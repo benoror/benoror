@@ -2,14 +2,12 @@
 
   <div class="masthead clearfix">
     <div class="inner">
-      <h3 class="masthead-brand">Ben Orozco</h3>
+      <h3 class="masthead-brand">{{#link-to 'index'}}Ben Orozco{{/link-to}}</h3>
       <nav>
         <ul class="nav masthead-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">Portfolio/Resumé</a></li>
-          <li><a href="#">About me</a></li>
-          <li><a href="#">PGP</a></li>
-          <li><a href="#">Contact</a></li>
+          <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+          <li>{{#link-to 'cv'}}Resumé{{/link-to}}</li>
+          <li>{{#link-to 'pgp'}}PGP{{/link-to}}</li>
         </ul>
       </nav>
     </div>
@@ -21,7 +19,7 @@
 
   <div class="mastfoot">
     <div class="inner">
-      <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+      {{!-- <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p> --}}
     </div>
   </div>
 

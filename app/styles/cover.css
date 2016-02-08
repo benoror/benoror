@@ -28,6 +28,11 @@ html,
 body {
   height: 100%;
   background-color: #333;
+  background-image: url("/assets/abstract-purple-and-white-min.jpg");
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: repeat;
+  filter: brightness(50%);
 }
 body {
   color: #fff;

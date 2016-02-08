@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Ben Orozco</title>
     <meta name="description" content="Ben Orozco">
     <meta name="author" content="Ben Orozco <benoror@gmail.com>">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {{content-for "head"}}
 
@@ -17,6 +17,11 @@
   </head>
   <body>
     {{content-for "body"}}
+
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner" id="ember-app">
+      </div>
+    </div>
 
     <script src="assets/vendor.js"></script>
     <script src="assets/benoror-website.js"></script>

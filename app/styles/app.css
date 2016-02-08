@@ -1,1 +1,10 @@
+/*
+application.hbs
+cover: http://getbootstrap.com/examples/cover/#
+ */
+@import 'cover.css';
+
+/*
+index.hbs
+ */
 @import 'index.css';

@@ -13,3 +13,8 @@ index.hbs
 pgp.hbs
  */
 @import 'pgp.css';
+
+/*
+components/gravatar-image
+ */
+@import 'components/gravatar-image.css';

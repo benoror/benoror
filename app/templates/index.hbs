@@ -1,7 +1,12 @@
-{{gravatar-image email=model.email size="256"}}
-<h1 class="cover-heading">Hi, I'm {{model.nickname}}!</h1>
-<p class="lead">Technologist. Web Developer. JavaScripter. OSS Enthusiast. Love building things, learn new stuff and help software to eat the world.</p>
+{{gravatar-image email=model.data.email size="256"}}
+<h1 class="cover-heading">Hi, I'm {{model.data.nickname}}!</h1>
+<p class="lead">
+Technologist &ndash; Web Developer &ndash; JavaScripter &ndash; OSS Enthusiast
+<br />
+&#x2665; Building things, learning new stuff, helping software to eat the world
+</p>
 <p class="lead">
   <a href="#" class="btn btn-lg btn-default">Learn more</a>
 </p>
 <hr />
+{{random-emoji emojis=model.emojis}}

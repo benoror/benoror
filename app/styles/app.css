@@ -18,3 +18,8 @@ pgp.hbs
 components/gravatar-image
  */
 @import 'components/gravatar-image.css';
+
+/*
+components/random-emoji
+ */
+@import 'components/random-emoji.css';

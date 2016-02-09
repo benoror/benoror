@@ -7,9 +7,8 @@ export default Ember.Controller.extend({
   },
 
   actions: {
-    show: function(actionParam, evt, cb) {
+    show: function(/*actionParam, evt, cb*/) {
       this.toggleProperty('collapsed');
-      console.log('action.show:', this.get('collapsed'))
     }
   }
 });

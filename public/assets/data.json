@@ -23,7 +23,7 @@
     {
       "name": "medium",
       "description": "Medium",
-      "url": "https://medium.com/@benoror"
+      "url": "https://blog.benoror.com"
     },
     {
       "name": "livecoding",
@@ -53,7 +53,7 @@
     {
       "name": "blogger",
       "description": "Blogger (Old Blog)",
-      "url": "http://benjiorozco.blogspot.com"
+      "url": "http://old-blog.benoror.com"
     }
   ]
 }

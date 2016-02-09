@@ -21,6 +21,11 @@
       "url": "https://twitter.com/benoror"
     },
     {
+      "name": "medium",
+      "description": "Medium",
+      "url": "https://medium.com/@benoror"
+    },
+    {
       "name": "livecoding",
       "description": "LiveCoding.TV",
       "url": "https://www.livecoding.tv/benoror/"
@@ -29,11 +34,6 @@
       "name": "google",
       "description": "Google+",
       "url": "https://plus.google.com/102367030438008357979"
-    },
-    {
-      "name": "linkedin",
-      "description": "LinkedIn",
-      "url": "https://www.linkedin.com/in/benoror"
     },
     {
       "name": "instagram",
@@ -46,9 +46,9 @@
       "url": "skype:benoror86"
     },
     {
-      "name": "youtube",
-      "description": "YouTube",
-      "url": "https://www.youtube.com/channel/UC-qvfEc3WMj3cq0AXlz93jA"
+      "name": "linkedin",
+      "description": "LinkedIn",
+      "url": "https://www.linkedin.com/in/benoror"
     },
     {
       "name": "blogger",

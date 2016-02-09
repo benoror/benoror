@@ -23,3 +23,8 @@ components/gravatar-image
 components/random-emoji
  */
 @import 'components/random-emoji.css';
+
+/*
+components/social-icons
+ */
+@import 'components/social-icons.css';

@@ -1,0 +1,11 @@
+<p class="lead social-icons">
+  {{#each data as |icon|}}
+    <a href="{{icon.url}}">
+    <img
+      src="/assets/social/{{icon.name}}.png"
+      title="{{icon.description}}"
+      alt="{{icon.name}}">
+    {{!-- {{icon.description}} --}}
+    </a>
+  {{/each}}
+</p>

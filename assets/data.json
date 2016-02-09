@@ -1,0 +1,59 @@
+{
+  "name": "Ben Orozco",
+  "nickname": "Ben",
+  "fullname": "Benjamin Orozco Rios",
+  "email": "benoror@gmail.com",
+  "website": "http://www.benoror.com",
+  "social": [
+    {
+      "name": "email",
+      "description": "Email",
+      "url": "mailto:benoror+website@gmail.com"
+    },
+    {
+      "name": "github",
+      "description": "GitHub",
+      "url": "https://github.com/benoror"
+    },
+    {
+      "name": "twitter",
+      "description": "Twitter",
+      "url": "https://twitter.com/benoror"
+    },
+    {
+      "name": "medium",
+      "description": "Medium",
+      "url": "https://medium.com/@benoror"
+    },
+    {
+      "name": "livecoding",
+      "description": "LiveCoding.TV",
+      "url": "https://www.livecoding.tv/benoror/"
+    },
+    {
+      "name": "google",
+      "description": "Google+",
+      "url": "https://plus.google.com/102367030438008357979"
+    },
+    {
+      "name": "instagram",
+      "description": "Instagram",
+      "url": "https://www.instagram.com/benoror/"
+    },
+    {
+      "name": "skype",
+      "description": "Skype",
+      "url": "skype:benoror86"
+    },
+    {
+      "name": "linkedin",
+      "description": "LinkedIn",
+      "url": "https://www.linkedin.com/in/benoror"
+    },
+    {
+      "name": "blogger",
+      "description": "Blogger (Old Blog)",
+      "url": "http://benjiorozco.blogspot.com"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'benoror-website',
     environment: environment,
-    baseURL: '/benoror-website',
+    baseURL: '/',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {

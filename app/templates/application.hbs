@@ -6,14 +6,12 @@
     <nav>
       <ul class="nav masthead-nav">
         <li>{{#link-to 'index'}}Home{{/link-to}}</li>
-        <li>{{#link-to 'cv'}}Resumé{{/link-to}}</li>
+        <li><a href="http://resume.benoror.com/">Resumé</a></li>
         <li>{{#link-to 'pgp'}}PGP{{/link-to}}</li>
       </ul>
     </nav>
   </div>
 </div>
 <div class="row top-buffer">
-  <div class="col-md-offset-2 col-md-8 col-md-12">
-    {{outlet}}
-  </div>
+  {{outlet}}
 </div>

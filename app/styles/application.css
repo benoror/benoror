@@ -1,4 +1,30 @@
 /*
+ * Globals
+ */
+
+/* Links */
+a,
+a:focus,
+a:hover {
+  color: #fff;
+}
+
+/*
+ * Base structure
+ */
+
+html,
+body {
+  height: 100%;
+  background-color: #333;
+}
+body {
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+}
+
+/*
 Override Body font with Roboto Condensed
  */
 
@@ -7,3 +33,79 @@ Override Body font with Roboto Condensed
 body {
   font-family: 'Roboto Condensed', sans-serif;
 }
+
+/*
+Filter Background
+http://stackoverflow.com/questions/20039765/how-to-apply-a-css-3-blur-filter-to-a-background-image
+http://codepen.io/akademy/pen/FlkzB
+ */
+body > div#ember-app:before {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  background-image: url("/assets/abstract-purple-and-white-min.jpg");
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: repeat;
+
+  -webkit-filter: brightness(50%); /* Chrome, Safari, Opera */
+  -moz-filter: brightness(50%);
+  -o-filter: brightness(50%);
+  -ms-filter: brightness(50%);
+  filter: brightness(50%);
+}
+body > div#ember-app {
+  position: relative;
+  left: 0;
+  right: 0;
+  z-index: 0;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.masthead-nav > li {
+  display: inline-block;
+}
+.masthead-nav > li + li {
+  margin-left: 20px;
+}
+.masthead-nav > li > a {
+  padding-right: 0;
+  padding-left: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; /* IE8 proofing */
+  color: rgba(255,255,255,.75);
+  border-bottom: 2px solid transparent;
+}
+.masthead-nav > li > a:hover,
+.masthead-nav > li > a:focus {
+  background-color: transparent;
+  border-bottom-color: #a9a9a9;
+  border-bottom-color: rgba(255,255,255,.25);
+}
+.masthead-nav > a.active,
+.masthead-nav > .active > a:hover,
+.masthead-nav > .active > a:focus {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+/*
+Top Buffer
+http://stackoverflow.com/questions/10085723/twitter-bootstrap-add-top-space-between-rows
+ */
+.top-header { padding-top:16px; }
+.top-buffer { margin-top:64px; }

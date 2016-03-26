@@ -1,12 +1,17 @@
 {{gravatar-image email=model.data.email size="256"}}
 <h1 class="cover-heading">Hi, I'm {{model.data.nickname}}!</h1>
 <br />
-{{social-icons data=model.data.social}}
-<br />
 <p class="lead">
 Technologist &ndash; Web Developer &ndash; JavaScripter &ndash; OSS Enthusiast
 <br />
 &#x2665; Build things, learn new stuff, help software keep eating the world
 </p>
-<br />
+<h1>Who?</h1>
+{{social-icons data=model.data.social}}
+<h1>What I do</h1>
+<p class="lead text-block">
+CTO @ <a href="http://www.nimbo-x.com/">Nimbo X</a>
+</p>
 {{random-emoji emojis=model.emojis}}
+<br />
+

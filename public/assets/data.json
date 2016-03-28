@@ -26,6 +26,11 @@
       "url": "http://blog.benoror.com"
     },
     {
+      "name": "stackoverflow",
+      "description": "Stack Overflow",
+      "url": "http://stackoverflow.com/cv/benoror"
+    },
+    {
       "name": "livecoding",
       "description": "LiveCoding.TV",
       "url": "https://www.livecoding.tv/benoror/"

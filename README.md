@@ -43,6 +43,9 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 Specify what it takes to deploy your app.
 
+* `ember github-pages:commit --message "Mmm NNth release" --branch master`
+* More info: https://github.com/poetic/ember-cli-github-pages
+
 ## Further Reading / Useful Links
 
 * [ember.js](http://emberjs.com/)

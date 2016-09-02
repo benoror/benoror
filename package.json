@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "ember build",
+    "build:gh-pages": "ember github-pages:commit --branch master --message 'Release'",
     "start": "ember server",
     "test": "ember test"
   },

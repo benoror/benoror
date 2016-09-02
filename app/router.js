@@ -8,6 +8,7 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('pgp');
   this.route('cv');
+  this.route('resume');
 });
 
 export default Router;

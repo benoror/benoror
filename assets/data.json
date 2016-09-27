@@ -12,18 +12,18 @@
     },
     {
       "name": "github",
-      "description": "GitHub",
+      "description": "Code",
       "url": "https://github.com/benoror"
+    },
+    {
+      "name": "medium",
+      "description": "Blog",
+      "url": "http://blog.benoror.com"
     },
     {
       "name": "twitter",
       "description": "Twitter",
       "url": "https://twitter.com/benoror"
-    },
-    {
-      "name": "medium",
-      "description": "Medium",
-      "url": "http://blog.benoror.com"
     },
     {
       "name": "stackoverflow",
@@ -54,6 +54,11 @@
       "name": "linkedin",
       "description": "LinkedIn",
       "url": "https://www.linkedin.com/in/benoror"
+    },
+    {
+      "name": "meetup",
+      "description": "Meetup",
+      "url": "https://www.meetup.com/members/185141289"
     },
     {
       "name": "blogger",

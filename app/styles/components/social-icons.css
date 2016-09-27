@@ -1,3 +1,7 @@
+a {
+  font-size: 0.8em;
+  color: #aaa;
+}
 p.social-icons a:hover {
   text-decoration: none;
 }

@@ -2,10 +2,10 @@ a {
   font-size: 0.8em;
   color: #aaa;
 }
-p.social-icons a:hover {
+div.social-icons a:hover {
   text-decoration: none;
 }
-p.social-icons img {
+div.social-icons img {
   margin: 4px;
   height: 48px;
   border-radius: 24px;
@@ -16,10 +16,37 @@ p.social-icons img {
   -ms-filter: grayscale(100%);
   filter: grayscale(100%);
 }
-p.social-icons img:hover {
+div.social-icons img:hover {
   -webkit-filter: none; /* Chrome, Safari, Opera */
   -moz-filter: none;
   -o-filter: none;
   -ms-filter: none;
   filter: none;
+}
+
+.icon {
+  text-align: left;
+  min-width: 220px;
+  margin: 10px 0px 10px 0px;
+}
+
+.flexcontainer {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  /* You can set flex-wrap and flex-direction individually */
+  -webkit-flex-direction: row;
+  flex-direction: row;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  /* Or do it all in one line with flex flow */
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  /* tweak the where items line up on the row */
+  /* valid values are: flex-start, flex-end, space-between, space-around, stretch */
+  -webkit-align-content: flex-end;
+  align-content: flex-end;
 }

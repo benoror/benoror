@@ -1,11 +1,13 @@
-<p class="lead social-icons">
+<div class="lead social-icons flexcontainer">
   {{#each data as |icon|}}
-    <a href="{{icon.url}}">
-    <img
-      src="/assets/social/{{icon.name}}.png"
-      title="{{icon.description}}"
-      alt="{{icon.name}}">
-    {{icon.description}}
-    </a>
+    <div class="icon">
+      <a href="{{icon.url}}">
+      <img
+        src="/assets/social/{{icon.name}}.png"
+        title="{{icon.description}}"
+        alt="{{icon.name}}">
+      {{icon.description}}
+      </a>
+    </div>
   {{/each}}
-</p>
+</div>

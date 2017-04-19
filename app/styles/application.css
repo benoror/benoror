@@ -6,7 +6,7 @@
 a,
 a:focus,
 a:hover {
-  color: #fff;
+  color: #333;
 }
 
 /*
@@ -16,12 +16,12 @@ a:hover {
 html,
 body {
   height: 100%;
-  background-color: #333;
+  background-color: #fff;
 }
 body {
-  color: #fff;
+  color: #555;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,.5);
+  text-shadow: 0 1px 3px #e5e5e5;
 }
 
 /*
@@ -32,40 +32,6 @@ Override Body font with Roboto Condensed
 
 body {
   font-family: 'Roboto Condensed', sans-serif;
-}
-
-/*
-Filter Background
-http://stackoverflow.com/questions/20039765/how-to-apply-a-css-3-blur-filter-to-a-background-image
-http://codepen.io/akademy/pen/FlkzB
- */
-body > div#ember-app:before {
-  content: "";
-  position: fixed;
-  left: 0;
-  right: 0;
-  z-index: -1;
-  width: 100%;
-  height: 100%;
-  display: block;
-
-  background-image: url("/assets/pixels.png");
-  background-color: #001620;
-  background-position: left top;
-  background-attachment: fixed;
-  background-repeat: repeat;
-
-  -webkit-filter: brightness(100%); /* Chrome, Safari, Opera */
-  -moz-filter: brightness(100%);
-  -o-filter: brightness(100%);
-  -ms-filter: brightness(100%);
-  filter: brightness(100%);
-}
-body > div#ember-app {
-  position: relative;
-  left: 0;
-  right: 0;
-  z-index: 0;
 }
 
 /*
@@ -87,8 +53,7 @@ body > div#ember-app {
   padding-left: 0;
   font-size: 16px;
   font-weight: bold;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255,255,255,.75);
+  color: #888; /* IE8 proofing */
   border-bottom: 2px solid transparent;
 }
 .masthead-nav > li > a:hover,
@@ -100,8 +65,8 @@ body > div#ember-app {
 .masthead-nav > a.active,
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
-  color: #fff;
-  border-bottom-color: #fff;
+  color: #333;
+  border-bottom-color: #333;
 }
 
 /*

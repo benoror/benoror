@@ -26,6 +26,11 @@
       "url": "https://twitter.com/benoror"
     },
     {
+      "name": "producthunt",
+      "description": "Product Hunt",
+      "url": "https://www.producthunt.com/@benoror/made"
+    },
+    {
       "name": "stackoverflow",
       "description": "Stack Overflow",
       "url": "http://stackoverflow.com/cv/benoror"

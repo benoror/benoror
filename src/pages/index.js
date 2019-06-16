@@ -2,8 +2,9 @@ import React from "react"
 import { Link } from "gatsby"
 
 import Layout from "../components/layout"
-import Avatar from "../components/avatar"
 import SEO from "../components/seo"
+import Avatar from "../components/avatar"
+import Social from "../components/social"
 
 const IndexPage = () => (
   <Layout>
@@ -16,6 +17,8 @@ const IndexPage = () => (
       <p style={{ fontSize: "1.2rem" }}>
         <em>Healthtech – Full Stack Dev – Open Source & Crypto Enthusiast</em>
       </p>
+      <h2>Who?</h2>
+      <Social />
     </div>
   </Layout>
 )

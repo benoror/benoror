@@ -32,6 +32,8 @@ class Avatar extends React.Component {
           borderRadius: "128px",
           boxShadow: "10px 10px 20px #e5e5e5",
           cursor: "crosshair",
+          display: "block",
+          verticalAlign: "middle",
         }}
         src={randomAvatar()}
         onClick={this.clickAvatar}

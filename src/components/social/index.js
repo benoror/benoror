@@ -23,7 +23,7 @@ const Social = () => {
           siteMetadata: { social },
         },
       }) => (
-        <div style={{ display: "flex", height: "110px" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", height: "110px" }}>
           {social.map((item, index) => (
             <SocialIcon item={item} key={index} />
           ))}

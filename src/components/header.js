@@ -35,6 +35,10 @@ const Header = ({ siteTitle }) => (
           Home
         </Link>
         &nbsp;&ndash;&nbsp;
+        <Link to="/portfolio" style={{ color: `white` }}>
+          Portfolio
+        </Link>
+        &nbsp;&ndash;&nbsp;
         <a href="http://resume.benoror.com/" style={{ color: `white` }}>
           Resumé
         </a>

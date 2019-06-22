@@ -85,6 +85,19 @@ module.exports = {
         url: "http://old-blog.benoror.com",
       },
     ],
+    portfolio: [
+      {
+        title: "CTO & Development Work",
+        cards: [
+          {
+            title: "Nimbo",
+            url: "https://www.nimbo-x.com/",
+          },
+        ],
+      },
+      { title: "Open source & Maker", cards: [] },
+      { title: "Talks & Meetups", cards: [] },
+    ],
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

@@ -36,6 +36,7 @@ class Avatar extends React.Component {
           verticalAlign: "middle",
         }}
         src={randomAvatar()}
+        alt="avatar"
         onClick={this.clickAvatar}
       />
     )

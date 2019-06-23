@@ -5,7 +5,7 @@ import styles from "./styles.module.css"
 const PortfolioCards = ({ cards }) => {
   return (
     <div style={{ display: "flex", flexWrap: "wrap" }}>
-      {cards.map(({ title, url }) => (
+      {cards.map(({ title, url, description, links }) => (
         <Card className={styles.card}>
           <a href={url}>
             <img
@@ -17,7 +17,7 @@ const PortfolioCards = ({ cards }) => {
           <h4>
             <a href={url}>{title}</a>
           </h4>
-          You can put whatever you want inside the card and it will look dope
+          <p>{description}</p>
         </Card>
       ))}
     </div>

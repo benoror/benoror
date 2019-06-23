@@ -87,13 +87,13 @@ module.exports = {
     ],
     portfolio: [
       {
-        title: "💼 Work",
+        title: "💼 CTO & Development Work",
         cards: [
           {
             title: "HealthTree",
             url: "https://www.healthtree.org",
             description:
-              "modern healthcare platform for helping Multiple Myeloma patients to find their best treatment options, with a mission to accelerate finding the cure for this type of cancer",
+              "Healthcare platform for helping cancer patients to find their best treatment options",
             links: {
               github: "https://github.com/HealthTree/ ",
             },
@@ -101,14 +101,20 @@ module.exports = {
           {
             title: "Nimbo",
             url: "https://www.nimbo-x.com/",
+            description:
+              "EHR SaaS product focused in providing the best physician experience for the LatAm market",
           },
           {
             title: "Nebula",
             url: "https://www.usenebula.com/",
+            description:
+              "Electronic claim management solution for health networks and insurance companies",
           },
           {
             title: "Panax.io",
             url: "http://panax.io/",
+            description:
+              "Development tool for quickly bootstraping full-stack applications",
             links: {
               github: "https://github.com/panaxit",
             },
@@ -185,7 +191,7 @@ module.exports = {
           },
         ],
       },
-      { title: "🗣 Talks", cards: [] },
+      { title: "🗣 Talks & Meetups", cards: [] },
     ],
   },
   plugins: [

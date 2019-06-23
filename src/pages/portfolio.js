@@ -17,6 +17,10 @@ const Portfolio = () => {
                 cards {
                   title
                   url
+                  description
+                  links {
+                    github
+                  }
                 }
               }
             }

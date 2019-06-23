@@ -15,9 +15,14 @@
 }
 
 .card a {
+  color: #3a72a5;
   text-decoration: none;
 }
 
 .card a:hover {
   text-decoration: underline;
+}
+
+.card p {
+  margin: 0;
 }

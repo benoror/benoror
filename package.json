@@ -3,6 +3,7 @@
   "private": true,
   "author": "Ben Orozco <benoror@gmail.com>",
   "dependencies": {
+    "card-vibes": "^0.1.0",
     "gatsby": "^2.9.4",
     "gatsby-image": "^2.1.4",
     "gatsby-plugin-manifest": "^2.1.1",

@@ -12,14 +12,14 @@ const IndexPage = () => (
       style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
     >
       <Avatar style={{ maxWidth: `256px`, marginBottom: `1.45rem` }} />
-      <h1>Hi, I'm Ben!</h1>
+      <h1>👋 Hi, I'm Ben!</h1>
       <p style={{ fontSize: "1.2rem" }}>
         <em>
           Healthtech – Full Stack Web Developer – Open Source &amp; Crypto
           Enthusiast
         </em>
       </p>
-      <h2>Who?</h2>
+      <h2>👀 Who?</h2>
       <Social />
     </div>
   </Layout>

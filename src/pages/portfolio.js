@@ -3,7 +3,7 @@ import { StaticQuery, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import PortfolioCards from "../components/portfolio-cards"
+import PortfolioCard from "../components/portfolio-card"
 
 const Portfolio = () => {
   return (
@@ -14,13 +14,11 @@ const Portfolio = () => {
             siteMetadata {
               portfolio {
                 title
-                cards {
-                  title
-                  url
-                  description
-                  links {
-                    github
-                  }
+                url
+                description
+                role
+                links {
+                  github
                 }
               }
             }
@@ -35,12 +33,18 @@ const Portfolio = () => {
         <Layout>
           <SEO title="Portfolio" />
           <h1>Portfolio</h1>
-          {portfolio.map((item, index) => (
-            <div key={index} style={{ textAlign: "center" }}>
-              <h2>{item.title}</h2>
-              <PortfolioCards cards={item.cards} />
-            </div>
-          ))}
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              textAlign: "center",
+            }}
+          >
+            {portfolio.map((card, index) => (
+              <PortfolioCard card={card} />
+            ))}
+          </div>
         </Layout>
       )}
     />

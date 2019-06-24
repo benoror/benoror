@@ -87,111 +87,111 @@ module.exports = {
     ],
     portfolio: [
       {
-        title: "💼 CTO & Development Work",
-        cards: [
-          {
-            title: "HealthTree",
-            url: "https://www.healthtree.org",
-            description:
-              "Healthcare platform for helping cancer patients to find their best treatment options",
-            links: {
-              github: "https://github.com/HealthTree/ ",
-            },
-          },
-          {
-            title: "Nimbo",
-            url: "https://www.nimbo-x.com/",
-            description:
-              "EHR SaaS product focused in providing the best physician experience for the LatAm market",
-          },
-          {
-            title: "Nebula",
-            url: "https://www.usenebula.com/",
-            description:
-              "Electronic claim management solution for health networks and insurance companies",
-          },
-          {
-            title: "Panax.io",
-            url: "http://panax.io/",
-            description:
-              "Development tool for quickly bootstraping full-stack applications",
-            links: {
-              github: "https://github.com/panaxit",
-            },
-          },
-        ],
+        title: "HealthTree",
+        url: "https://www.healthtree.org",
+        description:
+          "Healthcare platform for helping cancer patients to find their best treatment options",
+        role: "💼 CTO / Software Development",
+        links: {
+          github: "https://github.com/HealthTree/ ",
+        },
       },
       {
-        title: "👷‍♂️ Maker & Open Source",
-        cards: [
-          {
-            title: "Sundly",
-            url: "https://sundly.co/",
-            description:
-              "💛 Encrypted & decentralized personal health records. Built on Blockstack and powered by Blockchain",
-            links: {
-              github: "https://github.com/Sundly/sundly",
-            },
-          },
-          {
-            title: "better-npm-run",
-            url: "https://npmjs.org/package/better-npm-run",
-            description: "🏃‍♂️ A better NPM scripts runner!",
-            links: {
-              github: "https://github.com/benoror/better-npm-run",
-            },
-          },
-          {
-            title: "Awesome Product Development",
-            url: "https://github.com/benoror/product-development",
-            description:
-              "📓General styleguides & documentation for modern product development",
-            links: {
-              github: "https://github.com/benoror/product-development",
-            },
-          },
-          {
-            title: "Laystack",
-            url: "https://laystack.com/",
-            description: "Docs Templating API for your App",
-          },
-          {
-            title: "Taxi Driver",
-            url: "https://github.com/benoror/taxi-driver",
-            description:
-              "🚖 A flexible & international Tax Engine Microservice",
-            links: {
-              github: "https://github.com/benoror/taxi-driver",
-            },
-          },
-          {
-            title: "Procevi",
-            url: "http://www.procevi.com/",
-            description:
-              "Construction & real-estate ERP software & marketing website",
-            links: {
-              github: "https://github.com/Procevi",
-            },
-          },
-          {
-            title: "CotizaHoy",
-            url: "http://www.cotizahoy.com",
-            description: "B2B quotation platform for manufacturing industry",
-            links: {
-              github: "https://github.com/cotizahoy",
-            },
-          },
-          {
-            title: "Personal Website",
-            url: "https://www.benoror.com",
-            description: "The website you're looking at!",
-            links: {
-              github: "https://github.com/benoror/benoror.github.io",
-            },
-          },
-        ],
+        title: "Nimbo",
+        url: "https://www.nimbo-x.com/",
+        description:
+          "EHR SaaS product focused in providing the best physician experience for LatAm market",
+        role: "💼 CTO / Software Development",
       },
-      { title: "🗣 Talks & Meetups", cards: [] },
+      {
+        title: "Nebula",
+        url: "https://www.usenebula.com/",
+        description:
+          "Electronic claim management solution for health networks and insurance companies",
+        role: "💼 Software Architect",
+      },
+      {
+        title: "Panax.io",
+        url: "http://panax.io/",
+        description:
+          "Development tool for quickly bootstraping full-stack applications",
+        role: "💼 Software Development",
+        links: {
+          github: "https://github.com/panaxit",
+        },
+      },
+      {
+        title: "Sundly",
+        url: "https://sundly.co/",
+        description:
+          "💛 Encrypted & decentralized personal health records. Built on Blockstack and powered by Blockchain",
+        role: "👷‍♂️ Maker",
+        links: {
+          github: "https://github.com/Sundly/sundly",
+        },
+      },
+      {
+        title: "better-npm-run",
+        url: "https://npmjs.org/package/better-npm-run",
+        description: "🏃‍♂️ A better NPM scripts runner!",
+        role: "🤩 Open source",
+        links: {
+          github: "https://github.com/benoror/better-npm-run",
+        },
+      },
+      {
+        title: "Awesome Product Development",
+        url: "https://github.com/benoror/product-development",
+        description:
+          "📓General styleguides & documentation for modern product development",
+        role: "👷‍♂️ Maker",
+        links: {
+          github: "https://github.com/benoror/product-development",
+        },
+      },
+      {
+        title: "Laystack",
+        url: "https://laystack.com/",
+        description: "Docs Templating API for your App",
+        role: "👷‍♂️ Maker",
+      },
+      {
+        title: "Taxi Driver",
+        url: "https://github.com/benoror/taxi-driver",
+        description: "🚖 A flexible & international Tax Engine Microservice",
+        role: "🤩 Open source",
+        links: {
+          github: "https://github.com/benoror/taxi-driver",
+        },
+      },
+      {
+        title: "Procevi",
+        url: "http://www.procevi.com/",
+        description:
+          "Construction & real-estate ERP software & marketing website",
+        role: "👷‍♂️ Co-Founder",
+        links: {
+          github: "https://github.com/Procevi",
+        },
+      },
+      {
+        title: "CotizaHoy",
+        url: "http://www.cotizahoy.com",
+        description: "B2B quotation platform for manufacturing industry",
+        role: "👷‍♂️ Co-Founder",
+        links: {
+          github: "https://github.com/cotizahoy",
+        },
+      },
+      {
+        title: "Personal Website",
+        url: "https://www.benoror.com",
+        description: "The website you're looking at!",
+        role: "👷‍♂️ Maker",
+        links: {
+          github: "https://github.com/benoror/benoror.github.io",
+        },
+      },
     ],
   },
   plugins: [

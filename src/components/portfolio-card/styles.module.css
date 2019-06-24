@@ -1,9 +1,3 @@
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
 .card {
   width: 256px !important;
   margin: 20px 20px 40px 20px !important;
@@ -17,10 +11,10 @@
 }
 
 .card img {
-  width: 72px;
-  height: 72px;
+  width: 80px;
+  height: 80px;
   box-shadow: 0px 0px 8px #eee;
-  border-radius: 72px;
+  border-radius: 80px;
   padding: 4px;
   margin-top: 32px;
 }
@@ -36,6 +30,20 @@
 
 .card p {
   margin: 0;
+}
+
+.card .side .role {
+  font-size: 0.6em;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.card .side p {
+  font-size: 0.9em;
+  margin-top: 1.5em;
+  text-align: left;
 }
 
 .card .side .links {

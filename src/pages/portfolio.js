@@ -36,7 +36,7 @@ const Portfolio = () => {
           <SEO title="Portfolio" />
           <h1>Portfolio</h1>
           {portfolio.map((item, index) => (
-            <div key={index}>
+            <div key={index} style={{ textAlign: "center" }}>
               <h2>{item.title}</h2>
               <PortfolioCards cards={item.cards} />
             </div>

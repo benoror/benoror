@@ -1,9 +1,19 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .card {
   width: 256px !important;
   margin: 20px 20px 40px 20px !important;
+}
+
+.side {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .card img {
@@ -25,4 +35,53 @@
 
 .card p {
   margin: 0;
+}
+
+/* https://davidwalsh.name/css-flip */
+
+/* entire container, keeps perspective */
+.card {
+  perspective: 1000px;
+}
+/* flip the pane when hovered */
+.card:hover .flipper,
+.card.hover .flipper {
+  transform: rotateY(180deg);
+}
+
+.card,
+.front,
+.back {
+  /* width: 320px; */
+  height: 256px;
+}
+
+/* flip speed goes here */
+.flipper {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+/* hide back of pane during swap */
+.front,
+.back {
+  backface-visibility: hidden;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* front pane, placed above back */
+.front {
+  z-index: 2;
+  /* for firefox 31 */
+  transform: rotateY(0deg);
+}
+
+/* back, initially hidden pane */
+.back {
+  transform: rotateY(180deg);
 }

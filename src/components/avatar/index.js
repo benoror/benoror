@@ -7,6 +7,7 @@ const avatars = [
   require("./images/ben-dreamify.jpg"),
   require("./images/ben-duotone.png"),
   require("./images/ben-highres.jpg"),
+  require("./images/ben-smile-glasses.jpg"),
 ]
 
 const randomAvatar = () => avatars[Math.floor(Math.random() * avatars.length)]

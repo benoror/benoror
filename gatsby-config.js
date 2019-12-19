@@ -111,13 +111,12 @@ module.exports = {
         role: "💼 Software Architect",
       },
       {
-        title: "Panax.io",
-        url: "http://panax.io/",
-        description:
-          "Development tool for quickly bootstraping full-stack applications",
-        role: "💼 Software Development",
+        title: "Taxi Driver",
+        url: "https://github.com/benoror/taxi-driver",
+        description: "🚖 A flexible & international Tax Engine Microservice",
+        role: "🤩 Open source",
         links: {
-          github: "https://github.com/panaxit",
+          github: "https://github.com/benoror/taxi-driver",
         },
       },
       {
@@ -128,6 +127,16 @@ module.exports = {
         role: "👷‍♂️ Maker",
         links: {
           github: "https://github.com/Sundly/sundly",
+        },
+      },
+      {
+        title: "Panax.io",
+        url: "http://panax.io/",
+        description:
+          "Development tool for quickly bootstraping full-stack applications",
+        role: "💼 Software Development",
+        links: {
+          github: "https://github.com/panaxit",
         },
       },
       {
@@ -154,15 +163,6 @@ module.exports = {
         url: "https://laystack.com/",
         description: "Docs Templating API for your App",
         role: "👷‍♂️ Maker",
-      },
-      {
-        title: "Taxi Driver",
-        url: "https://github.com/benoror/taxi-driver",
-        description: "🚖 A flexible & international Tax Engine Microservice",
-        role: "🤩 Open source",
-        links: {
-          github: "https://github.com/benoror/taxi-driver",
-        },
       },
       {
         title: "Procevi",

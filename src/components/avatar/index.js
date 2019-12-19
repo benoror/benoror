@@ -24,6 +24,15 @@ class Avatar extends React.Component {
     })
   }
 
+  componentDidMount() {
+    setInterval(() =>
+      this.setState({
+        avatar: randomAvatar(),
+      }),
+      3000
+    );
+  }
+
   render() {
     return (
       <img
@@ -36,7 +45,7 @@ class Avatar extends React.Component {
           display: "block",
           verticalAlign: "middle",
         }}
-        src={randomAvatar()}
+        src={this.state.avatar}
         alt="avatar"
         onClick={this.clickAvatar}
       />

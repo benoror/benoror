@@ -19,6 +19,7 @@ const Portfolio = () => {
                 role
                 links {
                   github
+                  slides
                 }
               }
             }
@@ -42,7 +43,7 @@ const Portfolio = () => {
             }}
           >
             {portfolio.map((card, index) => (
-              <PortfolioCard card={card} />
+              <PortfolioCard key={index} card={card} />
             ))}
           </div>
         </Layout>

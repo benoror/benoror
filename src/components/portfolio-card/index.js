@@ -3,14 +3,19 @@ import Card from "card-vibes"
 import styles from "./styles.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faLink } from "@fortawesome/free-solid-svg-icons"
+import { faLink, faFilePowerpoint } from "@fortawesome/free-solid-svg-icons"
 import { faGithub } from "@fortawesome/free-brands-svg-icons"
+
+const faIconsMap = {
+  github: faGithub,
+  slides: faFilePowerpoint,
+}
 
 const PortfolioCard = ({ card: { title, url, description, role, links } }) => {
   return (
     <Card
       className={styles.card}
-      ontouchstart="this.classList.toggle('hover');"
+      onTouchStart="this.classList.toggle('hover');"
     >
       <div className={styles.flipper}>
         <div className={`${styles.front} ${styles.side}`}>
@@ -33,11 +38,11 @@ const PortfolioCard = ({ card: { title, url, description, role, links } }) => {
             <a href={url}>
               <FontAwesomeIcon icon={faLink} />
             </a>
-            {links && links.github && (
-              <a href={links.github}>
-                <FontAwesomeIcon icon={faGithub} />
+            {links && Object.keys(links).map(key => !!links[key] && (
+              <a key={key} href={links[key]}>
+                <FontAwesomeIcon icon={faIconsMap[key]} />
               </a>
-            )}
+            ))}
           </div>
         </div>
       </div>

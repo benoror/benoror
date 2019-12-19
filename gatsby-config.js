@@ -117,6 +117,7 @@ module.exports = {
         role: "🤩 Open source",
         links: {
           github: "https://github.com/benoror/taxi-driver",
+          slides: "https://slides.com/benoror/taxi-driver",
         },
       },
       {

@@ -141,6 +141,16 @@ module.exports = {
         },
       },
       {
+        title: "ember-postgrest-dynamic-ui",
+        url: "https://github.com/benoror/ember-postgrest-dynamic-ui",
+        description: "Dynamic UI powered by PostgREST and Ember Formly",
+        role: "🧪 Experiment",
+        links: {
+          github: "https://github.com/benoror/ember-postgrest-dynamic-ui",
+          video: "https://www.youtube.com/watch?v=BJz3ROHPwKU",
+        },
+      },
+      {
         title: "better-npm-run",
         url: "https://npmjs.org/package/better-npm-run",
         description: "🏃‍♂️ A better NPM scripts runner!",

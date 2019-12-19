@@ -20,6 +20,7 @@ const Portfolio = () => {
                 links {
                   github
                   slides
+                  video
                 }
               }
             }

@@ -21,6 +21,7 @@ const Portfolio = () => {
                   github
                   slides
                   video
+                  blogpost
                 }
               }
             }

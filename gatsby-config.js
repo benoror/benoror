@@ -131,6 +131,16 @@ module.exports = {
         },
       },
       {
+        title: "Low-code-stack - Airtable-Node-Ember",
+        url: "https://github.com/benoror/ember-airtable",
+        description: "🥞 A low-code stack for quickly prototyping apps with Airtable, Node & Ember",
+        role: "🤩 Open source",
+        links: {
+          github: "https://github.com/benoror/ember-airtable",
+          blogpost: "https://medium.com/the-backlog-by-ecaresoft/creating-a-serverless-web-app-with-node-js-ember-js-and-paas-services-hyperdev-surge-sh-8e3ebe263a76",
+        },
+      },
+      {
         title: "Panax.io",
         url: "http://panax.io/",
         description:

@@ -4,12 +4,13 @@ import styles from "./styles.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLink, faFilePowerpoint } from "@fortawesome/free-solid-svg-icons"
-import { faGithub, faYoutube } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faYoutube, faMedium } from "@fortawesome/free-brands-svg-icons"
 
 const faIconsMap = {
   github: faGithub,
   slides: faFilePowerpoint,
   video: faYoutube,
+  blogpost: faMedium,
 }
 
 const PortfolioCard = ({ card: { title, url, description, role, links } }) => {

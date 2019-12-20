@@ -29,7 +29,7 @@ class Avatar extends React.Component {
       this.setState({
         avatar: randomAvatar(),
       }),
-      3000
+      2000
     );
   }
 

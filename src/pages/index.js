@@ -20,7 +20,7 @@ const IndexPage = () => (
       </h1>
       <p style={{ fontSize: "1.2rem" }}>
         <em>
-          Maker – Full Stack Web Dev – Healthtech – Open Source &amp; Crypto Enthusiast
+            Full Stack Developer – Maker – Open Source, HealthTech, Low/NoCode &amp; Crypto Enthusiast
         </em>
       </p>
       <h2>

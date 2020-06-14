@@ -87,13 +87,14 @@ module.exports = {
     ],
     portfolio: [
       {
-        title: "HealthTree",
-        url: "https://www.healthtree.org",
+        title: "BaseQL",
+        url: "https://www.baseql.com/",
         description:
-          "Healthcare platform for helping cancer patients to find their best treatment options",
-        role: "💼 CTO / Software Development",
+          "A single GraphQL access point to all your cloud Data",
+        role: "👷‍♂️ Co-Founder",
         links: {
-          github: "https://github.com/HealthTree/ ",
+          github: "https://github.com/BaseQL",
+          blogpost: "https://blog.baseql.com",
         },
       },
       {
@@ -102,6 +103,16 @@ module.exports = {
         description:
           "EHR SaaS product focused in providing the best physician experience for LatAm market",
         role: "💼 CTO / Software Development",
+      },
+      {
+        title: "HealthTree",
+        url: "https://www.healthtree.org",
+        description:
+          "Healthcare platform for helping cancer patients to find their best treatment options",
+        role: "💼 CTO / Software Development",
+        links: {
+          github: "https://github.com/HealthTree",
+        },
       },
       {
         title: "Nebula",

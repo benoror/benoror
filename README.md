@@ -14,4 +14,6 @@ I am a Computer Science Engineer specialized in Full Stack web development, pass
 - 🏠Website: [benoror.com](https://benoror.com)
 - 🚧Portfolio: [benoror.com/portfolio](https://benoror.com/portfolio)
 - 💼LinkedIn: [linkedin.com/in/benoror](https://www.linkedin.com/in/benoror/)
+- 📑Résumé: [resume.benoror.com](http://resume.benoror.com/)
 - 📃Cover Letter: [gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe](https://gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe)
+- 💭Blog: [blog.benoror.com](http://blog.benoror.com/)

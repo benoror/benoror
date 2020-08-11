@@ -192,7 +192,7 @@ module.exports = {
       },
       {
         title: "Laystack",
-        url: "https://laystack.com/",
+        url: "https://benoror.github.io/laystack-landing",
         description: "Docs Templating API for your App",
         role: "👷‍♂️ Maker",
       },

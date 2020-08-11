@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/components/social/styles.module.css"],"names":["module","exports","socialIcon"],"mappings":"mGACAA,EAAAC,QAAA,CAAkBC,WAAA","file":"styles-891dd996dc83433cdde2.js","sourcesContent":["// extracted by mini-css-extract-plugin\nmodule.exports = {\"socialIcon\":\"styles-module--socialIcon--3fIx-\"};"],"sourceRoot":""}

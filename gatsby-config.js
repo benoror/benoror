@@ -133,7 +133,7 @@ module.exports = {
       },
       {
         title: "Sundly",
-        url: "https://sundly.co/",
+        url: "https://sundly.github.io/",
         description:
           "💛 Encrypted & decentralized personal health records. Built on Blockstack and powered by Blockchain",
         role: "👷‍♂️ Maker",

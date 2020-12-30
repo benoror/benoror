@@ -149,7 +149,7 @@ module.exports = {
         },
       },
       {
-        title: "Low-code-stack - Airtable-Node-Ember",
+        title: "Low-code: Airtable-Node-Ember",
         url: "https://github.com/benoror/ember-airtable",
         description: "🥞 A low-code stack for quickly prototyping apps with Airtable, Node & Ember",
         role: "🤩 Open source",

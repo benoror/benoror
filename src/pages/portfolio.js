@@ -44,7 +44,7 @@ const Portfolio = () => {
               textAlign: "center",
             }}
           >
-            {portfolio.map((card, index) => (
+            {portfolio.sort(() => Math.random() - 0.5).map((card, index) => (
               <PortfolioCard key={index} card={card} />
             ))}
           </div>

@@ -122,6 +122,13 @@ module.exports = {
         role: "💼 Software Architect",
       },
       {
+        title: "GBA Dev",
+        url: "https://github.com/benoror/gbadev",
+        description:
+          "Homebrew Game Boy Advance Game Development circa. 2001",
+        role: "👷‍♂️ Maker",
+      },
+      {
         title: "Taxi Driver",
         url: "https://github.com/benoror/taxi-driver",
         description: "🚖 A flexible & international Tax Engine Microservice",

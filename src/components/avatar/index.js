@@ -1,6 +1,7 @@
 import React from "react"
 
 const avatars = [
+  require("./images/ben-jamierusso.jpeg"),
   require("./images/ben-animated.gif"),
   require("./images/ben-aqua.jpg"),
   require("./images/ben-colored.jpg"),

@@ -103,6 +103,9 @@ module.exports = {
         description:
           "EHR SaaS product focused in providing the best physician experience for LatAm market",
         role: "💼 CTO / Software Development",
+        links: {
+          github: "https://github.com/ecaresoft"
+        }
       },
       {
         title: "HealthTree",

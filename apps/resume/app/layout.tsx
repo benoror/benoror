@@ -1,7 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google"
+import type { Metadata } from "next";
+import PrintButton from '@/components/PrintButton';
+import DownloadPDFButton from '@/components/DownlaodPDFButton';
+// import { Analytics } from "@vercel/analytics/react";
 
 import "@workspace/ui/globals.css"
-import { Providers } from "@/components/providers"
+// import { Providers } from "@/components/providers"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -13,6 +17,11 @@ const fontMono = Geist_Mono({
   variable: "--font-mono",
 })
 
+export const metadata: Metadata = {
+  title: "Ben Orozco - Resume",
+  description: "Resume of Ben Orozco",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,7 +32,15 @@ export default function RootLayout({
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
       >
-        <Providers>{children}</Providers>
+        {/* <Providers>{children}</Providers> */}
+        {children}
+        {/* <Analytics /> */}
+        <div className="print:hidden absolute top-1 left-1">
+        </div>
+        <div className="absolute top-1 right-1 flex gap-2">
+          <DownloadPDFButton />
+          <PrintButton />
+        </div>
       </body>
     </html>
   )

@@ -6,7 +6,8 @@
     "build": "tsc"
   },
   "exports": {
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./types/*": "./src/types/*.ts"
   },
   "dependencies": {
     "@workspace/utils": "workspace:*"

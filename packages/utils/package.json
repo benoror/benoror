@@ -1,5 +1,5 @@
 {
-  "name": "@workspace/data",
+  "name": "@workspace/utils",
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
@@ -7,9 +7,6 @@
   },
   "exports": {
     "./*": "./src/*.ts"
-  },
-  "dependencies": {
-    "@workspace/utils": "workspace:*"
   },
   "devDependencies": {
     "@workspace/typescript-config": "workspace:*",

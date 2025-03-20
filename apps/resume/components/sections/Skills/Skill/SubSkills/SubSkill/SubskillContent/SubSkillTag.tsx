@@ -1,6 +1,6 @@
 import { Badge } from '@workspace/ui/components/badge';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@workspace/ui/components/tooltip';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkillTag({ skill }: { skill: ISkill }) {
 

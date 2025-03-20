@@ -1,5 +1,5 @@
 import SubSkillTag from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillTag';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkillContent({ skill, yearsOfExperience }: { skill: ISkill, yearsOfExperience: string}) {
   return (

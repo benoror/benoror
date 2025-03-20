@@ -1,7 +1,7 @@
 'use client'
 
 import { Progress } from '@workspace/ui/components/progress';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 import { useEffect, useState } from 'react';
 
 export default function CoreSkill({ skill }: { skill: ISkill}) {

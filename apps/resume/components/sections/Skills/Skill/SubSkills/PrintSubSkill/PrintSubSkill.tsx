@@ -1,4 +1,4 @@
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function PrintSubSkill({ skill }: { skill: ISkill}) {
 

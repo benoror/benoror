@@ -3,7 +3,7 @@ import { Button } from '@workspace/ui/components/button';
 import { Dialog, DialogContent, DialogTrigger } from '@workspace/ui/components/dialog';
 import { sinceToString } from '@/lib/sinceToString';
 import { sinceToYears } from '@/lib/sinceToYears';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkill({ skill }: { skill: ISkill}) {
   const years = sinceToYears(skill.since)

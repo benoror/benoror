@@ -1,5 +1,5 @@
 import CoreSkill from '@/components/sections/CoreSkills/CoreSkill';
-import { SKILLS } from '@/lib/data/ALL_SKILLS';
+import { SKILLS } from '@workspace/data/resume';
 
 export default function CoreSkills() {
   return (

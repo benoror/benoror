@@ -1,6 +1,6 @@
 import SubSkills from '@/components/sections/Skills/Skill/SubSkills/SubSkills';
 import { sinceToString } from '@/lib/sinceToString';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function Skill({ skill }: { skill: ISkill}) {
   return (

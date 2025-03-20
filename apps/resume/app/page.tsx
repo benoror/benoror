@@ -17,9 +17,9 @@ export default function Page() {
       <Intro />
       <Contact />
       <About />
+      <CoreSkills />
       <Experience />
-      {/* <CoreSkills /> */}
-      {/* <Skills /> */}
+      <Skills />
       <Education />
       <Languages />
       {/* <Interests /> */}
@@ -31,20 +31,11 @@ export default function Page() {
         <DownloadPDFButton />
         <PrintButton />
       </div>
-      <footer className="text-center text-sm mb-3 print:hidden flex flex-col gap-3 items-center">
-        <div className="flex items-center gap-1">
-          Made with TypeScript, React, Next.js, Tailwind CSS and shadcn/ui
-          <a href="https://github.com/jkubacki/cv" target="_blank"><GitHubIcon className="w-4 h-4 mx-1" /></a>
-        </div>
-        <div className="flex flex-col items-center gap-1 lg:flex-row">
-          Check out my demo app at
-          <div className="underline">
-            <a href="https://demo.jakubkubacki.com" target="_blank">
-              https://demo.jakubkubacki.com
-            </a>
-          </div>
-          <a href="https://github.com/jkubacki/jobs-app" target="_blank"><GitHubIcon className="w-4 h-4 mx-1" /></a>
-        </div>
+      {/* ToDo: Extract to footer component */}
+      <footer className="text-center text-xs mb-3 print:hidden flex flex-col gap-3 items-center">
+        <a href="https://github.com/benoror/benoror-cv" target="_blank">
+          Made with TypeScript, React, Next.js, Tailwind and shadcn/ui <GitHubIcon className="w-4 h-4 mx-1" />
+        </a>
       </footer>
     </main>
   );

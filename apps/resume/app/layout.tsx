@@ -38,6 +38,7 @@ export default function RootLayout({
         <div className="print:hidden absolute top-1 left-1">
         </div>
         <div className="absolute top-1 right-1 flex gap-2">
+          {/* ToDo: Dark-mode button (& theme switcher (xoria256)?) */}
           <DownloadPDFButton />
           <PrintButton />
         </div>

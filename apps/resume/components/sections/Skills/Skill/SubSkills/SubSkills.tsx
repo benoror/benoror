@@ -1,6 +1,6 @@
 import PrintSubSkill from '@/components/sections/Skills/Skill/SubSkills/PrintSubSkill/PrintSubSkill';
 import SubSkill from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubSkill';
-import { ISkill } from '@/lib/types/ISkill';
+import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkills({ skills }: { skills: ISkill[] }) {
   return (

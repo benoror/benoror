@@ -4,7 +4,9 @@ import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkillTag({ skill }: { skill: ISkill }) {
 
-  const badge = <Badge variant="outline" className='m-0.5'>{skill.name}</Badge>
+  const badge = <div id={skill.slug}>
+                  <Badge variant="outline" className='m-0.5'>{skill.name}</Badge>
+                </div>
 
   if (!skill.description) return badge
 

@@ -1,3 +1,4 @@
+import React from 'react';
 import { PERSONAL } from '@workspace/data/personal';
 import { IRole, ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
@@ -223,6 +224,7 @@ export const ROLES: IRole[] = [
 
 export const SKILLS: ISkill[] = [{
   name: 'Leadership',
+  slug: 'leadership',
   since: 2016,
   level: 85,
   description: 'I have been in leadership roles for several years, overseeing multiple projects and teams.',
@@ -240,6 +242,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Management',
+    slug: 'management',
     since: 2017,
     description: 'As a mid-level manager, I was responsible for overseeing a group of developers, guiding their career paths, and fostering their professional growth.',
     subSkills: [
@@ -249,6 +252,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Recruitment',
+    slug: 'recruitment',
     since: 2016,
     description: 'I have been involved in the recruitment process for several years, conducting interviews. I have also been responsible for improving and unifying recruitment process.',
     subSkills: [
@@ -259,11 +263,13 @@ export const SKILLS: ISkill[] = [{
   }]
 }, {
   name: 'Backend',
+  slug: 'backend',
   since: 2010,
   level: 100,
   description: 'Backend development is my primary area of expertise, and I have created multiple applications, APIs, and integrations.',
   subSkills: [{
     name: 'Ruby on Rails',
+    slug: 'ruby-on-rails',
     since: 2013,
     description: 'I have worked with Ruby on Rails since 2013, building and maintaining numerous applications. Including those with large databases where efficient SQL queries are crucial. My experience includes implementing APIs, admin panels, integrating APIs, and optimising high-traffic applications.',
     subSkills: [
@@ -275,6 +281,7 @@ export const SKILLS: ISkill[] = [{
     ],
   }, {
     name: 'Developing APIs',
+    slug: 'apis',
     since: 2015,
     description: "Since 2015, I have been developing APIs. I've built multiple applications using Ruby on Rails as well as other frameworks.",
     subSkills: [
@@ -283,6 +290,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Databases',
+    slug: 'databases',
     since: 2010,
     description: 'I have worked with many different kinds of databases. Most Ruby on Rails performance issues stem from inefficient database queries. I have extensive experience in identifying and optimizing these issues.',
     subSkills: [
@@ -293,6 +301,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'API integrations',
+    slug: 'integrations',
     since: 2010,
     description: 'I developed multiple APIs that were consumed by frontend, mobile apps and other services.',
     subSkills: [
@@ -301,6 +310,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Other',
+    slug: 'backend-other',
     description: 'I like experimenting with different technologies and frameworks to find the best tool for the job.',
     subSkills: [
       { name: 'Node.js' },
@@ -315,11 +325,13 @@ export const SKILLS: ISkill[] = [{
   }],
 }, {
   name: 'Frontend',
+  slug: 'frontend',
   since: 2018,
   level: 75,
   description: 'I have been working with React since 2018. Created multiple applications and websites.',
   subSkills: [{
     name: 'React',
+    slug: 'react',
     since: 2018,
     description: 'I have been working with React since 2018. I have created several applications using React. SPA applications with SSR.',
     subSkills: [
@@ -332,12 +344,14 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Typescript',
+    slug: 'typescript',
     since: 2022,
     description: 'I created a complex frontend application using Typescript and Next.js. I use Typescript in all my javascript projects.',
     subSkills: [
     ]
   }, {
     name: 'Javascript',
+    slug: 'javascript',
     since: 2010,
     description: 'Javascript was always a part of my work. From simple jQuery scripts, through ES6, to using it with Typescript in Next.js applications and Express.js APIs.',
     subSkills: [
@@ -346,6 +360,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Next.js',
+    slug: 'next.js',
     since: 2022,
     description: 'I created a complex frontend application using Next.js and Typescript. Next.js is my go to framework for frontend applications.',
     subSkills: [
@@ -354,6 +369,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Other',
+    slug: 'frontend-other',
     description: '',
     subSkills: [
       { name: 'Hotwire & Stimulus'},
@@ -363,11 +379,13 @@ export const SKILLS: ISkill[] = [{
   }],
 }, {
   name: 'DevOps',
+  slug: 'devops',
   level: 80,
   since: 2019,
   description: 'I have been working with DevOps since 2019. Creating CI/CD pipelines and managing Kubernetes clusters.',
   subSkills: [{
     name: 'AWS',
+    slug: 'aws',
     since: 2016,
     description: "I've hosted websites and Kuberentes clusters using AWS",
     subSkills: [
@@ -380,12 +398,14 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Docker',
+    slug: 'docker',
     since: 2016,
     description: "I use Docker on a daily basis in development and production environments.",
     subSkills: [
     ]
   }, {
     name: 'Kubernetes',
+    slug: 'kubernetes',
     since: 2019,
     description: 'I have set up and maintained multiple Kubernetes clusters from scratch utilizing GitOps principles.',
     subSkills: [
@@ -395,6 +415,7 @@ export const SKILLS: ISkill[] = [{
     ]
   }, {
     name: 'Other',
+    slug: 'devops-other',
     description: 'I managed servers and used deployment tools since I started programming',
     subSkills: [
       { name: 'Terraform' },

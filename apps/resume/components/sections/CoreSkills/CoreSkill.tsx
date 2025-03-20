@@ -14,7 +14,7 @@ export default function CoreSkill({ skill }: { skill: ISkill}) {
 
   return (
     <div className="CoreSkill w-full md:w-[45%] lg:w-[22%] print:w-[22%] mb-4">
-      <a href={`#${skill.name}`}>
+      <a href={`#${skill.slug}`}>
         <div>{skill.name}</div>
         <Progress value={progress} />
       </a>

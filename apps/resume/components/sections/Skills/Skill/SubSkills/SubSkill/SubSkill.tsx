@@ -10,7 +10,7 @@ export default function SubSkill({ skill }: { skill: ISkill}) {
   const yearsOfExperience = sinceToString(skill.since)
 
   return (
-    <div className="Skill flex flex-col">
+    <div id={skill.slug} className="Skill flex flex-col">
       <Dialog>
         <DialogTrigger asChild>
           <Button className="whitespace-nowrap flex gap-1">

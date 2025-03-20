@@ -1,8 +1,8 @@
 import SubSkillContent from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillContent';
 import { Button } from '@workspace/ui/components/button';
 import { Dialog, DialogContent, DialogTrigger } from '@workspace/ui/components/dialog';
-import { sinceToString } from '@/lib/sinceToString';
-import { sinceToYears } from '@/lib/sinceToYears';
+import { sinceToString } from '@workspace/utils/date';
+import { sinceToYears } from '@workspace/utils/date';
 import { ISkill } from '@workspace/data/types/resume';
 
 export default function SubSkill({ skill }: { skill: ISkill}) {

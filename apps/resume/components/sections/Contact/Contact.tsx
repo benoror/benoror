@@ -1,66 +1,99 @@
+import { ABOUT } from '@workspace/data/resume';
+import { LINKS } from '@workspace/data/social';
 import { Button } from '@workspace/ui/components/button';
-import { MailIcon } from "lucide-react";
+import { MailIcon, GlobeIcon, NotebookIcon } from "lucide-react";
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { LinkedInIcon } from '@/components/icons/LinkedInIcon';
+import { shortURL } from '@workspace/utils/url';
 
+// ToDo: Componentize icon-links
 export default function Contact() {
   return (
-    <div className="flex gap-8 pt-1 text-sm text-muted-foreground flex-col sm:flex-row sm:items-baseline">
-      {process.env.NEXT_PUBLIC_EMAIL ? (
-        <div className="flex items-center gap-2">
-          <Button
-            className="size-8 print:hidden"
-            variant="outline"
-            size="icon"
-            asChild
-          >
-            <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} target='_blank'>
-              <MailIcon className="size-4" />
-            </a>
-          </Button>
-          <MailIcon className="size-4 hidden print:block" />
-          <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL}`} target='_blank'>
-            {process.env.NEXT_PUBLIC_EMAIL}
+    <div className="flex gap-4 pt-1 text-xs text-muted-foreground flex-col sm:flex-row sm:items-baseline">
+      <div className="flex items-center gap-2">
+        <Button
+          className="size-8 print:hidden"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={`mailto:${ABOUT.public_email}`} target='_blank'>
+            <MailIcon className="size-4" />
           </a>
-        </div>
-      ) : null}
-      {process.env.NEXT_PUBLIC_GITHUB_URL ? (
-        <div className="flex items-center gap-2">
-          <Button
-            className="size-8 print:hidden"
-            variant="outline"
-            size="icon"
-            asChild
-          >
-            <a href={process.env.NEXT_PUBLIC_GITHUB_URL} target='_blank'>
-              <GitHubIcon className="size-4" />
-            </a>
-          </Button>
-          <GitHubIcon className="size-4 hidden print:block" />
-          <a href={process.env.NEXT_PUBLIC_GITHUB_URL} target='_blank'>
-            {process.env.NEXT_PUBLIC_GITHUB_URL.replace('https://', '')}
+        </Button>
+        <MailIcon className="size-4 hidden print:block" />
+        <a href={`mailto:${ABOUT.public_email}`} target='_blank'>
+          {ABOUT.public_email}
+        </a>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Button
+          className="size-8 print:hidden"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={LINKS.website_url} target='_blank'>
+            <GlobeIcon className="size-4" />
           </a>
-        </div>
-      ) : null}
+        </Button>
+        <GlobeIcon className="size-4 hidden print:block" />
+        <a href={LINKS.website_url} target='_blank'>
+          {shortURL(LINKS.website_url)}
+        </a>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Button
+          className="size-8 print:hidden"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={LINKS.github_url} target='_blank'>
+            <GitHubIcon className="size-4" />
+          </a>
+        </Button>
+        <GitHubIcon className="size-4 hidden print:block" />
+        <a href={LINKS.github_url} target='_blank'>
+          {shortURL(LINKS.github_url)}
+        </a>
+      </div>
       
-      {process.env.NEXT_PUBLIC_LINKEDIN_URL ? (
-        <div className="flex items-center gap-2">
-          <Button
-            className="size-8 print:hidden"
-            variant="outline"
-            size="icon"
-            asChild
-          >
-            <a href={process.env.NEXT_PUBLIC_LINKEDIN_URL} target='_blank'>
-              <LinkedInIcon className="size-4" />
-            </a>
-          </Button>
-          <LinkedInIcon className="size-4 hidden print:block" />
-          <a href={process.env.NEXT_PUBLIC_LINKEDIN_URL} target='_blank'>
-            {process.env.NEXT_PUBLIC_LINKEDIN_URL.replace('https://www.', '')}
+      <div className="flex items-center gap-2">
+        <Button
+          className="size-8 print:hidden"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={LINKS.linkedin_url} target='_blank'>
+            <LinkedInIcon className="size-4" />
           </a>
-        </div>
-      ) : null}
+        </Button>
+        <LinkedInIcon className="size-4 hidden print:block" />
+        <a href={LINKS.linkedin_url} target='_blank'>
+          {shortURL(LINKS.linkedin_url)}
+        </a>
+      </div>
+      
+      <div className="flex items-center gap-2">
+        <Button
+          className="size-8 print:hidden"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={LINKS.blog_url} target='_blank'>
+            <NotebookIcon className="size-4" />
+          </a>
+        </Button>
+        <NotebookIcon className="size-4 hidden print:block" />
+        <a href={LINKS.blog_url} target='_blank'>
+          {shortURL(LINKS.blog_url)}
+        </a>
+      </div>
     </div>
   )
 }

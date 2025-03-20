@@ -1,18 +1,20 @@
+import { ABOUT } from '@workspace/data/resume';
+import { LINKS } from '@workspace/data/social';
+import { shortURL } from '@workspace/utils/url';
 
 export default function Intro() {
   return (
     <section className="Intro flex flex-col items-center w-full">
-      <h1 className="text-4xl font-bold">Jakub Kubacki</h1>
+      <h1 className="text-4xl font-bold">{ABOUT.name}</h1>
       <div className="text-lg">
-        Lead Software Engineer
+        {ABOUT.header}
       </div>
-      {process.env.NEXT_PUBLIC_WEBSITE_URL ? (
-        <div className="items-center gap-2 hidden print:flex">
-          <a href={process.env.NEXT_PUBLIC_WEBSITE_URL} target='_blank'>
-            {process.env.NEXT_PUBLIC_WEBSITE_URL.replace('https://', '')}
-          </a>
-        </div>
-      ) : null}
+      <div className="items-center gap-2 hidden text-muted-foreground print:flex">
+        <a href={LINKS.resume_url} target='_blank'>
+          {/* ToDo: Move to footer */}
+          {shortURL(LINKS.resume_url)}
+        </a>
+      </div>
     </section>
   );
 }

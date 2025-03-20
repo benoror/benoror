@@ -16,23 +16,24 @@ export default function Page() {
     <main className="container mx-auto flex flex-col items-center gap-10 print:gap-4 px-6 py-16 print:py-0 md:p-24 max-w-5xl">
       <Intro />
       <Contact />
-      <CoreSkills />
       <About />
       <Experience />
-      <Skills />
+      {/* <CoreSkills /> */}
+      {/* <Skills /> */}
       <Education />
       <Languages />
-      <Interests />
-      <div className="print:mt-8">
+      {/* <Interests /> */}
+      {/* <div className="print:mt-8">
         <Contact />
-      </div>
+      </div> */}
       <div className="flex gap-2">
+        {/* ToDo: Dark-mode button (& theme switcher (xoria256)?) */}
         <DownloadPDFButton />
         <PrintButton />
       </div>
       <footer className="text-center text-sm mb-3 print:hidden flex flex-col gap-3 items-center">
         <div className="flex items-center gap-1">
-          Made with ❤️ using TypeScript, React, Next.js, Tailwind CSS and shadcn/ui
+          Made with TypeScript, React, Next.js, Tailwind CSS and shadcn/ui
           <a href="https://github.com/jkubacki/cv" target="_blank"><GitHubIcon className="w-4 h-4 mx-1" /></a>
         </div>
         <div className="flex flex-col items-center gap-1 lg:flex-row">

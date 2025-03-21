@@ -1,7 +1,8 @@
 export interface IRole {
   title: string;
   company: string;
-  companyUrl: string;
+  project?: string;
+  websiteUrl: string;
   location: string;
   startDate: string;
   endDate: string;

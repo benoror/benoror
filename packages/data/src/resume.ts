@@ -37,7 +37,7 @@ export const ROLES: IRole[] = [
   {
     title: 'VP of Engineering',
     company: 'Apptegy',
-    companyUrl: 'https://www.apptegy.com/',
+    websiteUrl: 'https://www.apptegy.com/',
     location: 'Monterrey, NL 🇲🇽',
     startDate: 'Apr 2021 ',
     endDate: 'Present',
@@ -47,7 +47,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Lead Software Engineer',
     company: 'Apptegy',
-    companyUrl: 'https://www.apptegy.com/',
+    websiteUrl: 'https://www.apptegy.com/',
     location: 'Little Rock, AK 🇺🇸 / Remote 🌐',
     startDate: 'Mar 2020',
     endDate: 'Abr 2021',
@@ -77,7 +77,7 @@ export const ROLES: IRole[] = [
   {
     title: 'CTO',
     company: 'HealthTree',
-    companyUrl: 'https://healthtree.org',
+    websiteUrl: 'https://healthtree.org',
     location: 'Salt Lake City, UT 🇺🇸',
     startDate: 'Jan 2019',
     endDate: 'Mar 2020',
@@ -100,8 +100,8 @@ export const ROLES: IRole[] = [
   },
   {
     title: 'CTO',
-    company: '',
-    companyUrl: '',
+    company: 'Ecaresoft',
+    websiteUrl: 'https://www.ecaresoft.com/',
     location: 'Monterrey, NL 🇲🇽 / Austin, TX 🇺🇸',
     startDate: 'Jan 2018',
     endDate: 'Jan 2019',
@@ -128,8 +128,9 @@ export const ROLES: IRole[] = [
   },
   {
     title: 'CTO',
-    company: 'Nimbo',
-    companyUrl: 'http://www.nimbo-x.com/',
+    company: 'Ecaresoft',
+    project: 'Nimbo',
+    websiteUrl: 'http://www.nimbo-x.com/',
     location: 'Monterrey, NL 🇲🇽',
     startDate: 'Feb 2016',
     endDate: 'Jan 2019',
@@ -155,8 +156,9 @@ export const ROLES: IRole[] = [
   },
   {
     title: 'Tech Lead',
-    company: 'Nebula',
-    companyUrl: 'https://www.usenebula.com/',
+    company: 'Ecaresoft',
+    project: 'Nebula',
+    websiteUrl: 'https://www.usenebula.com/',
     location: 'Monterrey, NL 🇲🇽',
     startDate: 'Oct 2017',
     endDate: 'Jul 2018',
@@ -172,7 +174,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Full Stack Developer',
     company: 'Panax.io',
-    companyUrl: 'http://panax.io/',
+    websiteUrl: 'http://panax.io/',
     location: '',
     startDate: '2014',
     endDate: '2016',
@@ -182,7 +184,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Software Consultant',
     company: 'OperIT',
-    companyUrl: 'http://www.servicesinit.com/',
+    websiteUrl: 'http://www.servicesinit.com/',
     location: '',
     startDate: '2014',
     endDate: '2014',
@@ -192,7 +194,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Software Engineering Intern',
     company: 'SAP',
-    companyUrl: 'http://www.sap.com/',
+    websiteUrl: 'http://www.sap.com/',
     location: '',
     startDate: '2013',
     endDate: '2014',
@@ -202,7 +204,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Technical Co-Founder',
     company: 'CotizaHoy',
-    companyUrl: 'http://www.cotizahoy.com/',
+    websiteUrl: 'http://www.cotizahoy.com/',
     location: '',
     startDate: '2010',
     endDate: '2013',
@@ -212,7 +214,7 @@ export const ROLES: IRole[] = [
   {
     title: 'Software Development Intern',
     company: 'NIC Mexico',
-    companyUrl: 'http://www.nicmexico.mx/',
+    websiteUrl: 'http://www.nicmexico.mx/',
     location: '',
     startDate: '2008',
     endDate: '2009',

@@ -8,7 +8,7 @@ export default function Education() {
         {EDUCATION.map((degree, index) => (
           <div key={index} className="flex flex-col gap-1">
             <p className="text-md font-bold print:text-md">{degree.title}</p>
-            <h3 className="text-md print:text-sm underline">
+            <h3 className="text-md print:text-sm">
               <a href={degree.institutionUrl}>{degree.institution}</a>
             </h3>
             <p className="text-sm">🗓 {degree.startDate} - {degree.endDate}</p>

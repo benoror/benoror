@@ -6,18 +6,14 @@
     "build": "tsc"
   },
   "exports": {
-    "./*": "./src/*.tsx",
+    "./*": "./src/*.ts",
     "./types/*": "./src/types/*.ts"
   },
   "dependencies": {
-    "@workspace/utils": "workspace:*",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "@workspace/utils": "workspace:*"
   },
   "devDependencies": {
     "@workspace/typescript-config": "workspace:*",
-    "typescript": "latest",
-    "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "typescript": "latest"
   }
 }

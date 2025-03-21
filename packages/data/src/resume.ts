@@ -1,4 +1,3 @@
-import React from 'react';
 import { PERSONAL } from '@workspace/data/personal';
 import { IRole, ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
@@ -61,18 +60,18 @@ export const ROLES: IRole[] = [
       }, {
         achievement: 'Interview backend & full-stack candidates while onboarding 10\'s of new hires.'
       }, {
-        achievement: 'Hands-on development of Thrillshare platform and APIs mainly in `Ruby on Rails`, supporting Vue.js & Mobile (iOS & Android) clients.'
+        achievement: 'Hands-on development of Thrillshare platform and APIs mainly in [Ruby on Rails](#ruby-on-rails), supporting Vue.js & Mobile (iOS & Android) clients.'
       }, {
-        achievement: 'Supporting Micro-services built with `Ruby`, `Roda` micro-framework & `Sidekiq`: Analytics, Data Management, Translations, Learning Management System.'
+        achievement: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'
       }, {
         achievement: 'Developed greenfield Ruby on Rails outpost services following SOA (service-oriented architecture):',
         subAchievements: [{
-          achievement: 'Auth: AuthN/Z identity provider based on `OAuth2` & `OpenID Connect` standards to support SSO (Single Sign-on) and User Management across all Apptegy\'s products',
+          achievement: 'Auth: AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across all Apptegy\'s products',
         }, {
           achievement: 'Alerts: Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
         }]
       }, {
-        achievement: 'DevOps, CI/CD and release managment deploying in `AWS: EC2, ELB, EKS, RDS, S3` clusters using `Capistrano` & `Kubernetes`'
+        achievement: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#ec2), [ELB](#elb), [EKS](#eks), [RDS](#rds), [S3](#s3) clusters using [Capistrano](#capistrano) & [Kubernetes](#kubernetes)'
       }]
   },
   {
@@ -88,9 +87,9 @@ export const ROLES: IRole[] = [
     }, {
       achievement: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
     }, {
-      achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: `Metabase` `Sentry` `Intercom`'
+      achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
     }, {
-      achievement: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile `Kanban` methodology in `Trello`'
+      achievement: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile [Kanban](#kanban) methodology in [Trello](#trello)'
     }, {
       achievement: 'Decreased bugs and improved overall quality via technical leadership & mentoring to achieve continuous improvement as a team'
     }, {
@@ -117,9 +116,9 @@ export const ROLES: IRole[] = [
     }, {
       achievement: 'Product development and operations',
       subAchievements: [{
-        achievement: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting `SCRUM` & `Kanban` Agile software development methodologies'
+        achievement: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting [SCRUM](#scrum) & [Kanban](#kanban) Agile software development methodologies'
       }, {
-        achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: `Metabase` `Sentry` `Intercom`'
+        achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
       }, {
         achievement: 'Achieved continuous improvement via OKRs, Performance Reviews and One-on-ones'
       }, {
@@ -140,18 +139,18 @@ export const ROLES: IRole[] = [
     }, {
       achievement: 'Defined Software Architecture and launched fault-tolerant APIs and microservices',
       subAchievements: [{
-        achievement: 'Drugs interactions `Java` service based on Wolters Kluwer\'s Medi-Span®'
+        achievement: 'Drugs interactions [Java](#java) service based on Wolters Kluwer\'s Medi-Span®'
       }, {
-        achievement: 'Machine Learning prediction & classification service based on `Python` & `Tensorflow`'
+        achievement: 'Machine Learning prediction & classification service based on [Python](#python) & [Tensorflow](#Tensorflow)'
       }, {
-        achievement: 'Full-text search service based on `Apache Solr`'
+        achievement: 'Full-text search service based on [Apache Solr](#apache-solr)'
       }]
     }, {
       achievement: 'Implemented DevOps and continuous integration/delivery to production'
     }, {
       achievement: 'Reached balance between quality & speed by improving recruiting, management & coaching of development team'
     }, {
-      achievement: 'Achieved Lean product development by relying on `Kanban` methodology'
+      achievement: 'Achieved Lean product development by relying on [Kanban](#kanban) methodology'
     }]
   },
   {
@@ -163,11 +162,11 @@ export const ROLES: IRole[] = [
     endDate: 'Jul 2018',
     description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',
     achievements: [{
-      achievement: 'Full-stack development using `Elixir/Phoenix` for Backend and `Ember.js` for Frontend',
+      achievement: 'Full-stack development using [Elixir](#elixir)/[Phoenix](#phoenix) for Backend and [Ember.js](#ember.js) for Frontend',
     }, {
-      achievement: '`Domain-driven Design` architecture using Bounded Contexts',
+      achievement: '[Domain-driven Design](#ddd) architecture using Bounded Contexts',
     }, {
-      achievement: 'DevOps infrastructure using `Docker` containers on `AWS: Elastic Beanstalk`',
+      achievement: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#ebs)`',
     }]
   },
   {
@@ -177,7 +176,7 @@ export const ROLES: IRole[] = [
     location: '',
     startDate: '2014',
     endDate: '2016',
-    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: `Node.js / Express` `SQL Server` `Angular.js`',
+    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: `[Node.js](#node.js) / [Express](#express) [SQL Server](#sql-server) [Angular.js](#angular.js)',
     achievements: []
   },
   {
@@ -197,7 +196,7 @@ export const ROLES: IRole[] = [
     location: '',
     startDate: '2013',
     endDate: '2014',
-    description: 'Test-driven development for Supportability & SaaS enterprise product lines using `JavaScript` and `Jasmine`',
+    description: 'Test-driven development for Supportability & SaaS enterprise product lines using [JavaScript](#javascript) and [Jasmine](#jasmine)',
     achievements: []
   },
   {
@@ -207,7 +206,7 @@ export const ROLES: IRole[] = [
     location: '',
     startDate: '2010',
     endDate: '2013',
-    description: 'Launched B2B startup for car manufacturing industry developed in `Ruby on Rails` `PostgreSQL` `Heroku`',
+    description: 'Launched B2B startup for car manufacturing industry developed in [Ruby on Rails](#ruby-on-rails) [PostgreSQL](#psql) [Heroku](#heroku)',
     achievements: []
   },
   {

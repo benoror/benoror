@@ -42,7 +42,11 @@ export const ROLES: IRole[] = [
     startDate: 'Apr 2021 ',
     endDate: 'Present',
     description: 'Scaling and shipping a suite of products used by 3,000+ school districts in the US with quality and cadence goals in a high-growth Series-B EdTech startup. Help forming & leading a team of 120+ Engineers by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.',
-    achievements: []
+    achievements: [],
+    skills: [
+      { name: 'Ownership' },
+      { name: 'System Design' },
+    ]
   },
   {
     title: 'Lead Software Engineer',

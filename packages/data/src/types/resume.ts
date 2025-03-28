@@ -4,10 +4,13 @@ export interface IRole {
   project?: string;
   websiteUrl: string;
   location: string;
+  remote?: boolean;
   startDate: string;
   endDate: string;
   description: string;
+  roles?: IRole[];
   achievements: IAchievement[];
+  skills?: ISkill[];
 }
 
 export interface IAchievement {

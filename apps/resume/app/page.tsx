@@ -13,7 +13,7 @@ import { GitHubIcon } from '@/components/icons/GitHubIcon';
 
 export default function Page() {
   return (
-    <main className="container mx-auto flex flex-col items-center gap-10 print:gap-4 px-6 py-16 print:py-0 md:p-24 max-w-5xl">
+    <main className="container mx-auto flex flex-col items-center gap-10 print:gap-4 px-6 py-16 print:py-2 md:p-24 max-w-5xl">
       <Intro />
       <Contact />
       <About />

@@ -3,30 +3,20 @@
 import { useState } from "react"
 import { BriefcaseBusinessIcon } from "lucide-react";
 import Role from '@/components/sections/Experience/Role'
-import { ROLES } from '@workspace/data/resume'
-import { IRole } from '@workspace/data/types/resume';
-import { groupBy, sortBy, reduce } from 'lodash-es'
+import { COMPANIES } from '@workspace/data/resume'
+import { ICompany, IRole } from '@workspace/data/types/resume';
 import { Badge } from '@workspace/ui/components/badge';
-import { Calendar, Globe, MapPin } from "lucide-react"
+import { ExternalLink, Calendar, Globe, MapPin } from "lucide-react"
+import { shortURL } from '@workspace/utils/url';
 
 export default function Experience() {
-  const byCompany = (roles: IRole[]) => {
-    const grouped = groupBy(roles, 'company')
-    const resorted = sortBy(grouped, (group: any) => roles.indexOf(group[0]))
-
-    return reduce(resorted, (result: Array<Object>, companyRoles: Array<IRole>) => {
-      result.push({...companyRoles[0], roles: companyRoles})
-      return result
-    }, [])
-  }
-
   // Track open/closed state for each role
   const [openStates, setOpenStates] = useState<Record<string, boolean>>(() => {
     const initialState: Record<string, boolean> = {}
-    // Initialize all as closed by default except the first two companies
-    byCompany(ROLES).forEach((company: IRole, companyIndex: number) => {
+    // Initialize all as closed by default except the first company
+    COMPANIES.forEach((company: ICompany, companyIndex: number) => {
       (company.roles ?? []).forEach((_: IRole, roleIndex: number) => {
-        initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 2
+        initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 1
       })
     })
     return initialState
@@ -41,23 +31,24 @@ export default function Experience() {
 
   return (
     <section className="Experience flex flex-col items-center gap-5 print:gap-4">
-      <h2 className="text-2xl font-bold print:text-xl">
+      <h2 className="text-2xl font-bold print:text-xl mb-4">
         <BriefcaseBusinessIcon className="size-6 inline" /> 💼 Experience
       </h2>
       <div>
-        {byCompany(ROLES).map((company: IRole, companyIndex: number) => (
+        {COMPANIES.map((company: ICompany, companyIndex: number) => (
           <div key={companyIndex} className={companyIndex !== 0 ? "pt-4" : ""}>
-            <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-2">
+            <div className="flex flex-row justify-between items-center gap-2 mb-2">
               <h3 className="text-xl font-bold">
-                {company.websiteUrl ? (
-                  <a href={company.websiteUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
-                    {company.company}
+                {company.url ? (
+                  <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                    {company.name} <ExternalLink className="inline h-4 w-4 mb-1 print:hidden" />
                   </a>
                 ) : (
-                  company.company
+                  company.name
                 )}
+                <span className="hidden print:inline text-muted-foreground text-sm">/ {shortURL(company.url)}</span>
               </h3>
-              <div className="flex flex-col md:flex-row items-start md:items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-row items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-4">
                   {company.remote && (
                     <Badge
@@ -80,16 +71,16 @@ export default function Experience() {
               </div>
             </div>
 
-            <p className="text-sm mb-4">{company.description}</p>
+            <p className="text-sm mb-4 text-muted-foreground">{company.description}</p>
 
-            <div className="space-y-6 pl-0 md:pl-4 border-l-2 border-gray-200">
+            <div className="space-y-6 pl-4 border-l-2 border-gray-200">
               {(company.roles ?? []).map((role: IRole, roleIndex: number) => {
                 const key = `${companyIndex}-${roleIndex}`
                 const isOpen = openStates[key]
 
                 return (
-                  <div key={key} className="pl-4">
-                    <Role roleKey={key} role={role} isOpen={isOpen ?? false} toggleCollapsible={toggleCollapsible} />
+                  <div key={key} className="pl-0">
+                    <Role roleKey={key} role={role} short={!!company.short} isOpen={isOpen ?? false} toggleCollapsible={toggleCollapsible} />
                   </div>
                 )
               })}

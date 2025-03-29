@@ -1,20 +1,30 @@
+export interface ICompany {
+  short?: boolean;
+  name: string;
+  url: string;
+  location: string;
+  remote?: boolean;
+  startDate: string;
+  endDate: string;
+  roles: IRole[];
+  description: string;
+}
+
 export interface IRole {
   title: string;
-  company: string;
   project?: string;
-  websiteUrl: string;
+  projectUrl?: string;
   location: string;
   remote?: boolean;
   startDate: string;
   endDate: string;
   description: string;
-  roles?: IRole[];
+  skills: ISkill[];
   achievements: IAchievement[];
-  skills?: ISkill[];
 }
 
 export interface IAchievement {
-  achievement: string;
+  description: string;
   subAchievements?: IAchievement[];
 }
 

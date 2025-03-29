@@ -1,12 +1,13 @@
-import { PERSONAL } from '@workspace/data/personal';
-import { IRole, ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
+import { PERSONAL } from '@workspace/data/personal';
+import { APPTEGY, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
 
 export const ABOUT = {
   name: PERSONAL.short_name,
   header: 'Lead Software Engineer - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `VP Eng & CTO of SaaS startups with 100k's of users in U.S. & LATAM. Software engineer specialized in full stack web development and leading technical teams. Passionate about building end-to-end & customer-driven software products, mentoring engineers and leveraging technology to tackle real-world challenges.`
+  about_me: `VP Eng & CTO of SaaS startups in U.S. & LATAM. Software engineer specialized in full stack web development and leading technical teams. Passionate about building end-to-end & customer-driven software products, mentoring engineers and leveraging technology to tackle real-world challenges.`
 }
 
 export const EDUCATION = [{
@@ -33,197 +34,84 @@ export const LANGUAGES = [
   { name: '🇩🇪 German', level: 25, proficiency: 'Basic' },
 ]
 
-export const ROLES: IRole[] = [
+export const COMPANIES = [
   {
-    title: 'VP of Engineering',
-    company: 'Apptegy',
-    websiteUrl: 'https://www.apptegy.com/',
+    name: 'Apptegy',
+    url: 'https://www.apptegy.com',
     location: 'Monterrey, NL 🇲🇽',
-    startDate: 'Apr 2021 ',
-    endDate: 'Present',
-    description: 'Scaling and shipping a suite of products used by 3,000+ school districts in the US with quality and cadence goals in a high-growth Series-B EdTech startup. Help forming & leading a team of 120+ Engineers by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.',
-    achievements: [],
-    skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
-    ]
+    startDate: '2020',
+    endDate: 'Present (5yr)',
+    description: 'EdTech startup with 3,000+ school districts in the US.',
+    remote: true,
+    roles: APPTEGY
   },
   {
-    title: 'Lead Software Engineer',
-    company: 'Apptegy',
-    websiteUrl: 'https://www.apptegy.com/',
-    location: 'Little Rock, AK 🇺🇸 / Remote 🌐',
-    startDate: 'Mar 2020',
-    endDate: 'Abr 2021',
-    description: 'Member of Platform & Infrastructure team working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
-    achievements: [
-      {
-        achievement: 'Advocate best design, architecture, coding practices, peer reviewing & unit testing across the Engineering organization'
-      }, {
-        achievement: 'Scrum master working with Product team following Agile methodologies.'
-      }, {
-        achievement: 'Interview backend & full-stack candidates while onboarding 10\'s of new hires.'
-      }, {
-        achievement: 'Hands-on development of Thrillshare platform and APIs mainly in [Ruby on Rails](#ruby-on-rails), supporting Vue.js & Mobile (iOS & Android) clients.'
-      }, {
-        achievement: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'
-      }, {
-        achievement: 'Developed greenfield Ruby on Rails outpost services following SOA (service-oriented architecture):',
-        subAchievements: [{
-          achievement: 'Auth: AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across all Apptegy\'s products',
-        }, {
-          achievement: 'Alerts: Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
-        }]
-      }, {
-        achievement: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#ec2), [ELB](#elb), [EKS](#eks), [RDS](#rds), [S3](#s3) clusters using [Capistrano](#capistrano) & [Kubernetes](#kubernetes)'
-      }]
-  },
-  {
-    title: 'CTO',
-    company: 'HealthTree',
-    websiteUrl: 'https://healthtree.org',
+    name: 'HealthTree',
+    url: 'https://www.healthtree.org',
     location: 'Salt Lake City, UT 🇺🇸',
-    startDate: 'Jan 2019',
-    endDate: 'Mar 2020',
-    description: 'Developed a Healthcare platform for cancer patients to find their best treatment options, with the mission of accelerating the finding of a cure.',
-    achievements: [{
-      achievement: 'Put together development team and processes for backend APIs, data pipelines & frontend clients by hands-on programming, code reviewing & testing.'
-    }, {
-      achievement: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
-    }, {
-      achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
-    }, {
-      achievement: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile [Kanban](#kanban) methodology in [Trello](#trello)'
-    }, {
-      achievement: 'Decreased bugs and improved overall quality via technical leadership & mentoring to achieve continuous improvement as a team'
-    }, {
-      achievement: 'Defined a Technology Strategy and Software Architecture aligned with product vision'
-    }, {
-      achievement: 'Recruited and retained top talent in a competitive U.S. market'
-    }]
+    startDate: '2019',
+    endDate: '2020',
+    description: 'Healthcare platform for cancer patients, their families and caregivers, with the mission of accelerating the finding of a cure',
+    roles: HEALTHTREE
   },
   {
-    title: 'CTO',
-    company: 'Ecaresoft',
-    websiteUrl: 'https://www.ecaresoft.com/',
-    location: 'Monterrey, NL 🇲🇽 / Austin, TX 🇺🇸',
-    startDate: 'Jan 2018',
-    endDate: 'Jan 2019',
-    description: 'Lead technology strategy, software development and operations to get to new SaaS markets in Argentina and Middle-East. Merged all product teams under a single organization culture. Worked closely with Product, Sales & Support organizations.',
-    achievements: [{
-      achievement: 'Technology strategy and software architecture',
-      subAchievements: [{
-        achievement: 'Succesfully launched internationalization for new markets via APIs, Microservices and serverless Lambda functions using.'
-      }, {
-        achievement: 'Achieved high availability and resilience cloud architecture by relying on DevOps, elastic infrastructure, containerization, automated testing and CI/CD pipelines for continuous quality and delivery with.'
-      }]
-    }, {
-      achievement: 'Product development and operations',
-      subAchievements: [{
-        achievement: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting [SCRUM](#scrum) & [Kanban](#kanban) Agile software development methodologies'
-      }, {
-        achievement: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
-      }, {
-        achievement: 'Achieved continuous improvement via OKRs, Performance Reviews and One-on-ones'
-      }, {
-        achievement: 'Recruited and succesfully retained top talent that added value to the company'
-      }]
-    }]
+    name: 'Ecaresoft',
+    url: 'https://www.ecaresoft.com',
+    location: 'Austin, TX 🇺🇸',
+    startDate: '2016',
+    endDate: '2019',
+    description: 'EHR & HIS systems for hospitals and clinics in Latin America and Middle East.',
+    roles: ECARESOFT
   },
   {
-    title: 'CTO',
-    company: 'Ecaresoft',
-    project: 'Nimbo',
-    websiteUrl: 'http://www.nimbo-x.com/',
-    location: 'Monterrey, NL 🇲🇽',
-    startDate: 'Feb 2016',
-    endDate: 'Jan 2019',
-    description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
-    achievements: [{
-      achievement: 'Established development processes for coding, reviewing & testing backend APIs and frontend clients'
-    }, {
-      achievement: 'Defined Software Architecture and launched fault-tolerant APIs and microservices',
-      subAchievements: [{
-        achievement: 'Drugs interactions [Java](#java) service based on Wolters Kluwer\'s Medi-Span®'
-      }, {
-        achievement: 'Machine Learning prediction & classification service based on [Python](#python) & [Tensorflow](#Tensorflow)'
-      }, {
-        achievement: 'Full-text search service based on [Apache Solr](#apache-solr)'
-      }]
-    }, {
-      achievement: 'Implemented DevOps and continuous integration/delivery to production'
-    }, {
-      achievement: 'Reached balance between quality & speed by improving recruiting, management & coaching of development team'
-    }, {
-      achievement: 'Achieved Lean product development by relying on [Kanban](#kanban) methodology'
-    }]
-  },
-  {
-    title: 'Tech Lead',
-    company: 'Ecaresoft',
-    project: 'Nebula',
-    websiteUrl: 'https://www.usenebula.com/',
-    location: 'Monterrey, NL 🇲🇽',
-    startDate: 'Oct 2017',
-    endDate: 'Jul 2018',
-    description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',
-    achievements: [{
-      achievement: 'Full-stack development using [Elixir](#elixir)/[Phoenix](#phoenix) for Backend and [Ember.js](#ember.js) for Frontend',
-    }, {
-      achievement: '[Domain-driven Design](#ddd) architecture using Bounded Contexts',
-    }, {
-      achievement: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#ebs)`',
-    }]
-  },
-  {
-    title: 'Full Stack Developer',
-    company: 'Panax.io',
-    websiteUrl: 'http://panax.io/',
-    location: '',
+    short: true,
+    name: 'Panax',
+    url: 'https://panax.io',
+    location: 'San Luis Potosi, SLP 🇲🇽',
     startDate: '2014',
     endDate: '2016',
-    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: `[Node.js](#node.js) / [Express](#express) [SQL Server](#sql-server) [Angular.js](#angular.js)',
-    achievements: []
+    description: 'Low-code tool for building business applications.',
+    roles: PANAX
   },
   {
-    title: 'Software Consultant',
-    company: 'OperIT',
-    websiteUrl: 'http://www.servicesinit.com/',
-    location: '',
+    short: true,
+    name: 'OperIT',
+    url: 'https://www.servicesinit.com',
+    location: 'San Luis Potosi, SLP 🇲🇽',
     startDate: '2014',
     endDate: '2014',
-    description: 'Technical consultancy with U.S. companies to define and execute ETL, Analytics and Business Intelligence processes and maintenance of existing software',
-    achievements: []
+    description: 'IT nearshoring consultancy services for U.S. companies',
+    roles: OPERIT
   },
   {
-    title: 'Software Engineering Intern',
-    company: 'SAP',
-    websiteUrl: 'http://www.sap.com/',
-    location: '',
+    short: true,
+    name: 'SAP',
+    url: 'https://www.sap.com',
+    location: 'Walldorf, RNK 🇩🇪',
     startDate: '2013',
     endDate: '2014',
-    description: 'Test-driven development for Supportability & SaaS enterprise product lines using [JavaScript](#javascript) and [Jasmine](#jasmine)',
-    achievements: []
+    description: 'World\'s largest company of ERP software',
+    roles: SAP
   },
   {
-    title: 'Technical Co-Founder',
-    company: 'CotizaHoy',
-    websiteUrl: 'http://www.cotizahoy.com/',
-    location: '',
+    short: true,
+    name: 'CotizaHoy',
+    url: 'https://www.cotizahoy.com',
+    location: 'San Luis Potosi, SLP 🇲🇽',
     startDate: '2010',
     endDate: '2013',
-    description: 'Launched B2B startup for car manufacturing industry developed in [Ruby on Rails](#ruby-on-rails) [PostgreSQL](#psql) [Heroku](#heroku)',
-    achievements: []
+    description: 'B2B startup for car manufacturing industry',
+    roles: COTIZAHOY
   },
   {
-    title: 'Software Development Intern',
-    company: 'NIC Mexico',
-    websiteUrl: 'http://www.nicmexico.mx/',
-    location: '',
+    short: true,
+    name: 'NIC Mexico',
+    url: 'https://www.nicmexico.mx',
+    location: 'Monterrey, NL 🇲🇽',
     startDate: '2008',
     endDate: '2009',
-    description: 'Developed internal and customer apps in PHP Java and PL/SQL',
-    achievements: []
+    description: 'NIC organization for .mx top-level domains',
+    roles: NICMX
   }
 ]
 

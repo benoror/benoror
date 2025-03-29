@@ -3,7 +3,7 @@ import { EDUCATION } from '@workspace/data/resume';
 export default function Education() {
   return (
     <section className="Education flex flex-col items-center gap-5 print:gap-2 w-full">
-      <h2 className="text-2xl font-bold print:text-xl">🎓 Education</h2>
+      <h2 className="text-2xl font-bold print:text-xl mb-4">🎓 Education</h2>
       <div className="flex flex-col gap-4 w-full">
         {EDUCATION.map((degree, index) => (
           <div key={index} className="flex flex-col gap-1">

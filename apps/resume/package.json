@@ -27,7 +27,6 @@
     "@types/react-dom": "^19",
     "@workspace/eslint-config": "workspace:^",
     "@workspace/typescript-config": "workspace:*",
-    "lodash-es": "^4.17.21",
     "react-markdown": "^10.1.0",
     "typescript": "^5.7.3"
   }

@@ -15,7 +15,7 @@ export default function Language({ language }: { language: any }) {
     <div className="Language w-full md:w-[45%] lg:w-[22%] print:w-[22%] mb-4">
       <a href={`#${language.name}`}>
         <div className="text-center">{language.name}</div>
-        <Progress value={progress} />
+        <Progress value={progress} classNameIndicator="bg-sky-900 dark:bg-sky-200" />
         <div className="text-sm text-muted-foreground text-center">{language.proficiency}</div>
       </a>
     </div>

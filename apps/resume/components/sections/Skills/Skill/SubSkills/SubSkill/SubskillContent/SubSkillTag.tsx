@@ -1,11 +1,12 @@
 import { Badge } from '@workspace/ui/components/badge';
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@workspace/ui/components/tooltip';
 import { ISkill } from '@workspace/data/types/resume';
+import SkillBadge from '@/components/SkillBadge';
 
 export default function SubSkillTag({ skill }: { skill: ISkill }) {
 
   const badge = <div id={skill.slug}>
-                  <Badge variant="outline" className='m-0.5'>{skill.name}</Badge>
+                  <SkillBadge className='mr-1'>{skill.name}</SkillBadge>
                 </div>
 
   if (!skill.description) return badge

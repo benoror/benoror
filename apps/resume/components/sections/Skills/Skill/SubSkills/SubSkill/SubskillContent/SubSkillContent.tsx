@@ -1,10 +1,9 @@
 import SubSkillTag from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillTag';
 import { ISkill } from '@workspace/data/types/resume';
 
-export default function SubSkillContent({ skill, yearsOfExperience }: { skill: ISkill, yearsOfExperience: string}) {
+export default function SubSkillContent({ skill }: { skill: ISkill }) {
   return (
     <>
-      <h1 className="font-semibold">{skill.name}{yearsOfExperience && ` - ${yearsOfExperience}`}</h1>
       {skill.description}
       <div className="flex flex-row flex-wrap">
         {

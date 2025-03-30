@@ -36,9 +36,7 @@ export default function RootLayout({
         <Providers>
           {children}
           {/* <Analytics /> */}
-          <div className="print:hidden absolute top-1 left-1">
-          </div>
-          <div className="absolute top-1 right-1 flex gap-2">
+          <div className="print:hidden absolute top-1 right-1 flex gap-2">
             <DownloadPDFButton />
             <PrintButton />
             <ThemeToggleButton />

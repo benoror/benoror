@@ -1,5 +1,5 @@
 import Markdown from 'react-markdown'
-import { Badge } from '@workspace/ui/components/badge';
+import SkillBadge from './SkillBadge';
 
 export default function MDDescription({ markdown }: { markdown: string }) {
   return (
@@ -7,10 +7,9 @@ export default function MDDescription({ markdown }: { markdown: string }) {
       p: ({ children }) => <>{children}</>,
       a({node, ...props}) {
         return (
-          // <Badge variant="secondary" className="font-normal"></Badge>
-          <Badge variant="secondary" className="font-normal">
-            <a {...props} className="underline decoration-dotted decoration-gray hover:decoration-solid" />
-          </Badge>
+          <SkillBadge>
+            <a {...props} />
+          </SkillBadge>
         )
       }
     }} />

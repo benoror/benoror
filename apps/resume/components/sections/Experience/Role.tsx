@@ -5,6 +5,7 @@ import MDDescription from '@/components/MarkdownDescription';
 import { ExternalLink, Calendar, ChevronDown, ChevronUp, Globe, MapPin } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@workspace/ui/components/collapsible"
 import { shortURL } from '@workspace/utils/url';
+import SkillBadge from '@/components/SkillBadge';
 
 const RoleTitle = ({ role }: { role: IRole }) => (
   <h4 className="font-bold inline">
@@ -49,8 +50,8 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
           <div className="flex items-center gap-4">
             {role.remote && (
               <Badge
-                variant="secondary"
-                className="flex items-center h-5 px-1.5 text-xs font-normal bg-primary/10 border-primary/10"
+                variant="outline"
+                className="flex items-center h-5 px-1.5 text-muted-foreground/100 border-primary/10"
               >
                 <Globe className="h-3 w-3 mr-1" />
                 Remote
@@ -104,11 +105,11 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
 
       <div className="flex flex-wrap gap-2">
         {(role.skills ?? []).map((skill, skillIndex) => (
-          <Badge key={skillIndex} variant="secondary" className="font-normal">
-            <a href={`#${skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()}`} className="underline decoration-dotted decoration-gray hover:decoration-solid">
+          <SkillBadge key={skillIndex}>
+            <a href={`#${skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()}`}>
               {skill.name}
             </a>
-          </Badge>
+          </SkillBadge>
         ))}
       </div>
     </>

@@ -3,7 +3,7 @@ import { IRole } from '@workspace/data/types/resume';
 export const APPTEGY: IRole[] = [
   {
     title: 'VP of Engineering',
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Monterrey 🇲🇽',
     startDate: 'Apr 2021 ',
     endDate: 'Present',
     description: 'Scaling and shipping a suite of products used by 10MM\'s of users with quality and cadence goals in a high-growth Series-B EdTech startup. Help forming & leading a team of 120+ Engineers by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.',
@@ -20,7 +20,7 @@ export const APPTEGY: IRole[] = [
   {
     title: 'Lead Software Engineer',
     remote: true,
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Monterrey 🇲🇽',
     startDate: 'Mar 2020',
     endDate: 'Abr 2021',
     description: 'Member of Platform & Infrastructure team working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
@@ -85,7 +85,7 @@ export const HEALTHTREE: IRole[] = [
 export const ECARESOFT: IRole[] = [
   {
     title: 'CTO',
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Monterrey 🇲🇽',
     startDate: 'Jan 2018',
     endDate: 'Jan 2019',
     description: 'Lead technology strategy, software development and operations to get to new SaaS markets in Argentina and Middle-East. Merged all product teams under a single organization culture. Worked closely with Product, Sales & Support organizations.',
@@ -117,7 +117,7 @@ export const ECARESOFT: IRole[] = [
     title: 'CTO',
     project: 'Nimbo',
     projectUrl: 'https://www.nimbo-x.com',
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Monterrey 🇲🇽',
     startDate: 'Feb 2016',
     endDate: 'Jan 2019',
     description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
@@ -148,7 +148,7 @@ export const ECARESOFT: IRole[] = [
     title: 'Tech Lead',
     project: 'Nebula',
     projectUrl: 'https://www.usenebula.com',
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Monterrey 🇲🇽',
     startDate: 'Oct 2017',
     endDate: 'Jul 2018',
     description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',

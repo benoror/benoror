@@ -14,9 +14,9 @@ export default function Education() {
       <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
         <GraduationCap className="size-6 inline" /> Education
       </h2>
-      <div className="flex flex-row justify-center gap-16 w-full">
+      <div className="grid grid-cols-2 justify-center gap-8 w-full">
         {EDUCATION.map((degree, index) => (
-          <Card key={index} className="w-1/2">
+          <Card key={index}>
             <CardHeader>
               <CardTitle>{degree.title}</CardTitle>
               <CardDescription>

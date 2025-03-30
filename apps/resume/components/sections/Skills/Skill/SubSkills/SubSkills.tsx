@@ -8,7 +8,7 @@ export default function SubSkills({ skills }: { skills: ISkill[] }) {
       <div className="print:hidden flex w-full flex-row flex-wrap gap-3">
         {skills.map((skill, index) => <SubSkill key={index} skill={skill} /> )}
       </div>
-      <div className="hidden print:flex w-full flex-col flex-wrap gap-0">
+      <div className="hidden print:block w-full text-justify">
         {skills.map((skill, index) => <PrintSubSkill key={index} skill={skill} /> )}
       </div>
     </>

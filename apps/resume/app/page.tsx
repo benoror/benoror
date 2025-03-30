@@ -34,7 +34,7 @@ export default function Page() {
       {/* ToDo: Extract to footer component */}
       <footer className="text-center text-xs mb-3 print:hidden flex flex-col gap-3 items-center">
         <a href="https://github.com/benoror/benoror-cv" target="_blank">
-          Made with TypeScript, React, Next.js, Tailwind and shadcn/ui <GitHubIcon className="w-4 h-4 mx-1" />
+          Made with TypeScript, React, Next.js, Tailwind and shadcn/ui <GitHubIcon className="w-4 h-4 mx-1 mb-1 inline" />
         </a>
       </footer>
     </main>

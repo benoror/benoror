@@ -2,10 +2,11 @@ import { Geist, Geist_Mono } from "next/font/google"
 import type { Metadata } from "next";
 import PrintButton from '@/components/PrintButton';
 import DownloadPDFButton from '@/components/DownlaodPDFButton';
+import ThemeToggleButton from '@/components/ThemeToggleButton';
+import { Providers } from "@/components/providers"
 // import { Analytics } from "@vercel/analytics/react";
 
 import "@workspace/ui/globals.css"
-// import { Providers } from "@/components/providers"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -30,18 +31,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
+        className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased`}
       >
-        {/* <Providers>{children}</Providers> */}
-        {children}
-        {/* <Analytics /> */}
-        <div className="print:hidden absolute top-1 left-1">
-        </div>
-        <div className="absolute top-1 right-1 flex gap-2">
-          {/* ToDo: Dark-mode button (& theme switcher (xoria256)?) */}
-          <DownloadPDFButton />
-          <PrintButton />
-        </div>
+        <Providers>
+          {children}
+          {/* <Analytics /> */}
+          <div className="print:hidden absolute top-1 left-1">
+          </div>
+          <div className="absolute top-1 right-1 flex gap-2">
+            <DownloadPDFButton />
+            <PrintButton />
+            <ThemeToggleButton />
+          </div>
+        </Providers>
       </body>
     </html>
   )

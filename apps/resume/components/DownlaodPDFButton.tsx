@@ -10,7 +10,7 @@ export default function DownloadPDFButton(){
   }
 
   return (
-    <Button onClick={handleClick} className="px-2 py-1 print:hidden" variant={'outline'}>
+    <Button onClick={handleClick} className="print:hidden" variant={'outline'} size="icon">
       <Download width={20} strokeWidth={1} />
     </Button>
   )

@@ -6,7 +6,7 @@ import Experience from '@/components/sections/Experience/Experience';
 import Intro from '@/components/sections/Intro';
 import Skills from '@/components/sections/Skills/Skills';
 import Languages from '@/components/sections/Languages/Languages';
-import Interests from '@/components/sections/Interests/Interests';
+// import Interests from '@/components/sections/Interests/Interests';
 import PrintButton from '@/components/PrintButton';
 import DownloadPDFButton from '@/components/DownlaodPDFButton';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';

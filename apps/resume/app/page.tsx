@@ -27,7 +27,6 @@ export default function Page() {
         <Contact />
       </div> */}
       <div className="flex gap-2">
-        {/* ToDo: Dark-mode button (& theme switcher (xoria256)?) */}
         <DownloadPDFButton />
         <PrintButton />
       </div>

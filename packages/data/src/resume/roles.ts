@@ -9,13 +9,18 @@ export const APPTEGY: IRole[] = [
     description: 'Scaling and shipping a suite of products used by 10MM\'s of users with quality and cadence goals in a high-growth Series-B EdTech startup. Help forming & leading a team of 120+ Engineers by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.',
     achievements: [],
     skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
+      { name: 'Leadership' },
+      { name: 'Management' },
+      { name: 'Hiring' },
+      { name: 'Mentoring' },
+      { name: 'Agile' },
+      { name: 'Architecture' },
     ]
   },
   {
     title: 'Lead Software Engineer',
-    location: 'Little Rock, AK 🇺🇸 / Remote 🌐',
+    remote: true,
+    location: 'Monterrey, NL 🇲🇽',
     startDate: 'Mar 2020',
     endDate: 'Abr 2021',
     description: 'Member of Platform & Infrastructure team working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
@@ -41,8 +46,12 @@ export const APPTEGY: IRole[] = [
         description: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#ec2), [ELB](#elb), [EKS](#eks), [RDS](#rds), [S3](#s3) clusters using [Capistrano](#capistrano) & [Kubernetes](#kubernetes)'
       }],
       skills: [
-        { name: 'Ownership' },
+        { name: 'Technical Leadership' },
+        { name: 'Agile' },
         { name: 'System Design' },
+        { name: 'Architecture' },
+        { name: 'Code Review' },
+        { name: 'Unit Testing' },
       ]
   }
 ]
@@ -50,12 +59,9 @@ export const APPTEGY: IRole[] = [
 export const HEALTHTREE: IRole[] = [
   {
     title: 'CTO',
-    location: 'Salt Lake City, UT 🇺🇸',
-    startDate: 'Jan 2019',
-    endDate: 'Mar 2020',
     description: 'Developed web & mobile platforms for cancer patients to find their best treatment options.',
     achievements: [{
-      description: 'Put together development team and processes for backend APIs, data pipelines & frontend clients by hands-on programming, code reviewing & testing.'
+      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails) & , data pipelines & frontend clients by hands-on programming, code reviewing & testing.'
     }, {
       description: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
     }, {
@@ -70,8 +76,8 @@ export const HEALTHTREE: IRole[] = [
       description: 'Recruited and retained top talent in a competitive U.S. market'
     }],
     skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
+      // { name: 'Ownership' },
+      // { name: 'System Design' },
     ]
   }
 ]
@@ -103,8 +109,8 @@ export const ECARESOFT: IRole[] = [
       }]
     }],
     skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
+      // { name: 'Ownership' },
+      // { name: 'System Design' },
     ]
   },
   {
@@ -118,7 +124,7 @@ export const ECARESOFT: IRole[] = [
     achievements: [{
       description: 'Established development processes for coding, reviewing & testing backend APIs and frontend clients'
     }, {
-      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices',
+      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#psql), [Redis](#redis) and [Sidekiq](#sidekiq) for background processing',
       subAchievements: [{
         description: 'Drugs interactions [Java](#java) service based on Wolters Kluwer\'s Medi-Span®'
       }, {
@@ -134,8 +140,8 @@ export const ECARESOFT: IRole[] = [
       description: 'Achieved Lean product development by relying on [Kanban](#kanban) methodology'
     }],
     skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
+      // { name: 'Ownership' },
+      // { name: 'System Design' },
     ]
   },
   {
@@ -154,8 +160,8 @@ export const ECARESOFT: IRole[] = [
       description: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#ebs)`',
     }],
     skills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
+      // { name: 'Ownership' },
+      // { name: 'System Design' },
     ]
   }
 ]

@@ -7,8 +7,9 @@ export default function MDDescription({ markdown }: { markdown: string }) {
       p: ({ children }) => <>{children}</>,
       a({node, ...props}) {
         return (
-          <Badge variant="outline" className="text-sm font-mono">
-            <a {...props} className="" />
+          // <Badge variant="secondary" className="font-normal"></Badge>
+          <Badge variant="secondary" className="font-normal">
+            <a {...props} className="underline decoration-dotted decoration-gray hover:decoration-solid" />
           </Badge>
         )
       }

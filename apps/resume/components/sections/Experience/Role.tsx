@@ -45,26 +45,30 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
     <>
       <div className="flex flex-row justify-between items-center gap-1">
         <RoleTitle role={role} />
-        <div className="flex flex-row justify-between items-start gap-4 text-sm text-muted-foreground">
+        <div className="flex flex-row justify-between items-start gap-4 text-sm text-muted-foreground/70">
           <div className="flex items-center gap-4">
             {role.remote && (
               <Badge
                 variant="secondary"
-                className="flex items-center h-5 px-1.5 text-xs font-normal bg-primary/10 border-primary/20"
+                className="flex items-center h-5 px-1.5 text-xs font-normal bg-primary/10 border-primary/10"
               >
                 <Globe className="h-3 w-3 mr-1" />
                 Remote
               </Badge>
             )}
+            {role.location && (
+              <div className="flex items-center">
+                <MapPin className="h-4 w-4 mr-1" />
+                {role.location}
+              </div>
+            )}
+          </div>
+          {role.startDate && role.endDate && (
             <div className="flex items-center">
-              <MapPin className="h-4 w-4 mr-1" />
-              {role.location}
+              <Calendar className="h-4 w-4 mr-1" />
+              <span>{role.startDate} - {role.endDate}</span>
             </div>
-          </div>
-          <div className="flex items-center">
-            <Calendar className="h-4 w-4 mr-1" />
-            <span>{role.startDate} - {role.endDate}</span>
-          </div>
+          )}
         </div>
       </div>
 
@@ -101,7 +105,9 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
       <div className="flex flex-wrap gap-2">
         {(role.skills ?? []).map((skill, skillIndex) => (
           <Badge key={skillIndex} variant="secondary" className="font-normal">
-            {skill.name}
+            <a href={`#${skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()}`} className="underline decoration-dotted decoration-gray hover:decoration-solid">
+              {skill.name}
+            </a>
           </Badge>
         ))}
       </div>

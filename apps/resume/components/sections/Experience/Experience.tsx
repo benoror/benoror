@@ -38,7 +38,7 @@ export default function Experience() {
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
           <div key={companyIndex} className={companyIndex !== 0 ? "pt-4" : ""}>
             <div className="flex flex-row justify-between items-center gap-2 mb-2">
-              <h3 className="text-xl font-bold">
+              <h3 className="text-xl font-bold bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (
                   <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {company.name} <ExternalLink className="inline h-4 w-4 mb-1 print:hidden" />
@@ -46,9 +46,9 @@ export default function Experience() {
                 ) : (
                   company.name
                 )}
-                <span className="hidden print:inline text-muted-foreground text-sm">/ {shortURL(company.url)}</span>
+                <span className="hidden print:inline text-muted-foreground text-sm">— {shortURL(company.url)}</span>
               </h3>
-              <div className="flex flex-row items-center gap-4 text-sm text-muted-foreground">
+              <div className="flex flex-row items-center gap-4 text-sm text-muted-foreground/80">
                 <div className="flex items-center gap-4">
                   {company.remote && (
                     <Badge
@@ -71,7 +71,7 @@ export default function Experience() {
               </div>
             </div>
 
-            <p className="text-sm mb-4 text-muted-foreground">{company.description}</p>
+            <p className="text-sm mb-4">{company.description}</p>
 
             <div className="space-y-6 pl-4 border-l-2 border-gray-200">
               {(company.roles ?? []).map((role: IRole, roleIndex: number) => {

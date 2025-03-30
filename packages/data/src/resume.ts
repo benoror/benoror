@@ -7,42 +7,17 @@ export const ABOUT = {
   name: PERSONAL.short_name,
   header: 'Lead Software Engineer - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `VP Eng & CTO of SaaS startups in U.S. & LATAM. Software engineer specialized in full stack web development and leading technical teams. Passionate about building end-to-end & customer-driven software products, mentoring engineers and leveraging technology to tackle real-world challenges.`
+  about_me: `VP Eng & CTO of SaaS startups in U.S. & LatAm. Software engineer specialized in leading technical teams and full stack development and. Passionate about building end-to-end & customer-driven software products, mentoring & growing engineering teams, and leveraging technology to tackle real-world challenges.`
 }
-
-export const EDUCATION = [{
-  institution: 'Hochschule Offenburg',
-  institutionUrl: 'https://www.hs-offenburg.de/',
-  location: 'Offenburg, Germany',
-  title: 'MBA International Business Consulting',
-  description: 'University of Applied Sciences Offenburg',
-  startDate: 'Oct 2012',
-  endDate: 'Feb 2014',
-}, {
-  institution: 'ITESM Monterrey',
-  institutionUrl: 'https://tec.mx/en',
-  location: 'Monterrey, Mexico',
-  title: 'BS Computer Science and Technology',
-  description: 'Monterrey Institute of Technology and Higher Education',
-  startDate: 'Aug 2005',
-  endDate: 'Dec 2009',
-}]
-
-export const LANGUAGES = [
-  { name: '🇪🇸 Spanish', level: 100, proficiency: 'Native' },
-  { name: '🇬🇧 English', level: 100, proficiency: 'Fluent' },
-  { name: '🇩🇪 German', level: 25, proficiency: 'Basic' },
-]
 
 export const COMPANIES = [
   {
     name: 'Apptegy',
     url: 'https://www.apptegy.com',
-    location: 'Monterrey, NL 🇲🇽',
+    location: 'Little Rock, AK 🇺🇸',
     startDate: '2020',
     endDate: 'Present (5yr)',
     description: 'EdTech startup with 3,000+ school districts in the US.',
-    remote: true,
     roles: APPTEGY
   },
   {
@@ -119,7 +94,7 @@ export const SKILLS: ISkill[] = [{
   name: 'Leadership',
   slug: 'leadership',
   since: 2016,
-  level: 85,
+  level: 100,
   description: 'I have been in leadership roles for several years, overseeing multiple projects and teams.',
   subSkills: [{
     name: 'Technical Leadership',
@@ -220,7 +195,7 @@ export const SKILLS: ISkill[] = [{
   name: 'Frontend',
   slug: 'frontend',
   since: 2018,
-  level: 75,
+  level: 90,
   description: 'I have been working with React since 2018. Created multiple applications and websites.',
   subSkills: [{
     name: 'React',
@@ -319,3 +294,27 @@ export const SKILLS: ISkill[] = [{
     ]
   }]
 }]
+
+export const EDUCATION = [{
+  institution: 'Hochschule Offenburg',
+  institutionUrl: 'https://www.hs-offenburg.de/',
+  location: 'Offenburg, Germany',
+  title: 'MBA International Business Consulting',
+  description: 'University of Applied Sciences Offenburg',
+  startDate: 'Oct 2012',
+  endDate: 'Feb 2014',
+}, {
+  institution: 'ITESM Monterrey',
+  institutionUrl: 'https://tec.mx/en',
+  location: 'Monterrey, Mexico',
+  title: 'BS Computer Science and Technology',
+  description: 'Monterrey Institute of Technology and Higher Education',
+  startDate: 'Aug 2005',
+  endDate: 'Dec 2009',
+}]
+
+export const LANGUAGES = [
+  { name: '🇪🇸 Spanish', level: 100, proficiency: 'Native' },
+  { name: '🇬🇧 English', level: 100, proficiency: 'Fluent' },
+  { name: '🇩🇪 German', level: 25, proficiency: 'Basic' },
+]

@@ -14,10 +14,10 @@ export interface IRole {
   title: string;
   project?: string;
   projectUrl?: string;
-  location: string;
+  location?: string;
   remote?: boolean;
-  startDate: string;
-  endDate: string;
+  startDate?: string;
+  endDate?: string;
   description: string;
   skills: ISkill[];
   achievements: IAchievement[];

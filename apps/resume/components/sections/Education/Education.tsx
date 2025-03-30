@@ -1,5 +1,5 @@
 import { EDUCATION } from '@workspace/data/resume';
-import { ExternalLink } from "lucide-react"
+import { ExternalLink, GraduationCap } from "lucide-react"
 import {
   Card,
   CardContent,
@@ -11,7 +11,9 @@ import {
 export default function Education() {
   return (
     <section className="Education flex flex-col items-center gap-5 print:gap-2 w-full">
-      <h2 className="text-2xl font-bold print:text-xl mb-4">🎓 Education</h2>
+      <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
+        <GraduationCap className="size-6 inline" /> Education
+      </h2>
       <div className="flex flex-row justify-center gap-16 w-full">
         {EDUCATION.map((degree, index) => (
           <Card key={index} className="w-1/2">

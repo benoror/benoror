@@ -5,7 +5,7 @@ import { SKILLS } from '@workspace/data/resume';
 export default function Skills() {
   return (
     <section className="flex flex-col items-center gap-2 print:gap-2">
-      <h2 className="text-2xl font-bold print:text-xl mb-4">
+      <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
         <HammerIcon className="size-6 inline" /> Skills
       </h2>
       <div className="flex flex-col items-center gap-4">

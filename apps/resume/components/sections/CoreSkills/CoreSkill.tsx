@@ -16,7 +16,7 @@ export default function CoreSkill({ skill }: { skill: ISkill}) {
     <div className="CoreSkill w-full md:w-[45%] lg:w-[22%] print:w-[22%] mb-4">
       <a href={`#${skill.slug}`}>
         <div>{skill.name}</div>
-        <Progress value={progress} />
+        <Progress value={progress} classNameIndicator="bg-sky-900 dark:bg-sky-200" />
       </a>
     </div>
   )

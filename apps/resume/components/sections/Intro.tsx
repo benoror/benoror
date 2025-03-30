@@ -5,7 +5,7 @@ import { shortURL } from '@workspace/utils/url';
 export default function Intro() {
   return (
     <section className="Intro flex flex-col items-center w-full">
-      <h1 className="text-4xl font-bold">{ABOUT.name}</h1>
+      <h1 className="text-3xl font-medium text-sky-800 dark:text-sky-200">{ABOUT.name}</h1>
       <div className="text-lg">
         {ABOUT.header}
       </div>

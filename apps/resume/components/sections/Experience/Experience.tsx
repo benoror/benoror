@@ -31,14 +31,14 @@ export default function Experience() {
 
   return (
     <section className="Experience flex flex-col items-center gap-5 print:gap-4">
-      <h2 className="text-2xl font-bold print:text-xl mb-4">
-        <BriefcaseBusinessIcon className="size-6 inline" /> 💼 Experience
+      <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
+        <BriefcaseBusinessIcon className="size-6 inline" /> Experience
       </h2>
       <div>
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
           <div key={companyIndex} className={companyIndex !== 0 ? "pt-4" : ""}>
             <div className="flex flex-row justify-between items-center gap-2 mb-2">
-              <h3 className="text-xl font-bold bg-muted-foreground/10 py-0 px-2 rounded-sm">
+              <h3 className="text-xl font-semibold text-sky-800 dark:text-sky-200 bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (
                   <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {company.name} <ExternalLink className="inline h-4 w-4 mb-1 print:hidden" />

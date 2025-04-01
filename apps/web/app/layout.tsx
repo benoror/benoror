@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 
 import "@workspace/ui/globals.css"
@@ -12,6 +13,11 @@ const fontMono = Geist_Mono({
   subsets: ["latin"],
   variable: "--font-mono",
 })
+
+export const metadata: Metadata = {
+  title: "Ben Orozco | Full-stack Developer",
+  description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+}
 
 export default function RootLayout({
   children,

@@ -7,6 +7,8 @@ import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import CyberGridBackground from "@/components/cyber-grid-background"
 
+import styles from './home.module.css'
+
 export default function Hero() {
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -69,7 +71,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="text-4xl md:text-6xl font-bold tracking-tighter hero-text"
+              className={`${styles.heroText} text-4xl md:text-6xl font-bold tracking-tighter`}
             >
               Ben Orozco
             </motion.h1>
@@ -89,13 +91,13 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="flex justify-center my-8"
           >
-            <div className="profile-image">
+            <div className={styles.profileImage}>
               {images.map((src, index) => (
                 <img
                   key={src}
                   src={src || "/placeholder.svg"}
                   alt={`Ben Orozco profile ${index + 1}`}
-                  className={activeImageIndex === index ? "active" : ""}
+                  className={activeImageIndex === index ? styles.active : ""}
                 />
               ))}
             </div>

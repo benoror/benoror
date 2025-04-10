@@ -3,6 +3,8 @@
 import { motion } from "framer-motion"
 import { Github, Twitter, Linkedin, Mail, Rss } from "lucide-react"
 
+import styles from './styles.module.css'
+
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
@@ -21,7 +23,7 @@ export default function Footer() {
               href="https://github.com/benoror"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon text-blue-300 hover:text-white"
+              className={`${styles.socialIcon} text-blue-300 hover:text-white`}
               aria-label="GitHub"
             >
               <Github className="h-6 w-6" />
@@ -30,7 +32,7 @@ export default function Footer() {
               href="https://twitter.com/benoror"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon text-blue-300 hover:text-[#00acee]"
+              className={`${styles.socialIcon} text-blue-300 hover:text-[#00acee]`}
               aria-label="Twitter"
             >
               <Twitter className="h-6 w-6" />
@@ -39,14 +41,14 @@ export default function Footer() {
               href="https://linkedin.com/in/benoror"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon text-blue-300 hover:text-[#0077B5]"
+              className={`${styles.socialIcon} text-blue-300 hover:text-[#0077B5]`}
               aria-label="LinkedIn"
             >
               <Linkedin className="h-6 w-6" />
             </a>
             <a
               href="mailto:ben@orozco.xyz"
-              className="social-icon text-blue-300 hover:text-[#00ccff]"
+              className={`${styles.socialIcon} text-blue-300 hover:text-[#00ccff]`}
               aria-label="Email"
             >
               <Mail className="h-6 w-6" />
@@ -55,7 +57,7 @@ export default function Footer() {
               href="/blog/rss.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="social-icon text-blue-300 hover:text-[#0088ff]"
+              className={`${styles.socialIcon} text-blue-300 hover:text-[#0088ff]`}
               aria-label="RSS Feed"
             >
               <Rss className="h-6 w-6" />

@@ -6,6 +6,8 @@ import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 
+import styles from './styles.module.css'
+
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -48,16 +50,16 @@ export default function Navbar() {
             {isMenuOpen && (
               <div className="fixed inset-0 top-16 bg-black/90 backdrop-blur-md z-40 p-4">
                 <nav className="flex flex-col space-y-6 text-lg">
-                  <Link href="/" className="nav-link text-blue-100" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/" className={`${styles.navLink} text-blue-100"`} onClick={() => setIsMenuOpen(false)}>
                     Home
                   </Link>
-                  <Link href="/portfolio" className="nav-link text-blue-100" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/portfolio" className={`${styles.navLink} text-blue-100`} onClick={() => setIsMenuOpen(false)}>
                     Portfolio
                   </Link>
-                  <Link href="/resume" className="nav-link text-blue-100" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/resume" className={`${styles.navLink} text-blue-100`} onClick={() => setIsMenuOpen(false)}>
                     Resume
                   </Link>
-                  <Link href="/blog" className="nav-link text-blue-100" onClick={() => setIsMenuOpen(false)}>
+                  <Link href="/blog" className={`${styles.navLink} text-blue-100`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
                   <div className="pt-4">
@@ -70,16 +72,16 @@ export default function Navbar() {
         ) : (
           <div className="flex items-center space-x-8">
             <nav className="flex space-x-8 text-sm font-medium">
-              <Link href="/" className="nav-link text-blue-100 hover:text-white">
+              <Link href="/" className={`${styles.navLink} text-blue-100 hover:text-white`}>
                 Home
               </Link>
-              <Link href="/portfolio" className="nav-link text-blue-100 hover:text-white">
+              <Link href="/portfolio" className={`${styles.navLink} text-blue-100 hover:text-white`}>
                 Portfolio
               </Link>
-              <Link href="/resume" className="nav-link text-blue-100 hover:text-white">
+              <Link href="/resume" className={`${styles.navLink} text-blue-100 hover:text-white`}>
                 Resume
               </Link>
-              <Link href="/blog" className="nav-link text-blue-100 hover:text-white">
+              <Link href="/blog" className={`${styles.navLink} text-blue-100 hover:text-white`}>
                 Blog
               </Link>
             </nav>

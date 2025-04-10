@@ -1,0 +1,28 @@
+
+.navLink {
+  position: relative;
+}
+
+.navLink::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.navLink:hover::after {
+  width: 100%;
+  text-decoration: none;
+}
+
+.socialIcon {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.socialIcon:hover {
+  transform: translateY(-3px);
+}

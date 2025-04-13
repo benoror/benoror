@@ -60,6 +60,8 @@ export default function CyberGridBackground() {
       ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2)
       ctx.fill()
 
+      // GRID
+
       // Set grid color
       const gridColor = isDark ? "rgba(0, 170, 255, 0.6)" : "rgba(0, 120, 255, 0.3)"
       ctx.strokeStyle = gridColor
@@ -74,7 +76,6 @@ export default function CyberGridBackground() {
         // Calculate y position with continuous motion
         const t = (i / horizontalLineCount + gridOffset) % 1
         const y = horizonY + (canvas.height - horizonY) * t
-        if (i == 0) console.log({ t, y })
 
         // Calculate perspective width (wider as they get closer)
         const perspectiveWidth = canvas.width

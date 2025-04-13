@@ -5,7 +5,9 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
-import CyberGridBackground from "@/components/cyber-grid-background"
+// import OutrunGrid from "@/components/cyber-grid-background"
+import OutrunGrid from "@/components/outrun-retro"
+// import OutrunGrid from "@/components/outrun-grid"
 
 import styles from './home.module.css'
 
@@ -62,7 +64,7 @@ export default function Hero() {
 
   return (
     <section id="top" className="pt-24 min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
-      <CyberGridBackground />
+      <OutrunGrid />
 
       <div className="container mx-auto px-4 py-12 md:py-24 z-10">
         <div className="flex flex-col items-center justify-center gap-12 text-center">

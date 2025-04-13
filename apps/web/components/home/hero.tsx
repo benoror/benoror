@@ -5,8 +5,8 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
-// import OutrunGrid from "@/components/cyber-grid-background"
-import OutrunGrid from "@/components/outrun-retro"
+import OutrunGrid from "@/components/cyber-grid-background"
+// import OutrunGrid from "@/components/outrun-retro"
 // import OutrunGrid from "@/components/outrun-grid"
 
 import styles from './home.module.css'
@@ -66,7 +66,7 @@ export default function Hero() {
     <section id="top" className="pt-24 min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
       <OutrunGrid />
 
-      <div className="container mx-auto px-4 py-12 md:py-24 z-10">
+      <div className="container mx-auto px-4 -py-12 z-10">
         <div className="flex flex-col items-center justify-center gap-12 text-center">
           <div className="space-y-6">
             <motion.h1
@@ -81,9 +81,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-blue-100 dark:text-blue-100"
+              className="text-xl md:text-2xl text-sky-700 dark:text-blue-100"
             >
-              Full-stack Developer, Leader & Technologist
+              Technologist, Tech Lead, Full-stack Dev
             </motion.p>
           </div>
 

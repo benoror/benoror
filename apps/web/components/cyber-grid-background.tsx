@@ -35,9 +35,10 @@ export default function CyberGridBackground() {
 
       // Create full-screen background gradient from top to bottom
       const bgGradient = ctx.createLinearGradient(0, 0, 0, canvas.height)
-      bgGradient.addColorStop(0, "rgba(0, 0, 0, 1)")
-      bgGradient.addColorStop(0.5, isDark ? "rgba(0, 20, 60, 1)" : "rgba(0, 30, 80, 0.8)")
-      bgGradient.addColorStop(1, isDark ? "rgba(0, 40, 100, 1)" : "rgba(0, 60, 120, 0.6)")
+      bgGradient.addColorStop(0, isDark ? "rgb(0, 0, 0, 1)" : "rgb(0, 0, 0)")
+      bgGradient.addColorStop(0.25, isDark ? "rgb(1, 12, 36)" : "rgba(255, 255, 255, 0.8)")
+      bgGradient.addColorStop(0.75, isDark ? "rgb(1, 12, 36)" : "rgba(255, 255, 255, 0.8)")
+      bgGradient.addColorStop(1, isDark ? "rgba(0, 40, 100, 1)" : "rgba(0, 150, 255, 0.2)")
 
       ctx.fillStyle = bgGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -48,7 +49,7 @@ export default function CyberGridBackground() {
       // Draw sun/moon
       const sunRadius = canvas.width * 0.25
       const sunX = canvas.width * 0.5
-      const sunY = horizonY - 20
+      const sunY = horizonY - 80
 
       const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius)
 
@@ -60,76 +61,76 @@ export default function CyberGridBackground() {
       ctx.arc(sunX, sunY, sunRadius, 0, Math.PI * 2)
       ctx.fill()
 
-      // GRID
+      // // GRID
 
-      // Set grid color
-      const gridColor = isDark ? "rgba(0, 170, 255, 0.6)" : "rgba(0, 120, 255, 0.3)"
-      ctx.strokeStyle = gridColor
-      ctx.lineWidth = 1.5
+      // // Set grid color
+      // const gridColor = isDark ? "rgba(0, 170, 255, 0.6)" : "rgba(0, 120, 255, 0.3)"
+      // ctx.strokeStyle = gridColor
+      // ctx.lineWidth = 1.5
 
-      // Calculate grid offset based on time for continuous motion
-      const gridOffset = (time * 0.6) % 1
+      // // Calculate grid offset based on time for continuous motion
+      // const gridOffset = (time * 0.6) % 1
 
-      // Draw horizontal grid lines with perspective
-      const horizontalLineCount = 10
-      for (let i = 0; i <= horizontalLineCount; i++) {
-        // Calculate y position with continuous motion
-        const t = (i / horizontalLineCount + gridOffset) % 1
-        const y = horizonY + (canvas.height - horizonY) * t
+      // // Draw horizontal grid lines with perspective
+      // const horizontalLineCount = 10
+      // for (let i = 0; i <= horizontalLineCount; i++) {
+      //   // Calculate y position with continuous motion
+      //   const t = (i / horizontalLineCount + gridOffset) % 1
+      //   const y = horizonY + (canvas.height - horizonY) * t
 
-        // Calculate perspective width (wider as they get closer)
-        const perspectiveWidth = canvas.width
+      //   // Calculate perspective width (wider as they get closer)
+      //   const perspectiveWidth = canvas.width
 
-        ctx.beginPath()
-        ctx.moveTo(canvas.width / 2 - perspectiveWidth, y)
-        ctx.lineTo(canvas.width / 2 + perspectiveWidth, y)
-        ctx.stroke()
-      }
+      //   ctx.beginPath()
+      //   ctx.moveTo(canvas.width / 2 - perspectiveWidth, y)
+      //   ctx.lineTo(canvas.width / 2 + perspectiveWidth, y)
+      //   ctx.stroke()
+      // }
 
-      // Draw vertical grid lines with perspective
-      // These should diverge FROM the center (not converge TO the center)
-      const verticalLineCount = 19
+      // // Draw vertical grid lines with perspective
+      // // These should diverge FROM the center (not converge TO the center)
+      // const verticalLineCount = 19
 
-      for (let i = 0; i <= verticalLineCount; i++) {
-        // Calculate normalized position (0 to 1)
-        const normalizedPos = i / verticalLineCount
+      // for (let i = 0; i <= verticalLineCount; i++) {
+      //   // Calculate normalized position (0 to 1)
+      //   const normalizedPos = i / verticalLineCount
 
-        // Calculate x position at horizon (evenly spaced)
-        const horizonX = canvas.width * 0.1 + normalizedPos * canvas.width * 0.8
+      //   // Calculate x position at horizon (evenly spaced)
+      //   const horizonX = canvas.width * 0.1 + normalizedPos * canvas.width * 0.8
 
-        // Calculate x position at bottom (diverging FROM center)
-        // This is the key change - we're multiplying by a factor > 1 to make lines diverge
-        const bottomX = canvas.width / 2 + (horizonX - canvas.width / 2) * 5
+      //   // Calculate x position at bottom (diverging FROM center)
+      //   // This is the key change - we're multiplying by a factor > 1 to make lines diverge
+      //   const bottomX = canvas.width / 2 + (horizonX - canvas.width / 2) * 5
 
-        ctx.beginPath()
-        ctx.moveTo(horizonX, horizonY)
+      //   ctx.beginPath()
+      //   ctx.moveTo(horizonX, horizonY)
 
-        // Only draw the line if it's within the canvas bounds
-        if (bottomX >= 0 && bottomX <= canvas.width) {
-          ctx.lineTo(bottomX, canvas.height)
-        } else {
-          // If the bottom point is outside the canvas, find where it intersects the edge
-          const slope = (canvas.height - horizonY) / (bottomX - horizonX)
-          let edgeX, edgeY
+      //   // Only draw the line if it's within the canvas bounds
+      //   if (bottomX >= 0 && bottomX <= canvas.width) {
+      //     ctx.lineTo(bottomX, canvas.height)
+      //   } else {
+      //     // If the bottom point is outside the canvas, find where it intersects the edge
+      //     const slope = (canvas.height - horizonY) / (bottomX - horizonX)
+      //     let edgeX, edgeY
 
-          if (bottomX < 0) {
-            edgeX = 0
-            edgeY = horizonY + slope * (edgeX - horizonX)
-          } else {
-            edgeX = canvas.width
-            edgeY = horizonY + slope * (edgeX - horizonX)
-          }
+      //     if (bottomX < 0) {
+      //       edgeX = 0
+      //       edgeY = horizonY + slope * (edgeX - horizonX)
+      //     } else {
+      //       edgeX = canvas.width
+      //       edgeY = horizonY + slope * (edgeX - horizonX)
+      //     }
 
-          if (edgeY <= canvas.height) {
-            ctx.lineTo(edgeX, edgeY)
-          }
-        }
+      //     if (edgeY <= canvas.height) {
+      //       ctx.lineTo(edgeX, edgeY)
+      //     }
+      //   }
 
-        ctx.stroke()
-      }
+      //   ctx.stroke()
+      // }
 
       // Draw moving light dots (DeLorean time travel effect) at the top of the screen
-      const dotCount = 40
+      const dotCount = 80
       for (let i = 0; i < dotCount; i++) {
         // Calculate dot position with continuous motion
         const t = (i / dotCount + time * 0.2) % 1
@@ -137,15 +138,15 @@ export default function CyberGridBackground() {
 
         // Calculate x position with slight curve
         const curve = Math.sin(t * Math.PI * 2 + i) * 0.3
-        const x = canvas.width / 2 + curve * canvas.width * 0.4
+        const x = canvas.width / 2 + curve * canvas.width * 0.6
 
         // Calculate y position - now at the top portion of the screen
-        const y = horizonY * t * 0.8 // This keeps dots in the top 80% of the space above horizon
+        const y = horizonY * t * 1.8 // 0.8 // This keeps dots in the top 80% of the space above horizon
 
         // Fade in as they approach the horizon
-        const opacity = t * 0.8
+        const opacity = t * 1.0
 
-        ctx.fillStyle = `rgba(0, 220, 255, ${opacity})`
+        ctx.fillStyle = isDark ? `rgba(0, 220, 255, ${opacity})` : `rgba(124, 169, 237, 0.0)`
         ctx.beginPath()
         ctx.arc(x, y, size, 0, Math.PI * 2)
         ctx.fill()

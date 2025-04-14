@@ -33,7 +33,7 @@ export default function Portfolio() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-gradient-to-b from-black via-blue-950/30 to-black">
+    <main className="min-h-screen flex flex-col bg-gradient-to-b from-black via-sky-950/10 to-black">
       <Navbar />
 
       <div className="flex flex-1 pt-16">

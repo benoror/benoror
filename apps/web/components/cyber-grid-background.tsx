@@ -38,7 +38,7 @@ export default function CyberGridBackground() {
       bgGradient.addColorStop(0, isDark ? "rgb(0, 0, 0, 1)" : "rgb(0, 0, 0)")
       bgGradient.addColorStop(0.25, isDark ? "rgb(1, 12, 36)" : "rgba(255, 255, 255, 0.8)")
       bgGradient.addColorStop(0.75, isDark ? "rgb(1, 12, 36)" : "rgba(255, 255, 255, 0.8)")
-      bgGradient.addColorStop(1, isDark ? "rgba(0, 40, 100, 1)" : "rgba(0, 150, 255, 0.2)")
+      bgGradient.addColorStop(1, isDark ? "rgba(0, 40, 100, 1)" : "#082f49")
 
       ctx.fillStyle = bgGradient
       ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -53,7 +53,7 @@ export default function CyberGridBackground() {
 
       const sunGradient = ctx.createRadialGradient(sunX, sunY, 0, sunX, sunY, sunRadius)
 
-      sunGradient.addColorStop(0, isDark ? "rgba(0, 200, 255, 0.8)" : "rgba(0, 150, 255, 0.6)")
+      sunGradient.addColorStop(0, isDark ? "#38bdf8" : "#38bdf8")
       sunGradient.addColorStop(1, "rgba(0, 80, 255, 0)")
 
       ctx.fillStyle = sunGradient

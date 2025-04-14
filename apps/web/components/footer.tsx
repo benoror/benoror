@@ -14,7 +14,7 @@ export default function Footer() {
       href={link}
       target="_blank"
       rel="noopener noreferrer"
-      className={`${styles.socialIcon} text-blue-300 hover:text-white`}
+      className={`${styles.socialIcon} text-sky-300 hover:text-white`}
       aria-label={text}
     >
       <Icon className="h-6 w-6" />
@@ -22,7 +22,7 @@ export default function Footer() {
   )
 
   return (
-    <footer className="py-12 border-t border-blue-900/20 bg-black/80 backdrop-blur-md">
+    <footer className="py-12 border-t border-sky-900/20 bg-black/80 backdrop-blur-md">
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center justify-center space-y-6">
           <motion.div
@@ -44,7 +44,7 @@ export default function Footer() {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-sm text-blue-300"
+            className="text-sm text-sky-300"
           >
             © {currentYear} Ben Orozco. All rights reserved.
           </motion.p>

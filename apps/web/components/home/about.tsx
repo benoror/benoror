@@ -1,5 +1,6 @@
 "use client"
 
+import { HOME } from "@workspace/data/personal"
 import { motion } from "framer-motion"
 
 export default function About() {
@@ -16,15 +17,12 @@ export default function About() {
           <h2 className="text-3xl md:text-4xl font-bold tracking-tighter text-center text-blue-100">About Me</h2>
 
           <div className="space-y-4">
-            <p className="text-blue-200 leading-relaxed">
-              I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either
-              bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products,
-              growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I
-              consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting.
+            <p className="text-blue-200 leading-relaxed text-center text-justify">
+              {HOME.about_me}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 text-center">
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-blue-100">Skills</h3>
               <ul className="space-y-2 text-blue-200">

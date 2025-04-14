@@ -5,6 +5,7 @@ import type React from "react"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
+import { HOME } from "@workspace/data/personal"
 import OutrunGrid from "@/components/cyber-grid-background"
 // import OutrunGrid from "@/components/outrun-retro"
 // import OutrunGrid from "@/components/outrun-grid"
@@ -75,7 +76,7 @@ export default function Hero() {
               transition={{ duration: 0.5 }}
               className={`${styles.heroText} text-4xl md:text-6xl font-bold tracking-tighter`}
             >
-              Ben Orozco
+              {HOME.title}
             </motion.h1>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -83,7 +84,7 @@ export default function Hero() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-2xl text-sky-700 dark:text-blue-100"
             >
-              Technologist, Tech Lead, Full-stack Dev
+              {HOME.header}
             </motion.p>
           </div>
 

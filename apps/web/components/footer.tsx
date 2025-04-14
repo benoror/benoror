@@ -2,11 +2,24 @@
 
 import { motion } from "framer-motion"
 import { Github, Twitter, Linkedin, Mail, Rss } from "lucide-react"
+import { HOME, LINKS } from '@workspace/data/personal';
+import { shortURL } from '@workspace/utils/url';
 
 import styles from './styles.module.css'
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const IconLink = ({ Icon, link, text }: { Icon: React.ElementType, link: string, text: string }) => (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`${styles.socialIcon} text-blue-300 hover:text-white`}
+      aria-label={text}
+    >
+      <Icon className="h-6 w-6" />
+    </a>
+  )
 
   return (
     <footer className="py-12 border-t border-blue-900/20 bg-black/80 backdrop-blur-md">
@@ -19,49 +32,11 @@ export default function Footer() {
             viewport={{ once: true }}
             className="flex space-x-6"
           >
-            <a
-              href="https://github.com/benoror"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.socialIcon} text-blue-300 hover:text-white`}
-              aria-label="GitHub"
-            >
-              <Github className="h-6 w-6" />
-            </a>
-            <a
-              href="https://twitter.com/benoror"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.socialIcon} text-blue-300 hover:text-[#00acee]`}
-              aria-label="Twitter"
-            >
-              <Twitter className="h-6 w-6" />
-            </a>
-            <a
-              href="https://linkedin.com/in/benoror"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.socialIcon} text-blue-300 hover:text-[#0077B5]`}
-              aria-label="LinkedIn"
-            >
-              <Linkedin className="h-6 w-6" />
-            </a>
-            <a
-              href="mailto:ben@orozco.xyz"
-              className={`${styles.socialIcon} text-blue-300 hover:text-[#00ccff]`}
-              aria-label="Email"
-            >
-              <Mail className="h-6 w-6" />
-            </a>
-            <a
-              href="/blog/rss.xml"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`${styles.socialIcon} text-blue-300 hover:text-[#0088ff]`}
-              aria-label="RSS Feed"
-            >
-              <Rss className="h-6 w-6" />
-            </a>
+            <IconLink Icon={Github} link={LINKS.github_url} text={shortURL(LINKS.github_url)} />
+            <IconLink Icon={Twitter} link={LINKS.twitter_url} text={shortURL(LINKS.twitter_url)} />
+            <IconLink Icon={Linkedin} link={LINKS.linkedin_url} text={shortURL(LINKS.linkedin_url)} />
+            <IconLink Icon={Mail} link={`mailto:${HOME.public_email}`} text={shortURL(HOME.public_email)} />
+            <IconLink Icon={Rss} link={LINKS.blog_url} text={shortURL(LINKS.blog_url)} />
           </motion.div>
 
           <motion.p

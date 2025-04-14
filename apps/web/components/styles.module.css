@@ -16,7 +16,6 @@
 
 .navLink:hover::after {
   width: 100%;
-  text-decoration: none;
 }
 
 .socialIcon {

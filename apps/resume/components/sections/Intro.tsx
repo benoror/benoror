@@ -1,5 +1,5 @@
+import { LINKS } from '@workspace/data/personal';
 import { ABOUT } from '@workspace/data/resume';
-import { LINKS } from '@workspace/data/social';
 import { shortURL } from '@workspace/utils/url';
 
 export default function Intro() {

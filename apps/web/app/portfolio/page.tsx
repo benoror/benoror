@@ -34,7 +34,7 @@ export default function Portfolio() {
               key={tab.id}
               onClick={() => setActiveTab(tab.id as "projects" | "publications" | "talks")}
               className={cn(
-                "px-4 md:px-6 py-3 text-base md:text-lg font-medium transition-colors relative whitespace-nowrap cursor-pointer",
+                "px-4 md:px-6 py-3 text-sm md:text-lg font-medium transition-colors relative whitespace-nowrap cursor-pointer",
                 activeTab === tab.id ? "text-sky-100" : "text-sky-400 hover:text-sky-200",
               )}
             >

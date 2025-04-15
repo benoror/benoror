@@ -141,11 +141,11 @@ export default function OutrunGrid() {
       time += 0.01
 
       // Update shader uniforms
-      if (gridMaterial.uniforms) {
+      if (gridMaterial?.uniforms?.time) {
         gridMaterial.uniforms.time.value = time
       }
 
-      if (gradientMaterial.uniforms) {
+      if (gradientMaterial?.uniforms?.time) {
         gradientMaterial.uniforms.time.value = time
       }
 

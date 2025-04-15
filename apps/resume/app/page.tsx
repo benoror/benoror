@@ -19,7 +19,7 @@ export default function Page() {
       <About />
       <CoreSkills />
       <Experience />
-      <Skills />
+      {/* <Skills /> */}
       <Education />
       <Languages />
       {/* <Interests /> */}

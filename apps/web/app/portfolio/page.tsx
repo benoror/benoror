@@ -28,7 +28,7 @@ export default function Portfolio() {
       <div className="container mx-auto px-4 pt-24 pb-12">
         <h3 className="text-1xl md:text-5xl font-bold mb-8 hero-text text-center text-sky-300">Portfolio</h3>
         {/* Tab Navigation */}
-        <div className="flex flex-wrap border-b border-sky-700/30 mb-8 overflow-x-auto pb-1">
+        {/* <div className="flex flex-wrap border-b border-sky-700/30 mb-8 overflow-x-auto pb-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -41,7 +41,6 @@ export default function Portfolio() {
               {tab.label}
               <span className="ml-2 text-xs md:text-sm bg-sky-800/60 px-1.5 py-0.5 rounded-full">{tab.count}</span>
 
-              {/* Active Indicator */}
               {activeTab === tab.id && (
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-sky-500"
@@ -53,7 +52,7 @@ export default function Portfolio() {
               )}
             </button>
           ))}
-        </div>
+        </div> */}
 
         {/* Main Content */}
         <div className="min-h-[50vh]">

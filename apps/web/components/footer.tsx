@@ -39,15 +39,20 @@ export default function Footer() {
             <IconLink Icon={Rss} link={LINKS.blog_url} text={shortURL(LINKS.blog_url)} />
           </motion.div>
 
-          <motion.p
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="text-sm text-sky-300"
+            className="text-sm text-sky-300 flex flex-col items-center gap-4"
           >
-            © {currentYear} Ben Orozco. All rights reserved.
-          </motion.p>
+            <a href="https://github.com/benoror/benoror" target="_blank" className="text-xs">
+              Made with TypeScript, React, Next.js, Tailwind and shadcn/ui <Github className="w-4 h-4 mx-1 mb-1 inline" />
+            </a>
+            <div>
+              © {currentYear} Ben Orozco. All rights reserved.
+            </div>
+          </motion.div>
         </div>
       </div>
     </footer>

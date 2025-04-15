@@ -64,7 +64,7 @@ export default function Hero() {
   }
 
   return (
-    <section id="top" className="pt-24 min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
+    <section id="top" className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
       <OutrunGrid />
 
       <div className="container mx-auto px-4 -py-12 z-10">

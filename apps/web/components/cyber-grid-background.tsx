@@ -144,7 +144,8 @@ export default function CyberGridBackground() {
         const y = horizonY * t * 1.8 // 0.8 // This keeps dots in the top 80% of the space above horizon
 
         // Fade in as they approach the horizon
-        const opacity = t * 1.0
+        const radians = Math.PI * t;
+        const opacity = Math.pow(Math.sin(radians), 2);
 
         ctx.fillStyle = isDark ? `rgba(0, 220, 255, ${opacity})` : `rgba(124, 169, 237, 0.0)`
         ctx.beginPath()

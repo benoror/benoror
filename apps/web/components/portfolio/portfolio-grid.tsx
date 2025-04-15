@@ -5,7 +5,7 @@ import PortfolioCard from "./portfolio-card"
 
 export default function PortfolioGrid({ items }: { items: PortfolioItem[] }) {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-16 py-8">
       {items.map((item) => (
         <PortfolioCard key={item.id} item={item} />
       ))}

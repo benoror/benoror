@@ -1,21 +1,27 @@
 <p align="center">
   <a href="https://benoror.com/">
-    <img alt="Ben Orozco" src="https://avatars2.githubusercontent.com/u/119117?s=460&u=90226a2b669f648db10bcfcdea19a71b3bf667bb&v=4" width="60" style="border-radius: 60px;" />
+    <img alt="Ben Orozco" src="https://avatars2.githubusercontent.com/u/119117?s=460&u=90226a2b669f648db10bcfcdea19a71b3bf667bb&v=4" width="128" style="border-radius: 128px;" />
   </a>
 </p>
 <h1 align="center">
   Ben Orozco
 </h1>
 
-## 👋 Hi!
+# 👋 Hi!
+ 
+## About me
 
 I am a Computer Science Engineer specialized in Full Stack web development, passionate on making and launching software products, leading engineering teams and leveraging technology to tackle big real-world problems.
 
+![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)
+
 # About this codebase
 
-This repo powers my [personal website](https://www.benoror.com)
+This repo powers my personal website: [benoror.com](https://www.benoror.com)
 
-I effectively use it as a playground to experiment with [Web & AI tech](#tech)
+I effectively use it as a playground to experiment with [Web & AI tech](#tech-stack)
+
+(See v0 prompts for this app: [v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP](https://v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP))
 
 ## `apps/`
 
@@ -28,10 +34,10 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech)
 ## `packages/`
 
 - 🎨 [`ui/`](packages/ui) - Components library
-- 💿 [`data/`](packages/data) - Centralized data repository & TS types
+- 💿 [`data/`](packages/data) - Centralized data repository & TS types (like [resume.ts](packages/data/src/resume.ts))
 - 🛠️ [`utils/`](packages/utils) - Misc utilities
 
-# Tech
+## Tech Stack
 
 - [TypeScript](https://www.typescriptlang.org/)/Javascript
 - Build system: [Turbo](https://turbo.build/) Monorepo
@@ -44,7 +50,3 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech)
   - [v0](https://v0.dev/)
   - [Neovim](https://neovim.io/) / [LazyVim](https://www.lazyvim.org/)
   - [benoror/dotfiles](https://github.com/benoror/dotfiles)
- 
-# Stats
-
-![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)

@@ -13,6 +13,7 @@
     "@workspace/utils": "workspace:*"
   },
   "devDependencies": {
+    "@types/node": "^20",
     "@workspace/typescript-config": "workspace:*",
     "typescript": "latest"
   }

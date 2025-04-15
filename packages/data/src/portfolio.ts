@@ -3,355 +3,218 @@ export type PortfolioItem = {
   title: string
   category: string
   description: string
-  fullDescription: string
   image: string
   techStack: string[]
   url?: string
-  github?: string
+  links?: {
+    github?: string
+    video?: string
+    other?: string
+  }
+  role: string
   section: "projects" | "publications" | "talks"
 }
 
 export const portfolioItems: PortfolioItem[] = [
-  // Projects
   {
-    id: "project-1",
-    title: "E-commerce Platform",
-    category: "Web Application",
-    description: "A full-featured e-commerce platform with product management, cart, and checkout functionality.",
-    fullDescription: `
-# E-commerce Platform
-
-A comprehensive e-commerce solution built with modern web technologies.
-
-## Features
-
-- Product catalog with categories and search
-- User authentication and profiles
-- Shopping cart and wishlist
-- Secure checkout process
-- Order management
-- Admin dashboard
-- Analytics and reporting
-
-## Technical Details
-
-The application uses a microservices architecture with separate services for product management, user authentication, cart management, and order processing. The frontend is built with React and communicates with the backend via RESTful APIs.
-
-![E-commerce Dashboard](/images/portfolio/ecommerce-dashboard.jpg)
-
-The system is deployed on AWS using containerization for scalability and reliability.
-    `,
-    image: "/images/portfolio/ecommerce.jpg",
-    techStack: ["React", "Node.js", "MongoDB", "AWS", "Docker"],
-    url: "https://example.com/ecommerce",
-    github: "https://github.com/benoror/ecommerce",
+    id: "baseql",
+    title: "BaseQL",
     section: "projects",
+    category: "SaaS",
+    role: "👷‍♂️ Maker",
+    url: "https://www.baseql.com/",
+    image: "/images/portfolio/baseql.avif",
+    description:
+      "A single GraphQL access point to all your cloud Data from Airtable & Google Sheets",
+    techStack: ["GraphQL", "React", "Node", "MongoDB", "AWS"],
+    links: {
+      github: "https://github.com/BaseQL",
+      video: "https://youtu.be/l92O7tqq0iw",
+      other: "https://docs.baseql.com",
+    },
   },
   {
-    id: "project-2",
-    title: "Task Management System",
-    category: "Web Application",
-    description: "A collaborative task management system for teams with real-time updates.",
-    fullDescription: `
-# Task Management System
-
-A collaborative task management system designed for teams to organize and track their work efficiently.
-
-## Features
-
-- Task creation and assignment
-- Project organization
-- Due dates and reminders
-- Real-time collaboration
-- File attachments
-- Progress tracking
-- Reporting and analytics
-
-## Technical Implementation
-
-The system uses WebSockets for real-time updates and a React frontend with a Node.js backend. Data is stored in MongoDB with Redis for caching.
-
-![Task Board View](/images/portfolio/task-board.jpg)
-
-Authentication is handled via JWT tokens, and the application supports role-based access control.
-    `,
-    image: "/images/portfolio/task-management.jpg",
-    techStack: ["React", "WebSockets", "Node.js", "MongoDB", "Redis"],
-    url: "https://example.com/tasks",
-    github: "https://github.com/benoror/task-manager",
+    id: "nimbo-x",
+    title: "Nimbo",
     section: "projects",
+    category: "SaaS",
+    role: "💻 Software Development",
+    url: "https://www.nimbo-x.com/",
+    image: "/images/portfolio/nimbo-x.png",
+    description:
+      "EHR SaaS product focused in providing the best physician experience for LatAm market",
+    techStack: ["Rails", "Ember.js", "Heroku", "PostgreSQL"],
+    links: {
+      github: "https://github.com/ecaresoft"
+    }
   },
   {
-    id: "project-3",
-    title: "Financial Dashboard",
-    category: "Data Visualization",
-    description: "Interactive financial dashboard with real-time data visualization and analytics.",
-    fullDescription: `
-# Financial Dashboard
-
-An interactive financial dashboard that provides real-time insights into financial data.
-
-## Features
-
-- Real-time data visualization
-- Custom chart creation
-- Financial metrics and KPIs
-- Data export and reporting
-- Alerts and notifications
-- Mobile-responsive design
-
-## Technical Details
-
-The dashboard is built with React and D3.js for visualizations. It connects to various financial APIs to fetch real-time data and uses Redux for state management.
-
-![Financial Charts](/images/portfolio/financial-charts.jpg)
-
-The application is optimized for performance with lazy loading and virtualization for handling large datasets.
-    `,
-    image: "/images/portfolio/financial-dashboard.jpg",
-    techStack: ["React", "D3.js", "Redux", "TypeScript", "REST APIs"],
-    url: "https://example.com/finance",
+    id: "healthtree",
+    title: "HealthTree",
     section: "projects",
-  },
-  // Publications
-  {
-    id: "publication-1",
-    title: "Modern Web Architecture Patterns",
-    category: "Technical Article",
-    description: "An in-depth exploration of modern web architecture patterns and best practices.",
-    fullDescription: `
-# Modern Web Architecture Patterns
-
-This article explores the evolution of web architecture patterns and provides insights into modern approaches.
-
-## Topics Covered
-
-- Monolithic vs. microservices architecture
-- Serverless computing
-- JAMstack architecture
-- Event-driven architecture
-- GraphQL and REST API design
-- Progressive Web Apps
-- Performance optimization strategies
-
-## Key Takeaways
-
-The article discusses how to choose the right architecture for different types of applications and the trade-offs involved in each approach.
-
-![Architecture Diagram](/images/portfolio/architecture-diagram.jpg)
-
-It also includes case studies of successful implementations and lessons learned from real-world projects.
-    `,
-    image: "/images/portfolio/web-architecture.jpg",
-    techStack: ["Architecture", "Microservices", "Serverless", "JAMstack"],
-    url: "https://medium.com/@benoror/web-architecture",
-    section: "publications",
+    category: "SaaS",
+    role: "💻 Software Development",
+    url: "https://www.healthtree.org",
+    image: "/images/portfolio/healthtree.png",
+    description:
+      "Healthcare platform for helping cancer patients to find their best treatment options",
+    techStack: ["Rails", "React", "Heroku", "PostgreSQL", "AWS"],
+    links: {
+      github: "https://github.com/HealthTree",
+    },
   },
   {
-    id: "publication-2",
-    title: "Scaling Node.js Applications",
-    category: "Technical Guide",
-    description: "A comprehensive guide to scaling Node.js applications for high traffic and performance.",
-    fullDescription: `
-# Scaling Node.js Applications
-
-This comprehensive guide covers strategies and techniques for scaling Node.js applications to handle high traffic and maintain performance.
-
-## Topics Covered
-
-- Horizontal and vertical scaling
-- Load balancing strategies
-- Caching mechanisms
-- Database optimization
-- Microservices architecture
-- Containerization and orchestration
-- Monitoring and performance tuning
-
-## Implementation Examples
-
-The guide includes code examples and configuration snippets for implementing various scaling strategies.
-
-![Node.js Scaling Diagram](/images/portfolio/nodejs-scaling.jpg)
-
-It also discusses real-world case studies of companies that successfully scaled their Node.js applications to handle millions of users.
-    `,
-    image: "/images/portfolio/nodejs-scaling.jpg",
-    techStack: ["Node.js", "Kubernetes", "Redis", "MongoDB", "Docker"],
-    url: "https://dev.to/benoror/scaling-nodejs",
-    section: "publications",
-  },
-  // Talks
-  {
-    id: "talk-1",
-    title: "The Future of Web Development",
-    category: "Conference Talk",
-    description: "A presentation on emerging trends and technologies in web development.",
-    fullDescription: `
-# The Future of Web Development
-
-This talk explores emerging trends and technologies that are shaping the future of web development.
-
-## Key Points
-
-- WebAssembly and its impact on web performance
-- AI and machine learning integration in web applications
-- Edge computing and distributed systems
-- New JavaScript features and frameworks
-- Web3 and decentralized applications
-- Accessibility and inclusive design
-- Sustainability in web development
-
-## Presentation Highlights
-
-The talk includes live demos of WebAssembly applications and AI-powered web features.
-
-![Conference Presentation](/images/portfolio/conference-talk.jpg)
-
-It also discusses how developers can prepare for these changes and develop the skills needed for the future.
-    `,
-    image: "/images/portfolio/web-dev-future.jpg",
-    techStack: ["WebAssembly", "AI", "Edge Computing", "JavaScript", "Web3"],
-    url: "https://youtube.com/watch?v=example",
-    section: "talks",
+    id: "nebula",
+    title: "Nebula",
+    section: "projects",
+    category: "SaaS",
+    role: "🚧 Software Architect",
+    url: "https://www.usenebula.com/",
+    image: "/images/portfolio/nebula.png",
+    description:
+      "Electronic claim management solution for health networks and insurance companies",
+    techStack: ["Elixir/Phoenix", "Ember.js", "AWS", "PostgreSQL"],
   },
   {
-    id: "talk-2",
-    title: "Building Scalable Microservices",
-    category: "Workshop",
-    description: "A hands-on workshop on designing and implementing scalable microservices architecture.",
-    fullDescription: `
-# Building Scalable Microservices
-
-This workshop provides a hands-on approach to designing and implementing scalable microservices architecture.
-
-## Workshop Content
-
-- Microservices design principles
-- Service discovery and communication
-- Data management across services
-- Testing strategies
-- Deployment and orchestration
-- Monitoring and observability
-- Handling failures and resilience
-
-## Practical Exercises
-
-The workshop includes practical exercises where participants build a microservices-based application from scratch.
-
-![Microservices Workshop](/images/portfolio/microservices-workshop.jpg)
-
-Participants learn how to implement service discovery, handle inter-service communication, and deploy their services using Docker and Kubernetes.
-    `,
-    image: "/images/portfolio/microservices.jpg",
-    techStack: ["Microservices", "Docker", "Kubernetes", "Node.js", "API Gateway"],
-    url: "https://workshop.example.com/microservices",
-    section: "talks",
+    id: "gbadev",
+    title: "GBA Dev",
+    section: "projects",
+    category: "Gaming",
+    role: "👷‍♂️ Maker",
+    image: "https://raw.githubusercontent.com/benoror/gbadev/refs/heads/master/public/%40rkanoid.gif",
+    url: "https://github.com/benoror/gbadev",
+    description:
+      "Homebrew Game Boy Advance Game Development (circa. 2001)",
+      techStack: ["C/GCC", "ASM"],
   },
+  {
+    id: "taxi-driver",
+    title: "Taxi Driver",
+    section: "projects",
+    category: "Open Source",
+    role: "💻 Software Development",
+    url: "https://github.com/benoror/taxi-driver",
+    image: "/images/portfolio/taxi-driver.png",
+    description: "🚖 A flexible & international Tax Engine Microservice",
+    techStack: ["Node.js", "Micro", "LowDB"],
+    links: {
+      github: "https://github.com/benoror/taxi-driver",
+      other: "https://slides.com/benoror/taxi-driver",
+    },
+  },
+  {
+    id: "sundly", 
+    title: "Sundly",
+    section: "projects",
+    category: "Crypto",
+    role: "👷‍♂️ Maker",
+    url: "https://sundly.github.io/",
+    image: "/images/portfolio/sundly.png",
+    description:
+      "💛 Encrypted & decentralized personal health records. Built on Blockstack and powered by Blockchain",
+    links: {
+      github: "https://github.com/Sundly/sundly",
+    },
+    techStack: ["Node.js", "React", "Blockstack"],
+  },
+  {
+    id: "panax",
+    title: "Panax.io",
+    section: "projects",
+    category: "SaaS",
+    role: "💻 Software Development",
+    url: "http://panax.io/",
+    image: "/images/portfolio/panax.png",
+    techStack: ["Node.js", "AngularJS", "SQLServer", "XML/XSLT"],
+    description:
+      "Development tool for quickly bootstraping full-stack applications",
+    links: {
+      github: "https://github.com/panaxit",
+      video: "https://youtu.be/dcenGE9HMZg"
+    },
+  },
+  {
+    id: "ember-postgrest-dynamic-ui",
+    title: "ember-postgrest-dynamic-ui",
+    section: "projects",
+    category: "🧪 Experiment",
+    role: "💻 Software Development",
+    url: "https://github.com/benoror/ember-postgrest-dynamic-ui",
+    image: "/images/portfolio/ember-postgrest-dynamic-ui.png",
+    techStack: ["Ember.js", "PostgREST", "PostgreSQL"],
+    description: "Dynamic UI powered by PostgREST and Ember Formly",
+    links: {
+      github: "https://github.com/benoror/ember-postgrest-dynamic-ui",
+      video: "https://www.youtube.com/watch?v=BJz3ROHPwKU",
+    },
+  },
+  {
+    id: "better-npm-run",
+    title: "better-npm-run",
+    section: "projects",
+    category: "Open Source",
+    role: "💻 Software Development",
+    url: "https://npmjs.org/package/better-npm-run",
+    image: "/images/portfolio/better-npm-run.png",
+    description: "🏃‍♂️ A better NPM scripts runner!",
+    links: {
+      github: "https://github.com/benoror/better-npm-run",
+    },
+    techStack: ["Node.js", "npm"],
+  },
+  {
+    id: "laystack",
+    title: "Laystack",
+    section: "projects",
+    category: "🧪 Experiment",
+    role: "👷‍♂️ Maker",
+    url: "https://benoror.github.io/laystack-landing",
+    image: "/images/portfolio/laystack.png",
+    description: "Docs Templating API for your App",
+    techStack: ["Node.js", "React"],
+  },
+  {
+    id: "cotizahoy",
+    title: "CotizaHoy",
+    section: "projects",
+    category: "SaaS",
+    role: "👷‍♂️ Technical Co-Founder",
+    url: "http://www.cotizahoy.com",
+    image: "/images/portfolio/cotizahoy.png",
+    description: "B2B quotation platform for manufacturing industry",
+    links: {
+      github: "https://github.com/cotizahoy",
+    },
+    techStack: ["Ruby on Rails", "JQuery"],
+  },
+  // {
+  //   title: "Low-code: Airtable-Node-Ember",
+  //   url: "https://github.com/benoror/ember-airtable",
+  //   description: "🥞 A low-code stack for quickly prototyping apps with Airtable, Node & Ember",
+  //   role: "🤩 Open source",
+  //   links: {
+  //     github: "https://github.com/benoror/ember-airtable",
+  //     other: "https://medium.com/the-backlog-by-ecaresoft/creating-a-serverless-web-app-with-node-js-ember-js-and-paas-services-hyperdev-surge-sh-8e3ebe263a76",
+  //   },
+  // },
+  // {
+  //   title: "Awesome Product Development",
+  //   url: "https://github.com/benoror/product-development",
+  //   description:
+  //     "📓General styleguides & documentation for modern product development",
+  //   role: "👷‍♂️ Maker",
+  //   links: {
+  //     github: "https://github.com/benoror/product-development",
+  //   },
+  // },
+  // {
+  //   title: "Procevi",
+  //   url: "http://www.procevi.com/",
+  //   description:
+  //     "Construction & real-estate ERP software & marketing website",
+  //   role: "👷‍♂️ Co-Founder",
+  //   links: {
+  //     github: "https://github.com/Procevi",
+  //   },
+  // },
 ]
-
-// Add more dummy items to have around 20 projects
-for (let i = 4; i <= 20; i++) {
-  portfolioItems.push({
-    id: `project-${i}`,
-    title: `Project ${i}`,
-    category: i % 3 === 0 ? "Mobile App" : i % 2 === 0 ? "Web Application" : "Data Analysis",
-    description: `Description for Project ${i}. This is a brief overview of what the project does and its main features.`,
-    fullDescription: `
-# Project ${i}
-
-This is a detailed description of Project ${i}.
-
-## Features
-
-- Feature 1
-- Feature 2
-- Feature 3
-
-## Technical Details
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-
-![Project Screenshot](/images/portfolio/placeholder.jpg)
-
-## Implementation
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-    `,
-    image: "/images/portfolio/placeholder.jpg",
-    techStack: ["React", "Node.js", "MongoDB", "TypeScript"].slice(0, (i % 4) + 1),
-    url: i % 2 === 0 ? `https://example.com/project-${i}` : undefined,
-    github: i % 3 === 0 ? `https://github.com/benoror/project-${i}` : undefined,
-    section: "projects",
-  })
-}
-
-// Add more publications
-for (let i = 3; i <= 6; i++) {
-  portfolioItems.push({
-    id: `publication-${i}`,
-    title: `Publication ${i}`,
-    category: i % 2 === 0 ? "Technical Article" : "Research Paper",
-    description: `Description for Publication ${i}. This is a brief overview of what the publication covers.`,
-    fullDescription: `
-# Publication ${i}
-
-This is a detailed description of Publication ${i}.
-
-## Topics Covered
-
-- Topic 1
-- Topic 2
-- Topic 3
-
-## Key Takeaways
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-
-![Publication Image](/images/portfolio/placeholder.jpg)
-
-## Conclusion
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-    `,
-    image: "/images/portfolio/placeholder.jpg",
-    techStack: ["Architecture", "Best Practices", "Performance"].slice(0, (i % 3) + 1),
-    url: `https://example.com/publication-${i}`,
-    section: "publications",
-  })
-}
-
-// Add more talks
-for (let i = 3; i <= 4; i++) {
-  portfolioItems.push({
-    id: `talk-${i}`,
-    title: `Talk ${i}`,
-    category: i % 2 === 0 ? "Conference Talk" : "Workshop",
-    description: `Description for Talk ${i}. This is a brief overview of what the talk covers.`,
-    fullDescription: `
-# Talk ${i}
-
-This is a detailed description of Talk ${i}.
-
-## Key Points
-
-- Point 1
-- Point 2
-- Point 3
-
-## Presentation Highlights
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-
-![Talk Image](/images/portfolio/placeholder.jpg)
-
-## Conclusion
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, quis aliquam nisl nunc quis nisl.
-    `,
-    image: "/images/portfolio/placeholder.jpg",
-    techStack: ["JavaScript", "React", "Node.js"].slice(0, (i % 3) + 1),
-    url: `https://example.com/talk-${i}`,
-    section: "talks",
-  })
-}
-

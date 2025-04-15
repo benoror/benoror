@@ -137,6 +137,9 @@ importers:
         specifier: workspace:*
         version: link:../utils
     devDependencies:
+      '@types/node':
+        specifier: ^20
+        version: 20.17.19
       '@workspace/typescript-config':
         specifier: workspace:*
         version: link:../typescript-config

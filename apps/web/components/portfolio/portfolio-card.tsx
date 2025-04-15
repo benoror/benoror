@@ -32,6 +32,11 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
         <motion.div animate={{ scale: isHovered ? 1.05 : 1 }} transition={{ duration: 0.3 }} className="h-full w-full">
           <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-fill" />
         </motion.div>
+
+        <div className="absolute h-16 w-16 top-4 left-4 rounded-full bg-white border-2 border-sky-700/30 ring-2 ring-sky-200 flex items-center justify-center">
+          <Image src={item.icon || "/placeholder.svg"} alt={item.title} fill className="rounded-full p-2" />
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-t from-sky-900/90 to-transparent" />
         <div className="absolute bottom-0 left-0 p-4">
           <Badge variant="outline" className="bg-sky-700/70 text-sky-50 border-sky-400/50 mr-2">

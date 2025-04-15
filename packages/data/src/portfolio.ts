@@ -4,6 +4,7 @@ export type PortfolioItem = {
   category: string
   description: string
   image: string
+  icon?: string
   techStack: string[]
   url?: string
   links?: {
@@ -24,6 +25,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "👷‍♂️ Maker",
     url: "https://www.baseql.com/",
     image: "/images/portfolio/baseql.avif",
+    icon: "/images/portfolio/icons/BaseQL.png",
     description:
       "A single GraphQL access point to all your cloud Data from Airtable & Google Sheets",
     techStack: ["GraphQL", "React", "Node", "MongoDB", "AWS"],
@@ -41,6 +43,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "https://www.nimbo-x.com/",
     image: "/images/portfolio/nimbo-x.png",
+    icon: "/images/portfolio/icons/Nimbo.png",
     description:
       "EHR SaaS product focused in providing the best physician experience for LatAm market",
     techStack: ["Rails", "Ember.js", "Heroku", "PostgreSQL"],
@@ -56,6 +59,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "https://www.healthtree.org",
     image: "/images/portfolio/healthtree.png",
+    icon: "/images/portfolio/icons/HealthTree.png",
     description:
       "Healthcare platform for helping cancer patients to find their best treatment options",
     techStack: ["Rails", "React", "Heroku", "PostgreSQL", "AWS"],
@@ -71,6 +75,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "🚧 Software Architect",
     url: "https://www.usenebula.com/",
     image: "/images/portfolio/nebula.png",
+    icon: "/images/portfolio/icons/Nebula.png",
     description:
       "Electronic claim management solution for health networks and insurance companies",
     techStack: ["Elixir/Phoenix", "Ember.js", "AWS", "PostgreSQL"],
@@ -81,7 +86,8 @@ export const portfolioItems: PortfolioItem[] = [
     section: "projects",
     category: "Gaming",
     role: "👷‍♂️ Maker",
-    image: "https://raw.githubusercontent.com/benoror/gbadev/refs/heads/master/public/%40rkanoid.gif",
+    image: "/images/portfolio/%40rkanoid.gif",
+    icon: "/images/portfolio/icons/GBA Dev.png",
     url: "https://github.com/benoror/gbadev",
     description:
       "Homebrew Game Boy Advance Game Development (circa. 2001)",
@@ -95,6 +101,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "https://github.com/benoror/taxi-driver",
     image: "/images/portfolio/taxi-driver.png",
+    icon: "/images/portfolio/icons/Taxi Driver.png",
     description: "🚖 A flexible & international Tax Engine Microservice",
     techStack: ["Node.js", "Micro", "LowDB"],
     links: {
@@ -110,6 +117,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "👷‍♂️ Maker",
     url: "https://sundly.github.io/",
     image: "/images/portfolio/sundly.png",
+    icon: "/images/portfolio/icons/Sundly.png",
     description:
       "💛 Encrypted & decentralized personal health records. Built on Blockstack and powered by Blockchain",
     links: {
@@ -125,6 +133,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "http://panax.io/",
     image: "/images/portfolio/panax.png",
+    icon: "/images/portfolio/icons/Panax.io.png",
     techStack: ["Node.js", "AngularJS", "SQLServer", "XML/XSLT"],
     description:
       "Development tool for quickly bootstraping full-stack applications",
@@ -141,6 +150,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "https://github.com/benoror/ember-postgrest-dynamic-ui",
     image: "/images/portfolio/ember-postgrest-dynamic-ui.png",
+    icon: "/images/portfolio/icons/ember-postgrest-dynamic-ui.png",
     techStack: ["Ember.js", "PostgREST", "PostgreSQL"],
     description: "Dynamic UI powered by PostgREST and Ember Formly",
     links: {
@@ -156,6 +166,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "💻 Software Development",
     url: "https://npmjs.org/package/better-npm-run",
     image: "/images/portfolio/better-npm-run.png",
+    icon: "/images/portfolio/icons/better-npm-run.png",
     description: "🏃‍♂️ A better NPM scripts runner!",
     links: {
       github: "https://github.com/benoror/better-npm-run",
@@ -170,6 +181,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "👷‍♂️ Maker",
     url: "https://benoror.github.io/laystack-landing",
     image: "/images/portfolio/laystack.png",
+    icon: "/images/portfolio/icons/Laystack.png",
     description: "Docs Templating API for your App",
     techStack: ["Node.js", "React"],
   },
@@ -181,6 +193,7 @@ export const portfolioItems: PortfolioItem[] = [
     role: "👷‍♂️ Technical Co-Founder",
     url: "http://www.cotizahoy.com",
     image: "/images/portfolio/cotizahoy.png",
+    icon: "/images/portfolio/icons/CotizaHoy.png",
     description: "B2B quotation platform for manufacturing industry",
     links: {
       github: "https://github.com/cotizahoy",

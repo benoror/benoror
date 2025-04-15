@@ -1,11 +1,11 @@
-<p align="center">
+<!-- <p align="center">
   <a href="https://benoror.com/">
     <img alt="Ben Orozco" src="https://avatars2.githubusercontent.com/u/119117?s=460&u=90226a2b669f648db10bcfcdea19a71b3bf667bb&v=4" width="128" style="border-radius: 128px;" />
   </a>
 </p>
 <h1 align="center">
   Ben Orozco
-</h1>
+</h1> -->
 
 # 👋 Hi!
  

@@ -29,3 +29,28 @@ export const HOME = {
   public_email: gmailAlias(PERSONAL.private_email, 'homepage'),
   about_me: "I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products, growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting."
 }
+
+export const SKILLS = [
+  "Full-stack Development",
+  "Systems Design",
+  "Backend Architecture",
+  "Frontend UI/UX",
+  "DevOps Infrastructure",
+  "Agile Methodologies",
+  "Leadership",
+  "Management",
+  "Technical Strategy",
+]
+
+export const INTERESTS = [
+  "All things computers & technology",
+  "Programming",
+  "Software Engineering",
+  "Books and Podcasts",
+  "Startups",
+  "Leadership",
+  "Artificial Intelligence",
+  "Crypto",
+  "Science, Sci-Fi, History",
+  "Economics & Politics",
+]

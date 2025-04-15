@@ -1,6 +1,6 @@
 "use client"
 
-import { HOME } from "@workspace/data/personal"
+import { HOME, SKILLS, INTERESTS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
 
 export default function About() {
@@ -26,31 +26,18 @@ export default function About() {
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-sky-100">Skills</h3>
               <ul className="space-y-2 text-sky-200">
-                <li>Full-stack Development</li>
-                <li>Systems Design</li>
-                <li>Backend Architecture</li>
-                <li>Frontend UI/UX</li>
-                <li>DevOps Infrastructure</li>
-                <li>Agile Methodologies</li>
-                <li>Leadership</li>
-                <li>Management</li>
-                <li>Technical Strategy</li>
+                {SKILLS.map((skill, index) => (
+                  <li key={index}>{skill}</li>
+                ))}
               </ul>
             </div>
 
             <div className="space-y-4">
               <h3 className="text-xl font-semibold text-sky-100">Interests</h3>
               <ul className="space-y-2 text-sky-200">
-                <li>All things computers & technology</li>
-                <li>Programming</li>
-                <li>Software Engineering</li>
-                <li>Books and Podcasts</li>
-                <li>Startups</li>
-                <li>Leadership</li>
-                <li>Artificial Intelligence</li>
-                <li>Crypto</li>
-                <li>Science, Sci-Fi, History</li>
-                <li>Economics & Politics</li>
+                {INTERESTS.map((interest, index) => (
+                  <li key={index}>{interest}</li>
+                ))}
               </ul>
             </div>
           </div>

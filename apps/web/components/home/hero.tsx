@@ -6,6 +6,7 @@ import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import { HOME } from "@workspace/data/personal"
+import { SocialIcons } from "../footer"
 import OutrunGrid from "@/components/cyber-grid-background"
 // import OutrunGrid from "@/components/outrun-retro"
 // import OutrunGrid from "@/components/outrun-grid"
@@ -92,7 +93,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex justify-center my-8"
+            className="flex justify-center mt-8"
           >
             <div className={styles.profileImage}>
               {images.map((src, index) => (
@@ -105,6 +106,10 @@ export default function Hero() {
               ))}
             </div>
           </motion.div>
+
+          <div className="flex flex-col items-center justify-center">
+            <SocialIcons />
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}

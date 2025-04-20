@@ -5,7 +5,7 @@ import { APPTEGY, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } 
 
 export const ABOUT = {
   name: PERSONAL.short_name,
-  header: 'Lead Software Engineer - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
+  header: 'Software Engineering Lead - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
   about_me: `VP Eng & CTO of SaaS startups in U.S. & LatAm. Software engineer specialized in leading technical teams and full stack development and. Passionate about building end-to-end & customer-driven software products, mentoring & growing engineering teams, and leveraging technology to tackle real-world challenges.`
 }

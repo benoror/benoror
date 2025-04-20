@@ -17,8 +17,8 @@ export default function Portfolio() {
 
   const tabs = [
     { id: "projects", label: "Projects", count: projects.length },
-    { id: "publications", label: "Publications", count: publications.length },
     { id: "talks", label: "Talks", count: talks.length },
+    { id: "publications", label: "Publications", count: publications.length },
   ]
 
   return (
@@ -28,7 +28,7 @@ export default function Portfolio() {
       <div className="container mx-auto px-4 pt-24 pb-12">
         <h3 className="text-1xl md:text-5xl font-bold mb-8 hero-text text-center text-sky-300">Portfolio</h3>
         {/* Tab Navigation */}
-        {/* <div className="flex flex-wrap border-b border-sky-700/30 mb-8 overflow-x-auto pb-1">
+        <div className="flex flex-wrap border-b border-sky-700/30 mb-8 overflow-x-auto pb-1">
           {tabs.map((tab) => (
             <button
               key={tab.id}
@@ -52,7 +52,7 @@ export default function Portfolio() {
               )}
             </button>
           ))}
-        </div> */}
+        </div>
 
         {/* Main Content */}
         <div className="min-h-[50vh]">

@@ -5,6 +5,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { ExternalLink, Github, Youtube, ClipboardPlus } from "lucide-react"
 import type { PortfolioItem } from "@workspace/data/portfolio"
+import ImageSlider from "./image-slider"
 import { Badge } from "@workspace/ui/components/badge"
 
 interface PortfolioCardProps {
@@ -13,6 +14,8 @@ interface PortfolioCardProps {
 
 export default function PortfolioCard({ item }: PortfolioCardProps) {
   const [isHovered, setIsHovered] = useState(false)
+  // Determine if we should use the slider (if multiple images are provided)
+  const useSlider = item.images.length > 0
 
   return (
     <motion.div
@@ -30,7 +33,11 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
     >
       <div className="relative h-48 overflow-hidden">
         <motion.div animate={{ scale: isHovered ? 1.05 : 1 }} transition={{ duration: 0.3 }} className="h-full w-full">
-          <Image src={item.image || "/placeholder.svg"} alt={item.title} fill className="object-fill" />
+          {useSlider ? (
+            <ImageSlider images={item.images} alt={item.title} autoplayInterval={3000} className="h-full" />
+          ) : (
+            <Image src={item.images[0] || "/placeholder.svg"} alt={item.title} fill className="object-fill justify-start" />
+          )}
         </motion.div>
 
         <div className="absolute h-16 w-16 top-4 left-4 rounded-full bg-white border-2 border-sky-700/30 ring-2 ring-sky-200 flex items-center justify-center">
@@ -46,6 +53,13 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
             {item.role}
           </Badge>
         </div>
+        {item.circa && (
+          <div className="absolute bottom-0 right-0 p-4">
+            <Badge variant="outline" className="bg-black/30 text-sky-50 border-none">
+              {item.circa}
+            </Badge>
+          </div>
+        )}
       </div>
 
       <div className="p-5 space-y-4">

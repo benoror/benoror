@@ -17,7 +17,7 @@ I am a Computer Science Engineer specialized in Full Stack web development, pass
 
 # About this codebase
 
-This repo powers my personal website: [benoror.com](https://www.benoror.com)
+This monorepo powers my personal website: [benoror.com](https://www.benoror.com)
 
 I effectively use it as a playground to experiment with [Web & AI tech](#tech-stack)
 
@@ -26,10 +26,8 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
 ## `apps/`
 
 - 🏠 [`web/`](apps/web) — Website Homepage — [benoror.com](https://benoror.com)
+    - 💼 [`portfolio/`](apps/web/app/portfolio) — Portfolio — [portfolio.benoror.com](https://portfolio.benoror.com)
 - 📑 [`resume/`](apps/resume) — Résumé — [resume.benoror.com](http://resume.benoror.com/)
-- 💼 [`portfolio/`](apps/portfolio) — Portfolio — [portfolio.benoror.com](https://portfolio.benoror.com)
-- 📃 Cover Letter: [gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe](https://gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe)
-- 💭 Blog: [blog.benoror.com](http://blog.benoror.com/)
 
 ## `packages/`
 
@@ -50,3 +48,8 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
   - [v0](https://v0.dev/)
   - [Neovim](https://neovim.io/) / [LazyVim](https://www.lazyvim.org/)
   - [benoror/dotfiles](https://github.com/benoror/dotfiles)
+
+## Others
+
+- 📃 Cover Letter: [gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe](https://gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe)
+- 💭 Blog: [blog.benoror.com](http://blog.benoror.com/)

@@ -4,7 +4,6 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "@workspace/utils": "workspace:*",
     "dev": "next dev --turbopack --port 3000",
     "build": "next build",
     "start": "next start",

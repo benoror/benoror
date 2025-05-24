@@ -60,6 +60,9 @@ export default function Footer() {
             <div>
               © {currentYear} Ben Orozco. All rights reserved.
             </div>
+            <code className="text-xs text-sky-900">
+              nostr (<a href="https://primal.net/p/nprofile1qqsyr8m0f9sjjv5t3jzm29ry8faddqxfeguku477krth3decu8w0q2ctsxua2" target="_blank">primal.net</a>): npub1gx0k7jtp9yeghry9k52xgwn666qvnj3edetaavxh0zmn3cwu7q4s9v9x06
+            </code>
           </motion.div>
         </div>
       </div>

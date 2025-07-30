@@ -13,7 +13,7 @@ export const APPTEGY: IRole[] = [
       }, {
         description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes and systems.'
       }, {
-        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60%'
+        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.'
       },
     ],
     skills: [

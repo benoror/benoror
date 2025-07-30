@@ -1,38 +1,58 @@
 import { ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
 import { PERSONAL } from '@workspace/data/personal';
-import { APPTEGY, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
+import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
 
 export const ABOUT = {
   name: PERSONAL.short_name,
   header: 'Software Engineering Lead - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
+  location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `VP Eng & CTO of SaaS startups in U.S. & LatAm. Software engineer specialized in leading technical teams and full stack development and. Passionate about building end-to-end & customer-driven software products, mentoring & growing engineering teams, and leveraging technology to tackle real-world challenges.`
+  about_me: `VP Eng & CTO of SaaS startups in U.S. & LatAm. Product-minded Software engineer specialized in leading technical teams and full stack development. Passionate on building scalable products with a strong focus on user experience. Proven track record building, growing and mentoring engineering teams with a people-first mindset and deep sense of ownership, leveraging people & technology to tackle real-world problems. Looking for new big challenges in the intersection of B2B software, AI & Internet tech.`
 }
 
 export const COMPANIES = [
   {
     name: 'Apptegy',
     url: 'https://www.apptegy.com',
-    location: 'Little Rock 🇺🇸',
+    location: 'Little Rock, AR 🇺🇸',
+    remote: true,
     startDate: '2020',
     endDate: 'Present (5yr)',
-    description: 'EdTech startup with 3,000+ school districts in the US.',
+    description: 'Industry-leading EdTech SaaS company with 5,000+ school districts in the US & Canada and 10MM+ of active users.',
     roles: APPTEGY
+  },
+  {
+    name: 'Brokerlit',
+    url: 'https://www.brokerlit.com',
+    location: 'Monterrey, MX 🇲🇽',
+    startDate: '2023',
+    endDate: 'Present',
+    description: 'Real Estate SaaS providing an MLS, CMS & CRM platform for brokers to manage their properties and inbound leads generation.',
+    roles: BROKERLIT
+  },
+  {
+    name: 'BaseQL',
+    url: 'https://www.baseql.com',
+    location: 'Miami, FL 🇺🇸',
+    startDate: '2020',
+    endDate: '2024',
+    description: 'GraphQL access point for your Cloud data (Airtable & Google Sheets). ',
+    roles: BASEQL
   },
   {
     name: 'HealthTree',
     url: 'https://www.healthtree.org',
-    location: 'Salt Lake City 🇺🇸',
-    startDate: '2019',
-    endDate: '2020',
+    location: 'Salt Lake City, UT 🇺🇸',
+    startDate: 'Jan 2019',
+    endDate: 'Mar 2020',
     description: 'Healthcare platform for cancer patients, their families and caregivers, with the mission of accelerating the finding of a cure',
     roles: HEALTHTREE
   },
   {
     name: 'Ecaresoft',
     url: 'https://www.ecaresoft.com',
-    location: 'Austin 🇺🇸',
+    location: 'Austin, TX 🇺🇸',
     startDate: '2016',
     endDate: '2019',
     description: 'EHR & HIS systems for hospitals and clinics in Latin America and Middle East.',
@@ -42,7 +62,7 @@ export const COMPANIES = [
     short: true,
     name: 'Panax',
     url: 'https://panax.io',
-    location: 'San Luis Potosi 🇲🇽',
+    location: 'San Luis Potosi, MX 🇲🇽',
     startDate: '2014',
     endDate: '2016',
     description: 'Low-code tool for building business applications.',
@@ -52,7 +72,7 @@ export const COMPANIES = [
     short: true,
     name: 'OperIT',
     url: 'https://www.servicesinit.com',
-    location: 'San Luis Potosi 🇲🇽',
+    location: 'San Luis Potosi, MX 🇲🇽',
     startDate: '2014',
     endDate: '2014',
     description: 'IT nearshoring consultancy services for U.S. companies',
@@ -62,7 +82,7 @@ export const COMPANIES = [
     short: true,
     name: 'SAP',
     url: 'https://www.sap.com',
-    location: 'Walldorf 🇩🇪',
+    location: 'Walldorf, DE 🇩🇪',
     startDate: '2013',
     endDate: '2014',
     description: 'World\'s largest company of ERP software',
@@ -72,7 +92,7 @@ export const COMPANIES = [
     short: true,
     name: 'CotizaHoy',
     url: 'https://www.cotizahoy.com',
-    location: 'San Luis Potosi 🇲🇽',
+    location: 'San Luis Potosi, MX 🇲🇽',
     startDate: '2010',
     endDate: '2013',
     description: 'B2B startup for car manufacturing industry',
@@ -82,7 +102,7 @@ export const COMPANIES = [
     short: true,
     name: 'NIC Mexico',
     url: 'https://www.nicmexico.mx',
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: '2008',
     endDate: '2009',
     description: 'NIC organization for .mx top-level domains',
@@ -293,6 +313,17 @@ export const SKILLS: ISkill[] = [{
       { name: 'Distributed systems' },
     ]
   }]
+}, {
+  name: 'AI',
+  slug: 'ai',
+  since: 2023,
+  level: 60,
+  description: 'I have been experimenting with AI since 2023. I have helped enable AI in the Engineering organization.',
+  subSkills: [
+    { name: 'LLMs integration (OpenAI, Anthropic, Gemini, etc.)' },
+    { name: 'Tools (Cursor, Claude, CodeRabbit, etc.)' },
+    { name: 'Best practices (prompt engineering, rules, etc.)' },
+  ]
 }]
 
 export const EDUCATION = [{

@@ -3,11 +3,19 @@ import { IRole } from '@workspace/data/types/resume';
 export const APPTEGY: IRole[] = [
   {
     title: 'VP of Engineering',
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: 'Apr 2021 ',
     endDate: 'Present',
-    description: 'Scaling and shipping a suite of products used by 10MM\'s of users with quality and cadence goals in a high-growth Series-B EdTech startup. Help forming & leading a team of 120+ Engineers by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.',
-    achievements: [],
+    description: 'Shipped & scaled a suite of industry-leading products with quality and cadence in a high-growth Series-B EdTech startup.',
+    achievements: [
+      {
+        description: 'Help hiring, forming & leading a team of 120+ Engineers on both sides of the border by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.'
+      }, {
+        description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes and systems.'
+      }, {
+        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60%'
+      },
+    ],
     skills: [
       { name: 'Leadership' },
       { name: 'Management' },
@@ -19,31 +27,30 @@ export const APPTEGY: IRole[] = [
   },
   {
     title: 'Lead Software Engineer',
-    remote: true,
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: 'Mar 2020',
     endDate: 'Abr 2021',
-    description: 'Member of Platform & Infrastructure team working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
+    description: 'As part of the nascent engineering organization, I helped planting the seeds & building the foundations during an early stage of the company and through the scale from ~500 to 2,000+ school districts. Lead the platform & infrastructure teams working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
     achievements: [
       {
-        description: 'Advocate best design, architecture, coding practices, peer reviewing & unit testing across the Engineering organization'
-      }, {
-        description: 'Scrum master working with Product team following Agile methodologies.'
-      }, {
-        description: 'Interview backend & full-stack candidates while onboarding 10\'s of new hires.'
-      }, {
         description: 'Hands-on development of Thrillshare platform and APIs mainly in [Ruby on Rails](#ruby-on-rails), supporting Vue.js & Mobile (iOS & Android) clients.'
       }, {
-        description: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'
+        description: 'Advocate best design, architecture, coding practices, peer reviewing & unit testing across the Engineering organization'
       }, {
         description: 'Developed greenfield Ruby on Rails outpost services following SOA (service-oriented architecture):',
         subAchievements: [{
-          description: 'Auth: AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across all Apptegy\'s products',
+          description: 'Auth: With a constant inflow of 1,000\'s of new users, implemented an AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across existing and newer Apptegy\'s products',
         }, {
-          description: 'Alerts: Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
+          description: 'Alerts: Due to a spike in usage of our alerting services, from 10\'s to 1,000\'s of notifications per minute, we required to scale it up by implementing a Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
         }]
       }, {
+        description: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'
+      }, {
         description: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#ec2), [ELB](#elb), [EKS](#eks), [RDS](#rds), [S3](#s3) clusters using [Capistrano](#capistrano) & [Kubernetes](#kubernetes)'
+      }, {
+        description: 'Scrum master working with Product team following Agile methodologies.'
+      }, {
+        description: 'Interview backend & full-stack candidates while onboarding new hires.'
       }],
       skills: [
         { name: 'Technical Leadership' },
@@ -53,6 +60,32 @@ export const APPTEGY: IRole[] = [
         { name: 'Code Review' },
         { name: 'Unit Testing' },
       ]
+  }
+]
+
+export const BROKERLIT: IRole[] = [
+  {
+    title: 'Technical Co-Founder',
+    description: 'Developed real estate SaaS platform with the help of a freelance contractor.',
+    achievements: [{
+      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Next.js](#next.js)'
+    }, {
+      description: 'DevOps infrastructure based on [Fly.io](https://fly.io) k8s service & [Vercel](http://vercel.com) serverless hosting'
+    }],
+    skills: []
+  }
+]
+
+export const BASEQL: IRole[] = [
+  {
+    title: 'Founder',
+    description: 'Built as a side-project during COVID and exited through a successful acquisition.',
+    achievements: [{
+      description: 'Hands-on full-stack Javascript development with [Node.js](#node.js), [Next.js](#next.js) & [Tailwind CSS](#tailwind-css).'
+    }, {
+      description: 'DevOps infrastructure based on [AWS EBS](#aws-elastic-beanstalk) & [MongoDB](#mongodb)'
+    }],
+    skills: []
   }
 ]
 
@@ -85,7 +118,7 @@ export const HEALTHTREE: IRole[] = [
 export const ECARESOFT: IRole[] = [
   {
     title: 'CTO',
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2018',
     endDate: 'Jan 2019',
     description: 'Lead technology strategy, software development and operations to get to new SaaS markets in Argentina and Middle-East. Merged all product teams under a single organization culture. Worked closely with Product, Sales & Support organizations.',
@@ -117,7 +150,7 @@ export const ECARESOFT: IRole[] = [
     title: 'CTO',
     project: 'Nimbo',
     projectUrl: 'https://www.nimbo-x.com',
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: 'Feb 2016',
     endDate: 'Jan 2019',
     description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
@@ -148,7 +181,7 @@ export const ECARESOFT: IRole[] = [
     title: 'Tech Lead',
     project: 'Nebula',
     projectUrl: 'https://www.usenebula.com',
-    location: 'Monterrey 🇲🇽',
+    location: 'Monterrey, MX 🇲🇽',
     startDate: 'Oct 2017',
     endDate: 'Jul 2018',
     description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',

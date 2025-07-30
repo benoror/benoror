@@ -8,15 +8,16 @@ import { ICompany, IRole } from '@workspace/data/types/resume';
 import { Badge } from '@workspace/ui/components/badge';
 import { ExternalLink, Calendar, Globe, MapPin } from "lucide-react"
 import { shortURL } from '@workspace/utils/url';
+import MDDescription from "@/components/MarkdownDescription";
 
 export default function Experience() {
   // Track open/closed state for each role
   const [openStates, setOpenStates] = useState<Record<string, boolean>>(() => {
     const initialState: Record<string, boolean> = {}
-    // Initialize all as closed by default except the first company
+    // Initialize all as closed by default except the first N companies
     COMPANIES.forEach((company: ICompany, companyIndex: number) => {
       (company.roles ?? []).forEach((_: IRole, roleIndex: number) => {
-        initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 1
+        initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 5
       })
     })
     return initialState
@@ -53,7 +54,7 @@ export default function Experience() {
                   {company.remote && (
                     <Badge
                       variant="outline"
-                      className="flex items-center h-5 px-1.5 text-xs font-normal bg-primary/10 border-primary/20"
+                      className="flex items-center h-5 px-1.5 text-muted-foreground/100 border-primary/10"
                     >
                       <Globe className="h-3 w-3 mr-1" />
                       Remote
@@ -71,7 +72,9 @@ export default function Experience() {
               </div>
             </div>
 
-            <p className="text-sm mb-4">{company.description}</p>
+            <p className="text-sm mb-4">
+              <MDDescription markdown={company.description} />
+            </p>
 
             <div className="space-y-6 pl-4 border-l-2 border-gray-200">
               {(company.roles ?? []).map((role: IRole, roleIndex: number) => {

@@ -9,11 +9,15 @@ export const APPTEGY: IRole[] = [
     description: 'Shipped & scaled a suite of industry-leading products with quality and cadence in a high-growth Series-B EdTech startup.',
     achievements: [
       {
-        description: 'Help hiring, forming & leading a team of 120+ Engineers on both sides of the border by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.'
+        description: 'Help hiring, forming & leading a team of 140+ Engineers on both sides of the border by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.'
       }, {
-        description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes and systems.'
+        description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes, implementing org restructuring, planning frameworks, and delivery systems for sustained high-growth.'
       }, {
-        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.'
+        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.',
+      }, {
+        description: 'Led architecting & shipping of multiple high-impact services & products with consistent cadence & quality, ensuring uptime and scalability for millions of end-users.'
+      }, {
+        description: 'Advocated a significant cost-reduction, simplification & refactoring of gRPC-based microservices architecture & in-house frameworks following Domain-Driven Design (DDD) principles.'
       },
     ],
     skills: [
@@ -30,7 +34,7 @@ export const APPTEGY: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Mar 2020',
     endDate: 'Abr 2021',
-    description: 'As part of the nascent engineering organization, I helped planting the seeds & building the foundations during an early stage of the company and through the scale from ~500 to 2,000+ school districts. Lead the platform & infrastructure teams working on new and existing products, building internal & user-facing components on top of a service oriented architecture.',
+    description: 'As part of the nascent engineering organization, I helped planting the seeds & building the foundations, architected, hands-on coded, delivered, refactored & scaled during an early stage of the company and through the scale from ~500 to 2,000+ school districts. Lead the platform & infrastructure teams working on new and existing products, building internal & user-facing components on top of a service oriented architecture during rapid scale-up.',
     achievements: [
       {
         description: 'Hands-on development of Thrillshare platform and APIs mainly in [Ruby on Rails](#ruby-on-rails), supporting Vue.js & Mobile (iOS & Android) clients.'
@@ -42,6 +46,8 @@ export const APPTEGY: IRole[] = [
           description: 'Auth: With a constant inflow of 1,000\'s of new users, implemented an AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across existing and newer Apptegy\'s products',
         }, {
           description: 'Alerts: Due to a spike in usage of our alerting services, from 10\'s to 1,000\'s of notifications per minute, we required to scale it up by implementing a Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
+        }, {
+          description: 'Among other projects I lead: Forms & surveys builder, ETL pipeline revamp, Translation service, Emails newsletters & marketing campaigns, Learning-management-system & Real-time horizontally-scalable Chat messaging system'
         }]
       }, {
         description: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'

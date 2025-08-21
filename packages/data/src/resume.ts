@@ -37,7 +37,7 @@ export const COMPANIES = [
     location: 'Miami, FL 🇺🇸',
     startDate: '2020',
     endDate: '2024',
-    description: 'GraphQL access point for your Cloud data (Airtable & Google Sheets). ',
+    description: `GraphQL access point for your Cloud data (Airtable & Google Sheets). 🎯 **Acquired in 2024**`,
     roles: BASEQL
   },
   {

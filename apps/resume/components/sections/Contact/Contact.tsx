@@ -1,4 +1,4 @@
-import { LINKS } from '@workspace/data/personal';
+import { LINKS, PERSONAL } from '@workspace/data/personal';
 import { ABOUT } from '@workspace/data/resume';
 import { Button } from '@workspace/ui/components/button';
 import { MailIcon, GlobeIcon, NotebookIcon } from "lucide-react";
@@ -28,7 +28,7 @@ export default function Contact() {
 
   return (
     <div className="flex gap-4 pt-1 text-xs text-muted-foreground flex-col sm:flex-row sm:items-baseline">
-      <IconLink Icon={MailIcon} link={`mailto:${ABOUT.public_email}`} text={shortURL(ABOUT.public_email)} />
+      <IconLink Icon={MailIcon} link={`mailto:${ABOUT.public_email}`} text={shortURL(PERSONAL.private_email)} />
       <IconLink Icon={GlobeIcon} link={LINKS.website_url} text={shortURL(LINKS.website_url)} />
       <IconLink Icon={GitHubIcon} link={LINKS.github_url} text={shortURL(LINKS.github_url)} />
       <IconLink Icon={LinkedInIcon} link={LINKS.linkedin_url} text={shortURL(LINKS.linkedin_url)} />

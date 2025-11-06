@@ -74,7 +74,7 @@ export const BROKERLIT: IRole[] = [
     title: 'Technical Co-Founder',
     description: 'Developed real estate SaaS platform with the help of a freelance contractor.',
     achievements: [{
-      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Next.js](#next.js)'
+      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & Typescript/[Next.js](#next.js)'
     }, {
       description: 'DevOps infrastructure based on [Fly.io](https://fly.io) k8s service & [Vercel](http://vercel.com) serverless hosting'
     }],

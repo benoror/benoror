@@ -7,7 +7,7 @@ export default function SkillBadge({ children, className }: { children: ReactNod
     <Badge
       variant="secondary"
       className={cn(
-        "font-normal decoration-sky-700 text-sky-800 dark:decoration-sky-200 dark:text-sky-200 hover:decoration-solid",
+        "font-normal bg-sky-100 decoration-sky-700 text-sky-800 dark:bg-sky-900 dark:decoration-sky-200 dark:text-sky-200 hover:decoration-solid py-0 px-1 text-sm",
         className
       )}
     >

@@ -74,7 +74,7 @@ export const BROKERLIT: IRole[] = [
     title: 'Technical Co-Founder',
     description: 'Developed real estate SaaS platform with the help of a freelance contractor.',
     achievements: [{
-      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & Typescript/[Next.js](#next.js)'
+      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Typescript](#typescript)/[React.js](#react.js)/[Next.js](#next.js)'
     }, {
       description: 'DevOps infrastructure based on [Fly.io](https://fly.io) k8s service & [Vercel](http://vercel.com) serverless hosting'
     }],
@@ -87,7 +87,7 @@ export const BASEQL: IRole[] = [
     title: 'Founder',
     description: 'Built as a side-project during COVID and exited through a successful acquisition.',
     achievements: [{
-      description: 'Hands-on full-stack Javascript development with [Node.js](#node.js), [Next.js](#next.js) & [Tailwind CSS](#tailwind-css).'
+      description: 'Hands-on full-stack Javascript development with [Node.js](#node.js), [React.js](#react.js)/[Next.js](#next.js) & [Tailwind CSS](#tailwind-css).'
     }, {
       description: 'DevOps infrastructure based on [AWS EBS](#aws-elastic-beanstalk) & [MongoDB](#mongodb)'
     }],
@@ -100,7 +100,7 @@ export const HEALTHTREE: IRole[] = [
     title: 'CTO',
     description: 'Developed web & mobile platforms for cancer patients to find their best treatment options.',
     achievements: [{
-      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails) & , data pipelines & frontend clients by hands-on programming, code reviewing & testing.'
+      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails), frontend clients in [React.js](#react.js) & data pipelines by hands-on programming, code reviewing & testing.'
     }, {
       description: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
     }, {
@@ -161,11 +161,11 @@ export const ECARESOFT: IRole[] = [
     endDate: 'Jan 2019',
     description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
     achievements: [{
-      description: 'Established development processes for coding, reviewing & testing backend APIs and frontend clients'
+      description: 'Established development processes for coding, reviewing & testing [Ruby on Rails](#ruby-on-rails) backend APIs and [Ember.js](#ember.js) frontend clients'
     }, {
-      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#psql), [Redis](#redis) and [Sidekiq](#sidekiq) for background processing',
+      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby](#ruby), [Java](#java), [PostgreSQL](#psql), [Redis](#redis) and [Sidekiq](#sidekiq) for background processing',
       subAchievements: [{
-        description: 'Drugs interactions [Java](#java) service based on Wolters Kluwer\'s Medi-Span®'
+        description: 'Drugs interactions service based on Wolters Kluwer\'s Medi-Span®'
       }, {
         description: 'Machine Learning prediction & classification service based on [Python](#python) & [Tensorflow](#Tensorflow)'
       }, {

@@ -19,7 +19,7 @@ export const COMPANIES = [
     remote: true,
     startDate: '2020',
     endDate: 'Present (5yr)',
-    description: 'Industry-leading EdTech SaaS company with 5,000+ school districts in the US & Canada and 10MM+ of active users.',
+    description: 'Industry-leading EdTech SaaS company with 6,000+ school districts in the US & Canada and 10MM+ of active users.',
     roles: APPTEGY
   },
   {

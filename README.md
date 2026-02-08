@@ -7,15 +7,21 @@
   Ben Orozco
 </h1> -->
 
-# 👋 Hi!
- 
-## About me
+# About me
 
 I am a Computer Science Engineer specialized in Full Stack web development, passionate on making and launching software products, leading engineering teams and leveraging technology to tackle big real-world problems.
 
 ![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)
 
-# About this codebase
+# Projects
+
+Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
+
+## Open Source
+
+- [gpg.nvim](https://github.com/benoror/gpg.nvim): Edit GPG encrypted files in NeoVIM
+
+## About this codebase ([`benoror/benoror`](https://github.com/benoror/benoror))
 
 This monorepo powers my personal website: [benoror.com](https://www.benoror.com)
 
@@ -23,19 +29,19 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
 
 (See v0 prompts for this app: [v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP](https://v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP))
 
-## `apps/`
+### `apps/`
 
 - 🏠 [`web/`](apps/web) — Website Homepage — [benoror.com](https://benoror.com)
     - 💼 [`portfolio/`](apps/web/app/portfolio) — Portfolio — [portfolio.benoror.com](https://portfolio.benoror.com)
 - 📑 [`resume/`](apps/resume) — Résumé — [resume.benoror.com](http://resume.benoror.com/)
 
-## `packages/`
+### `packages/`
 
 - 🎨 [`ui/`](packages/ui) - Components library
 - 💿 [`data/`](packages/data) - Centralized data repository & TS types (like [resume.ts](packages/data/src/resume.ts))
 - 🛠️ [`utils/`](packages/utils) - Misc utilities
 
-## Tech Stack
+### Tech Stack
 
 - [TypeScript](https://www.typescriptlang.org/)/Javascript
 - Build system: [Turbo](https://turbo.build/) Monorepo

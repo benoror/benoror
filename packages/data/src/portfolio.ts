@@ -19,6 +19,22 @@ export type PortfolioItem = {
 
 export const projectsItems: PortfolioItem[] = [
   {
+    id: "gpg-nvim",
+    title: "gpg.nvim",
+    section: "projects",
+    category: "Open Source",
+    role: "👷‍♂️ Maker",
+    url: "https://github.com/benoror/gpg.nvim",
+    images: ["/images/portfolio/gpg.nvim.gif"],
+    description: "Editing GPG encrypted files symmetrically in NeoVIM",
+    techStack: ["Lua", "Neovim", "GPG"],
+    links: {
+      github: "https://github.com/benoror/gpg.nvim",
+    },
+    circa: "2025",
+    icon: "/images/portfolio/icons/nvim.png",
+  },
+  {
     id: "baseql",
     title: "BaseQL",
     section: "projects",

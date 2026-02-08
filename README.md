@@ -20,6 +20,11 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 ## Open Source
 
 - [gpg.nvim](https://github.com/benoror/gpg.nvim): Edit GPG encrypted files in NeoVIM
+- [better-npm-run](https://github.com/benoror/better-npm-run): A better NPM scripts runner
+- [sundly](https://github.com/Sundly/sundly): Encrypted & decentralized personal health records
+- [ember-postgrest-dynamic-ui](https://github.com/benoror/ember-postgrest-dynamic-ui): Dynamic UI powered by PostgREST and Ember Formly
+- [gbadev](https://github.com/benoror/gbadev): Homebrew Game Boy Advance Game Development
+- [taxi-driver](https://github.com/benoror/taxi-driver): A flexible & international Tax Engine Microservice
 
 ## About this codebase ([`benoror/benoror`](https://github.com/benoror/benoror))
 

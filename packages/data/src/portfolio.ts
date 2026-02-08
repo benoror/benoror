@@ -30,6 +30,7 @@ export const projectsItems: PortfolioItem[] = [
     techStack: ["Lua", "Neovim", "GPG"],
     links: {
       github: "https://github.com/benoror/gpg.nvim",
+      other: "https://dotfyle.com/plugins/benoror/gpg.nvim",
     },
     circa: "2025",
     icon: "/images/portfolio/icons/nvim.png",

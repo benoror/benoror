@@ -9,7 +9,7 @@
 
 # About me
 
-I am a Computer Science Engineer specialized in Full Stack web development, passionate on making and launching software products, leading engineering teams and leveraging technology to tackle big real-world problems.
+I am a Computer Science Engineer specialized in Full Stack development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
 
 ![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)
 

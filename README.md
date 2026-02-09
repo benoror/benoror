@@ -2,22 +2,21 @@
   <a href="https://benoror.com/">
     <img alt="Ben Orozco" src="https://avatars2.githubusercontent.com/u/119117?s=460&u=90226a2b669f648db10bcfcdea19a71b3bf667bb&v=4" width="128" style="border-radius: 128px;" />
   </a>
-</p>
-<h1 align="center">
-  Ben Orozco
-</h1> -->
+</p> -->
 
-# About me
+# Ben Orozco
+
+## About me
 
 I am a Computer Science Engineer specialized in Full Stack development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
 
 ![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)
 
-# Projects
+## Projects
 
 Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 
-## Open Source
+### Open Source
 
 - [gpg.nvim](https://github.com/benoror/gpg.nvim): Edit GPG encrypted files in NeoVIM
 - [better-npm-run](https://github.com/benoror/better-npm-run): A better NPM scripts runner

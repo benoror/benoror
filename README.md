@@ -10,7 +10,7 @@
 
 I am a Computer Science Engineer specialized in Full Stack development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
 
-![Github Stats](https://github-readme-stats.vercel.app/api?username=benoror&count_private=true&show_icons=true&theme=nord)
+![Github Stats](https://github-stats-extended.vercel.app/api?username=benoror&count_private=true&hide=contribs&show_icons=true&theme=nord&show=prs_merged_percentage,issues_authored,issues_commented)
 
 ## Projects
 
@@ -18,14 +18,16 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 
 ### Open Source
 
-- [gpg.nvim](https://github.com/benoror/gpg.nvim): Edit GPG encrypted files in NeoVIM
-- [better-npm-run](https://github.com/benoror/better-npm-run): A better NPM scripts runner
-- [sundly](https://github.com/Sundly/sundly): Encrypted & decentralized personal health records
-- [ember-postgrest-dynamic-ui](https://github.com/benoror/ember-postgrest-dynamic-ui): Dynamic UI powered by PostgREST and Ember Formly
-- [gbadev](https://github.com/benoror/gbadev): Homebrew Game Boy Advance Game Development
-- [taxi-driver](https://github.com/benoror/taxi-driver): A flexible & international Tax Engine Microservice
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=better-npm-run&show=prs_reviewed,issues_commented)](https://github.com/benoror/better-npm-run)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=gpg.nvim&show=prs_reviewed,issues_commented)](https://github.com/benoror/gpg.nvim)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=Sundly&repo=sundly&show=prs_reviewed,issues_commented)](https://github.com/Sundly/sundly)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=ember-postgrest-dynamic-ui&show=prs_reviewed,issues_commented)](https://github.com/benoror/ember-postgrest-dynamic-ui)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=taxi-driver&show=prs_reviewed,issues_commented)](https://github.com/benoror/taxi-driver)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=gbadev&show=prs_reviewed,issues_commented)](https://github.com/benoror/gbadev)
 
-## About this codebase ([`benoror/benoror`](https://github.com/benoror/benoror))
+## About this codebase
+
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=benoror&theme=rose_pine)](https://github.com/benoror/benoror)
 
 This monorepo powers my personal website: [benoror.com](https://www.benoror.com)
 

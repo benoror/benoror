@@ -27,7 +27,7 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 
 ## About this codebase
 
-[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=benoror&theme=rose_pine)](https://github.com/benoror/benoror)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=benoror&show_owner=true&theme=nord)](https://github.com/benoror/benoror)
 
 This monorepo powers my personal website: [benoror.com](https://www.benoror.com)
 

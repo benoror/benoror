@@ -5,6 +5,7 @@ import { sinceToString } from '@workspace/utils/date';
 import { ISkill } from '@workspace/data/types/resume';
 import PrintSubSkill from '@/components/sections/Skills/Skill/SubSkills/PrintSubSkill/PrintSubSkill';
 import SubSkill from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubSkill';
+import CompactCard from '@/components/CompactCard';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@workspace/ui/components/collapsible';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@workspace/ui/lib/utils';
@@ -30,10 +31,9 @@ export default function Skill({ skill }: { skill: ISkill }) {
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <div
+      <CompactCard
         id={skill.slug}
         className={cn(
-          "rounded-lg border bg-card text-card-foreground shadow-sm transition-colors duration-150",
           !isOpen && "hover:bg-muted/50 dark:hover:bg-muted/20"
         )}
       >
@@ -97,7 +97,7 @@ export default function Skill({ skill }: { skill: ISkill }) {
             {skill.subSkills?.map((subSkill, index) => <PrintSubSkill key={index} skill={subSkill} />)}
           </div>
         </div>
-      </div>
+      </CompactCard>
     </Collapsible>
   )
 }

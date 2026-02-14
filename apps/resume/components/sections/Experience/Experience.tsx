@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { BriefcaseBusinessIcon } from "lucide-react";
 import Role from '@/components/sections/Experience/Role'
+import Section from '@/components/Section';
 import { COMPANIES } from '@workspace/data/resume'
 import { ICompany, IRole } from '@workspace/data/types/resume';
 import { Badge } from '@workspace/ui/components/badge';
@@ -31,10 +32,7 @@ export default function Experience() {
   }
 
   return (
-    <section className="Experience flex flex-col items-center gap-5 print:gap-4">
-      <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
-        <BriefcaseBusinessIcon className="size-6 inline" /> Experience
-      </h2>
+    <Section title="Experience" icon={<BriefcaseBusinessIcon className="size-6 inline" />}>
       <div>
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
           <div key={companyIndex} className={companyIndex !== 0 ? "pt-4" : ""}>
@@ -91,6 +89,6 @@ export default function Experience() {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   )
 }

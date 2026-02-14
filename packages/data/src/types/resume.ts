@@ -31,6 +31,7 @@ export interface IAchievement {
 export interface ISkill {
   name: string;
   slug?: string;
+  order?: number;
   level?: number;
   since?: number;
   description?: string;

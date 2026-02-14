@@ -113,12 +113,13 @@ export const COMPANIES = [
 export const SKILLS: ISkill[] = [{
   name: 'Leadership',
   slug: 'leadership',
+  order: 1,
   since: 2016,
   level: 100,
   description: 'I have been in leadership roles for several years, overseeing multiple projects and teams.',
   subSkills: [{
     name: 'Technical Leadership',
-    since: 2016,
+    slug: 'technical-leadership',
     description: 'I have served as a technical lead for multiple projects over several years, directing their technical direction. This included code reviews, pair programming, and mentoring. Additionally, I oversaw project quality and managed technical debt. I also acted as the primary point of contact for clients alongside the Product/Project Manager(s).',
     subSkills: [
       { name: 'Ownership' },
@@ -129,9 +130,17 @@ export const SKILLS: ISkill[] = [{
       { name: 'Roadmaps' },
     ]
   }, {
-    name: 'Management',
+    name: 'Strategic Planning',
+    slug: 'strategic-planning',
+    description: 'I have been involved in the strategic planning process for several years, developing and implementing strategic plans. This included setting goals, identifying key initiatives, and allocating resources.',
+    subSkills: [
+      { name: 'Goal setting' },
+      { name: 'Key initiatives' },
+      { name: 'Resource allocation' },
+    ]
+  }, {
+    name: 'Teams Management',
     slug: 'management',
-    since: 2017,
     description: 'As a VP-level manager, I am in charge of developing & coaching other managers and leaders. As a mid-level manager, I was responsible for overseeing a group of developers, guiding their career paths, and fostering their professional growth.',
     subSkills: [
       { name: 'Mentorship' },
@@ -141,7 +150,6 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Recruitment',
     slug: 'recruitment',
-    since: 2016,
     description: 'I have been involved in the recruitment process for several years, conducting interviews. I have also been responsible for improving and unifying recruitment process.',
     subSkills: [
       { name: 'Talent sourcing' },
@@ -152,13 +160,13 @@ export const SKILLS: ISkill[] = [{
 }, {
   name: 'Backend',
   slug: 'backend',
+  order: 3,
   since: 2010,
   level: 100,
   description: 'Backend development is my primary area of expertise, and I have created multiple applications, APIs, and integrations.',
   subSkills: [{
     name: 'Ruby on Rails',
     slug: 'ruby-on-rails',
-    since: 2013,
     description: 'I have worked with Ruby on Rails since 2013, building and maintaining numerous applications. Including those with large databases where efficient SQL queries are crucial. My experience includes implementing APIs, admin panels, integrating APIs, and optimising high-traffic applications.',
     subSkills: [
       { name: 'Rails 7' },
@@ -170,7 +178,6 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Developing APIs',
     slug: 'apis',
-    since: 2015,
     description: "Since 2015, I have been developing APIs. I've built multiple applications using Ruby on Rails as well as other frameworks.",
     subSkills: [
       { name: 'REST API' },
@@ -179,7 +186,6 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Databases',
     slug: 'databases',
-    since: 2010,
     description: 'I have worked with many different kinds of databases. Most Ruby on Rails performance issues stem from inefficient database queries. I have extensive experience in identifying and optimizing these issues.',
     subSkills: [
       { name: 'PostgreSQL' },
@@ -190,7 +196,6 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'API integrations',
     slug: 'integrations',
-    since: 2010,
     description: 'I developed multiple APIs that were consumed by frontend, mobile apps and other services.',
     subSkills: [
       { name: 'REST' },
@@ -214,13 +219,13 @@ export const SKILLS: ISkill[] = [{
 }, {
   name: 'Frontend',
   slug: 'frontend',
+  order: 4,
   since: 2018,
   level: 90,
   description: 'I have been working with React since 2018. Created multiple applications and websites.',
   subSkills: [{
     name: 'React',
     slug: 'react',
-    since: 2018,
     description: 'I have been working with React since 2018. I have created several applications using React. SPA applications with SSR.',
     subSkills: [
       { name: 'React Testing Library' },
@@ -233,14 +238,12 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Typescript',
     slug: 'typescript',
-    since: 2022,
     description: 'I created a complex frontend application using Typescript and Next.js. I use Typescript in all my javascript projects.',
     subSkills: [
     ]
   }, {
     name: 'Javascript',
     slug: 'javascript',
-    since: 2010,
     description: 'Javascript was always a part of my work. From simple jQuery scripts, through ES6, to using it with Typescript in Next.js applications and Express.js APIs.',
     subSkills: [
       { name: 'Node.js' },
@@ -249,7 +252,6 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Next.js',
     slug: 'next.js',
-    since: 2022,
     description: 'I created a complex frontend application using Next.js and Typescript. Next.js is my go to framework for frontend applications.',
     subSkills: [
       { name: 'NextAuth' },
@@ -268,13 +270,13 @@ export const SKILLS: ISkill[] = [{
 }, {
   name: 'DevOps',
   slug: 'devops',
+  order: 5,
   level: 80,
   since: 2019,
   description: 'I have been working with DevOps since 2019. Creating CI/CD pipelines and managing Kubernetes clusters.',
   subSkills: [{
     name: 'AWS',
     slug: 'aws',
-    since: 2016,
     description: "I've hosted websites and Kuberentes clusters using AWS",
     subSkills: [
       { name: 'EKS' },
@@ -287,14 +289,12 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Docker',
     slug: 'docker',
-    since: 2016,
     description: "I use Docker on a daily basis in development and production environments.",
     subSkills: [
     ]
   }, {
     name: 'Kubernetes',
     slug: 'kubernetes',
-    since: 2019,
     description: 'I have set up and maintained multiple Kubernetes clusters from scratch utilizing GitOps principles.',
     subSkills: [
       { name: 'GitOPS - ArgoCD' },
@@ -314,16 +314,27 @@ export const SKILLS: ISkill[] = [{
     ]
   }]
 }, {
+  name: 'Product',
+  slug: 'product',
+  order: 2,
+  since: 2016,
+  level: 100,
+  description: 'I have been involved in the product development process for several years, developing and implementing product plans. This included setting goals, identifying key initiatives, and allocating resources.',
+  subSkills: [
+    { name: 'Project management' },
+  ]
+}, {
   name: 'AI',
   slug: 'ai',
+  order: 6,
   since: 2023,
   level: 60,
   description: 'I have been experimenting with AI since 2023. I have helped enable AI in the Engineering organization.',
-  subSkills: [
-    { name: 'LLMs integration (OpenAI, Anthropic, Gemini, etc.)' },
-    { name: 'Tools (Cursor, Claude, CodeRabbit, etc.)' },
-    { name: 'Best practices (prompt engineering, rules, etc.)' },
-  ]
+  // subSkills: [
+  //   { name: 'LLMs integration (OpenAI, Anthropic, Gemini, etc.)' },
+  //   { name: 'Tools (Cursor, Claude, CodeRabbit, etc.)' },
+  //   { name: 'Best practices (prompt engineering, rules, etc.)' },
+  // ]
 }]
 
 export const EDUCATION = [{

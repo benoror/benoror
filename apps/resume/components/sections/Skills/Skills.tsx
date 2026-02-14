@@ -8,8 +8,8 @@ export default function Skills() {
       <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
         <HammerIcon className="size-6 inline" /> Skills
       </h2>
-      <div className="grid grid-cols-2 justify-center gap-8 w-full">
-        {SKILLS.map((skill, index) => (
+      <div className="grid grid-cols-3 justify-center gap-8 w-full">
+        {SKILLS.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)).map((skill, index) => (
           <Skill key={index} skill={skill} />
         ))}
       </div>

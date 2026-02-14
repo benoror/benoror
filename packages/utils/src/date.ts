@@ -5,8 +5,9 @@ export function sinceToYears(since?: number) {
   return 2024 - (since ?? 0)
 }
 
-export function sinceToString(since?: number) {
+export function sinceToString(since?: number, short: boolean = true) {
   const experience = sinceToYears(since)
   const years = experience === 1 ? 'year' : 'years'
-  return experience > 0 ? `${experience} ${years} of experience` : ''
+  const label = short ? 'y' : ' years of experience'
+  return experience > 0 ? `${experience}${label}` : ''
 }

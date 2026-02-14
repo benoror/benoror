@@ -1,39 +1,27 @@
 import { EDUCATION } from '@workspace/data/resume';
+import Section from '@/components/Section';
+import CompactCard from '@/components/CompactCard';
 import { ExternalLink, GraduationCap } from "lucide-react"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@workspace/ui/components/card"
 
 export default function Education() {
   return (
-    <section className="Education flex flex-col items-center gap-5 print:gap-2 w-full">
-      <h2 className="text-2xl print:text-xl mb-4 font-medium text-sky-800 dark:text-sky-200">
-        <GraduationCap className="size-6 inline" /> Education
-      </h2>
-      <div className="grid grid-cols-2 justify-center gap-8 w-full">
+    <Section title="Education" icon={<GraduationCap className="size-6 inline" />}>
+      <div className="grid grid-cols-2 justify-center gap-3 w-full">
         {EDUCATION.map((degree, index) => (
-          <Card key={index}>
-            <CardHeader>
-              <CardTitle>{degree.title}</CardTitle>
-              <CardDescription>
-                <h3 className="text-md print:text-sm">
-                  <a href={degree.institutionUrl}>
-                    {degree.institution} <ExternalLink className="inline h-3 w-3 mb-1 print:hidden" />
-                  </a>
-                </h3>
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm">🗓 {degree.startDate} - {degree.endDate}</p>
-              <p className="text-sm">{degree.description}</p>
-            </CardContent>
-          </Card>
+          <CompactCard key={index}>
+            <div className="px-3 py-2.5 flex flex-col gap-1">
+              <div className="font-semibold text-sm text-sky-800 dark:text-sky-200">{degree.title}</div>
+              <h3 className="text-sm print:text-sm text-muted-foreground">
+                <a href={degree.institutionUrl} className="hover:underline">
+                  {degree.institution} <ExternalLink className="inline h-3 w-3 mb-1 print:hidden" />
+                </a>
+              </h3>
+              <p className="text-xs text-muted-foreground">🗓 {degree.startDate} - {degree.endDate}</p>
+              <p className="text-xs text-muted-foreground">{degree.description}</p>
+            </div>
+          </CompactCard>
         ))}
       </div>
-    </section>
+    </Section>
   )
 }

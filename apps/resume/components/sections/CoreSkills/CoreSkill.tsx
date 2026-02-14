@@ -18,7 +18,7 @@ export default function CoreSkill({ skill }: { skill: ISkill}) {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' })
     }
-    window.dispatchEvent(new CustomEvent('open-skill-dialog', { detail: { slug: skill.slug } }))
+    window.dispatchEvent(new CustomEvent('expand-skill', { detail: { slug: skill.slug } }))
   }
 
   return (

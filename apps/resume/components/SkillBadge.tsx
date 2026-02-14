@@ -7,7 +7,13 @@ export default function SkillBadge({ children, className, ...props }: ComponentP
     <Badge
       variant="secondary"
       className={cn(
-        "font-normal bg-sky-100 decoration-sky-700 text-sky-800 dark:bg-sky-900 dark:decoration-sky-200 dark:text-sky-200 hover:decoration-solid py-0 px-1 text-sm",
+        "font-normal text-sm py-0 px-1.5",
+        "bg-sky-100 text-sky-800 dark:bg-sky-900 dark:text-sky-200",
+        "border border-sky-200/60 dark:border-sky-700/40",
+        "hover:bg-sky-200 dark:hover:bg-sky-800",
+        "hover:border-sky-300 dark:hover:border-sky-600",
+        "hover:shadow-sm",
+        "transition-all duration-150",
         className
       )}
       {...props}

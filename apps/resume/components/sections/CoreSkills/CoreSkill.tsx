@@ -12,9 +12,18 @@ export default function CoreSkill({ skill }: { skill: ISkill}) {
     return () => clearTimeout(timer)
   }, [skill.level])
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.preventDefault()
+    const target = document.getElementById(skill.slug ?? '')
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+    }
+    window.dispatchEvent(new CustomEvent('open-skill-dialog', { detail: { slug: skill.slug } }))
+  }
+
   return (
     <div className="CoreSkill w-full md:w-[45%] lg:w-[22%] print:w-[22%] mb-4">
-      <a href={`#${skill.slug}`} className="text-sky-800 dark:text-sky-200 hover:underline cursor-pointer text-center">
+      <a onClick={handleClick} className="text-sky-800 dark:text-sky-200 hover:underline cursor-pointer text-center">
         <div>{skill.name}</div>
         <Progress value={progress} classNameIndicator="bg-sky-900 dark:bg-sky-200" />
       </a>

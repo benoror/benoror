@@ -5,14 +5,14 @@ import { ExternalLink, GraduationCap } from "lucide-react"
 
 export default function Education() {
   return (
-    <Section title="Education" icon={<GraduationCap className="size-6 inline" />}>
+    <Section title="Education" icon={<GraduationCap />}>
       <div className="grid grid-cols-2 justify-center gap-3 w-full">
         {EDUCATION.map((degree, index) => (
           <CompactCard key={index}>
             <div className="px-3 py-2.5 flex flex-col gap-1">
-              <div className="font-semibold text-foreground">{degree.title}</div>
+              <div className="font-semibold text-foreground print:text-brand-print">{degree.title}</div>
               <h3 className="text-muted-foreground">
-                <a href={degree.institutionUrl} className="hover:underline">
+                <a href={degree.institutionUrl} className="text-brand hover:underline">
                   {degree.institution} <ExternalLink className="inline h-3 w-3 mb-1 print:hidden" />
                 </a>
               </h3>

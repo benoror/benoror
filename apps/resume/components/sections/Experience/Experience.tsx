@@ -32,12 +32,12 @@ export default function Experience() {
   }
 
   return (
-    <Section title="Experience" icon={<BriefcaseBusinessIcon className="size-6 inline" />}>
+    <Section title="Experience" icon={<BriefcaseBusinessIcon />}>
       <div>
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
           <div key={companyIndex} className={companyIndex !== 0 ? "pt-3" : ""}>
             <div className="flex flex-row justify-between items-center gap-2 mb-1.5">
-              <h3 className="text-lg font-semibold text-brand bg-muted-foreground/10 py-0 px-2 rounded-sm">
+              <h3 className="text-lg font-semibold text-brand-emphasis bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (
                   <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {company.name} <ExternalLink className="inline h-4 w-4 mb-1 print:hidden" />

@@ -1,9 +1,12 @@
 import { ISkill } from '@workspace/data/types/resume';
 
-export default function PrintSubSkill({ skill }: { skill: ISkill}) {
+export default function PrintSubSkill({ skill }: { skill: ISkill }) {
+  const nestedSkills = skill.subSkills?.map((subSkill) => subSkill.name).join(', ')
+
   return (
-    <span className="text-sm">
-        <span className="font-semibold">{skill.name}</span>{ skill.subSkills && skill.subSkills.length > 0 && (<>:</>) || (<>.&nbsp;</>)} <span>{skill.subSkills && skill.subSkills.map((subSkill, index) => subSkill.name).join(', ') }</span>{ skill.subSkills && skill.subSkills.length > 0 && (<>.&nbsp;</>)}
+    <span>
+      <span className="font-semibold">{skill.name}</span>
+      {nestedSkills ? `: ${nestedSkills}; ` : '; '}
     </span>
   )
 }

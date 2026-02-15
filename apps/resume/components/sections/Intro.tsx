@@ -6,7 +6,7 @@ import { MapPin } from 'lucide-react';
 export default function Intro() {
   return (
     <section className="Intro flex flex-col items-center gap-1 w-full">
-      <h1 className="text-2xl font-medium text-brand">{ABOUT.name}</h1>
+      <h1 className="text-2xl font-medium text-brand-emphasis">{ABOUT.name}</h1>
       <div className="text-base">
         {ABOUT.header}
       </div>
@@ -15,7 +15,7 @@ export default function Intro() {
         {ABOUT.location}
       </div>
       <div className="items-center gap-2 hidden text-muted-foreground print:flex">
-        <a href={LINKS.resume_url} target='_blank'>
+        <a href={LINKS.resume_url} target='_blank' className="print:text-brand-print">
           {/* ToDo: Move to footer */}
           {shortURL(LINKS.resume_url)}
         </a>

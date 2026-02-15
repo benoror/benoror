@@ -15,7 +15,7 @@ export default function CoreSkill({ skill }: { skill: ISkill}) {
 
   return (
     <div className="CoreSkill w-full">
-      <a onClick={handleClick} className="text-brand hover:underline cursor-pointer text-center">
+      <a onClick={handleClick} className="text-brand-emphasis hover:underline cursor-pointer text-center">
         <div>{skill.name}</div>
         <AnimatedProgress value={skill.level ?? 0} />
       </a>

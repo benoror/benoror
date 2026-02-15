@@ -6,21 +6,22 @@ import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@workspace/ui/components/collapsible"
 import { shortURL } from '@workspace/utils/url';
 import SkillBadge from '@/components/SkillBadge';
+import { PrintOnly, ScreenOnly } from '@/components/MediaVisibility';
 
 const RoleTitle = ({ role }: { role: IRole }) => (
-  <h4 className="font-bold inline">
+  <h4 className="font-bold inline print:text-brand-print">
     {role.title}
     {role.projectUrl && (
       <span className="text-muted-foreground">
-        <span className="print:hidden">
+        <ScreenOnly as="span">
           <span> — </span>
-          <a href={role.projectUrl} target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href={role.projectUrl} target="_blank" rel="noopener noreferrer" className="hover:underline print:text-brand-print">
             {role.project} <ExternalLink className="inline h-3 w-3 mb-1" />
           </a>
-        </span>
-        <span className="hidden print:inline">
+        </ScreenOnly>
+        <PrintOnly as="span" display="inline">
           <span> — </span> {role.project} / {shortURL(role.projectUrl)}
-        </span>
+        </PrintOnly>
       </span>
     )}
   </h4>

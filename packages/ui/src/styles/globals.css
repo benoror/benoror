@@ -41,6 +41,9 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --brand: #075985;
+  --brand-bg: #e0f2fe;
+  --brand-indicator: #0c4a6e;
 }
 
 .dark {
@@ -76,6 +79,9 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
+  --brand: #bae6fd;
+  --brand-bg: #0c4a6e;
+  --brand-indicator: #bae6fd;
 }
 
 @theme inline {
@@ -115,6 +121,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-brand: var(--brand);
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-indicator: var(--brand-indicator);
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
 
@@ -143,8 +152,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-  a:hover {
-     @apply underline;
   }
 }

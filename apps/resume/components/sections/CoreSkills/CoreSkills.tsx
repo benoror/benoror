@@ -3,7 +3,7 @@ import { SKILLS } from '@workspace/data/resume';
 
 export default function CoreSkills() {
   return (
-    <section className="CoreSkills w-full flex flex-row gap-8 justify-between print:hidden">
+    <section className="CoreSkills w-full grid grid-cols-3 md:grid-cols-6 gap-3 print:hidden">
       {SKILLS.sort((a, b) => (a.order ?? 0) - (b.order ?? 0)).map((skill, index) => (
         <CoreSkill key={index} skill={skill} />
       ))}

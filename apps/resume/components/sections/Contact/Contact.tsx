@@ -16,11 +16,11 @@ export default function Contact() {
         asChild
       >
         <a href={link} target='_blank'>
-          <Icon className="size-4 text-sky-800 dark:text-sky-200" />
+          <Icon className="size-4 text-brand" />
         </a>
       </Button>
-      <Icon className="size-4 hidden print:block text-sky-800 dark:text-sky-200" />
-      <a href={link} target='_blank' className="text-sky-800 dark:text-sky-200">
+      <Icon className="size-4 hidden print:block text-brand" />
+      <a href={link} target='_blank' className="text-brand">
         {text}
       </a>
     </div>

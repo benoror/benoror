@@ -15,7 +15,7 @@ export default function Section({
   return (
     <section className={cn("flex flex-col items-center gap-3 print:gap-2 w-full", className)}>
       {title && (
-        <h2 className="text-2xl print:text-xl font-medium text-sky-800 dark:text-sky-200">
+        <h2 className="text-xl print:text-lg font-medium text-brand">
           {icon} {title}
         </h2>
       )}

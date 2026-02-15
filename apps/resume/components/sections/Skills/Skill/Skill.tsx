@@ -53,7 +53,7 @@ export default function Skill({ skill }: { skill: ISkill }) {
 
           <CollapsibleTrigger asChild>
             <button
-              className="font-semibold text-sm text-sky-800 dark:text-sky-200 hover:underline decoration-sky-400 dark:decoration-sky-500 underline-offset-2 cursor-pointer text-left"
+              className="font-semibold text-sm text-brand hover:underline decoration-sky-400 dark:decoration-sky-500 underline-offset-2 cursor-pointer text-left"
             >
               {skill.name}
             </button>
@@ -61,19 +61,19 @@ export default function Skill({ skill }: { skill: ISkill }) {
 
           {subSkillCount > 0 && (
             isOpen ? (
-              <span className="text-xs text-muted-foreground/60 whitespace-nowrap print:hidden ml-auto">
+              <span className="text-xs text-muted-foreground/50 whitespace-nowrap print:hidden ml-auto">
                 {subSkillCount} skills
               </span>
             ) : (
               <CollapsibleTrigger asChild>
-                <button className="text-xs text-muted-foreground/60 whitespace-nowrap print:hidden cursor-pointer hover:text-sky-700 dark:hover:text-sky-300 hover:underline underline-offset-2 transition-colors ml-auto">
+                <button className="text-xs text-muted-foreground/50 whitespace-nowrap print:hidden cursor-pointer hover:text-sky-700 dark:hover:text-sky-300 hover:underline underline-offset-2 transition-colors ml-auto">
                   {subSkillCount} skills
                 </button>
               </CollapsibleTrigger>
             )
           )}
 
-          <span className="text-xs text-muted-foreground/40">·</span>
+          <span className="text-xs text-muted-foreground/50">·</span>
           <span className="text-xs text-muted-foreground whitespace-nowrap">
             {yearsOfExperience}
           </span>

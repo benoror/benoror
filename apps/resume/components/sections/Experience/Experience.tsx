@@ -6,8 +6,8 @@ import Role from '@/components/sections/Experience/Role'
 import Section from '@/components/Section';
 import { COMPANIES } from '@workspace/data/resume'
 import { ICompany, IRole } from '@workspace/data/types/resume';
-import { Badge } from '@workspace/ui/components/badge';
-import { ExternalLink, Calendar, Globe, MapPin } from "lucide-react"
+import MetadataRow from '@/components/sections/Experience/MetadataRow';
+import { ExternalLink } from "lucide-react"
 import { shortURL } from '@workspace/utils/url';
 import MDDescription from "@/components/MarkdownDescription";
 
@@ -35,9 +35,9 @@ export default function Experience() {
     <Section title="Experience" icon={<BriefcaseBusinessIcon className="size-6 inline" />}>
       <div>
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
-          <div key={companyIndex} className={companyIndex !== 0 ? "pt-4" : ""}>
-            <div className="flex flex-row justify-between items-center gap-2 mb-2">
-              <h3 className="text-xl font-semibold text-sky-800 dark:text-sky-200 bg-muted-foreground/10 py-0 px-2 rounded-sm">
+          <div key={companyIndex} className={companyIndex !== 0 ? "pt-3" : ""}>
+            <div className="flex flex-row justify-between items-center gap-2 mb-1.5">
+              <h3 className="text-lg font-semibold text-brand bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (
                   <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {company.name} <ExternalLink className="inline h-4 w-4 mb-1 print:hidden" />
@@ -47,34 +47,19 @@ export default function Experience() {
                 )}
                 <span className="hidden print:inline text-muted-foreground text-sm">— {shortURL(company.url)}</span>
               </h3>
-              <div className="flex flex-row items-center gap-4 text-sm text-muted-foreground/80">
-                <div className="flex items-center gap-4">
-                  {company.remote && (
-                    <Badge
-                      variant="outline"
-                      className="flex items-center h-5 px-1.5 text-muted-foreground/100 border-primary/10"
-                    >
-                      <Globe className="h-3 w-3 mr-1" />
-                      Remote
-                    </Badge>
-                  )}
-                  <div className="flex items-center">
-                    <MapPin className="h-4 w-4 mr-1" />
-                    {company.location}
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Calendar className="h-4 w-4 mr-1" />
-                  <span>{company.startDate} - {company.endDate}</span>
-                </div>
-              </div>
+              <MetadataRow
+                remote={company.remote}
+                location={company.location}
+                startDate={company.startDate}
+                endDate={company.endDate}
+              />
             </div>
 
-            <p className="text-sm mb-4">
+            <p className="text-sm mb-3">
               <MDDescription markdown={company.description} />
             </p>
 
-            <div className="space-y-6 pl-4 border-l-2 border-gray-200">
+            <div className="space-y-4 pl-4 border-l-2 border-border">
               {(company.roles ?? []).map((role: IRole, roleIndex: number) => {
                 const key = `${companyIndex}-${roleIndex}`
                 const isOpen = openStates[key]

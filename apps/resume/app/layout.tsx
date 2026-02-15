@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google"
 import type { Metadata } from "next";
 import PrintButton from '@/components/PrintButton';
-import DownloadPDFButton from '@/components/DownlaodPDFButton';
+import DownloadPDFButton from '@/components/DownloadPDFButton';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { Providers } from "@/components/providers"
 // import { Analytics } from "@vercel/analytics/react";

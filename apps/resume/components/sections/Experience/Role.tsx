@@ -1,8 +1,8 @@
 import { IRole } from '@workspace/data/types/resume';
 import Achievement from '@/components/sections/Experience/Achievement'
-import { Badge } from '@workspace/ui/components/badge';
+import MetadataRow from '@/components/sections/Experience/MetadataRow';
 import MDDescription from '@/components/MarkdownDescription';
-import { ExternalLink, Calendar, ChevronDown, ChevronUp, Globe, MapPin } from "lucide-react"
+import { ExternalLink, ChevronDown, ChevronUp } from "lucide-react"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@workspace/ui/components/collapsible"
 import { shortURL } from '@workspace/utils/url';
 import SkillBadge from '@/components/SkillBadge';
@@ -46,34 +46,15 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
     <>
       <div className="flex flex-row justify-between items-center gap-1">
         <RoleTitle role={role} />
-        <div className="flex flex-row justify-between items-start gap-4 text-sm text-muted-foreground/70">
-          <div className="flex items-center gap-4">
-            {role.remote && (
-              <Badge
-                variant="outline"
-                className="flex items-center h-5 px-1.5 text-muted-foreground/100 border-primary/10"
-              >
-                <Globe className="h-3 w-3 mr-1" />
-                Remote
-              </Badge>
-            )}
-            {role.location && (
-              <div className="flex items-center">
-                <MapPin className="h-4 w-4 mr-1" />
-                {role.location}
-              </div>
-            )}
-          </div>
-          {role.startDate && role.endDate && (
-            <div className="flex items-center">
-              <Calendar className="h-4 w-4 mr-1" />
-              <span>{role.startDate} - {role.endDate}</span>
-            </div>
-          )}
-        </div>
+        <MetadataRow
+          remote={role.remote}
+          location={role.location}
+          startDate={role.startDate}
+          endDate={role.endDate}
+        />
       </div>
 
-      <Collapsible open={isOpen} className="my-3 pl-2 border-l hover:border-muted-foreground/25 border-transparent">
+      <Collapsible open={isOpen} className="my-2 pl-2 border-l border-border hover:border-muted-foreground/50">
         <div className="group">
           <CollapsibleTrigger
             onClick={() => toggleCollapsible(roleKey)}

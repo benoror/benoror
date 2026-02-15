@@ -5,7 +5,7 @@ import { Earth } from "lucide-react"
 
 export default function Languages() {
   return (
-    <Section title="Languages" icon={<Earth className="size-6 inline" />}>
+    <Section title="Languages" icon={<Earth />}>
       <div className="flex flex-row justify-center gap-8 w-2/3">
         {LANGUAGES.map((language, index) => (
           <Language key={index} language={language} />

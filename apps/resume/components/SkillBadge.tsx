@@ -8,7 +8,7 @@ export default function SkillBadge({ children, className, ...props }: ComponentP
       variant="secondary"
       className={cn(
         "font-normal text-sm py-0 px-1.5",
-        "bg-brand-bg text-brand",
+        "bg-brand-bg text-brand-emphasis",
         "border border-sky-200/60 dark:border-sky-700/40",
         "hover:bg-sky-200 dark:hover:bg-sky-800",
         "hover:border-sky-300 dark:hover:border-sky-600",

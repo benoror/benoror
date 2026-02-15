@@ -5,22 +5,27 @@ import { MailIcon, GlobeIcon, NotebookIcon } from "lucide-react";
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { LinkedInIcon } from '@/components/icons/LinkedInIcon';
 import { shortURL } from '@workspace/utils/url';
+import { PrintOnly, ScreenOnly } from '@/components/MediaVisibility';
 
 export default function Contact() {
   const IconLink = ({ Icon, link, text }: { Icon: React.ElementType, link: string, text: string }) => (
     <div className="flex items-center gap-2">
-      <Button
-        className="size-8 print:hidden border-sky-100 dark:border-sky-950"
-        variant="outline"
-        size="icon"
-        asChild
-      >
-        <a href={link} target='_blank'>
-          <Icon className="size-4 text-brand" />
-        </a>
-      </Button>
-      <Icon className="size-4 hidden print:block text-brand" />
-      <a href={link} target='_blank' className="text-brand">
+      <ScreenOnly as="span" className="inline-flex">
+        <Button
+          className="size-8 border-sky-100 dark:border-sky-950"
+          variant="outline"
+          size="icon"
+          asChild
+        >
+          <a href={link} target='_blank'>
+            <Icon className="size-4 text-brand" />
+          </a>
+        </Button>
+      </ScreenOnly>
+      <PrintOnly as="span" display="inline-flex">
+        <Icon className="size-4 text-brand-emphasis" />
+      </PrintOnly>
+      <a href={link} target='_blank' className="text-brand-emphasis">
         {text}
       </a>
     </div>

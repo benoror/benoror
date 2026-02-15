@@ -42,6 +42,7 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --brand: #075985;
+  --brand-print: #0369a1;
   --brand-bg: #e0f2fe;
   --brand-indicator: #0c4a6e;
 }
@@ -80,6 +81,7 @@
   --sidebar-border: oklch(0.269 0 0);
   --sidebar-ring: oklch(0.439 0 0);
   --brand: #bae6fd;
+  --brand-print: #0369a1;
   --brand-bg: #0c4a6e;
   --brand-indicator: #bae6fd;
 }
@@ -122,6 +124,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-brand: var(--brand);
+  --color-brand-print: var(--brand-print);
   --color-brand-bg: var(--brand-bg);
   --color-brand-indicator: var(--brand-indicator);
   --animate-accordion-down: accordion-down 0.2s ease-out;
@@ -152,5 +155,11 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .text-brand-emphasis {
+    @apply text-brand print:text-brand-print;
   }
 }

@@ -7,9 +7,7 @@ import { motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import { HOME } from "@workspace/data/personal"
 import { SocialIcons } from "../footer"
-import OutrunGrid from "@/components/cyber-grid-background"
-// import OutrunGrid from "@/components/outrun-retro"
-// import OutrunGrid from "@/components/outrun-grid"
+import OutrunGrid from "@/components/outrun-hero-background"
 
 import styles from './home.module.css'
 

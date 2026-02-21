@@ -10,13 +10,13 @@ import { PrintOnly, ScreenOnly } from '@/components/MediaVisibility';
 import { scrollToSkill } from '@/lib/scrollToSkill';
 
 const RoleTitle = ({ role }: { role: IRole }) => (
-  <h4 className="font-bold inline print:text-brand-print">
+  <h4 className="font-bold inline print:text-brand">
     {role.title}
     {role.projectUrl && (
       <span className="text-muted-foreground">
         <ScreenOnly as="span">
           <span> — </span>
-          <a href={role.projectUrl} target="_blank" rel="noopener noreferrer" className="hover:underline print:text-brand-print">
+          <a href={role.projectUrl} target="_blank" rel="noopener noreferrer" className="hover:underline print:text-brand">
             {role.project} <ExternalLink className="inline h-3 w-3 mb-1" />
           </a>
         </ScreenOnly>

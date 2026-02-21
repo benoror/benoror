@@ -12,6 +12,9 @@ export default function AnimatedProgress({ value }: { value: number }) {
   }, [value])
 
   return (
-    <Progress value={progress} classNameIndicator="bg-brand-indicator" />
+    <Progress
+      value={progress}
+      classNameIndicator="bg-brand-indicator print:bg-brand-indicator"
+    />
   )
 }

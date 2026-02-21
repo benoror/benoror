@@ -10,7 +10,7 @@ export default function Education() {
         {EDUCATION.map((degree, index) => (
           <CompactCard key={index}>
             <div className="px-3 py-2.5 flex flex-col gap-1">
-              <div className="font-semibold text-foreground print:text-brand-print">{degree.title}</div>
+              <div className="font-semibold text-foreground print:text-brand">{degree.title}</div>
               <h3 className="text-muted-foreground">
                 <a href={degree.institutionUrl} className="text-brand hover:underline">
                   {degree.institution} <ExternalLink className="inline h-3 w-3 mb-1 print:hidden" />

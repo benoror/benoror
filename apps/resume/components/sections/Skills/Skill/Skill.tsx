@@ -109,7 +109,7 @@ export default function Skill({ skill }: { skill: ISkill }) {
       {/* Print version (plain text, no card chrome) */}
       <div className="hidden print:block break-inside-avoid text-[12px] leading-4 text-justify mb-2">
         <p>
-          <span className="font-bold text-brand-print">{skill.name}</span>
+          <span className="font-bold text-brand">{skill.name}</span>
           <span className="text-muted-foreground"> ({yearsOfExperience})</span>
           {skill.description && <span> — {skill.description}</span>}
           {subSkillCount > 0 ? ': ' : '. '}

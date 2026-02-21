@@ -15,7 +15,7 @@ export default function Intro() {
         {ABOUT.location}
       </div>
       <div className="items-center gap-2 hidden text-muted-foreground print:flex">
-        <a href={LINKS.resume_url} target='_blank' className="print:text-brand-print">
+        <a href={LINKS.resume_url} target='_blank' className="print:text-brand">
           {/* ToDo: Move to footer */}
           {shortURL(LINKS.resume_url)}
         </a>

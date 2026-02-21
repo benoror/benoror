@@ -47,7 +47,7 @@ export default function Navbar() {
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
         <Link href="/" className={`text-xl font-bold tracking-tighter hover:no-underline inline-flex items-center gap-2 ${textClass}`}>
-          Ben Orozco {isOutrun && <Sparkles size={16} className="text-pink-400 animate-pulse" aria-hidden />}
+          Ben Orozco
         </Link>
 
         {isMobile ? (

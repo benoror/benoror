@@ -7,24 +7,24 @@ import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
 
 export default function About() {
   const { isBlueDark, themeKind } = useAppTheme()
-  const sectionClass = pickThemeValue(themeKind, {
-    outrun: "bg-black/80",
-    dark: "bg-slate-950/85",
-    light: "bg-white/90",
+  const panelClass = pickThemeValue(themeKind, {
+    outrun: "rounded-3xl border border-cyan-400/25 bg-slate-950/45 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.65)] p-6 md:p-8",
+    dark: "rounded-3xl border border-sky-700/35 bg-slate-950/55 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.55)] p-6 md:p-8",
+    light: "rounded-3xl border border-sky-200/80 bg-white/80 backdrop-blur-xl shadow-[0_24px_80px_rgba(15,23,42,0.10)] p-6 md:p-8",
   })
   const headingClass = pickBlueValue(isBlueDark, "text-sky-100", "text-sky-900")
   const bodyClass = pickBlueValue(isBlueDark, "text-sky-200", "text-sky-700")
   const linkHoverClass = pickBlueValue(isBlueDark, "hover:text-sky-300", "hover:text-sky-600")
 
   return (
-    <section id="about" className={`py-20 md:py-32 backdrop-blur-md ${sectionClass}`}>
+    <section id="about" className="py-20 md:py-32">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className="max-w-3xl mx-auto space-y-8"
+          className={`max-w-4xl mx-auto space-y-8 ${panelClass}`}
         >
           <h2 className={`text-3xl md:text-4xl font-bold tracking-tighter text-center ${headingClass}`}>About Me</h2>
 

@@ -277,7 +277,7 @@ export const SKILLS: ISkill[] = [{
     description: 'I created a complex frontend application using Next.js and Typescript. Next.js is my go to framework for frontend applications.',
     subSkills: [
       { name: 'NextAuth' },
-      { name: 'Vercel' },
+      { name: 'Vercel', url: 'https://vercel.com' },
     ]
   }, {
     name: 'Other',
@@ -334,6 +334,7 @@ export const SKILLS: ISkill[] = [{
       { name: 'CDN' },
       { name: 'Observability' },
       { name: 'Distributed systems' },
+      { name: 'Fly.io', url: 'https://fly.io' },
     ]
   }]
 }, {
@@ -362,12 +363,12 @@ export const SKILLS: ISkill[] = [{
     name: 'AI tools',
     slug: 'ai-tools',
     subSkills: [
-      { name: 'Cursor / CLI' },
-      { name: 'Claude / Code CLI' },
-      { name: 'OpenCode' },
-      { name: 'OpenAI / API' },
-      { name: 'Gemini' },
-      { name: 'CodeRabbit' },
+      { name: 'Cursor / CLI', url: 'https://cursor.com' },
+      { name: 'Claude / Code CLI', url: 'https://claude.ai' },
+      { name: 'OpenCode', url: 'https://opencode.ai' },
+      { name: 'OpenAI / API', url: 'https://openai.com' },
+      { name: 'Gemini', url: 'https://gemini.google.com' },
+      { name: 'CodeRabbit', url: 'https://coderabbit.ai' },
     ]
   }, {
     name: 'Multi-agent orchestration',

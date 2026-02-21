@@ -4,15 +4,36 @@ import { Tooltip, TooltipTrigger, TooltipContent } from '@workspace/ui/component
 import { sinceToString, sinceToYears } from '@workspace/utils/date';
 import { ISkill } from '@workspace/data/types/resume';
 import SkillBadge from '@/components/SkillBadge';
+import { ExternalLink } from 'lucide-react';
 
 export default function SubSkill({ skill }: { skill: ISkill }) {
   const years = sinceToYears(skill.since)
   const yearsOfExperience = sinceToString(skill.since)
+  const hasContent = skill.description || (skill.subSkills && skill.subSkills.length > 0)
+
+  const badgeContent = (
+    <>
+      <span>{skill.name}</span>
+      {years !== 0 && <span title={yearsOfExperience}> ({years}y)</span>}
+      {skill.url && <ExternalLink className="inline h-3 w-3 ml-1 opacity-50" />}
+    </>
+  )
+
+  if (skill.url && !hasContent) {
+    return (
+      <div id={skill.slug} className="SubSkill">
+        <a href={skill.url} target="_blank" rel="noopener noreferrer">
+          <SkillBadge className="cursor-pointer">
+            {badgeContent}
+          </SkillBadge>
+        </a>
+      </div>
+    )
+  }
 
   const badge = (
     <SkillBadge className="cursor-pointer">
-      <span>{skill.name}</span>
-      {years !== 0 && <span title={yearsOfExperience}> ({years}y)</span>}
+      {badgeContent}
     </SkillBadge>
   )
 

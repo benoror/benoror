@@ -13,7 +13,7 @@ export const APPTEGY: IRole[] = [
       }, {
         description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes, implementing org restructuring, planning frameworks, and delivery systems for sustained high-growth.'
       }, {
-        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](https://cursor.com), [Claude](https://claude.ai), [CodeRabbit](https://www.coderabbit.ai), [Gemini](https://gemini.google.com), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.',
+        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](#ai-tools), [Claude](#ai-tools), [CodeRabbit](#ai-tools), [Gemini](#ai-tools), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.',
       }, {
         description: 'Led architecting & shipping of multiple high-impact services & products with consistent cadence & quality, ensuring uptime and scalability for millions of end-users.'
       }, {
@@ -76,7 +76,7 @@ export const BROKERLIT: IRole[] = [
     achievements: [{
       description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Typescript](#typescript)/[React.js](#react)/[Next.js](#next.js)'
     }, {
-      description: 'DevOps infrastructure based on [Fly.io](https://fly.io) k8s service & [Vercel](http://vercel.com) serverless hosting'
+      description: 'DevOps infrastructure based on [Fly.io](#devops-other) k8s service & [Vercel](#next.js) serverless hosting'
     }],
     skills: []
   }

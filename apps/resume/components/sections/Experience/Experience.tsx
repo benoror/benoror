@@ -35,7 +35,13 @@ export default function Experience() {
     <Section title="Experience" icon={<BriefcaseBusinessIcon />}>
       <div>
         {COMPANIES.map((company: ICompany, companyIndex: number) => (
-          <div key={companyIndex} className={companyIndex !== 0 ? "pt-3" : ""}>
+          <div
+            key={companyIndex}
+            className={[
+              companyIndex !== 0 ? "pt-3" : "",
+              company.name === "Brokerlit" ? "print:break-before-page" : "",
+            ].filter(Boolean).join(" ")}
+          >
             <div className="flex flex-row justify-between items-center gap-2 mb-1.5">
               <h3 className="text-lg font-semibold text-brand-emphasis bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (

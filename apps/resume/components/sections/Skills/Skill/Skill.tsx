@@ -17,13 +17,22 @@ export default function Skill({ skill }: { skill: ISkill }) {
   const subSkillCount = skill.subSkills?.length ?? 0
 
   useEffect(() => {
-    if (window.location.hash === `#${skill.slug}`) {
+    const hash = window.location.hash.slice(1)
+    const ownSlugs = [
+      skill.slug,
+      ...(skill.subSkills?.map(s => s.slug).filter(Boolean) ?? [])
+    ]
+    if (ownSlugs.includes(hash)) {
       setIsOpen(true)
     }
 
     const handleExpand = (e: Event) => {
       const { slug } = (e as CustomEvent<{ slug: string }>).detail
-      if (slug === skill.slug) setIsOpen(true)
+      const ownSlugs = [
+        skill.slug,
+        ...(skill.subSkills?.map(s => s.slug).filter(Boolean) ?? [])
+      ]
+      if (ownSlugs.includes(slug)) setIsOpen(true)
     }
 
     window.addEventListener('expand-skill', handleExpand)

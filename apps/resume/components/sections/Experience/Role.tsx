@@ -7,6 +7,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@workspace/
 import { shortURL } from '@workspace/utils/url';
 import SkillBadge from '@/components/SkillBadge';
 import { PrintOnly, ScreenOnly } from '@/components/MediaVisibility';
+import { scrollToSkill } from '@/lib/scrollToSkill';
 
 const RoleTitle = ({ role }: { role: IRole }) => (
   <h4 className="font-bold inline print:text-brand-print">
@@ -86,13 +87,22 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
       </Collapsible>
 
       <div className="flex flex-wrap gap-2">
-        {(role.skills ?? []).map((skill, skillIndex) => (
-          <SkillBadge key={skillIndex}>
-            <a href={`#${skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()}`}>
-              {skill.name}
-            </a>
-          </SkillBadge>
-        ))}
+        {(role.skills ?? []).map((skill, skillIndex) => {
+          const slug = skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()
+          return (
+            <SkillBadge key={skillIndex}>
+              <a
+                href={`#${slug}`}
+                onClick={(e) => {
+                  e.preventDefault()
+                  scrollToSkill(slug)
+                }}
+              >
+                {skill.name}
+              </a>
+            </SkillBadge>
+          )
+        })}
       </div>
     </>
   );

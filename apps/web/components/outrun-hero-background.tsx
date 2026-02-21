@@ -254,24 +254,24 @@ export default function OutrunHeroBackground() {
 
       }
 
-      // Animated light dots (from A)
-      const dotCount = 80
-      for (let i = 0; i < dotCount; i++) {
-        const t = (i / dotCount + time * 0.2) % 1
-        const size = 2 + Math.sin(time * 2 + i) * 1
-        const curve = Math.sin(t * Math.PI * 2 + i) * 0.3
-        const x = w / 2 + curve * w * 0.6
-        const y = horizonY * t * 1.8
-        const radians = Math.PI * t
-        const opacity = Math.pow(Math.sin(radians), 2)
+      // // Animated light dots (from A)
+      // const dotCount = 80
+      // for (let i = 0; i < dotCount; i++) {
+      //   const t = (i / dotCount + time * 0.2) % 1
+      //   const size = 2 + Math.sin(time * 2 + i) * 1
+      //   const curve = Math.sin(t * Math.PI * 2 + i) * 0.3
+      //   const x = w / 2 + curve * w * 0.6
+      //   const y = horizonY * t * 1.8
+      //   const radians = Math.PI * t
+      //   const opacity = Math.pow(Math.sin(radians), 2)
 
-        ctx.fillStyle = isDark
-          ? `rgba(0, 220, 255, ${opacity})`
-          : "rgba(124, 169, 237, 0.0)"
-        ctx.beginPath()
-        ctx.arc(x, y, size, 0, Math.PI * 2)
-        ctx.fill()
-      }
+      //   ctx.fillStyle = isDark
+      //     ? `rgba(0, 220, 255, ${opacity})`
+      //     : "rgba(124, 169, 237, 0.0)"
+      //   ctx.beginPath()
+      //   ctx.arc(x, y, size, 0, Math.PI * 2)
+      //   ctx.fill()
+      // }
 
       animationFrameId = requestAnimationFrame(draw)
     }

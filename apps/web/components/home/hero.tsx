@@ -10,6 +10,7 @@ import { SocialIcons } from "../footer"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
+import Link from "next/link"
 
 import styles from './home.module.css'
 
@@ -150,12 +151,12 @@ export default function Hero() {
             >
               Learn More
             </a>
-            <a
+            <Link
               href="/portfolio"
               className={`inline-flex items-center justify-center rounded-md border backdrop-blur-sm px-6 py-3 text-sm font-medium shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${secondaryButtonClass}`}
             >
               View Portfolio
-            </a>
+            </Link>
           </motion.div>
         </div>
       </div>

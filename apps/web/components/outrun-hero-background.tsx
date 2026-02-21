@@ -27,7 +27,7 @@ const STARS = [
 export default function OutrunHeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const threeRef = useRef<HTMLDivElement>(null)
-  const { theme } = useTheme()
+  const { theme, resolvedTheme } = useTheme()
 
   // ── Layer 1: Canvas 2D atmosphere ──────────────────────────────────
   useEffect(() => {
@@ -48,10 +48,7 @@ export default function OutrunHeroBackground() {
     window.addEventListener("resize", resize)
     resize()
 
-    const isDark =
-      theme === "dark" ||
-      (theme === "system" &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    const isDark = theme === "outrun" || resolvedTheme === "dark"
 
     const draw = () => {
       time += 0.01
@@ -253,7 +250,7 @@ export default function OutrunHeroBackground() {
       window.removeEventListener("resize", resize)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [theme])
+  }, [theme, resolvedTheme])
 
   // ── Layer 2: Three.js GPU grid ─────────────────────────────────────
   useEffect(() => {

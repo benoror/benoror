@@ -9,7 +9,7 @@ import CompactCard from '@/components/CompactCard';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@workspace/ui/components/collapsible';
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@workspace/ui/lib/utils';
-import { PrintOnly, ScreenOnly } from '@/components/MediaVisibility';
+
 
 export default function Skill({ skill }: { skill: ISkill }) {
   const [isOpen, setIsOpen] = useState(false)
@@ -31,11 +31,11 @@ export default function Skill({ skill }: { skill: ISkill }) {
   }, [skill.slug])
 
   return (
-    <>
-      <ScreenOnly>
+    <div id={skill.slug}>
+      {/* Screen version */}
+      <div className="print:hidden">
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <CompactCard
-            id={skill.slug}
             className={cn(
               !isOpen && "hover:bg-muted/50 dark:hover:bg-muted/20"
             )}
@@ -95,17 +95,18 @@ export default function Skill({ skill }: { skill: ISkill }) {
             </CollapsibleContent>
           </CompactCard>
         </Collapsible>
-      </ScreenOnly>
+      </div>
 
       {/* Print version (plain text, no card chrome) */}
-      <PrintOnly id={skill.slug} className="break-inside-avoid py-0.5 text-[12px] leading-4 text-left">
+      <div className="hidden print:block break-inside-avoid text-[12px] leading-4 text-left mb-2">
         <p>
           <span className="font-bold text-brand-print">{skill.name}</span>
           <span className="text-muted-foreground"> ({yearsOfExperience})</span>
+          {skill.description && <span> — {skill.description}</span>}
           {subSkillCount > 0 ? ': ' : '. '}
           {skill.subSkills?.map((subSkill, index) => <PrintSubSkill key={index} skill={subSkill} />)}
         </p>
-      </PrintOnly>
-    </>
+      </div>
+    </div>
   )
 }

@@ -1,3 +1,6 @@
+'use client'
+
+import { useEffect, useState } from 'react';
 import SubSkillContent from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillContent';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@workspace/ui/components/dialog';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@workspace/ui/components/tooltip';
@@ -7,9 +10,20 @@ import SkillBadge from '@/components/SkillBadge';
 import { ExternalLink } from 'lucide-react';
 
 export default function SubSkill({ skill }: { skill: ISkill }) {
+  const [dialogOpen, setDialogOpen] = useState(false)
   const years = sinceToYears(skill.since)
   const yearsOfExperience = sinceToString(skill.since)
   const hasContent = skill.description || (skill.subSkills && skill.subSkills.length > 0)
+
+  useEffect(() => {
+    const handleOpen = (e: Event) => {
+      const { slug } = (e as CustomEvent<{ slug: string }>).detail
+      if (slug === skill.slug) setDialogOpen(true)
+    }
+
+    window.addEventListener('open-subskill', handleOpen)
+    return () => window.removeEventListener('open-subskill', handleOpen)
+  }, [skill.slug])
 
   const badgeContent = (
     <>
@@ -39,7 +53,7 @@ export default function SubSkill({ skill }: { skill: ISkill }) {
 
   return (
     <div id={skill.slug} className="SubSkill">
-      <Dialog>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
         {skill.description ? (
           <Tooltip>
             <TooltipTrigger asChild>

@@ -1,7 +1,7 @@
 import { ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
 import { PERSONAL } from '@workspace/data/personal';
-import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
+import { APPTEGY, BASEQL, BROKERLIT, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP, TRIVELTA } from '@workspace/data/resume/roles';
 
 export const ABOUT = {
   name: PERSONAL.short_name,
@@ -13,12 +13,21 @@ export const ABOUT = {
 
 export const COMPANIES = [
   {
+    name: 'Trivelta',
+    url: 'https://trivelta.com/',
+    location: 'Boston, MA 🇺🇸',
+    startDate: '2026',
+    endDate: 'Present',
+    description: 'B2B iGaming technology provider.',
+    roles: TRIVELTA
+  },
+  {
     name: 'Apptegy',
     url: 'https://www.apptegy.com',
     location: 'Little Rock, AR 🇺🇸',
     remote: true,
     startDate: '2020',
-    endDate: 'Present (5yr)',
+    endDate: 'Nov 2025',
     description: 'Industry-leading EdTech SaaS company with 6,000+ school districts in the US & Canada and 10MM+ of active users.',
     roles: APPTEGY
   },

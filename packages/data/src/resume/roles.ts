@@ -1,5 +1,40 @@
 import { IRole } from '@workspace/data/types/resume';
 
+export const TRIVELTA: IRole[] = [
+  {
+    title: 'Lead Software Engineer (Platform Team Lead)',
+    location: 'Monterrey, MX 🇲🇽',
+    startDate: 'Jan 2026',
+    endDate: 'Present',
+    description: 'Technical lead for the PAM platform team at a B2B iGaming technology company, driving platform reliability, compliance, and product delivery with a hands-on approach.',
+    achievements: [
+      {
+        description: 'Hands-on full-stack development of platform features in [Python](#backend-other), [React](#react), and [AWS serverless](#serverless-aws): [Lambda](#serverless-aws), [DynamoDB](#serverless-aws), [Amplify](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), and [OpenSearch](#backend-other).'
+      }, {
+        description: 'Improved engineering quality and delivery speed by pushing architecture/design reviews, RFD/PRD planning, [Code reviews](#technical-leadership), [Unit Testing](#ruby-on-rails), [CI/CD](#devops-other), and trunk-based development practices.'
+      }, {
+        description: 'Partnered closely with product and engineering leadership to scope and sequence roadmap initiatives, balancing business impact, technical constraints, and execution risk.'
+      }, {
+        description: 'Supported secure and compliant platform evolution across AML/KYC, data privacy, fraud/geolocation controls, and operational resilience (monitoring, incident response, and root-cause analysis).'
+      }, {
+        description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent documentation/rules, and repeatable engineering automation patterns.'
+      }, {
+        description: 'Helped build and organize the Monterrey engineering team through international hiring, technical interviewing, coaching, and performance management.'
+      },
+    ],
+    skills: [
+      { name: 'Technical Leadership', slug: 'technical-leadership' },
+      { name: 'Architecture', slug: 'technical-leadership' },
+      { name: 'Delivery management', slug: 'technical-leadership' },
+      { name: 'Hiring manager', slug: 'recruitment' },
+      { name: 'People management', slug: 'management' },
+      { name: 'Python', slug: 'backend-other' },
+      { name: 'AWS Serverless', slug: 'serverless-aws' },
+      { name: 'AI enablement', slug: 'ai' },
+    ]
+  }
+]
+
 export const APPTEGY: IRole[] = [
   {
     title: 'VP of Engineering',

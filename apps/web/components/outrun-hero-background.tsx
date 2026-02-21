@@ -22,7 +22,25 @@ const STARS = [
   { x: 0.45, y: 0.10, s: 2 },   { x: 0.52, y: 0.30, s: 1.5 },
   { x: 0.78, y: 0.45, s: 2 },   { x: 0.38, y: 0.48, s: 1.5 },
   { x: 0.88, y: 0.28, s: 2 },   { x: 0.15, y: 0.50, s: 1.5 },
+  { x: 0.07, y: 0.14, s: 1.5 }, { x: 0.18, y: 0.22, s: 2 },
+  { x: 0.27, y: 0.12, s: 1.5 }, { x: 0.41, y: 0.20, s: 2.5 },
+  { x: 0.49, y: 0.06, s: 1.5 }, { x: 0.57, y: 0.16, s: 2 },
+  { x: 0.68, y: 0.22, s: 1.5 }, { x: 0.74, y: 0.10, s: 2.5 },
+  { x: 0.82, y: 0.18, s: 1.5 }, { x: 0.94, y: 0.26, s: 2 },
+  { x: 0.26, y: 0.34, s: 1.5 }, { x: 0.43, y: 0.38, s: 2 },
+  { x: 0.11, y: 0.04, s: 1.5 }, { x: 0.21, y: 0.07, s: 1.5 },
+  { x: 0.35, y: 0.05, s: 2 },   { x: 0.55, y: 0.09, s: 1.5 },
+  { x: 0.66, y: 0.05, s: 1.5 }, { x: 0.79, y: 0.07, s: 2 },
+  { x: 0.89, y: 0.11, s: 1.5 }, { x: 0.47, y: 0.24, s: 1.5 },
 ]
+
+const STAR_TWINKLE = STARS.map((_, index) => {
+  const phase = (index * 2.17) % (Math.PI * 2)
+  const speed = 1.2 + (index % 9) * 0.35
+  const variance = 0.3 + (index % 6) * 0.08
+  const base = 0.03 + (index % 5) * 0.025
+  return { phase, speed, variance, base }
+})
 
 export default function OutrunHeroBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -80,11 +98,25 @@ export default function OutrunHeroBackground() {
 
       // Stars (dark mode only, above horizon)
       if (isDark) {
-        const glitter = 0.5 + 0.4 * Math.sin(time * Math.PI)
-        for (const star of STARS) {
+        for (const [index, star] of STARS.entries()) {
+          const twinkle = STAR_TWINKLE[index]!
           const sy = star.y * horizonY
           if (sy > horizonY) continue
-          ctx.globalAlpha = glitter * (0.3 + star.s / 6)
+          const rhythmA = Math.sin(time * twinkle.speed + twinkle.phase)
+          const rhythmB = Math.sin(time * (twinkle.speed * 1.8) + twinkle.phase * 0.7)
+          const wave = (rhythmA * 0.65 + rhythmB * 0.35 + 1) / 2
+          const shimmer = Math.pow(wave, 1.8)
+          const opacity = Math.min(1, twinkle.base + shimmer * twinkle.variance)
+
+          // Soft glow pass for more visible twinkle.
+          ctx.globalAlpha = opacity * 0.22
+          ctx.fillStyle = "#dbeafe"
+          ctx.beginPath()
+          ctx.arc(star.x * w, sy, star.s * (1.45 + shimmer * 0.35), 0, Math.PI * 2)
+          ctx.fill()
+
+          // Core star pass.
+          ctx.globalAlpha = opacity * (0.45 + star.s / 7)
           ctx.fillStyle = "white"
           ctx.beginPath()
           ctx.arc(star.x * w, sy, star.s, 0, Math.PI * 2)

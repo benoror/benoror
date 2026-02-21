@@ -5,6 +5,7 @@ import { portfolioItems } from "@workspace/data/portfolio"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import PortfolioGrid from "@/components/portfolio/portfolio-grid"
+import OutrunGrid from "@/components/outrun-hero-background"
 import { motion } from "framer-motion"
 import { cn } from '@workspace/ui/lib/utils';
 import { useAppTheme } from "@/hooks/use-app-theme"
@@ -12,9 +13,9 @@ import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<"projects" | "publications" | "talks">("projects")
-  const { isBlueDark, themeKind } = useAppTheme()
+  const { isBlueDark, isOutrun, themeKind } = useAppTheme()
   const pageClass = pickThemeValue(themeKind, {
-    outrun: "bg-gradient-to-b from-black via-sky-950/10 to-black",
+    outrun: "",
     dark: "bg-gradient-to-b from-slate-950 via-sky-950/20 to-slate-950",
     light: "bg-gradient-to-b from-white via-sky-50 to-blue-50",
   })
@@ -37,6 +38,7 @@ export default function Portfolio() {
 
   return (
     <main className={`min-h-screen flex flex-col ${pageClass}`}>
+      {isOutrun && <OutrunGrid />}
       <Navbar />
 
       <div className="container mx-auto px-4 pt-24 pb-12">

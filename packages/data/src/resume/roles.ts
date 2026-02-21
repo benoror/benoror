@@ -21,12 +21,12 @@ export const APPTEGY: IRole[] = [
       },
     ],
     skills: [
-      { name: 'Leadership' },
-      { name: 'Management' },
-      { name: 'Hiring' },
-      { name: 'Mentoring' },
-      { name: 'Agile' },
-      { name: 'Architecture' },
+      { name: 'Leadership', slug: 'leadership' },
+      { name: 'Management', slug: 'management' },
+      { name: 'Hiring', slug: 'recruitment' },
+      { name: 'Mentoring', slug: 'management' },
+      { name: 'Agile', slug: 'technical-leadership' },
+      { name: 'Architecture', slug: 'technical-leadership' },
     ]
   },
   {
@@ -43,28 +43,28 @@ export const APPTEGY: IRole[] = [
       }, {
         description: 'Developed greenfield Ruby on Rails outpost services following SOA (service-oriented architecture):',
         subAchievements: [{
-          description: 'Auth: With a constant inflow of 1,000\'s of new users, implemented an AuthN/Z identity provider based on [OAuth2](#oauth2) & [OpenID Connect](#openid-connect) standards to support SSO (Single Sign-on) and User Management across existing and newer Apptegy\'s products',
+          description: 'Auth: With a constant inflow of 1,000\'s of new users, implemented an AuthN/Z identity provider based on [OAuth2](#apis) & [OpenID Connect](#apis) standards to support SSO (Single Sign-on) and User Management across existing and newer Apptegy\'s products',
         }, {
           description: 'Alerts: Due to a spike in usage of our alerting services, from 10\'s to 1,000\'s of notifications per minute, we required to scale it up by implementing a Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
         }, {
           description: 'Among other projects I lead: Forms & surveys builder, ETL pipeline revamp, Translation service, Emails newsletters & marketing campaigns, Learning-management-system & Real-time horizontally-scalable Chat messaging system'
         }]
       }, {
-        description: 'Supporting Micro-services built with [Ruby](#ruby), [Roda](#roda) micro-framework & [Sidekiq](#sidekiq): Analytics, Data Management, Translations, Learning Management System.'
+        description: 'Supporting Micro-services built with [Ruby](#ruby-on-rails), [Roda](#ruby-on-rails) micro-framework & [Sidekiq](#ruby-on-rails): Analytics, Data Management, Translations, Learning Management System.'
       }, {
-        description: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#ec2), [ELB](#elb), [EKS](#eks), [RDS](#rds), [S3](#s3) clusters using [Capistrano](#capistrano) & [Kubernetes](#kubernetes)'
+        description: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#aws), [ELB](#aws), [EKS](#aws), [RDS](#aws), [S3](#aws) clusters using [Capistrano](#devops-other) & [Kubernetes](#kubernetes)'
       }, {
         description: 'Scrum master working with Product team following Agile methodologies.'
       }, {
         description: 'Interview backend & full-stack candidates while onboarding new hires.'
       }],
       skills: [
-        { name: 'Technical Leadership' },
-        { name: 'Agile' },
-        { name: 'System Design' },
-        { name: 'Architecture' },
-        { name: 'Code Review' },
-        { name: 'Unit Testing' },
+        { name: 'Technical Leadership', slug: 'technical-leadership' },
+        { name: 'Agile', slug: 'technical-leadership' },
+        { name: 'System Design', slug: 'technical-leadership' },
+        { name: 'Architecture', slug: 'technical-leadership' },
+        { name: 'Code Review', slug: 'technical-leadership' },
+        { name: 'Unit Testing', slug: 'ruby-on-rails' },
       ]
   }
 ]
@@ -74,7 +74,7 @@ export const BROKERLIT: IRole[] = [
     title: 'Technical Co-Founder',
     description: 'Developed real estate SaaS platform with the help of a freelance contractor.',
     achievements: [{
-      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Typescript](#typescript)/[React.js](#react.js)/[Next.js](#next.js)'
+      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Typescript](#typescript)/[React.js](#react)/[Next.js](#next.js)'
     }, {
       description: 'DevOps infrastructure based on [Fly.io](https://fly.io) k8s service & [Vercel](http://vercel.com) serverless hosting'
     }],
@@ -87,9 +87,9 @@ export const BASEQL: IRole[] = [
     title: 'Founder',
     description: 'Built as a side-project during COVID and exited through a successful acquisition.',
     achievements: [{
-      description: 'Hands-on full-stack Javascript development with [Node.js](#node.js), [React.js](#react.js)/[Next.js](#next.js) & [Tailwind CSS](#tailwind-css).'
+      description: 'Hands-on full-stack Javascript development with [Node.js](#javascript), [React.js](#react)/[Next.js](#next.js) & [Tailwind CSS](#react).'
     }, {
-      description: 'DevOps infrastructure based on [AWS EBS](#aws-elastic-beanstalk) & [MongoDB](#mongodb)'
+      description: 'DevOps infrastructure based on [AWS EBS](#aws) & [MongoDB](#databases)'
     }],
     skills: []
   }
@@ -100,13 +100,13 @@ export const HEALTHTREE: IRole[] = [
     title: 'CTO',
     description: 'Developed web & mobile platforms for cancer patients to find their best treatment options.',
     achievements: [{
-      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails), frontend clients in [React.js](#react.js) & data pipelines by hands-on programming, code reviewing & testing.'
+      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails), frontend clients in [React.js](#react) & data pipelines by hands-on programming, code reviewing & testing.'
     }, {
       description: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
     }, {
-      description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
+      description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#devops-other) [Sentry](#devops-other) [Intercom](#product)'
     }, {
-      description: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile [Kanban](#kanban) methodology in [Trello](#trello)'
+      description: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile [Kanban](#product) methodology in [Trello](#product)'
     }, {
       description: 'Decreased bugs and improved overall quality via technical leadership & mentoring to achieve continuous improvement as a team'
     }, {
@@ -138,9 +138,9 @@ export const ECARESOFT: IRole[] = [
     }, {
       description: 'Product development and operations',
       subAchievements: [{
-        description: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting [SCRUM](#scrum) & [Kanban](#kanban) Agile software development methodologies'
+        description: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting [SCRUM](#technical-leadership) & [Kanban](#product) Agile software development methodologies'
       }, {
-        description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#metabase) [Sentry](#sentry) [Intercom](#intercom)'
+        description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#devops-other) [Sentry](#devops-other) [Intercom](#product)'
       }, {
         description: 'Achieved continuous improvement via OKRs, Performance Reviews and One-on-ones'
       }, {
@@ -161,22 +161,22 @@ export const ECARESOFT: IRole[] = [
     endDate: 'Jan 2019',
     description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
     achievements: [{
-      description: 'Established development processes for coding, reviewing & testing [Ruby on Rails](#ruby-on-rails) backend APIs and [Ember.js](#ember.js) frontend clients'
+      description: 'Established development processes for coding, reviewing & testing [Ruby on Rails](#ruby-on-rails) backend APIs and [Ember.js](#frontend-other) frontend clients'
     }, {
-      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby](#ruby), [Java](#java), [PostgreSQL](#psql), [Redis](#redis) and [Sidekiq](#sidekiq) for background processing',
+      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby](#ruby-on-rails), [Java](#backend-other), [PostgreSQL](#databases), [Redis](#databases) and [Sidekiq](#ruby-on-rails) for background processing',
       subAchievements: [{
         description: 'Drugs interactions service based on Wolters Kluwer\'s Medi-Span®'
       }, {
-        description: 'Machine Learning prediction & classification service based on [Python](#python) & [Tensorflow](#Tensorflow)'
+        description: 'Machine Learning prediction & classification service based on [Python](#backend-other) & [Tensorflow](#ai-product-features)'
       }, {
-        description: 'Full-text search service based on [Apache Solr](#apache-solr)'
+        description: 'Full-text search service based on [Apache Solr](#backend-other)'
       }]
     }, {
       description: 'Implemented DevOps and continuous integration/delivery to production'
     }, {
       description: 'Reached balance between quality & speed by improving recruiting, management & coaching of development team'
     }, {
-      description: 'Achieved Lean product development by relying on [Kanban](#kanban) methodology'
+      description: 'Achieved Lean product development by relying on [Kanban](#product) methodology'
     }],
     skills: [
       // { name: 'Ownership' },
@@ -192,11 +192,11 @@ export const ECARESOFT: IRole[] = [
     endDate: 'Jul 2018',
     description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',
     achievements: [{
-      description: 'Full-stack development using [Elixir](#elixir)/[Phoenix](#phoenix) for Backend and [Ember.js](#ember.js) for Frontend',
+      description: 'Full-stack development using [Elixir](#backend-other)/[Phoenix](#backend-other) for Backend and [Ember.js](#frontend-other) for Frontend',
     }, {
-      description: '[Domain-driven Design](#ddd) architecture using Bounded Contexts',
+      description: '[Domain-driven Design](#technical-leadership) architecture using Bounded Contexts',
     }, {
-      description: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#ebs)`',
+      description: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#aws)',
     }],
     skills: [
       // { name: 'Ownership' },
@@ -211,7 +211,7 @@ export const PANAX: IRole[] = [
     location: '',
     startDate: '2014',
     endDate: '2016',
-    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: `[Node.js](#node.js) / [Express](#express) [SQL Server](#sql-server) [Angular.js](#angular.js)',
+    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: [Node.js](#javascript) / [Express](#javascript) [SQL Server](#databases) [Angular.js](#frontend-other)',
     achievements: [],
     skills: []
   }
@@ -235,7 +235,7 @@ export const SAP: IRole[] = [
     location: '',
     startDate: '2013',
     endDate: '2014',
-    description: 'Test-driven development for Supportability & SaaS enterprise product lines using [JavaScript](#javascript) and [Jasmine](#jasmine)',
+    description: 'Test-driven development for Supportability & SaaS enterprise product lines using [JavaScript](#javascript) and [Jasmine](#javascript)',
     achievements: [],
     skills: []
   }
@@ -247,7 +247,7 @@ export const COTIZAHOY: IRole[] = [
     location: '',
     startDate: '2010',
     endDate: '2013',
-    description: 'Launched SaaS/Marketplace developed in [Ruby on Rails](#ruby-on-rails) [PostgreSQL](#psql) [Heroku](#heroku)',
+    description: 'Launched SaaS/Marketplace developed in [Ruby on Rails](#ruby-on-rails) [PostgreSQL](#databases) [Heroku](#devops-other)',
     achievements: [],
     skills: []
   }

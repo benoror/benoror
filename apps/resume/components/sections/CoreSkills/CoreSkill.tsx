@@ -2,15 +2,12 @@
 
 import AnimatedProgress from '@/components/AnimatedProgress';
 import { ISkill } from '@workspace/data/types/resume';
+import { scrollToSkill } from '@/lib/scrollToSkill';
 
 export default function CoreSkill({ skill }: { skill: ISkill}) {
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    const target = document.getElementById(skill.slug ?? '')
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-    }
-    window.dispatchEvent(new CustomEvent('expand-skill', { detail: { slug: skill.slug } }))
+    scrollToSkill(skill.slug ?? '')
   }
 
   return (

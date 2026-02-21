@@ -5,5 +5,8 @@ export function scrollToSkill(slug: string) {
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('open-subskill', { detail: { slug } }))
+    }, 200)
   }, 150)
 }

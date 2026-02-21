@@ -1,6 +1,6 @@
 "use client"
 
-import { HOME, SKILLS, INTERESTS } from "@workspace/data/personal"
+import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
 
 export default function About() {
@@ -27,7 +27,16 @@ export default function About() {
               <h3 className="text-xl font-semibold text-sky-100">Skills</h3>
               <ul className="space-y-2 text-sky-200">
                 {SKILLS.map((skill, index) => (
-                  <li key={index}>{skill}</li>
+                  <li key={index}>
+                    <a
+                      href={`${LINKS.resume_url}#${skill.slug}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-sky-400 hover:underline underline-offset-4 transition-colors"
+                    >
+                      {skill.name}
+                    </a>
+                  </li>
                 ))}
               </ul>
             </div>

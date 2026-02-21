@@ -8,14 +8,16 @@ function isLowEndDevice(): boolean {
     connection?: { saveData?: boolean; effectiveType?: string }
   }
 
-  const deviceMemory = nav.deviceMemory ?? Number.POSITIVE_INFINITY
+  const deviceMemory = nav.deviceMemory
   const cores = nav.hardwareConcurrency ?? 8
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
   const saveData = Boolean(nav.connection?.saveData)
   const effectiveType = nav.connection?.effectiveType ?? ""
-  const slowConnection = ["slow-2g", "2g", "3g"].includes(effectiveType)
+  const verySlowConnection = ["slow-2g", "2g"].includes(effectiveType)
+  const lowMemory = typeof deviceMemory === "number" && deviceMemory <= 2
+  const lowCpuAndMemory = typeof deviceMemory === "number" && deviceMemory <= 4 && cores <= 2
 
-  return deviceMemory <= 4 || cores <= 4 || reducedMotion || saveData || slowConnection
+  // Keep "system" fallback for truly constrained devices only.
+  return saveData || verySlowConnection || lowMemory || lowCpuAndMemory
 }
 
 export function getInitialThemePreference(): "system" | "outrun" {

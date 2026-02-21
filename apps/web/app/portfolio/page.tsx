@@ -40,11 +40,6 @@ export default function Portfolio() {
     dark: "rounded-t-xl rounded-b-none border border-sky-700/40 bg-sky-900/30",
     light: "rounded-t-xl rounded-b-none border border-sky-300 bg-white/85 shadow-sm",
   })
-  const contentShellClass = pickThemeValue(themeKind, {
-    outrun: "rounded-2xl border border-cyan-500/20 bg-slate-950/35 backdrop-blur-md p-3 md:p-4",
-    dark: "",
-    light: "",
-  })
 
   const projects = portfolioItems.filter((item) => item.section === "projects")
   const publications = portfolioItems.filter((item) => item.section === "publications")
@@ -92,7 +87,7 @@ export default function Portfolio() {
           </div>
 
           {/* Main Content */}
-          <div className={`min-h-[50vh] ${contentShellClass}`}>
+          <div className={`min-h-[50vh]`}>
             {activeTab === "projects" && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

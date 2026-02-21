@@ -5,10 +5,10 @@ import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OP
 
 export const ABOUT = {
   name: PERSONAL.short_name,
-  header: 'Software Engineering Lead - Full Stack Developer', // ToDo: FSDev not here, in roles. Alt. Software Engieneering Leader
+  header: 'Hands-on Engineering Leader · Full Stack Developer · Product Builder',
   location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `VP Eng & CTO of SaaS startups in U.S. & LatAm. Product-minded Software engineer specialized in leading technical teams and full stack development. Passionate on building scalable products with a strong focus on user experience. Proven track record building, growing and mentoring engineering teams with a people-first mindset and deep sense of ownership, leveraging people & technology to tackle real-world problems. Looking for new big challenges in the intersection of B2B software, AI & Internet tech.`
+  about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to code, architecture, product, UI/UX design and delivery across backend, frontend, infrastructure and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
 }
 
 export const COMPANIES = [
@@ -116,44 +116,56 @@ export const SKILLS: ISkill[] = [{
   order: 1,
   since: 2016,
   level: 100,
-  description: 'I have been in leadership roles for several years, overseeing multiple projects and teams.',
+  description: 'Hands-on technical leader and generalist: building teams, shipping products, and scaling delivery. Comfortable wearing multiple hats — from strategy & hiring to architecture & building',
   subSkills: [{
     name: 'Technical Leadership',
     slug: 'technical-leadership',
-    description: 'I have served as a technical lead for multiple projects over several years, directing their technical direction. This included code reviews, pair programming, and mentoring. Additionally, I oversaw project quality and managed technical debt. I also acted as the primary point of contact for clients alongside the Product/Project Manager(s).',
+    description: 'Leading engineering teams end-to-end: technical direction, execution scope, sequencing, delivery quality, and mentoring.',
     subSkills: [
-      { name: 'Ownership' },
-      { name: 'System Design' },
-      { name: 'Architecture' },
+      { name: 'Project scope & sequencing' },
+      { name: 'Delivery management' },
+      { name: 'Ownership & Accountability' },
+      { name: 'System Design Architecture' },
       { name: 'Code reviews' },
-      { name: 'Agile' },
-      { name: 'Roadmaps' },
+      { name: 'Mentoring & Coaching' },
+      { name: 'Agile Methodologies' },
+      { name: 'Roadmaps Planning' },
     ]
   }, {
     name: 'Strategic Planning',
     slug: 'strategic-planning',
-    description: 'I have been involved in the strategic planning process for several years, developing and implementing strategic plans. This included setting goals, identifying key initiatives, and allocating resources.',
+    description: 'Pragmatic planning across product and engineering: tooling strategy, architecture choices, and execution plans tied to business outcomes.',
     subSkills: [
-      { name: 'Goal setting' },
-      { name: 'Key initiatives' },
+      { name: 'Tooling & AI enablement' },
+      { name: 'Vendor & cost management' },
+      { name: 'Buy vs Build decisions' },
+      { name: 'Team composition & org design' },
+      { name: 'Architecture & design reviews' },
+      { name: 'RFC/RFD technical documentation' },
+      { name: 'Product + Engineering leadership alignment' },
       { name: 'Resource allocation' },
     ]
   }, {
-    name: 'Teams Management',
+    name: 'People Management',
     slug: 'management',
-    description: 'As a VP-level manager, I am in charge of developing & coaching other managers and leaders. As a mid-level manager, I was responsible for overseeing a group of developers, guiding their career paths, and fostering their professional growth.',
+    description: 'VP-level people-first team & manager development: coaching, performance, feedback, and building healthy high-output teams.',
     subSkills: [
       { name: 'Mentorship' },
+      { name: 'Coaching' },
       { name: 'Performance reviews' },
+      { name: 'Performance management' },
       { name: 'Conflict resolution' },
     ]
   }, {
     name: 'Recruitment',
     slug: 'recruitment',
-    description: 'I have been involved in the recruitment process for several years, conducting interviews. I have also been responsible for improving and unifying recruitment process.',
+    description: 'Hiring manager experience: building interview loops, running technical screens, and coaching interviewers/candidates.',
     subSkills: [
       { name: 'Talent sourcing' },
+      { name: 'Hiring manager' },
       { name: 'Interviewing' },
+      { name: 'Technical screening scripts/challenges' },
+      { name: 'Interviewer coaching' },
       { name: 'Recruitment process' },
     ]
   }]
@@ -182,6 +194,16 @@ export const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'REST API' },
       { name: 'GraphQL' },
+    ]
+  }, {
+    name: 'Serverless on AWS',
+    slug: 'serverless-aws',
+    description: 'Built backend services on AWS serverless stack for scalable, low-ops delivery.',
+    subSkills: [
+      { name: 'Python on AWS Lambda' },
+      { name: 'DynamoDB' },
+      { name: 'Amplify' },
+      { name: 'Cognito' },
     ]
   }, {
     name: 'Databases',
@@ -273,7 +295,7 @@ export const SKILLS: ISkill[] = [{
   order: 5,
   level: 80,
   since: 2019,
-  description: 'I have been working with DevOps since 2019. Creating CI/CD pipelines and managing Kubernetes clusters.',
+  description: 'Building and evolving infrastructure from scratch: CI/CD, cloud environments, reliability, and developer workflows.',
   subSkills: [{
     name: 'AWS',
     slug: 'aws',
@@ -304,8 +326,9 @@ export const SKILLS: ISkill[] = [{
   }, {
     name: 'Other',
     slug: 'devops-other',
-    description: 'I managed servers and used deployment tools since I started programming',
+    description: 'I have managed infrastructure and deployment pipelines since early in my career.',
     subSkills: [
+      { name: 'Greenfield infrastructure setup' },
       { name: 'Terraform' },
       { name: 'CI/CD' },
       { name: 'CDN' },
@@ -319,8 +342,13 @@ export const SKILLS: ISkill[] = [{
   order: 2,
   since: 2016,
   level: 100,
-  description: 'I have been involved in the product development process for several years, developing and implementing product plans. This included setting goals, identifying key initiatives, and allocating resources.',
+  description: 'Product-minded engineering leadership: balancing UX, technical constraints, and business outcomes.',
   subSkills: [
+    { name: 'Roadmap planning' },
+    { name: 'Resource allocation' },
+    { name: 'Design reviews' },
+    { name: 'UI/UX assessment' },
+    { name: 'Problem solving with business focus' },
     { name: 'Project management' },
   ]
 }, {
@@ -328,13 +356,50 @@ export const SKILLS: ISkill[] = [{
   slug: 'ai',
   order: 6,
   since: 2023,
-  level: 60,
-  description: 'I have been experimenting with AI since 2023. I have helped enable AI in the Engineering organization.',
-  // subSkills: [
-  //   { name: 'LLMs integration (OpenAI, Anthropic, Gemini, etc.)' },
-  //   { name: 'Tools (Cursor, Claude, CodeRabbit, etc.)' },
-  //   { name: 'Best practices (prompt engineering, rules, etc.)' },
-  // ]
+  level: 75,
+  description: 'Hands-on with AI-assisted engineering and AI product delivery: agent workflows, team adoption, and production-oriented experimentation.',
+  subSkills: [{
+    name: 'AI tools',
+    slug: 'ai-tools',
+    subSkills: [
+      { name: 'Cursor / CLI' },
+      { name: 'Claude / Code CLI' },
+      { name: 'OpenCode' },
+      { name: 'OpenAI / API' },
+      { name: 'Gemini' },
+      { name: 'CodeRabbit' },
+    ]
+  }, {
+    name: 'Multi-agent orchestration',
+    slug: 'multi-agent-orchestration',
+    subSkills: [
+      { name: 'AGENTS.md / CLAUDE.md / .cursor/rules' },
+      { name: 'Git worktrees' },
+      { name: 'MCP / ACP' },
+      { name: 'Agent Skills' },
+      { name: 'Parallel agents' },
+      { name: 'QMD workflows' },
+    ]
+  }, {
+    name: 'Workflows',
+    slug: 'ai-workflows',
+    subSkills: [
+      { name: 'Plan-first for complex tasks' },
+      { name: 'Parallel exploration and execution' },
+      { name: 'Verification-first loops (tests, checks, review)' },
+      { name: 'Learn from mistakes via docs/rules updates' },
+      { name: 'Automating repeatable workflows (skills/commands)' },
+    ]
+  }, {
+    name: 'AI product features',
+    slug: 'ai-product-features',
+    subSkills: [
+      { name: 'Chatbots' },
+      { name: 'RAGs (Pinecone, pgvector)' },
+      { name: 'Context tuning & prompt refinement' },
+      { name: 'Security and privacy guardrails' },
+    ]
+  }]
 }]
 
 export const EDUCATION = [{

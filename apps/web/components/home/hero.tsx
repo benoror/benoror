@@ -81,7 +81,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-xl md:text-2xl text-sky-700 dark:text-sky-100"
+              className="text-xl md:text-2xl text-sky-700 dark:text-cyan-200/80"
             >
               {HOME.header}
             </motion.p>
@@ -117,13 +117,13 @@ export default function Hero() {
           >
             <a
               href="#about"
-              className="inline-flex items-center justify-center rounded-md bg-sky-600 hover:bg-sky-700 px-6 py-3 text-sm font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              className="inline-flex items-center justify-center rounded-md bg-sky-600 hover:bg-sky-700 dark:bg-cyan-600/80 dark:hover:bg-cyan-500/90 dark:shadow-[0_0_20px_rgba(34,211,238,0.35)] px-6 py-3 text-sm font-medium text-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
               Learn More
             </a>
             <a
               href="/portfolio"
-              className="inline-flex items-center justify-center rounded-md border border-sky-400/30 bg-sky-950/30 hover:bg-sky-900/40 backdrop-blur-sm px-6 py-3 text-sm font-medium text-sky-100 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              className="inline-flex items-center justify-center rounded-md border border-sky-400/30 bg-sky-950/30 hover:bg-sky-900/40 dark:border-cyan-400/30 dark:bg-cyan-950/20 dark:hover:bg-cyan-900/30 dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] backdrop-blur-sm px-6 py-3 text-sm font-medium text-sky-100 dark:text-cyan-100 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
             >
               View Portfolio
             </a>
@@ -137,7 +137,7 @@ export default function Hero() {
           onClick={handleArrowClick}
           aria-label={isScrolled ? "Scroll to top" : "Scroll to about section"}
         >
-          {isScrolled ? <ArrowUp className="h-6 w-6 text-sky-100" /> : <ArrowDown className="h-6 w-6 text-sky-100" />}
+          {isScrolled ? <ArrowUp className="h-6 w-6 text-sky-100 dark:text-cyan-300" /> : <ArrowDown className="h-6 w-6 text-sky-100 dark:text-cyan-300" />}
         </a>
       </div>
     </section>

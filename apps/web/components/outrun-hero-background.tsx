@@ -173,6 +173,27 @@ export default function OutrunHeroBackground() {
         ctx.arc(sunX, sunY, sunDiscR, 0, Math.PI * 2)
         ctx.fill()
         ctx.restore()
+
+        // Horizontal scan-line bands (classic outrun sun detail)
+        ctx.save()
+        ctx.beginPath()
+        ctx.arc(sunX, sunY, sunDiscR, 0, Math.PI * 2)
+        ctx.clip()
+        ctx.fillStyle = "rgba(5, 5, 32, 0.8)"
+        const bands = [
+          { y: 0.30, h: 0.035 },
+          { y: 0.42, h: 0.04 },
+          { y: 0.53, h: 0.045 },
+          { y: 0.63, h: 0.055 },
+          { y: 0.73, h: 0.065 },
+          { y: 0.84, h: 0.08 },
+        ]
+        for (const band of bands) {
+          const by = sunY - sunDiscR + sunDiscR * 2 * band.y
+          const bh = sunDiscR * 2 * band.h
+          ctx.fillRect(sunX - sunDiscR, by, sunDiscR * 2, bh)
+        }
+        ctx.restore()
       } else {
         const lightSun = ctx.createRadialGradient(
           sunX, sunY, 0,
@@ -201,6 +222,7 @@ export default function OutrunHeroBackground() {
         hazeGrad.addColorStop(1, "rgba(10, 10, 46, 0)")
         ctx.fillStyle = hazeGrad
         ctx.fillRect(0, horizonY - 60, w, 100)
+
       }
 
       // Animated light dots (from A)
@@ -256,11 +278,10 @@ export default function OutrunHeroBackground() {
     renderer.setClearColor(0x000000, 0)
     container.appendChild(renderer.domElement)
 
-    const gridSize = 40
-    const gridDivisions = 20
-    const cellSize = gridSize / gridDivisions
+    const cellSize = 2
+    const gridSize = 1000
+    const gridDivisions = gridSize / cellSize
 
-    // Cyan/blue shader with distance fog
     const gridMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
@@ -279,18 +300,19 @@ export default function OutrunHeroBackground() {
         varying vec3 vWorldPos;
 
         void main() {
-          float pulse = 0.8 + 0.2 * sin(time * 2.0);
+          float pulse = 0.9 + 0.1 * sin(time * 2.0);
 
           vec3 color;
-          color.r = 0.0  + 0.15 * sin(vWorldPos.z * 0.1 + time);
-          color.g = 0.55 + 0.15 * sin(vWorldPos.z * 0.1 + time);
-          color.b = 1.0  - 0.1  * cos(vWorldPos.z * 0.1 + time);
+          color.r = 0.1  + 0.1 * sin(vWorldPos.z * 0.05 + time);
+          color.g = 0.6  + 0.1 * sin(vWorldPos.z * 0.05 + time);
+          color.b = 1.0;
 
-          float dist  = abs(vWorldPos.z - camZ);
-          float fog   = 1.0 - smoothstep(2.0, 18.0, dist);
-          float xFade = 1.0 - smoothstep(8.0, 20.0, abs(vWorldPos.x));
+          float dist = abs(vWorldPos.z - camZ);
+          float horizonFade = 1.0 - smoothstep(400.0, 500.0, dist);
+          float xFade = 1.0 - smoothstep(400.0, 500.0, abs(vWorldPos.x));
 
-          gl_FragColor = vec4(color * pulse, fog * xFade);
+          float glow = 1.2;
+          gl_FragColor = vec4(color * pulse * glow, horizonFade * xFade);
         }
       `,
       transparent: true,
@@ -326,7 +348,7 @@ export default function OutrunHeroBackground() {
         gridMaterial.uniforms.time.value = time
       }
 
-      grid.position.z += 0.05
+      grid.position.z += 0.08
       if (grid.position.z > cellSize) {
         grid.position.z = 0
       }

@@ -3,12 +3,21 @@
   -webkit-background-clip: text;
   color: transparent;
   background-image: linear-gradient(90deg, #0284c7, #7dd3fc);
-  text-shadow: 0 0 5px rgba(0, 150, 255, 0.5);
 }
 
-.dark .heroText {
-  background-image: linear-gradient(90deg, #0088ff, #00ddff);
-  text-shadow: 0 0 10px rgba(0, 150, 255, 0.8);
+:global(.dark) .heroText {
+  background-image: linear-gradient(
+    180deg,
+    #67e8f9 0%,
+    #cffafe 38%,
+    #ffffff 50%,
+    #bae6fd 62%,
+    #38bdf8 78%,
+    #0ea5e9 100%
+  );
+  text-shadow: 0 0 40px rgba(56, 189, 248, 0.6),
+               0 0 80px rgba(14, 165, 233, 0.3);
+  filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
 }
 
 .profileImage {
@@ -20,8 +29,27 @@
   box-shadow: 0 0 20px rgba(0, 150, 255, 0.3), 0 0 40px rgba(0, 80, 255, 0.2);
 }
 
-.dark .profileImage {
-  box-shadow: 0 0 30px rgba(0, 180, 255, 0.5), 0 0 60px rgba(0, 100, 255, 0.3);
+:global(.dark) .profileImage {
+  box-shadow:
+    0 0 20px rgba(240, 195, 217, 0.5),
+    0 0 50px rgba(236, 72, 153, 0.35),
+    0 0 100px rgba(168, 85, 247, 0.2);
+  animation: profilePulse 4s ease-in-out infinite;
+}
+
+@keyframes profilePulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px rgba(240, 195, 217, 0.5),
+      0 0 50px rgba(236, 72, 153, 0.35),
+      0 0 100px rgba(168, 85, 247, 0.2);
+  }
+  50% {
+    box-shadow:
+      0 0 30px rgba(240, 195, 217, 0.65),
+      0 0 70px rgba(236, 72, 153, 0.45),
+      0 0 120px rgba(168, 85, 247, 0.3);
+  }
 }
 
 .profileImage img {

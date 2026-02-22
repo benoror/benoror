@@ -3,7 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import { HOME } from "@workspace/data/personal"
 import { SocialIcons } from "../footer"
@@ -45,18 +45,19 @@ export default function Hero() {
   })
   const socialIconClass = pickBlueValue(isBlueDark, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900")
   const images = [
-    "/images/ben-normal.jpeg",
-    "/images/ben-dreamify.jpeg",
-    "/images/ben-illustrated.jpeg",
-    "/images/ben-bw.jpeg",
-    "/images/ben-colorized.png",
-    "/images/ben-laser-eyes.png",
+    "/images/ben/ben-bw.jpeg",
+    "/images/ben/1ff66dbc-9c8b-4526-84dc-89d4f46ef8b0.jpg",
+    "/images/ben/Gemini_Generated_Image_8mdk0g8mdk0g8mdk.png",
+    "/images/ben/cyberpunk.jpg",
+    "/images/ben/himekawa2.jpg",
+    "/images/ben/himekawa4.jpg",
+    "/images/ben/himekawa5.jpg",
   ]
 
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveImageIndex((prev) => (prev + 1) % images.length)
-    }, 3000)
+    }, 1500)
 
     return () => clearInterval(interval)
   }, [images.length])
@@ -124,14 +125,37 @@ export default function Hero() {
             className="flex justify-center mt-8"
           >
             <div className={styles.profileImage}>
-              {images.map((src, index) => (
-                <img
-                  key={src}
-                  src={src || "/placeholder.svg"}
-                  alt={`Ben Orozco profile ${index + 1}`}
-                  className={activeImageIndex === index ? styles.active : ""}
+              <AnimatePresence mode="sync" initial={false}>
+                <motion.img
+                  key={images[activeImageIndex]}
+                  src={images[activeImageIndex] || "/placeholder.svg"}
+                  alt={`Ben Orozco profile ${activeImageIndex + 1}`}
+                  className={styles.carouselImage}
+                  initial={{
+                    opacity: 0,
+                    scale: 1.06,
+                    filter: "blur(6px) saturate(120%)",
+                  }}
+                  animate={{
+                    opacity: 1,
+                    scale: 1,
+                    filter: "blur(0px) saturate(100%)",
+                  }}
+                  exit={{
+                    opacity: 0,
+                    scale: 0.98,
+                    filter: "blur(4px) saturate(110%)",
+                  }}
+                  transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                 />
-              ))}
+              </AnimatePresence>
+              <motion.div
+                key={`sheen-${activeImageIndex}`}
+                className={styles.transitionSheen}
+                initial={{ x: "-130%", opacity: 0 }}
+                animate={{ x: "130%", opacity: [0, 0.35, 0] }}
+                transition={{ duration: 0.48, ease: "easeInOut" }}
+              />
             </div>
           </motion.div>
 

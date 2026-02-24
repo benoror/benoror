@@ -46,7 +46,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className={`text-xl font-bold tracking-tighter hover:no-underline inline-flex items-center gap-2 ${textClass}`}>
+        <Link href="/" className={`hidden md:inline-flex text-xl font-bold tracking-tighter hover:no-underline items-center gap-2 ${textClass}`}>
           Ben Orozco
         </Link>
 

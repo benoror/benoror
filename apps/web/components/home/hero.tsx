@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowDown, ArrowUp } from "lucide-react"
 import { HOME } from "@workspace/data/personal"
@@ -44,15 +44,40 @@ export default function Hero() {
     light: "text-sky-700",
   })
   const socialIconClass = pickBlueValue(isBlueDark, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900")
-  const images = [
-    "/images/ben/ben-bw.jpeg",
-    "/images/ben/1ff66dbc-9c8b-4526-84dc-89d4f46ef8b0.jpg",
-    "/images/ben/Gemini_Generated_Image_8mdk0g8mdk0g8mdk.png",
-    "/images/ben/cyberpunk.jpg",
-    "/images/ben/himekawa2.jpg",
-    "/images/ben/himekawa4.jpg",
-    "/images/ben/himekawa5.jpg",
-  ]
+  const images = useMemo(
+    () => [
+      "/images/ben/ben-bw.jpeg",
+      "/images/ben/1ff66dbc-9c8b-4526-84dc-89d4f46ef8b0.jpg",
+      "/images/ben/Gemini_Generated_Image_8mdk0g8mdk0g8mdk.png",
+      "/images/ben/cyberpunk.jpg",
+      "/images/ben/himekawa2.jpg",
+      "/images/ben/himekawa4.jpg",
+      "/images/ben/himekawa5.jpg",
+    ],
+    [],
+  )
+
+  useEffect(() => {
+    const preloadLinks: HTMLLinkElement[] = []
+
+    images.forEach((src) => {
+      // Hint the browser to fetch carousel assets as early as possible.
+      const link = document.createElement("link")
+      link.rel = "preload"
+      link.as = "image"
+      link.href = src
+      document.head.appendChild(link)
+      preloadLinks.push(link)
+
+      const img = new Image()
+      img.decoding = "async"
+      img.src = src
+    })
+
+    return () => {
+      preloadLinks.forEach((link) => link.remove())
+    }
+  }, [images])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -131,6 +156,8 @@ export default function Hero() {
                   src={images[activeImageIndex] || "/placeholder.svg"}
                   alt={`Ben Orozco profile ${activeImageIndex + 1}`}
                   className={styles.carouselImage}
+                  loading="eager"
+                  decoding="async"
                   initial={{
                     opacity: 0,
                     scale: 1.06,

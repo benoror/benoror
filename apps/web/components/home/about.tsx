@@ -2,6 +2,7 @@
 
 import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
+import { ExternalLink } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
 
@@ -15,6 +16,11 @@ export default function About() {
   const headingClass = pickBlueValue(isBlueDark, "text-sky-100", "text-sky-900")
   const bodyClass = pickBlueValue(isBlueDark, "text-sky-200", "text-sky-700")
   const linkHoverClass = pickBlueValue(isBlueDark, "hover:text-sky-300", "hover:text-sky-600")
+  const linkFocusClass = pickThemeValue(themeKind, {
+    outrun: "focus-visible:ring-cyan-300/60",
+    dark: "focus-visible:ring-sky-300/60",
+    light: "focus-visible:ring-sky-500/50",
+  })
 
   return (
     <section id="about" className="py-20 md:py-32">
@@ -44,9 +50,10 @@ export default function About() {
                       href={`${LINKS.resume_url}#${skill.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${linkHoverClass} hover:underline underline-offset-4 transition-colors`}
+                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${linkHoverClass} ${linkFocusClass}`}
                     >
                       {skill.name}
+                      <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
                     </a>
                   </li>
                 ))}

@@ -48,7 +48,7 @@ export const INTERESTS = [
   "Software Engineering Craft",
   "Engineering Leadership & Culture",
   "Startups and Entrepreneurship",
-  "AI & Agentic Workflows",
+  "Artificial Intelligence",
   "Open Source & Dev Tools",
   "Books, Podcasts & Writing",
   "Crypto & Decentralized Systems",

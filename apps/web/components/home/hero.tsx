@@ -44,7 +44,7 @@ export default function Hero() {
     light: "text-sky-700",
   })
   const socialIconClass = pickBlueValue(isBlueDark, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900")
-  const images = useMemo(
+  const baseImages = useMemo(
     () => [
       "/images/ben/ben-bw.jpeg",
       "/images/ben/1ff66dbc-9c8b-4526-84dc-89d4f46ef8b0.jpg",
@@ -56,6 +56,7 @@ export default function Hero() {
     ],
     [],
   )
+  const images = useMemo(() => [...baseImages].sort(() => Math.random() - 0.5), [baseImages])
 
   useEffect(() => {
     const preloadLinks: HTMLLinkElement[] = []

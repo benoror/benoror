@@ -31,10 +31,15 @@ function FeedItemCard({
   return (
     <li className={`${classes.card} p-4`}>
       <div className="flex flex-col gap-2">
-        <a href={item.link} target="_blank" rel="noopener noreferrer" className={`font-medium hover:underline ${classes.itemTitle}`}>
+        <a
+          href={item.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`text-[1.03rem] font-medium hover:underline ${classes.itemTitle}`}
+        >
           {item.title}
         </a>
-        <div className={`text-sm ${classes.meta} flex flex-wrap items-center gap-2`}>
+        <div className={`text-[0.92rem] ${classes.meta} flex flex-wrap items-center gap-2`}>
             <ExternalLink
               href={sourceUrl}
               target="_blank"
@@ -60,7 +65,7 @@ function FeedItemCard({
           body={item.body ?? item.summary}
           bodyFormat={item.bodyFormat}
           codeLanguage={item.codeLanguage}
-          className={`text-sm ${classes.body}`}
+          className={`text-[1.01rem] ${classes.body}`}
         />
       </div>
     </li>

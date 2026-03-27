@@ -33,8 +33,7 @@ function FeedItemCard({
         <a href={item.link} target="_blank" rel="noopener noreferrer" className={`font-medium hover:underline ${classes.itemTitle}`}>
           {item.title}
         </a>
-        <div className={`text-sm ${classes.meta} flex items-center justify-between gap-3`}>
-          <div className="flex flex-wrap items-center gap-2">
+        <div className={`text-sm ${classes.meta} flex flex-wrap items-center gap-2`}>
             <ExternalLink
               href={sourceUrl}
               target="_blank"
@@ -42,9 +41,6 @@ function FeedItemCard({
             >
               {item.sourceName}
             </ExternalLink>
-            <span>·</span>
-            <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
-          </div>
           {sourceRssUrl ? (
             <a
               href={sourceRssUrl}
@@ -56,6 +52,8 @@ function FeedItemCard({
               <Rss className="h-4 w-4" />
             </a>
           ) : null}
+          <span>·</span>
+          <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
         </div>
         {item.summary ? <p className={`text-sm ${classes.body}`}>{item.summary}</p> : null}
       </div>

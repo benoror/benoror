@@ -47,7 +47,7 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
                   >
                     {item.title}
                   </a>
-                  <div className={`text-sm mt-1 flex items-center justify-between gap-3 ${classes.source}`}>
+                  <div className={`text-sm mt-1 flex flex-wrap items-center gap-2 ${classes.source}`}>
                     <ExternalLink
                       href={item.sourceUrl}
                       target="_blank"

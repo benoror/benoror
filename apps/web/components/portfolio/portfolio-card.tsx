@@ -123,7 +123,7 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
         >
           <a href={item.url} target="_blank" className="hover:no-underline">{item.title}</a>
         </h3>
-        <p className={`text-sm leading-relaxed line-clamp-3 ${descriptionClass}`}>{item.description}</p>
+        <p className={`text-sm leading-relaxed line-clamp-2 min-h-[2.8rem] ${descriptionClass}`}>{item.description}</p>
 
         <div className="flex flex-wrap gap-2">
           {item.techStack.map((tech) => (

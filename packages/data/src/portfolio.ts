@@ -19,6 +19,24 @@ export type PortfolioItem = {
 
 export const projectsItems: PortfolioItem[] = [
   {
+    id: "obsidianos-work",
+    title: "ObsidianOS: Work",
+    section: "projects",
+    category: "Open Source",
+    role: "👷‍♂️ Maker",
+    circa: "2026",
+    url: "https://github.com/benoror/obsidianos_work",
+    images: ["/images/portfolio/ObsidianOS-logo.png"],
+    description:
+      "An Obsidian vault wired with AI agent skills - an agentic operating system for thinkers.",
+    techStack: ["JavaScript", "Python", "Shell", "MCP", "Obsidian"],
+    links: {
+      github: "https://github.com/benoror/obsidianos_work",
+      other: "https://x.com/benoror/status/2027980781985939948"
+    },
+    icon: "/images/portfolio/icons/ObsidianOS-icon.png",
+  },
+  {
     id: "gpg-nvim",
     title: "gpg.nvim",
     section: "projects",
@@ -34,6 +52,23 @@ export const projectsItems: PortfolioItem[] = [
     },
     circa: "2025",
     icon: "/images/portfolio/icons/nvim.png",
+  },
+  {
+    id: "bloxcraft",
+    title: "BloxCraft",
+    section: "projects",
+    category: "Gaming",
+    role: "👷‍♂️ Maker",
+    circa: "2025",
+    url: "https://benoror.github.io/bloxcraft/",
+    images: ["/images/portfolio/bloxcraft.gif"],
+    description:
+      "A vibe-coded puzzle game inspired by Bloxorz and based on thomasfriday.com/cuboid.",
+    techStack: ["JavaScript", "HTML", "CSS", "Three.js"],
+    links: {
+      github: "https://github.com/benoror/bloxcraft",
+    },
+    icon: "/images/portfolio/icons/bloxcraft-icon.png",
   },
   {
     id: "baseql",

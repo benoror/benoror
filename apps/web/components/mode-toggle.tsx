@@ -1,7 +1,7 @@
 "use client"
 import { Check, Moon, Sparkles, Sun } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { pickBlueValue } from "@/lib/theme-styles"
+import { getModeToggleTriggerClass } from "./mode-toggle.variants"
 
 import { Button } from "@workspace/ui/components/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@workspace/ui/components/dropdown-menu"
@@ -9,12 +9,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 export function ModeToggle() {
   const { activeTheme, activeResolvedTheme, setTheme, isBlueDark } = useAppTheme()
   const showDarkIcon = activeTheme !== "outrun" && activeResolvedTheme === "dark"
-  const toggleColorClass = pickBlueValue(isBlueDark, "text-sky-100", "text-sky-700")
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className={`rounded-full cursor-pointer ${toggleColorClass}`}>
+        <Button variant="ghost" size="icon" className={getModeToggleTriggerClass(isBlueDark)}>
           {activeTheme === "outrun" ? (
             <Sparkles className="h-[1.2rem] w-[1.2rem] text-pink-400" />
           ) : showDarkIcon ? (

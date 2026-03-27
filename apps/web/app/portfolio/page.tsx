@@ -7,39 +7,14 @@ import Footer from "@/components/footer"
 import PortfolioGrid from "@/components/portfolio/portfolio-grid"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { motion } from "framer-motion"
-import { cn } from '@workspace/ui/lib/utils';
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
+import { getPortfolioPageClasses } from "./portfolio-page.theme"
+import { getPortfolioTabClass, getPortfolioTabCountClass, getPortfolioTabIndicatorClass } from "./portfolio-tabs.variants"
 
 export default function Portfolio() {
   const [activeTab, setActiveTab] = useState<"projects" | "publications" | "talks">("projects")
   const { isBlueDark, isOutrun, themeKind } = useAppTheme()
-  const pageClass = pickThemeValue(themeKind, {
-    outrun: "",
-    dark: "bg-gradient-to-b from-slate-950 via-sky-950/20 to-slate-950",
-    light: "bg-gradient-to-b from-white via-sky-50 to-blue-50",
-  })
-  const headingClass = pickBlueValue(isBlueDark, "text-sky-300", "text-sky-800")
-  const tabBorderClass = pickBlueValue(isBlueDark, "border-cyan-400/25", "border-sky-200")
-  const activeTabClass = pickBlueValue(isBlueDark, "text-sky-100", "text-sky-800")
-  const inactiveTabClass = pickBlueValue(isBlueDark, "text-sky-400 hover:text-sky-200", "text-sky-500 hover:text-sky-700")
-  const tabCountClass = pickBlueValue(isBlueDark, "bg-sky-800/60 px-1.5 py-0.5 rounded-full", "bg-sky-100 text-sky-700 px-1.5 py-0.5 rounded-full")
-  const tabIndicatorClass = pickBlueValue(isBlueDark, "bg-sky-500", "bg-sky-600")
-  const pageContentClass = pickThemeValue(themeKind, {
-    outrun: "rounded-3xl border border-cyan-400/25 bg-slate-950/45 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.65)] p-5 md:p-8",
-    dark: "rounded-3xl border border-sky-700/35 bg-slate-950/55 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.55)] p-5 md:p-8",
-    light: "rounded-3xl border border-sky-200/80 bg-white/80 backdrop-blur-xl shadow-[0_24px_80px_rgba(15,23,42,0.10)] p-5 md:p-8",
-  })
-  const headingAccentClass = pickThemeValue(themeKind, {
-    outrun: "drop-shadow-[0_0_22px_rgba(34,211,238,0.35)]",
-    dark: "",
-    light: "",
-  })
-  const activeTabShellClass = pickThemeValue(themeKind, {
-    outrun: "rounded-t-xl rounded-b-none border border-cyan-400/35 bg-slate-950/70 backdrop-blur-md shadow-[0_8px_24px_rgba(34,211,238,0.16)]",
-    dark: "rounded-t-xl rounded-b-none border border-sky-700/40 bg-sky-900/30",
-    light: "rounded-t-xl rounded-b-none border border-sky-300 bg-white/85 shadow-sm",
-  })
+  const classes = getPortfolioPageClasses(themeKind, isBlueDark)
 
   const projects = portfolioItems.filter((item) => item.section === "projects")
   const publications = portfolioItems.filter((item) => item.section === "publications")
@@ -52,30 +27,27 @@ export default function Portfolio() {
   ]
 
   return (
-    <main className={`min-h-screen flex flex-col ${pageClass}`}>
+    <main className={`min-h-screen flex flex-col ${classes.page}`}>
       {isOutrun && <OutrunGrid />}
       <Navbar />
 
       <div className="container mx-auto px-4 pt-24 pb-12">
-        <div className={pageContentClass}>
-          <h3 className={`text-1xl md:text-5xl font-bold mb-8 hero-text text-center ${headingClass} ${headingAccentClass}`}>Portfolio</h3>
+        <div className={classes.panel}>
+          <h3 className={`text-1xl md:text-5xl font-bold mb-8 hero-text text-center ${classes.heading} ${classes.headingAccent}`}>Portfolio</h3>
           {/* Tab Navigation */}
-          <div className={`flex flex-wrap gap-1 border-b mb-8 overflow-x-auto pb-0 ${tabBorderClass}`}>
+          <div className={`flex flex-wrap gap-1 border-b mb-8 overflow-x-auto pb-0 ${classes.tabBorder}`}>
             {tabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as "projects" | "publications" | "talks")}
-                className={cn(
-                  "px-4 md:px-6 py-3 text-sm md:text-lg font-medium transition-colors relative whitespace-nowrap cursor-pointer border border-transparent",
-                  activeTab === tab.id ? `${activeTabClass} ${activeTabShellClass}` : inactiveTabClass,
-                )}
+                className={getPortfolioTabClass(isBlueDark, activeTab === tab.id)}
               >
                 {tab.label}
-                <span className={`ml-2 text-xs md:text-sm ${tabCountClass}`}>{tab.count}</span>
+                <span className={getPortfolioTabCountClass(isBlueDark)}>{tab.count}</span>
 
                 {activeTab === tab.id && (
                   <motion.div
-                    className={`absolute bottom-0 left-0 right-0 h-0.5 ${tabIndicatorClass}`}
+                    className={getPortfolioTabIndicatorClass(isBlueDark)}
                     layoutId="activeTab"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

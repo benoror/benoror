@@ -4,23 +4,11 @@ import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
+import { getAboutClasses } from "./about.theme"
 
 export default function About() {
   const { isBlueDark, themeKind } = useAppTheme()
-  const panelClass = pickThemeValue(themeKind, {
-    outrun: "rounded-3xl border border-cyan-400/25 bg-slate-950/45 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.65)] p-6 md:p-8",
-    dark: "rounded-3xl border border-sky-700/35 bg-slate-950/55 backdrop-blur-xl shadow-[0_24px_80px_rgba(2,8,23,0.55)] p-6 md:p-8",
-    light: "rounded-3xl border border-sky-200/80 bg-white/80 backdrop-blur-xl shadow-[0_24px_80px_rgba(15,23,42,0.10)] p-6 md:p-8",
-  })
-  const headingClass = pickBlueValue(isBlueDark, "text-sky-100", "text-sky-900")
-  const bodyClass = pickBlueValue(isBlueDark, "text-sky-200", "text-sky-700")
-  const linkHoverClass = pickBlueValue(isBlueDark, "hover:text-sky-300", "hover:text-sky-600")
-  const linkFocusClass = pickThemeValue(themeKind, {
-    outrun: "focus-visible:ring-cyan-300/60",
-    dark: "focus-visible:ring-sky-300/60",
-    light: "focus-visible:ring-sky-500/50",
-  })
+  const classes = getAboutClasses(themeKind, isBlueDark)
 
   return (
     <section id="about" className="py-20 md:py-32">
@@ -30,27 +18,27 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
-          className={`max-w-4xl mx-auto space-y-8 ${panelClass}`}
+          className={`max-w-4xl mx-auto space-y-8 ${classes.panel}`}
         >
-          <h2 className={`text-3xl md:text-4xl font-bold tracking-tighter text-center ${headingClass}`}>About Me</h2>
+          <h2 className={`text-3xl md:text-4xl font-bold tracking-tighter text-center ${classes.heading}`}>About Me</h2>
 
           <div className="space-y-4">
-            <p className={`leading-relaxed text-center text-justify ${bodyClass}`}>
+            <p className={`leading-relaxed text-center text-justify ${classes.body}`}>
               {HOME.about_me}
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8 text-center">
             <div className="space-y-4">
-              <h3 className={`text-xl font-semibold ${headingClass}`}>Skills</h3>
-              <ul className={`space-y-2 ${bodyClass}`}>
+              <h3 className={`text-xl font-semibold ${classes.heading}`}>Skills</h3>
+              <ul className={`space-y-2 ${classes.body}`}>
                 {SKILLS.map((skill, index) => (
                   <li key={index}>
                     <a
                       href={`${LINKS.resume_url}#${skill.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${linkHoverClass} ${linkFocusClass}`}
+                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
                     >
                       {skill.name}
                       <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
@@ -61,8 +49,8 @@ export default function About() {
             </div>
 
             <div className="space-y-4">
-              <h3 className={`text-xl font-semibold ${headingClass}`}>Interests</h3>
-              <ul className={`space-y-2 ${bodyClass}`}>
+              <h3 className={`text-xl font-semibold ${classes.heading}`}>Interests</h3>
+              <ul className={`space-y-2 ${classes.body}`}>
                 {INTERESTS.map((interest, index) => (
                   <li key={index}>{interest}</li>
                 ))}

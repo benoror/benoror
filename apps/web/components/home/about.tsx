@@ -2,7 +2,7 @@
 
 import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
-import { ExternalLink } from "lucide-react"
+import ExternalLink from "@/components/ui/external-link"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "./about.theme"
 
@@ -34,15 +34,13 @@ export default function About() {
               <ul className={`space-y-2 ${classes.body}`}>
                 {SKILLS.map((skill, index) => (
                   <li key={index}>
-                    <a
+                    <ExternalLink
                       href={`${LINKS.resume_url}#${skill.slug}`}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                      className={`transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
                     >
                       {skill.name}
-                      <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
-                    </a>
+                    </ExternalLink>
                   </li>
                 ))}
               </ul>

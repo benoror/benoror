@@ -1,10 +1,11 @@
 "use client"
 
 import Link from "next/link"
-import { ExternalLink, Rss } from "lucide-react"
+import { Rss } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import OutrunGrid from "@/components/outrun-hero-background"
+import ExternalLink from "@/components/ui/external-link"
 import { LINKS } from "@workspace/data/personal"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import type { AggregatedFeed, AggregatedFeedItem } from "@/lib/feed"
@@ -34,15 +35,13 @@ function FeedItemCard({
         </a>
         <div className={`text-sm ${classes.meta} flex items-center justify-between gap-3`}>
           <div className="flex flex-wrap items-center gap-2">
-            <a
+            <ExternalLink
               href={sourceUrl}
               target="_blank"
-              rel="noopener noreferrer"
               className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
             >
               {item.sourceName}
-              <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
-            </a>
+            </ExternalLink>
             <span>·</span>
             <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
           </div>

@@ -1,7 +1,8 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { ExternalLink, Rss } from "lucide-react"
+import { Rss } from "lucide-react"
+import ExternalLink from "@/components/ui/external-link"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "./feed-excerpt.theme"
 
@@ -47,15 +48,13 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
                     {item.title}
                   </a>
                   <div className={`text-sm mt-1 flex items-center justify-between gap-3 ${classes.source}`}>
-                    <a
+                    <ExternalLink
                       href={item.sourceUrl}
                       target="_blank"
-                      rel="noopener noreferrer"
-                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                      className={`transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
                     >
                       {item.sourceName}
-                      <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
-                    </a>
+                    </ExternalLink>
                     {item.sourceRssUrl ? (
                       <a
                         href={item.sourceRssUrl}

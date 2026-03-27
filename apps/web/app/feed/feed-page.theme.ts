@@ -19,6 +19,11 @@ export function getClasses(themeKind: AppThemeKind) {
     }),
     body: pickBlueThemeValue(themeKind, "text-sky-200/90", "text-sky-700"),
     link: pickBlueThemeValue(themeKind, "text-sky-200 hover:text-sky-100", "text-sky-700 hover:text-sky-900"),
+    linkFocus: pickThemeValue(themeKind, {
+      outrun: "focus-visible:ring-cyan-300/60",
+      dark: "focus-visible:ring-sky-300/60",
+      light: "focus-visible:ring-sky-500/50",
+    }),
     card: pickThemeValue(themeKind, {
       outrun: "rounded-xl border border-cyan-400/25 bg-cyan-950/20 backdrop-blur-md",
       dark: "rounded-xl border border-sky-600/25 bg-sky-950/20 backdrop-blur-md",

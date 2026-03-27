@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
+import { ExternalLink, Rss } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "./feed-excerpt.theme"
 
@@ -9,6 +10,8 @@ export type FeedExcerptItem = {
   title: string
   link: string
   sourceName: string
+  sourceUrl: string
+  sourceRssUrl?: string
 }
 
 export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] }) {
@@ -43,7 +46,28 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
                   >
                     {item.title}
                   </a>
-                  <p className={`text-sm mt-1 ${classes.source}`}>{item.sourceName}</p>
+                  <div className={`text-sm mt-1 flex items-center justify-between gap-3 ${classes.source}`}>
+                    <a
+                      href={item.sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                    >
+                      {item.sourceName}
+                      <ExternalLink size={12} aria-hidden="true" className="opacity-70" />
+                    </a>
+                    {item.sourceRssUrl ? (
+                      <a
+                        href={item.sourceRssUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open RSS feed for ${item.sourceName}`}
+                        className={`inline-flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                      >
+                        <Rss className="h-4 w-4" />
+                      </a>
+                    ) : null}
+                  </div>
                 </li>
               ))}
             </ul>

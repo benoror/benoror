@@ -9,6 +9,11 @@ export function getClasses(themeKind: AppThemeKind) {
     body: pickBlueThemeValue(themeKind, "text-sky-200", "text-sky-700"),
     source: pickBlueThemeValue(themeKind, "text-sky-300/80", "text-sky-600"),
     linkHover: pickBlueThemeValue(themeKind, "hover:text-sky-300", "hover:text-sky-900"),
+    linkFocus: pickThemeValue(themeKind, {
+      outrun: "focus-visible:ring-cyan-300/60",
+      dark: "focus-visible:ring-sky-300/60",
+      light: "focus-visible:ring-sky-500/50",
+    }),
     separator: pickThemeValue(themeKind, {
       outrun: "border-cyan-400/20",
       dark: "border-sky-700/35",

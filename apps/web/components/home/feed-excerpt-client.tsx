@@ -48,6 +48,12 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
               ))}
             </ul>
           )}
+
+          <div className="pt-2 text-center">
+            <a href="/feed" className={`text-sm underline underline-offset-4 ${classes.linkHover} ${classes.body}`}>
+              View All
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>

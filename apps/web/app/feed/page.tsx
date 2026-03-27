@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: "Aggregated personal feed from blog posts, social updates, podcasts, and gists.",
 }
 
-export const revalidate = 1800
+export const dynamic = "force-dynamic"
 
 const ITEMS_PER_PAGE = 10
 

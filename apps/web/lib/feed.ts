@@ -28,6 +28,12 @@ export type AggregatedFeedSource = {
   error?: string
 }
 
+export type AggregatedFeed = {
+  items: AggregatedFeedItem[]
+  sources: AggregatedFeedSource[]
+  generatedAt: string
+}
+
 const parseDate = (value: string | undefined): Date | null => {
   if (!value) return null
   const parsed = new Date(value)
@@ -98,7 +104,7 @@ const getSourceItems = async (
   }
 }
 
-export const getAggregatedFeed = async () => {
+export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
   const items = sourceResults

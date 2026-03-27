@@ -65,6 +65,8 @@ function FeedItemCard({
           body={item.body ?? item.summary}
           bodyFormat={item.bodyFormat}
           codeLanguage={item.codeLanguage}
+          continueHref={item.link}
+          continueLinkClassName={`text-sm underline underline-offset-4 ${classes.link}`}
           className={`text-[1.01rem] ${classes.body}`}
         />
       </div>

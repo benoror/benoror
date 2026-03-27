@@ -9,6 +9,7 @@ export const PERSONAL = {
 export const LINKS = {
   website_url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
   resume_url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
+  feed_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed" : "https://www.benoror.com/feed",
   github_url: "https://github.com/benoror",
   twitter_url: "https://twitter.com/benoror",
   linkedin_url: "https://linkedin.com/in/benoror",
@@ -22,6 +23,70 @@ export const LINKS = {
   product_hunt_url: "https://producthunt.com/@benoror",
   stack_overflow_url: "https://stackoverflow.com/users/171809/ben-orozco",
 }
+
+export type FeedSourceStatus = "active" | "manual" | "private"
+
+export type FeedSource = {
+  id: string
+  name: string
+  site_url: string
+  rss_url?: string
+  status: FeedSourceStatus
+  note?: string
+}
+
+export const FEED_SOURCES: FeedSource[] = [
+  {
+    id: "bear_blog",
+    name: "Blog (Bear Blog)",
+    site_url: LINKS.bear_blog_url,
+    rss_url: "https://benoror.bearblog.dev/feed/?type=rss",
+    status: "active",
+  },
+  {
+    id: "medium",
+    name: "Old Medium Blog (2016-2020)",
+    site_url: LINKS.medium_url,
+    rss_url: "https://medium.com/feed/@benoror",
+    status: "active",
+  },
+  {
+    id: "blogger",
+    name: "Older Blogger Blog (2006-2016)",
+    site_url: LINKS.blogspot_url,
+    rss_url: "https://benjiorozco.blogspot.com/feeds/posts/default?alt=rss",
+    status: "active",
+  },
+  {
+    id: "x_likes_bookmarks",
+    name: "X / Twitter (manual likes/bookmarks subset)",
+    site_url: "https://x.com/benoror",
+    status: "manual",
+    note: "X does not provide an official public RSS for likes/bookmarks.",
+  },
+  {
+    id: "pocketcasts_starred",
+    name: "Pocket Casts Starred",
+    site_url: "https://pocketcasts.com/starred",
+    status: "private",
+    note: "Pocket Casts starred items are account-scoped and not publicly exposed via RSS.",
+  },
+  {
+    id: "gist_created",
+    name: "GitHub Gists (created)",
+    site_url: "https://gist.github.com/benoror",
+    rss_url: "https://gist.github.com/benoror.atom",
+    status: "active",
+  },
+  {
+    id: "gist_starred_own",
+    name: "GitHub Gists (starred and authored by Ben)",
+    site_url: "https://gist.github.com/benoror/starred",
+    rss_url: "https://gist.github.com/benoror/starred.atom",
+    status: "active",
+    note: "Filtered to entries authored under the benoror namespace.",
+  },
+]
 
 export const HOME = {
   title: PERSONAL.short_name,

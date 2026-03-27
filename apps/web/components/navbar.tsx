@@ -67,6 +67,9 @@ export default function Navbar() {
                   <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
+                  <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                    Feed
+                  </Link>
                   <div className="pt-4">
                     <ModeToggle />
                   </div>
@@ -88,6 +91,9 @@ export default function Navbar() {
               </Link>
               <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Blog
+              </Link>
+              <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+                Feed
               </Link>
             </nav>
             <ModeToggle />

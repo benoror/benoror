@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Twitter, Linkedin, Mail, Rss } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail, NotebookPen, Rss } from "lucide-react"
 import { HOME, LINKS } from '@workspace/data/personal';
 import { shortURL } from '@workspace/utils/url';
 import { useAppTheme } from "@/hooks/use-app-theme"
@@ -44,7 +44,8 @@ export const SocialIcons = ({ iconClassName = "text-sky-300 hover:text-white" }:
     <IconLink Icon={Twitter} link={LINKS.twitter_url} text={shortURL(LINKS.twitter_url)} className={iconClassName} />
     <IconLink Icon={Linkedin} link={LINKS.linkedin_url} text={shortURL(LINKS.linkedin_url)} className={iconClassName} />
     <IconLink Icon={Mail} link={`mailto:${HOME.public_email}`} text={shortURL(HOME.public_email)} className={iconClassName} />
-    <IconLink Icon={Rss} link={LINKS.blog_url} text={shortURL(LINKS.blog_url)} className={iconClassName} />
+    <IconLink Icon={NotebookPen} link={LINKS.blog_url} text={shortURL(LINKS.blog_url)} className={iconClassName} />
+    <IconLink Icon={Rss} link={LINKS.feed_url} text={shortURL(LINKS.feed_url)} className={iconClassName} />
   </motion.div>
 )
 

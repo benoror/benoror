@@ -6,6 +6,7 @@ import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import OutrunGrid from "@/components/outrun-hero-background"
 import ExternalLink from "@/components/ui/external-link"
+import FeedItemBody from "@/components/feed/feed-item-body"
 import { LINKS } from "@workspace/data/personal"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import type { AggregatedFeed, AggregatedFeedItem } from "@/lib/feed"
@@ -55,7 +56,12 @@ function FeedItemCard({
           <span>·</span>
           <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
         </div>
-        {item.summary ? <p className={`text-sm ${classes.body}`}>{item.summary}</p> : null}
+        <FeedItemBody
+          body={item.body ?? item.summary}
+          bodyFormat={item.bodyFormat}
+          codeLanguage={item.codeLanguage}
+          className={`text-sm ${classes.body}`}
+        />
       </div>
     </li>
   )

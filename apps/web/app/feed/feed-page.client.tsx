@@ -74,7 +74,62 @@ function FeedItemCard({
   )
 }
 
-export function FeedPageClient({ feed }: { feed: AggregatedFeed }) {
+type FeedPagination = {
+  currentPage: number
+  totalPages: number
+  itemsPerPage: number
+  totalItems: number
+}
+
+const getPageHref = (page: number) => (page <= 1 ? "/feed" : `/feed?page=${page}`)
+
+function FeedPaginationControls({
+  pagination,
+  classes,
+}: {
+  pagination: FeedPagination
+  classes: ReturnType<typeof getClasses>
+}) {
+  if (pagination.totalPages <= 1) {
+    return null
+  }
+
+  return (
+    <nav aria-label="Feed pagination" className="flex flex-wrap items-center justify-between gap-3 pt-2">
+      <Link
+        href={getPageHref(Math.max(1, pagination.currentPage - 1))}
+        aria-disabled={pagination.currentPage <= 1}
+        className={`text-sm underline underline-offset-4 ${
+          pagination.currentPage <= 1 ? "pointer-events-none opacity-50" : classes.link
+        }`}
+      >
+        Previous
+      </Link>
+
+      <span className={`text-sm ${classes.meta}`}>
+        Page {pagination.currentPage} of {pagination.totalPages} ({pagination.totalItems} items)
+      </span>
+
+      <Link
+        href={getPageHref(Math.min(pagination.totalPages, pagination.currentPage + 1))}
+        aria-disabled={pagination.currentPage >= pagination.totalPages}
+        className={`text-sm underline underline-offset-4 ${
+          pagination.currentPage >= pagination.totalPages ? "pointer-events-none opacity-50" : classes.link
+        }`}
+      >
+        Next
+      </Link>
+    </nav>
+  )
+}
+
+export function FeedPageClient({
+  feed,
+  pagination,
+}: {
+  feed: AggregatedFeed
+  pagination: FeedPagination
+}) {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const sourceById = new Map(feed.sources.map((source) => [source.id, source]))
@@ -109,29 +164,28 @@ export function FeedPageClient({ feed }: { feed: AggregatedFeed }) {
               {feed.items.length === 0 ? (
                 <p className={classes.body}>No feed items available right now.</p>
               ) : (
-                <ul className="space-y-3">
-                  {feed.items.map((item) => {
-                    const source = sourceById.get(item.sourceId)
-                    return (
-                      <FeedItemCard
-                        key={item.id}
-                        item={item}
-                        sourceUrl={source?.siteUrl ?? item.sourceUrl}
-                        sourceRssUrl={source?.rssUrl}
-                        classes={classes}
-                      />
-                    )
-                  })}
-                </ul>
+                <>
+                  <ul className="space-y-3">
+                    {feed.items.map((item) => {
+                      const source = sourceById.get(item.sourceId)
+                      return (
+                        <FeedItemCard
+                          key={item.id}
+                          item={item}
+                          sourceUrl={source?.siteUrl ?? item.sourceUrl}
+                          sourceRssUrl={source?.rssUrl}
+                          classes={classes}
+                        />
+                      )
+                    })}
+                  </ul>
+                  <FeedPaginationControls pagination={pagination} classes={classes} />
+                </>
               )}
             </div>
 
             <p className={`text-xs ${classes.meta}`}>
-              Generated at {dateFormatter.format(new Date(feed.generatedAt))}. Looking for old posts? Visit{" "}
-              <Link href="/portfolio" className="underline">
-                Portfolio
-              </Link>{" "}
-              too.
+              Generated at {dateFormatter.format(new Date(feed.generatedAt))}
             </p>
           </div>
         </div>

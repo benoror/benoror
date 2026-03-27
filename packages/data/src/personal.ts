@@ -1,4 +1,5 @@
 import { gmailAlias } from '@workspace/utils/email';
+import type { FeedSource } from './types/feed.js';
 
 export const PERSONAL = {
   full_name: "Benjamin Orozco Rios",
@@ -9,7 +10,7 @@ export const PERSONAL = {
 export const LINKS = {
   website_url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
   resume_url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
-  feed_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed" : "https://www.benoror.com/feed",
+  feed_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed.rss" : "https://www.benoror.com/feed.rss",
   github_url: "https://github.com/benoror",
   twitter_url: "https://twitter.com/benoror",
   linkedin_url: "https://linkedin.com/in/benoror",
@@ -22,17 +23,6 @@ export const LINKS = {
   pop_podcast_url: "https://benoror.bearblog.dev/pop-podcast",
   product_hunt_url: "https://producthunt.com/@benoror",
   stack_overflow_url: "https://stackoverflow.com/users/171809/ben-orozco",
-}
-
-export type FeedSourceStatus = "active" | "manual" | "private"
-
-export type FeedSource = {
-  id: string
-  name: string
-  site_url: string
-  rss_url?: string
-  status: FeedSourceStatus
-  note?: string
 }
 
 export const FEED_SOURCES: FeedSource[] = [

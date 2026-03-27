@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Rss } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import { getAggregatedFeed } from "@/lib/feed"
@@ -38,14 +39,18 @@ export default async function FeedPage() {
               A consolidated stream of my writing and activity, primarily powered by RSS/Atom and ordered
               by publish time.
             </p>
-            <a
-              href={`${LINKS.website_url}/feed.xml`}
-              className="inline-flex text-sm underline underline-offset-4"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Open consolidated RSS feed
-            </a>
+            <div className="flex flex-wrap items-center gap-4">
+              <a
+                href={LINKS.feed_url}
+                className="inline-flex items-center gap-2 text-sm underline underline-offset-4"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Open consolidated RSS feed"
+              >
+                <Rss className="h-4 w-4" />
+                Open consolidated RSS feed
+              </a>
+            </div>
           </div>
 
           <div className="grid gap-4 md:grid-cols-2">

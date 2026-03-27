@@ -10,15 +10,15 @@ import { SocialIcons } from "../footer"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import Link from "next/link"
-import { getHeroClasses } from "./hero.theme"
+import { getClasses } from "./hero.theme"
 
 import styles from './home.module.css'
 
 export default function Hero() {
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { isOutrun, isBlueDark, themeKind } = useAppTheme()
-  const classes = getHeroClasses(themeKind, isBlueDark)
   const baseImages = useMemo(
     () => [
       "/images/ben/ben-bw.jpeg",
@@ -96,7 +96,7 @@ export default function Hero() {
 
   return (
     <section id="top" className={`min-h-screen flex flex-col justify-center items-center relative overflow-hidden ${classes.section}`}>
-      {isOutrun && <OutrunGrid />}
+      {classes.showOutrunGrid && <OutrunGrid />}
 
       <div className="container mx-auto px-4 -py-12 z-10">
         <div className="flex flex-col items-center justify-center gap-12 text-center">

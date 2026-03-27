@@ -5,7 +5,7 @@ import { Github, Twitter, Linkedin, Mail, Rss } from "lucide-react"
 import { HOME, LINKS } from '@workspace/data/personal';
 import { shortURL } from '@workspace/utils/url';
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getFooterClasses } from "./footer.theme"
+import { getClasses } from "./footer.theme"
 
 import styles from './styles.module.css'
 
@@ -50,8 +50,8 @@ export const SocialIcons = ({ iconClassName = "text-sky-300 hover:text-white" }:
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
-  const { isBlueDark, themeKind } = useAppTheme()
-  const classes = getFooterClasses(themeKind, isBlueDark)
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
 
   return (
     <footer className={`py-12 border-t backdrop-blur-md ${classes.root}`}>

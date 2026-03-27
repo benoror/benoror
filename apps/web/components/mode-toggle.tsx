@@ -1,19 +1,20 @@
 "use client"
 import { Check, Moon, Sparkles, Sun } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getModeToggleTriggerClass } from "./mode-toggle.variants"
+import { getClasses } from "./mode-toggle.theme"
 
 import { Button } from "@workspace/ui/components/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@workspace/ui/components/dropdown-menu"
 
 export function ModeToggle() {
-  const { activeTheme, activeResolvedTheme, setTheme, isBlueDark } = useAppTheme()
+  const { activeTheme, activeResolvedTheme, setTheme, themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
   const showDarkIcon = activeTheme !== "outrun" && activeResolvedTheme === "dark"
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className={getModeToggleTriggerClass(isBlueDark)}>
+        <Button variant="ghost" size="icon" className={classes.trigger}>
           {activeTheme === "outrun" ? (
             <Sparkles className="h-[1.2rem] w-[1.2rem] text-pink-400" />
           ) : showDarkIcon ? (

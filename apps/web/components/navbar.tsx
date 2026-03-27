@@ -7,16 +7,16 @@ import { Menu, X } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { LINKS } from '@workspace/data/personal';
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getNavbarClasses } from "./navbar.theme"
+import { getClasses } from "./navbar.theme"
 
 import styles from './styles.module.css'
 
 export default function Navbar() {
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useMediaQuery("(max-width: 768px)")
-  const { isBlueDark, themeKind } = useAppTheme()
-  const classes = getNavbarClasses(themeKind, isBlueDark, isScrolled)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +34,7 @@ export default function Navbar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        classes.header
+        classes.header(isScrolled)
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">

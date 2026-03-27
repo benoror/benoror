@@ -8,16 +8,16 @@ import type { PortfolioItem } from "@workspace/data/portfolio"
 import ImageSlider from "./image-slider"
 import { Badge } from "@workspace/ui/components/badge"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getPortfolioCardClasses } from "./portfolio-card.theme"
+import { getClasses } from "./portfolio-card.theme"
 
 interface PortfolioCardProps {
   item: PortfolioItem
 }
 
 export default function PortfolioCard({ item }: PortfolioCardProps) {
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
   const [isHovered, setIsHovered] = useState(false)
-  const { isBlueDark, isOutrun, themeKind } = useAppTheme()
-  const classes = getPortfolioCardClasses(themeKind, isBlueDark, isOutrun)
 
   // Determine if we should use the slider (if multiple images are provided)
   const useSlider = item.images.length > 0

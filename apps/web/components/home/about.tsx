@@ -4,11 +4,11 @@ import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
 import { motion } from "framer-motion"
 import { ExternalLink } from "lucide-react"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getAboutClasses } from "./about.theme"
+import { getClasses } from "./about.theme"
 
 export default function About() {
-  const { isBlueDark, themeKind } = useAppTheme()
-  const classes = getAboutClasses(themeKind, isBlueDark)
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
 
   return (
     <section id="about" className="py-20 md:py-32">

@@ -1,8 +1,9 @@
 import type { AppThemeKind } from "@/hooks/use-app-theme"
-import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
+import { isOutrunTheme, pickBlueThemeValue, pickThemeValue } from "@/lib/theme-styles"
 
-export function getHeroClasses(themeKind: AppThemeKind, isBlueDark: boolean) {
+export function getClasses(themeKind: AppThemeKind) {
   return {
+    showOutrunGrid: isOutrunTheme(themeKind),
     section: pickThemeValue(themeKind, {
       outrun: "",
       dark: "bg-gradient-to-b from-black via-sky-950/20 to-black",
@@ -28,6 +29,6 @@ export function getHeroClasses(themeKind: AppThemeKind, isBlueDark: boolean) {
       dark: "text-sky-300",
       light: "text-sky-700",
     }),
-    socialIcon: pickBlueValue(isBlueDark, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900"),
+    socialIcon: pickBlueThemeValue(themeKind, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900"),
   }
 }

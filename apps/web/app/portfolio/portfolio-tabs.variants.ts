@@ -1,4 +1,6 @@
 import { cva } from "class-variance-authority"
+import type { AppThemeKind } from "@/hooks/use-app-theme"
+import { isBlueDarkTheme } from "@/lib/theme-styles"
 
 type Tone = "blueDark" | "light"
 
@@ -60,18 +62,14 @@ const tabIndicatorVariants = cva("absolute bottom-0 left-0 right-0 h-0.5", {
   },
 })
 
-export function getTabTone(isBlueDark: boolean): Tone {
-  return isBlueDark ? "blueDark" : "light"
+function getTabTone(themeKind: AppThemeKind): Tone {
+  return isBlueDarkTheme(themeKind) ? "blueDark" : "light"
 }
 
-export function getPortfolioTabClass(isBlueDark: boolean, isActive: boolean): string {
-  return tabTriggerVariants({ tone: getTabTone(isBlueDark), state: isActive ? "active" : "inactive" })
-}
-
-export function getPortfolioTabCountClass(isBlueDark: boolean): string {
-  return tabCountVariants({ tone: getTabTone(isBlueDark) })
-}
-
-export function getPortfolioTabIndicatorClass(isBlueDark: boolean): string {
-  return tabIndicatorVariants({ tone: getTabTone(isBlueDark) })
+export function getClasses(themeKind: AppThemeKind) {
+  return {
+    tab: (isActive: boolean) => tabTriggerVariants({ tone: getTabTone(themeKind), state: isActive ? "active" : "inactive" }),
+    tabCount: tabCountVariants({ tone: getTabTone(themeKind) }),
+    tabIndicator: tabIndicatorVariants({ tone: getTabTone(themeKind) }),
+  }
 }

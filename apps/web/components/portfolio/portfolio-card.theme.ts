@@ -1,7 +1,9 @@
 import type { AppThemeKind } from "@/hooks/use-app-theme"
-import { pickBlueValue, pickThemeValue } from "@/lib/theme-styles"
+import { isOutrunTheme, pickBlueThemeValue, pickThemeValue } from "@/lib/theme-styles"
 
-export function getPortfolioCardClasses(themeKind: AppThemeKind, isBlueDark: boolean, isOutrun: boolean) {
+export function getClasses(themeKind: AppThemeKind) {
+  const isOutrun = isOutrunTheme(themeKind)
+
   return {
     root: pickThemeValue(themeKind, {
       outrun: "bg-gradient-to-br from-slate-950/90 via-slate-900/85 to-sky-950/80 border-cyan-400/35 shadow-[0_16px_40px_rgba(2,12,27,0.65)]",
@@ -33,7 +35,7 @@ export function getPortfolioCardClasses(themeKind: AppThemeKind, isBlueDark: boo
       dark: "bg-sky-800/70 text-sky-100 border border-sky-500/20",
       light: "bg-sky-100 text-sky-700 border border-sky-300",
     }),
-    divider: pickBlueValue(isBlueDark, "border-sky-700/30", "border-sky-200"),
+    divider: pickBlueThemeValue(themeKind, "border-sky-700/30", "border-sky-200"),
     link: pickThemeValue(themeKind, {
       outrun: "text-cyan-200 hover:text-cyan-50",
       dark: "text-sky-200 hover:text-sky-50",

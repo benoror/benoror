@@ -8,13 +8,12 @@ import PortfolioGrid from "@/components/portfolio/portfolio-grid"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { motion } from "framer-motion"
 import { useAppTheme } from "@/hooks/use-app-theme"
-import { getPortfolioPageClasses } from "./portfolio-page.theme"
-import { getPortfolioTabClass, getPortfolioTabCountClass, getPortfolioTabIndicatorClass } from "./portfolio-tabs.variants"
+import { getClasses } from "./portfolio-page.theme"
 
 export default function Portfolio() {
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
   const [activeTab, setActiveTab] = useState<"projects" | "publications" | "talks">("projects")
-  const { isBlueDark, isOutrun, themeKind } = useAppTheme()
-  const classes = getPortfolioPageClasses(themeKind, isBlueDark)
 
   const projects = portfolioItems.filter((item) => item.section === "projects")
   const publications = portfolioItems.filter((item) => item.section === "publications")
@@ -28,7 +27,7 @@ export default function Portfolio() {
 
   return (
     <main className={`min-h-screen flex flex-col ${classes.page}`}>
-      {isOutrun && <OutrunGrid />}
+      {classes.showOutrunGrid && <OutrunGrid />}
       <Navbar />
 
       <div className="container mx-auto px-4 pt-24 pb-12">
@@ -40,14 +39,14 @@ export default function Portfolio() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id as "projects" | "publications" | "talks")}
-                className={getPortfolioTabClass(isBlueDark, activeTab === tab.id)}
+                className={classes.tab(activeTab === tab.id)}
               >
                 {tab.label}
-                <span className={getPortfolioTabCountClass(isBlueDark)}>{tab.count}</span>
+                <span className={classes.tabCount}>{tab.count}</span>
 
                 {activeTab === tab.id && (
                   <motion.div
-                    className={getPortfolioTabIndicatorClass(isBlueDark)}
+                    className={classes.tabIndicator}
                     layoutId="activeTab"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

@@ -2,6 +2,7 @@ import { gmailAlias } from '@workspace/utils/email';
 import type { FeedSource } from './types/feed.js';
 
 const isProductionDeployment =
+  process.env.NODE_ENV === "production" ||
   process.env.VERCEL === "1" ||
   process.env.VERCEL_ENV === "production" ||
   process.env.DEPLOYMENT_ENV === "production";

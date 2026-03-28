@@ -62,13 +62,6 @@ export const FEED_SOURCES: FeedSource[] = [
     note: "Pocket Casts starred items are account-scoped and not publicly exposed via RSS.",
   },
   {
-    id: "gist_created",
-    name: "GitHub Gists (created)",
-    site_url: "https://gist.github.com/benoror",
-    rss_url: "https://gist.github.com/benoror.atom",
-    status: "active",
-  },
-  {
     id: "gist_starred_own",
     name: "GitHub Gists (starred and authored by Ben)",
     site_url: "https://gist.github.com/benoror/starred",

@@ -1,3 +1,15 @@
 @use "./base.scss";
 
 // put your custom CSS here!
+
+:root[saved-theme="dark"][data-theme-variant="outrun"] {
+  --light: #10051f;
+  --lightgray: #2a1646;
+  --gray: #8f7bb8;
+  --darkgray: #f3e8ff;
+  --dark: #fdf7ff;
+  --secondary: #22d3ee;
+  --tertiary: #f472b6;
+  --highlight: rgba(244, 114, 182, 0.22);
+  --textHighlight: #f472b655;
+}

@@ -18,6 +18,11 @@
     fill: var(--darkgray);
     transition: opacity 0.1s ease;
   }
+
+  & .outrunIcon {
+    fill: none;
+    stroke: var(--tertiary);
+  }
 }
 
 :root[saved-theme="dark"] {
@@ -35,6 +40,18 @@
   & > .nightIcon {
     display: inline;
   }
+  & > .outrunIcon {
+    display: none;
+  }
+}
+
+:root[saved-theme="dark"][data-theme-variant="outrun"] .darkmode {
+  & > .nightIcon {
+    display: none;
+  }
+  & > .outrunIcon {
+    display: inline;
+  }
 }
 
 :root .darkmode {
@@ -42,6 +59,9 @@
     display: inline;
   }
   & > .nightIcon {
+    display: none;
+  }
+  & > .outrunIcon {
     display: none;
   }
 }

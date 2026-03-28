@@ -1,0 +1,16 @@
+{
+  "name": "notes",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "sync:vaults": "node ./scripts/sync-vaults.mjs",
+    "publish:login": "publish auth login",
+    "publish:status": "publish auth status",
+    "publish:new": "publish ./content --name notes --overwrite",
+    "publish:sync": "publish sync ./content --name notes"
+  },
+  "devDependencies": {
+    "@flowershow/publish": "^1.1.3"
+  }
+}

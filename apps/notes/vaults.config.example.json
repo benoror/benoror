@@ -1,0 +1,14 @@
+{
+  "sources": [
+    {
+      "name": "personal",
+      "path": "/absolute/path/to/Obsidian/PersonalVault",
+      "entries": ["Public Notes", "today-i-learned.md"]
+    },
+    {
+      "name": "work",
+      "path": "/absolute/path/to/Obsidian/WorkVault",
+      "entries": ["Published/Architecture"]
+    }
+  ]
+}

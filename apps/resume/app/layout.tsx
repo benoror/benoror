@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 import type { Metadata } from "next";
 import PrintButton from '@/components/PrintButton';
 import DownloadPDFButton from '@/components/DownloadPDFButton';
+import DownloadMarkdownButton from '@/components/DownloadMarkdownButton';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { Providers } from "@/components/providers"
 // import { Analytics } from "@vercel/analytics/react";
@@ -37,6 +38,7 @@ export default function RootLayout({
           {children}
           {/* <Analytics /> */}
           <div className="print:hidden fixed top-1 right-1 flex gap-2">
+            <DownloadMarkdownButton />
             <DownloadPDFButton />
             <PrintButton />
             <ThemeToggleButton />

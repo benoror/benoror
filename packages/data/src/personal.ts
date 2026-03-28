@@ -96,6 +96,14 @@ export const FEED_SOURCES: FeedSource[] = [
     status: "active",
   },
   {
+    id: "notes",
+    name: "Obsidian Notes",
+    site_url: LINKS.notes.url,
+    rss_url: `${LINKS.notes.url}/index.xml`,
+    status: "active",
+    note: "Quartz RSS feed for published notes.",
+  },
+  {
     id: "medium",
     name: "Old Medium Blog (2016-2020)",
     site_url: LINKS.medium.url,

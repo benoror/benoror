@@ -61,20 +61,56 @@ function hasBooleanFrontmatter(frontmatter, field) {
 }
 
 function hasDateFrontmatter(frontmatter) {
-  return /^date:\s*["']?\d{4}-\d{2}-\d{2}["']?\s*$/m.test(frontmatter);
+  return /^date:\s*["']?[^"'\n]+["']?\s*$/m.test(frontmatter);
+}
+
+function hasCreatedFrontmatter(frontmatter) {
+  return /^created:\s*["']?[^"'\n]+["']?\s*$/m.test(frontmatter);
+}
+
+function getFrontmatterField(frontmatter, field) {
+  const pattern = new RegExp(`^${field}:\\s*(.+)\\s*$`, "m");
+  const match = frontmatter.match(pattern);
+  if (!match) return null;
+  return match[1].trim().replace(/^["']|["']$/g, "");
+}
+
+function parseDateValue(value) {
+  if (!value) return null;
+  const parsed = new Date(value);
+  if (Number.isNaN(parsed.getTime())) return null;
+  return parsed;
 }
 
 function formatDate(date) {
-  return date.toISOString().slice(0, 10);
+  return date.toISOString();
 }
 
-function ensureDateFrontmatter(rawContents, dateString) {
+function ensureTemporalFrontmatter(rawContents, fileStats) {
   const parsed = extractFrontmatter(rawContents);
   if (!parsed) return rawContents;
-  if (hasDateFrontmatter(parsed.content)) return rawContents;
 
   const normalizedFrontmatter = parsed.content.replace(/\s*$/, "");
-  const updatedFrontmatter = `---\n${normalizedFrontmatter}\ndate: "${dateString}"\n---\n`;
+  const frontmatterLines = [normalizedFrontmatter];
+
+  const hasDate = hasDateFrontmatter(parsed.content);
+  const hasCreated = hasCreatedFrontmatter(parsed.content);
+  const createdDate =
+    parseDateValue(getFrontmatterField(parsed.content, "created")) ?? fileStats.ctime;
+
+  // Priority: date > created > original source ctime.
+  if (!hasDate) {
+    const preferredDate =
+      parseDateValue(getFrontmatterField(parsed.content, "created")) ?? fileStats.ctime;
+    frontmatterLines.push(`date: "${formatDate(preferredDate)}"`);
+  }
+
+  // Preserve original source file ctime metadata when created is missing.
+  if (!hasCreated) {
+    frontmatterLines.push(`created: "${formatDate(createdDate)}"`);
+  }
+
+  const updatedFrontmatter = `---\n${frontmatterLines.filter(Boolean).join("\n")}\n---\n`;
   return rawContents.replace(parsed.fullBlock, updatedFrontmatter);
 }
 
@@ -98,7 +134,7 @@ async function copyMarkdownFiles(vaultName, sourceRoot) {
       }
 
       const fileStats = await fs.stat(filePath);
-      const syncedContents = ensureDateFrontmatter(fileContents, formatDate(fileStats.mtime));
+      const syncedContents = ensureTemporalFrontmatter(fileContents, fileStats);
       const relativeToRoot = path.relative(sourceRoot, filePath);
       const destination = path.join(destinationRoot, vaultName, relativeToRoot);
 

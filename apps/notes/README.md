@@ -16,7 +16,8 @@ Sync behavior:
 
 - Recursively traverses each configured vault.
 - Syncs only notes with `publish: true` frontmatter.
-- If no `date: "YYYY-MM-DD"` is present, it auto-populates `date` in the synced file (using source file modified date).
+- If no `date` is present, it auto-populates `date` using this priority: `date` (existing) -> `created` (frontmatter) -> source file `ctime`.
+- If no `created` is present, it auto-populates `created` from source file `ctime` to preserve original file metadata in synced output.
 - If `hidden: true` is present, the note is still generated and accessible by direct URL, but excluded from Quartz Explorer/index-based discovery.
 - Folder hierarchy is preserved relative to the original vault path under `apps/notes/content/<vault-name>/...`.
 

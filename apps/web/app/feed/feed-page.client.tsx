@@ -168,7 +168,7 @@ export function FeedPageClient({
                 A consolidated stream of my writing and activity, powered by RSS/Atom.
               </p>
               <a
-                href={LINKS.feed_url}
+                href={LINKS.feed.url}
                 className={`inline-flex items-center gap-2 text-sm underline underline-offset-4 ${classes.link}`}
                 target="_blank"
                 rel="noopener noreferrer"

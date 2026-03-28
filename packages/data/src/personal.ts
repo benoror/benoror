@@ -7,48 +7,105 @@ export const PERSONAL = {
   private_email: 'benoror@gmail.com',
 }
 
-export const LINKS = {
-  website_url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
-  resume_url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
-  resume_pdf_url: process.env.NODE_ENV === "development" ? "http://localhost:3001/Ben%20Orozco%20-%20Resume.pdf" : "https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf",
-  resume_markdown_url: process.env.NODE_ENV === "development" ? "http://localhost:3001/resume.md" : "https://resume.benoror.com/resume.md",
-  notes_url: process.env.NODE_ENV === "development" ? "http://localhost:3002" : "http://notes.benoror.com",
-  blog_url: "https://blog.benoror.com",
-  bear_blog_url: "https://benoror.bearblog.dev",
-  feed_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed.rss" : "https://www.benoror.com/feed.rss",
-  feed_page_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed" : "https://www.benoror.com/feed",
-  github_url: "https://github.com/benoror",
-  twitter_url: "https://twitter.com/benoror",
-  linkedin_url: "https://linkedin.com/in/benoror",
-  instagram_url: "https://instagram.com/benoror",
-  bluesky_url: "https://bsky.app/profile/benoror.bsky.social",
-  goodreads_url: "https://goodreads.com/benoror",
-  medium_url: "https://benoror.medium.com",
-  blogspot_url: "https://benjiorozco.blogspot.com",
-  pop_podcast_url: "https://benoror.bearblog.dev/pop-podcast",
-  product_hunt_url: "https://producthunt.com/@benoror",
-  stack_overflow_url: "https://stackoverflow.com/users/171809/ben-orozco",
+type LinkEntry = {
+  url: string
+  legend?: string
 }
+
+export const LINKS = {
+  website: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
+    legend: "Website",
+  },
+  resume: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
+    legend: "Resume",
+  },
+  resume_pdf: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3001/Ben%20Orozco%20-%20Resume.pdf" : "https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf",
+    legend: "Resume (PDF)",
+  },
+  resume_markdown: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3001/resume.md" : "https://resume.benoror.com/resume.md",
+    legend: "Resume (Markdown)",
+  },
+  notes: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3002" : "http://notes.benoror.com",
+    legend: "Obsidian Notes",
+  },
+  blog: {
+    url: "https://blog.benoror.com",
+    legend: "Blog",
+  },
+  bear_blog: {
+    url: "https://benoror.bearblog.dev",
+  },
+  feed: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed.rss" : "https://www.benoror.com/feed.rss",
+    legend: "RSS Feed",
+  },
+  feed_page: {
+    url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed" : "https://www.benoror.com/feed",
+    legend: "Activity Feed",
+  },
+  github: {
+    url: "https://github.com/benoror",
+    legend: "GitHub",
+  },
+  twitter: {
+    url: "https://twitter.com/benoror",
+    legend: "X / Twitter",
+  },
+  linkedin: {
+    url: "https://linkedin.com/in/benoror",
+    legend: "LinkedIn",
+  },
+  instagram: {
+    url: "https://instagram.com/benoror",
+  },
+  bluesky: {
+    url: "https://bsky.app/profile/benoror.bsky.social",
+    legend: "Bluesky",
+  },
+  goodreads: {
+    url: "https://goodreads.com/benoror",
+  },
+  medium: {
+    url: "https://benoror.medium.com",
+  },
+  blogspot: {
+    url: "https://benjiorozco.blogspot.com",
+  },
+  pop_podcast: {
+    url: "https://benoror.bearblog.dev/pop-podcast",
+  },
+  product_hunt: {
+    url: "https://producthunt.com/@benoror",
+  },
+  stack_overflow: {
+    url: "https://stackoverflow.com/users/171809/ben-orozco",
+  },
+} satisfies Record<string, LinkEntry>
 
 export const FEED_SOURCES: FeedSource[] = [
   {
     id: "bear_blog",
     name: "Blog (Bear Blog)",
-    site_url: LINKS.bear_blog_url,
+    site_url: LINKS.bear_blog.url,
     rss_url: "https://benoror.bearblog.dev/feed/?type=rss",
     status: "active",
   },
   {
     id: "medium",
     name: "Old Medium Blog (2016-2020)",
-    site_url: LINKS.medium_url,
+    site_url: LINKS.medium.url,
     rss_url: "https://medium.com/feed/@benoror",
     status: "active",
   },
   {
     id: "blogger",
     name: "Older Blogger Blog (2006-2016)",
-    site_url: LINKS.blogspot_url,
+    site_url: LINKS.blogspot.url,
     rss_url: "https://benjiorozco.blogspot.com/feeds/posts/default?alt=rss",
     status: "active",
   },
@@ -70,14 +127,14 @@ export const FEED_SOURCES: FeedSource[] = [
   {
     id: "bluesky_posts",
     name: "Bluesky Posts",
-    site_url: LINKS.bluesky_url,
+    site_url: LINKS.bluesky.url,
     status: "active",
     note: "Public author feed from Bluesky API (excluding replies and reposts).",
   },
   {
     id: "linkedin_posts",
     name: "LinkedIn Posts (manual subset)",
-    site_url: LINKS.linkedin_url,
+    site_url: LINKS.linkedin.url,
     status: "manual",
     note: "LinkedIn does not provide an official public RSS endpoint for member posts.",
   },

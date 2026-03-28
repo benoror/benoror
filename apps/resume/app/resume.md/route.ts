@@ -4,7 +4,7 @@ import type { IAchievement, IRole, ISkill } from '@workspace/data/types/resume'
 import { shortURL } from '@workspace/utils/url'
 import { sinceToString } from '@workspace/utils/date'
 
-const PUBLIC_RESUME_URL = LINKS.resume_url.replace(/\/$/, '')
+const PUBLIC_RESUME_URL = LINKS.resume.url.replace(/\/$/, '')
 
 function withAbsoluteSkillLinks(markdown: string): string {
   return markdown.replace(/\]\(#([^)]+)\)/g, `](${PUBLIC_RESUME_URL}#$1)`)
@@ -78,11 +78,11 @@ function buildMarkdown(): string {
   lines.push('')
   lines.push('## Contact')
   lines.push(`- Email: [${ABOUT.public_email}](mailto:${ABOUT.public_email})`)
-  lines.push(`- Website: [${shortURL(LINKS.website_url)}](${LINKS.website_url})`)
-  lines.push(`- GitHub: [${shortURL(LINKS.github_url)}](${LINKS.github_url})`)
-  lines.push(`- LinkedIn: [${shortURL(LINKS.linkedin_url)}](${LINKS.linkedin_url})`)
-  lines.push(`- Blog: [${shortURL(LINKS.blog_url)}](${LINKS.blog_url})`)
-  lines.push(`- Resume URL: [${shortURL(LINKS.resume_url)}](${LINKS.resume_url})`)
+  lines.push(`- Website: [${shortURL(LINKS.website.url)}](${LINKS.website.url})`)
+  lines.push(`- GitHub: [${shortURL(LINKS.github.url)}](${LINKS.github.url})`)
+  lines.push(`- LinkedIn: [${shortURL(LINKS.linkedin.url)}](${LINKS.linkedin.url})`)
+  lines.push(`- Blog: [${shortURL(LINKS.blog.url)}](${LINKS.blog.url})`)
+  lines.push(`- Resume URL: [${shortURL(LINKS.resume.url)}](${LINKS.resume.url})`)
   lines.push('')
   lines.push('## About')
   lines.push(withAbsoluteSkillLinks(ABOUT.about_me))

@@ -8,7 +8,7 @@ const GIST_API_BASE_URL = "https://api.github.com/gists"
 const BLUESKY_API_BASE_URL = "https://public.api.bsky.app"
 
 const parser = new Parser()
-const LINK_PRIORITY_LIST = Object.values(LINKS)
+const LINK_PRIORITY_LIST = Object.values(LINKS).map((entry) => entry.url)
 
 export type AggregatedFeedItem = {
   id: string

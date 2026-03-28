@@ -61,13 +61,13 @@ export default function Navbar() {
                   <Link href="/portfolio" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Portfolio
                   </Link>
-                  <Link href={LINKS.resume_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.resume.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Resume
                   </Link>
-                  <Link href={LINKS.notes_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.notes.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Notes
                   </Link>
-                  <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.blog.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
                   <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
@@ -89,13 +89,13 @@ export default function Navbar() {
               <Link href="/portfolio" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Portfolio
               </Link>
-              <Link href={LINKS.resume_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.resume.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Resume
               </Link>
-              <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.blog.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Blog
               </Link>
-              <Link href={LINKS.notes_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.notes.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Notes
               </Link>
               <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`}>

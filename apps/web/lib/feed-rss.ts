@@ -11,7 +11,7 @@ const escapeXml = (value: string) =>
 
 export const buildConsolidatedRssXml = async (selfPath: "/feed.xml" | "/feed.rss") => {
   const feed = await getAggregatedFeed()
-  const selfUrl = `${LINKS.website_url}${selfPath}`
+  const selfUrl = `${LINKS.website.url}${selfPath}`
 
   const itemXml = feed.items
     .map((item) => {
@@ -35,7 +35,7 @@ export const buildConsolidatedRssXml = async (selfPath: "/feed.xml" | "/feed.rss
 <rss version="2.0">
   <channel>
     <title>Ben Orozco - Consolidated Feed</title>
-    <link>${escapeXml(LINKS.feed_url)}</link>
+    <link>${escapeXml(LINKS.feed.url)}</link>
     <description>Combined personal feed from blog posts, social updates, podcasts, and gists.</description>
     <language>en-us</language>
     <lastBuildDate>${new Date(feed.generatedAt).toUTCString()}</lastBuildDate>

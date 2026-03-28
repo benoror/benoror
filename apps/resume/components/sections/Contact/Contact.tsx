@@ -28,10 +28,10 @@ export default function Contact() {
   return (
     <div className="flex gap-4 pt-1 text-xs text-muted-foreground flex-col sm:flex-row sm:items-baseline">
       <IconLink Icon={MailIcon} link={`mailto:${ABOUT.public_email}`} text={shortURL(ABOUT.public_email)} />
-      <IconLink Icon={GlobeIcon} link={LINKS.website_url} text={shortURL(LINKS.website_url)} />
-      <IconLink Icon={GitHubIcon} link={LINKS.github_url} text={shortURL(LINKS.github_url)} />
-      <IconLink Icon={LinkedInIcon} link={LINKS.linkedin_url} text={shortURL(LINKS.linkedin_url)} />
-      <IconLink Icon={NotebookIcon} link={LINKS.blog_url} text={shortURL(LINKS.blog_url)} />
+      <IconLink Icon={GlobeIcon} link={LINKS.website.url} text={shortURL(LINKS.website.url)} />
+      <IconLink Icon={GitHubIcon} link={LINKS.github.url} text={shortURL(LINKS.github.url)} />
+      <IconLink Icon={LinkedInIcon} link={LINKS.linkedin.url} text={shortURL(LINKS.linkedin.url)} />
+      <IconLink Icon={NotebookIcon} link={LINKS.blog.url} text={shortURL(LINKS.blog.url)} />
     </div>
   )
 }

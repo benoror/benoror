@@ -35,7 +35,7 @@ export default function About() {
                 {SKILLS.map((skill, index) => (
                   <li key={index}>
                     <ExternalLink
-                      href={`${LINKS.resume_url}#${skill.slug}`}
+                      href={`${LINKS.resume.url}#${skill.slug}`}
                       target="_blank"
                       className={`transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
                     >

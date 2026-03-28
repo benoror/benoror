@@ -5,6 +5,7 @@ const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000
 const MAX_ITEMS = 200
 const GIST_API_BASE_URL = "https://api.github.com/gists"
+const BLUESKY_API_BASE_URL = "https://public.api.bsky.app"
 
 const parser = new Parser()
 
@@ -290,6 +291,110 @@ const getBodyContent = (item: Parser.Item): string => {
   return encodedContent || item.content || item.contentSnippet || ""
 }
 
+const getBlueskyActorFromProfileUrl = (profileUrl: string): string | null => {
+  const match = profileUrl.match(/bsky\.app\/profile\/([^/?#]+)/i)
+  return match?.[1] ?? null
+}
+
+const getBlueskyPostRkey = (uri: string | undefined): string | null => {
+  if (!uri) return null
+  const parts = uri.split("/")
+  return parts[parts.length - 1] ?? null
+}
+
+const buildBlueskyPostLink = (authorHandle: string, postUri: string | undefined): string | null => {
+  const rkey = getBlueskyPostRkey(postUri)
+  if (!rkey) return null
+  return `https://bsky.app/profile/${authorHandle}/post/${rkey}`
+}
+
+const toBlueskyText = (value: unknown): string => (typeof value === "string" ? value.trim() : "")
+
+const fetchBlueskyItems = async (
+  source: (typeof FEED_SOURCES)[number],
+): Promise<{ items: AggregatedFeedItem[]; error?: string }> => {
+  const actor = getBlueskyActorFromProfileUrl(source.site_url)
+  if (!actor) {
+    return { items: [], error: "Invalid Bluesky profile URL" }
+  }
+
+  try {
+    const response = await fetch(
+      `${BLUESKY_API_BASE_URL}/xrpc/app.bsky.feed.getAuthorFeed?actor=${encodeURIComponent(actor)}&limit=100`,
+      {
+        headers: {
+          "User-Agent": RSS_USER_AGENT,
+        },
+        signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+        next: { revalidate: 1800 },
+      },
+    )
+
+    if (!response.ok) {
+      return {
+        items: [],
+        error: `Unable to fetch Bluesky feed (HTTP ${response.status})`,
+      }
+    }
+
+    const payload = (await response.json()) as {
+      feed?: Array<{
+        reason?: unknown
+        reply?: unknown
+        post?: {
+          uri?: string
+          indexedAt?: string
+          author?: { handle?: string; displayName?: string }
+          record?: { text?: string; createdAt?: string; $type?: string; reply?: unknown }
+          reply?: unknown
+        }
+      }>
+    }
+
+    const items: AggregatedFeedItem[] = []
+    for (const entry of payload.feed ?? []) {
+      // Reposts include "reason" metadata; skip them.
+      if (entry.reason) continue
+
+      // Keep only top-level posts (exclude all reply shapes).
+      if (entry.reply || entry.post?.reply || entry.post?.record?.reply) continue
+
+      const post = entry.post
+      const authorHandle = post?.author?.handle
+      const link = authorHandle ? buildBlueskyPostLink(authorHandle, post?.uri) : null
+      if (!post || !link) continue
+
+      const publishedAtRaw = post.record?.createdAt ?? post.indexedAt
+      const publishedAt = parseDate(publishedAtRaw)?.toISOString()
+      if (!publishedAt) continue
+
+      const text = toBlueskyText(post.record?.text)
+      const title = text.split("\n").find((line) => line.trim().length > 0)?.slice(0, 120) || "Bluesky post"
+      const sourceName = source.name
+
+      items.push({
+        id: `${source.id}::${post.uri ?? link}`,
+        title,
+        link,
+        summary: text.slice(0, 240) || undefined,
+        body: text || undefined,
+        bodyFormat: "text",
+        publishedAt,
+        sourceId: source.id,
+        sourceName,
+        sourceUrl: source.site_url,
+      })
+    }
+
+    return { items }
+  } catch (error) {
+    return {
+      items: [],
+      error: error instanceof Error ? error.message : "Unknown Bluesky feed error",
+    }
+  }
+}
+
 const inferBodyKind = async (
   item: Parser.Item,
   source: (typeof FEED_SOURCES)[number],
@@ -423,6 +528,10 @@ const normalizeItem = async (
 const getSourceItems = async (
   source: (typeof FEED_SOURCES)[number],
 ): Promise<{ items: AggregatedFeedItem[]; error?: string }> => {
+  if (source.id === "bluesky_posts") {
+    return fetchBlueskyItems(source)
+  }
+
   if (!source.rss_url) {
     return { items: [] }
   }

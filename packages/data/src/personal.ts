@@ -15,6 +15,7 @@ export const LINKS = {
   twitter_url: "https://twitter.com/benoror",
   linkedin_url: "https://linkedin.com/in/benoror",
   instagram_url: "https://instagram.com/benoror",
+  bluesky_url: "https://bsky.app/profile/benoror.bsky.social",
   goodreads_url: "https://goodreads.com/benoror",
   blog_url: "https://blog.benoror.com",
   bear_blog_url: "https://benoror.bearblog.dev",
@@ -61,6 +62,13 @@ export const FEED_SOURCES: FeedSource[] = [
     site_url: "https://x.com/benoror",
     status: "manual",
     note: "X does not provide an official public RSS for likes/bookmarks.",
+  },
+  {
+    id: "bluesky_posts",
+    name: "Bluesky Posts",
+    site_url: LINKS.bluesky_url,
+    status: "active",
+    note: "Public author feed from Bluesky API (excluding replies and reposts).",
   },
   {
     id: "linkedin_posts",

@@ -2,7 +2,7 @@
 modified: 2026-03-27T23:41:05-06:00
 created: 2026-02-17T15:20:08-06:00
 publish: "true"
-date: "2026-03-28"
+date: "2026-02-17T21:20:08.000Z"
 ---
 > [!NOTE] About
 > Some prompts snippets I have found useful and \[mostly\] effective through my agentic coding workflows.

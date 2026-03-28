@@ -4,10 +4,10 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "sync:vaults": "node ./scripts/sync-vaults.mjs",
     "dev": "node ./scripts/run-quartz.mjs build --serve --port 3002 --wsPort 3003",
     "build": "node ./scripts/run-quartz.mjs build",
-    "quartz": "node ./scripts/run-quartz.mjs"
+    "quartz": "node ./scripts/run-quartz.mjs",
+    "sync:vaults": "node ./scripts/sync-vaults.mjs"
   },
   "dependencies": {
     "@clack/prompts": "^0.11.0",

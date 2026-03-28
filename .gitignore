@@ -29,6 +29,7 @@ out/
 build
 dist
 apps/notes/public
+apps/notes/quartz/.quartz-cache/
 
 
 # Debug

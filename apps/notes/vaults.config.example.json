@@ -2,13 +2,11 @@
   "sources": [
     {
       "name": "personal",
-      "path": "/absolute/path/to/Obsidian/PersonalVault",
-      "entries": ["Public Notes", "today-i-learned.md"]
+      "path": "/absolute/path/to/Obsidian/PersonalVault"
     },
     {
       "name": "work",
-      "path": "/absolute/path/to/Obsidian/WorkVault",
-      "entries": ["Published/Architecture"]
+      "path": "/absolute/path/to/Obsidian/WorkVault"
     }
   ]
 }

@@ -45,13 +45,37 @@ async function listMarkdownFiles(sourcePath) {
   return files.flat();
 }
 
-function hasPublishFrontmatter(rawContents) {
-  const frontmatterMatch = rawContents.match(/^---\n([\s\S]*?)\n---/);
-  if (!frontmatterMatch) {
-    return false;
-  }
+function extractFrontmatter(rawContents) {
+  const frontmatterMatch = rawContents.match(/^---\r?\n([\s\S]*?)\r?\n---(\r?\n|$)/);
+  if (!frontmatterMatch) return null;
 
-  return /^publish:\s*true\s*$/m.test(frontmatterMatch[1]);
+  return {
+    fullBlock: frontmatterMatch[0],
+    content: frontmatterMatch[1],
+  };
+}
+
+function hasBooleanFrontmatter(frontmatter, field) {
+  const pattern = new RegExp(`^${field}:\\s*(?:true|"true"|'true')\\s*$`, "m");
+  return pattern.test(frontmatter);
+}
+
+function hasDateFrontmatter(frontmatter) {
+  return /^date:\s*["']?\d{4}-\d{2}-\d{2}["']?\s*$/m.test(frontmatter);
+}
+
+function formatDate(date) {
+  return date.toISOString().slice(0, 10);
+}
+
+function ensureDateFrontmatter(rawContents, dateString) {
+  const parsed = extractFrontmatter(rawContents);
+  if (!parsed) return rawContents;
+  if (hasDateFrontmatter(parsed.content)) return rawContents;
+
+  const normalizedFrontmatter = parsed.content.replace(/\s*$/, "");
+  const updatedFrontmatter = `---\n${normalizedFrontmatter}\ndate: "${dateString}"\n---\n`;
+  return rawContents.replace(parsed.fullBlock, updatedFrontmatter);
 }
 
 function expandHome(filePath) {
@@ -62,22 +86,24 @@ function expandHome(filePath) {
   return filePath;
 }
 
-async function copyMarkdownFiles(vaultName, sourceRoot, entryPath) {
-  const absoluteEntryPath = path.resolve(sourceRoot, entryPath);
-  const files = await listMarkdownFiles(absoluteEntryPath);
+async function copyMarkdownFiles(vaultName, sourceRoot) {
+  const files = await listMarkdownFiles(sourceRoot);
 
   await Promise.all(
     files.map(async (filePath) => {
       const fileContents = await fs.readFile(filePath, "utf-8");
-      if (!hasPublishFrontmatter(fileContents)) {
+      const parsed = extractFrontmatter(fileContents);
+      if (!parsed || !hasBooleanFrontmatter(parsed.content, "publish")) {
         return;
       }
 
+      const fileStats = await fs.stat(filePath);
+      const syncedContents = ensureDateFrontmatter(fileContents, formatDate(fileStats.mtime));
       const relativeToRoot = path.relative(sourceRoot, filePath);
       const destination = path.join(destinationRoot, vaultName, relativeToRoot);
 
       await fs.mkdir(path.dirname(destination), { recursive: true });
-      await fs.writeFile(destination, fileContents, "utf-8");
+      await fs.writeFile(destination, syncedContents, "utf-8");
       console.log(`copied ${vaultName}/${relativeToRoot}`);
     })
   );
@@ -100,15 +126,23 @@ async function main() {
   await fs.mkdir(destinationRoot, { recursive: true });
 
   for (const source of config.sources) {
-    if (!source.name || !source.path || !Array.isArray(source.entries)) {
-      console.error("Each source must include `name`, `path`, and an `entries` array.");
+    if (!source.name || !source.path) {
+      console.error("Each source must include `name` and `path`.");
       process.exit(1);
     }
 
     const sourceRoot = path.resolve(expandHome(source.path));
-    for (const entryPath of source.entries) {
-      await copyMarkdownFiles(source.name, sourceRoot, entryPath);
+    if (!(await exists(sourceRoot))) {
+      console.warn(
+        `warning: skipping source "${source.name}" because path does not exist: ${sourceRoot}`
+      );
+      continue;
     }
+
+    const vaultDestination = path.join(destinationRoot, source.name);
+    // Keep destination mirrored with current vault state by removing stale synced files first.
+    await fs.rm(vaultDestination, { recursive: true, force: true });
+    await copyMarkdownFiles(source.name, sourceRoot);
   }
 
   console.log("Vault sync completed.");

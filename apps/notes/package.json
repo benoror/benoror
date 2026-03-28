@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "type": "module",
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {
     "dev": "node ./scripts/run-quartz.mjs build --serve --port 3002 --wsPort 3003",
     "build": "node ./scripts/run-quartz.mjs build",

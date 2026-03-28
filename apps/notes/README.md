@@ -31,6 +31,26 @@ Sync behavior:
 Quartz source is committed locally in `apps/notes/quartz` (standard Quartz project layout).
 Dev server uses port `3002` (`wsPort` `3003`).
 
+## Deploy on Vercel (dedicated Notes project)
+
+Create a separate Vercel project for `apps/notes`:
+
+1. Import the monorepo in Vercel.
+2. Set **Framework Preset** to **Other**.
+3. Set **Root Directory** to `apps/notes`.
+4. Ensure URL rewriting is enabled via `apps/notes/vercel.json`:
+   - `"cleanUrls": true` (so Quartz routes work without `.html` suffixes)
+5. Keep default commands from `apps/notes/vercel.json`:
+   - Install: `pnpm install --frozen-lockfile`
+   - Build: `pnpm build`
+   - Output directory: `public`
+6. Set Node.js runtime to **22.x** (also declared in `apps/notes/package.json` engines).
+7. (Optional) Add your custom domain (e.g. `notes.benoror.com`) in project domains.
+
+Quartz note: sitemap/RSS generation depends on correct `baseUrl` configuration (`notes.benoror.com` is already set in `quartz.config.ts`).
+
+This deploys Quartz as a static site from the generated `public/` output.
+
 ## 3) Install themes from quartz-themes
 
 This app includes a wrapper for the official `quartz-themes` installer flow.

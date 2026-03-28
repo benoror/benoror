@@ -1,5 +1,5 @@
 import Parser from "rss-parser"
-import { FEED_SOURCES } from "@workspace/data/personal"
+import { FEED_SOURCES, LINKS } from "@workspace/data/personal"
 
 const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000
@@ -8,6 +8,7 @@ const GIST_API_BASE_URL = "https://api.github.com/gists"
 const BLUESKY_API_BASE_URL = "https://public.api.bsky.app"
 
 const parser = new Parser()
+const LINK_PRIORITY_LIST = Object.values(LINKS)
 
 export type AggregatedFeedItem = {
   id: string
@@ -21,6 +22,11 @@ export type AggregatedFeedItem = {
   body?: string
   bodyFormat?: "html" | "markdown" | "code" | "text"
   codeLanguage?: string
+  alsoSharedTo?: Array<{
+    sourceId: string
+    sourceName: string
+    link: string
+  }>
 }
 
 export type AggregatedFeedSource = {
@@ -37,6 +43,39 @@ export type AggregatedFeed = {
   items: AggregatedFeedItem[]
   sources: AggregatedFeedSource[]
   generatedAt: string
+}
+
+const normalizeUrl = (value: string): string => value.trim().replace(/\/+$/, "")
+
+const getSourcePriority = (sourceUrl: string): number => {
+  const normalizedSourceUrl = normalizeUrl(sourceUrl)
+  const index = LINK_PRIORITY_LIST.findIndex((url) => {
+    const normalizedPriorityUrl = normalizeUrl(url)
+    return (
+      normalizedSourceUrl === normalizedPriorityUrl ||
+      normalizedSourceUrl.startsWith(`${normalizedPriorityUrl}/`) ||
+      normalizedPriorityUrl.startsWith(`${normalizedSourceUrl}/`)
+    )
+  })
+
+  return index >= 0 ? index : Number.MAX_SAFE_INTEGER
+}
+
+const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase()
+
+const pickPreferredBySourcePriority = (a: AggregatedFeedItem, b: AggregatedFeedItem): AggregatedFeedItem => {
+  const aPriority = getSourcePriority(a.sourceUrl)
+  const bPriority = getSourcePriority(b.sourceUrl)
+  return aPriority <= bPriority ? a : b
+}
+
+const sortBySourcePriority = (items: AggregatedFeedItem[]): AggregatedFeedItem[] => {
+  return [...items].sort((a, b) => {
+    const aPriority = getSourcePriority(a.sourceUrl)
+    const bPriority = getSourcePriority(b.sourceUrl)
+    if (aPriority !== bPriority) return aPriority - bPriority
+    return 0
+  })
 }
 
 const parseDate = (value: string | undefined): Date | null => {
@@ -569,8 +608,36 @@ const getSourceItems = async (
 export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
-  const items = sourceResults
-    .flatMap((result) => result.items)
+  const groupedByTitle = new Map<string, AggregatedFeedItem[]>()
+  for (const item of sourceResults.flatMap((result) => result.items)) {
+    const key = normalizeDedupTitle(item.title)
+    const existingGroup = groupedByTitle.get(key) ?? []
+    groupedByTitle.set(key, [...existingGroup, item])
+  }
+
+  const dedupedItems = [...groupedByTitle.values()]
+    .map((group): AggregatedFeedItem | null => {
+      const first = group[0]
+      if (!first) return null
+      if (group.length === 1) return first
+    const sorted = sortBySourcePriority(group)
+    const preferred = sorted.reduce((best, current) => pickPreferredBySourcePriority(best, current))
+    const alternates = sorted
+      .filter((item) => item.id !== preferred.id)
+      .map((item) => ({
+        sourceId: item.sourceId,
+        sourceName: item.sourceName,
+        link: item.link,
+      }))
+
+    return {
+      ...preferred,
+      alsoSharedTo: alternates.length > 0 ? alternates : undefined,
+    }
+    })
+    .filter((item): item is AggregatedFeedItem => item !== null)
+
+  const items = dedupedItems
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)
 

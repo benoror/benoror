@@ -10,6 +10,8 @@ export const PERSONAL = {
 export const LINKS = {
   website_url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
   resume_url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
+  blog_url: "https://blog.benoror.com",
+  bear_blog_url: "https://benoror.bearblog.dev",
   feed_url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed.rss" : "https://www.benoror.com/feed.rss",
   github_url: "https://github.com/benoror",
   twitter_url: "https://twitter.com/benoror",
@@ -17,8 +19,6 @@ export const LINKS = {
   instagram_url: "https://instagram.com/benoror",
   bluesky_url: "https://bsky.app/profile/benoror.bsky.social",
   goodreads_url: "https://goodreads.com/benoror",
-  blog_url: "https://blog.benoror.com",
-  bear_blog_url: "https://benoror.bearblog.dev",
   medium_url: "https://benoror.medium.com",
   blogspot_url: "https://benjiorozco.blogspot.com",
   pop_podcast_url: "https://benoror.bearblog.dev/pop-podcast",

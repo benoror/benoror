@@ -69,6 +69,26 @@ function FeedItemCard({
           continueLinkClassName={`text-sm underline underline-offset-4 ${classes.link}`}
           className={`text-[1.01rem] ${classes.body}`}
         />
+        {item.alsoSharedTo && item.alsoSharedTo.length > 0 ? (
+          <div className={`flex justify-end text-xs ${classes.meta}`}>
+            <span className="mr-1">Also shared to:</span>
+            <span className="flex flex-wrap items-center justify-end gap-1">
+              {item.alsoSharedTo.map((shared, index) => (
+                <span key={`${item.id}-${shared.sourceId}-${index}`}>
+                  <a
+                    href={shared.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`underline underline-offset-4 ${classes.link}`}
+                  >
+                    {shared.sourceName}
+                  </a>
+                  {index < item.alsoSharedTo!.length - 1 ? "," : ""}
+                </span>
+              ))}
+            </span>
+          </div>
+        ) : null}
       </div>
     </li>
   )

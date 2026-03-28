@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+    <channel>
+      <title>Ben Orozco Notes</title>
+      <link>https://notes.benoror.com</link>
+      <description>Last 10 notes on Ben Orozco Notes</description>
+      <generator>Quartz -- quartz.jzhao.xyz</generator>
+      <item>
+    <title>Notes</title>
+    <link>https://notes.benoror.com/</link>
+    <guid>https://notes.benoror.com/</guid>
+    <description><![CDATA[ This space is selectively published from multiple Obsidian vaults. Only notes explicitly marked for publishing are included. ]]></description>
+    <pubDate>Sat, 28 Mar 2026 02:26:11 GMT</pubDate>
+  </item><item>
+    <title>Welcome to Notes</title>
+    <link>https://notes.benoror.com/personal/welcome</link>
+    <guid>https://notes.benoror.com/personal/welcome</guid>
+    <description><![CDATA[ First published note. ]]></description>
+    <pubDate>Fri, 27 Mar 2026 06:00:00 GMT</pubDate>
+  </item>
+    </channel>
+  </rss>

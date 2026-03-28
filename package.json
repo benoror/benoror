@@ -9,8 +9,8 @@
     "dev:web": "turbo dev --filter=web",
     "dev:resume": "turbo dev --filter=resume",
     "notes:sync:vaults": "pnpm --filter notes sync:vaults",
-    "notes:publish": "pnpm --filter notes publish:new",
-    "notes:publish:sync": "pnpm --filter notes publish:sync",
+    "notes:dev": "pnpm --filter notes dev",
+    "notes:build": "pnpm --filter notes build",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },

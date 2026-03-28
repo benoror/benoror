@@ -40,13 +40,19 @@ export const IconLink = ({
   </a>
 )
 
-export const SocialIcons = ({ iconClassName = "text-sky-300 hover:text-white" }: { iconClassName?: string }) => (
+export const SocialIcons = ({
+  iconClassName = "text-sky-300 hover:text-white",
+  containerClassName = "",
+}: {
+  iconClassName?: string
+  containerClassName?: string
+}) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     viewport={{ once: true }}
-    className="flex space-x-6"
+    className={`flex space-x-6 ${containerClassName}`}
   >
     <IconLink Icon={Github} link={LINKS.github_url} text={shortURL(LINKS.github_url)} className={iconClassName} />
     <IconLink Icon={Twitter} link={LINKS.twitter_url} text={shortURL(LINKS.twitter_url)} className={iconClassName} />

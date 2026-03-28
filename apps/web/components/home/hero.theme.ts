@@ -15,14 +15,14 @@ export function getClasses(themeKind: AppThemeKind) {
       light: "text-sky-700",
     }),
     primaryButton: pickThemeValue(themeKind, {
-      outrun: "bg-cyan-600/80 hover:bg-cyan-500/90 dark:shadow-[0_0_20px_rgba(34,211,238,0.35)] text-white",
-      dark: "bg-sky-600 hover:bg-sky-500 text-white",
-      light: "bg-sky-600 hover:bg-sky-700 text-white",
+      outrun: "bg-cyan-600/90 hover:bg-cyan-500/95 border border-cyan-300/45 backdrop-blur-md dark:shadow-[0_0_20px_rgba(34,211,238,0.35)] text-white",
+      dark: "bg-sky-600/95 hover:bg-sky-500 border border-sky-300/35 backdrop-blur-md text-white",
+      light: "bg-sky-700/95 hover:bg-sky-700 border border-sky-500/40 backdrop-blur-md text-white",
     }),
     secondaryButton: pickThemeValue(themeKind, {
-      outrun: "border-cyan-400/30 bg-cyan-950/20 hover:bg-cyan-900/30 dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] text-cyan-100",
-      dark: "border-sky-400/30 bg-sky-950/30 hover:bg-sky-900/40 text-sky-100",
-      light: "border-sky-300 bg-white/70 hover:bg-sky-100/80 text-sky-800",
+      outrun: "border-cyan-300/45 bg-slate-950/70 hover:bg-slate-900/80 dark:shadow-[0_0_15px_rgba(34,211,238,0.2)] text-cyan-100",
+      dark: "border-sky-300/45 bg-slate-950/70 hover:bg-slate-900/80 text-sky-100",
+      light: "border-sky-500/35 bg-white/90 hover:bg-white text-sky-900",
     }),
     arrow: pickThemeValue(themeKind, {
       outrun: "text-cyan-300",
@@ -30,5 +30,10 @@ export function getClasses(themeKind: AppThemeKind) {
       light: "text-sky-700",
     }),
     socialIcon: pickBlueThemeValue(themeKind, "text-sky-300 hover:text-white", "text-sky-700 hover:text-sky-900"),
+    socialPanel: pickThemeValue(themeKind, {
+      outrun: "rounded-2xl px-4 py-3 bg-slate-950/65 border border-cyan-300/25 backdrop-blur-md",
+      dark: "rounded-2xl px-4 py-3 bg-slate-950/70 border border-sky-300/20 backdrop-blur-md",
+      light: "rounded-2xl px-4 py-3 bg-slate-950/65 border border-slate-700/25 backdrop-blur-md",
+    }),
   }
 }

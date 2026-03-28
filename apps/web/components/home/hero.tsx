@@ -123,7 +123,7 @@ export default function Hero() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="flex justify-center mt-8"
+            className="flex justify-center mt-12 mb-4"
           >
             <div className={styles.profileImage}>
               <AnimatePresence mode="sync" initial={false}>
@@ -162,15 +162,15 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          <div className="flex flex-col items-center justify-center">
-            <SocialIcons iconClassName={classes.socialIcon} />
+          <div className="flex flex-col items-center justify-center -mt-8">
+            <SocialIcons iconClassName={classes.socialIcon} containerClassName={classes.socialPanel} />
           </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4"
+            className="flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-4"
           >
             <a
               href="#about"

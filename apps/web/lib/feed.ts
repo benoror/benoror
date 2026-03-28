@@ -48,7 +48,19 @@ export type AggregatedFeed = {
 const normalizeUrl = (value: string): string => value.trim().replace(/\/+$/, "")
 const normalizeLocalhostNotesLink = (value: string): string =>
   value.replace(/^https:\/\/localhost:3002/i, "http://localhost:3002")
-const isNotesRootLink = (value: string): boolean => /^https?:\/\/localhost:3002\/?$/i.test(value)
+const isNotesRootLinkForSource = (itemLink: string, sourceSiteUrl: string): boolean => {
+  try {
+    const linkUrl = new URL(itemLink)
+    const sourceUrl = new URL(sourceSiteUrl)
+    const isSameHost = linkUrl.host.toLowerCase() === sourceUrl.host.toLowerCase()
+    const isRootPath = linkUrl.pathname === "/" || linkUrl.pathname === ""
+    return isSameHost && isRootPath
+  } catch {
+    const normalizedItem = normalizeUrl(itemLink).toLowerCase()
+    const normalizedSource = normalizeUrl(sourceSiteUrl).toLowerCase()
+    return normalizedItem === normalizedSource
+  }
+}
 
 const getSourcePriority = (sourceUrl: string): number => {
   const normalizedSourceUrl = normalizeUrl(sourceUrl)
@@ -632,7 +644,7 @@ const getSourceItems = async (
           sourceUrl: resolvedSiteUrl,
         }
       })
-      .filter((item) => !(isNotesSource && isNotesRootLink(item.link)))
+      .filter((item) => !(isNotesSource && isNotesRootLinkForSource(item.link, resolvedSiteUrl)))
 
     return { items: normalizedItems, resolvedSiteUrl, resolvedRssUrl }
   } catch (error) {

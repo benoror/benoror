@@ -43,7 +43,6 @@ Notes:
 
 - The wrapper downloads and runs the upstream `action.sh` from `quartz-themes` in `apps/notes`, so Quartz root detection works as intended.
 - Upstream installer applies one theme package at a time. If you need mixed-mode setup (for example, light from one theme and dark from another), keep using Quartz tokens/overrides for the mode split.
-- Outrun remains a local custom variant in `quartz/styles/custom.scss`.
 
 ## Upgrading Quartz
 

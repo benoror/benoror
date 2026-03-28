@@ -7,14 +7,28 @@ html {
   font-size: 16px;
 }
 
-:root[saved-theme="dark"][data-theme-variant="outrun"] {
-  --light: #10051f;
-  --lightgray: #2a1646;
-  --gray: #8f7bb8;
-  --darkgray: #f3e8ff;
-  --dark: #fdf7ff;
-  --secondary: #22d3ee;
-  --tertiary: #f472b6;
-  --highlight: rgba(244, 114, 182, 0.22);
-  --textHighlight: #f472b655;
+// quartz-themes masks the darkmode button and hides child svgs.
+// Re-assert Quartz's native light/dark icon rendering.
+:root button.darkmode {
+  background: none !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+}
+
+:root button.darkmode > svg {
+  display: none !important;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: calc(50% - 10px);
+  fill: var(--quartz-icon-color, var(--darkgray)) !important;
+  stroke: var(--quartz-icon-color, var(--darkgray)) !important;
+}
+
+:root[saved-theme="light"] button.darkmode > .dayIcon {
+  display: inline !important;
+}
+
+:root[saved-theme="dark"] button.darkmode > .nightIcon {
+  display: inline !important;
 }

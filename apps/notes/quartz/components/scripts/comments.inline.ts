@@ -1,5 +1,9 @@
-const changeTheme = (e: CustomEventMap["themechange"]) => {
-  const theme = e.detail.theme
+const addCleanup = (cleanup: () => void) =>
+  (window as unknown as Window & { addCleanup: (cleanup: () => void) => void }).addCleanup(cleanup)
+
+const changeTheme = (e: Event) => {
+  const event = e as CustomEvent<{ theme: string }>
+  const theme = event.detail.theme
   const iframe = document.querySelector("iframe.giscus-frame") as HTMLIFrameElement
   if (!iframe) {
     return
@@ -23,7 +27,7 @@ const changeTheme = (e: CustomEventMap["themechange"]) => {
 
 const getThemeName = (theme: string) => {
   if (theme !== "dark" && theme !== "light") {
-    return theme
+    return "dark"
   }
   const giscusContainer = document.querySelector(".giscus") as GiscusElement
   if (!giscusContainer) {
@@ -87,6 +91,6 @@ document.addEventListener("nav", () => {
 
   giscusContainer.appendChild(giscusScript)
 
-  document.addEventListener("themechange", changeTheme)
-  window.addCleanup(() => document.removeEventListener("themechange", changeTheme))
+  document.addEventListener("themechange", changeTheme as EventListener)
+  addCleanup(() => document.removeEventListener("themechange", changeTheme as EventListener))
 })

@@ -22,7 +22,7 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
   - Markdown: [resume.benoror.com/resume.md](https://resume.benoror.com/resume.md)
 - 📝 Notes (public from my Obsidian Vaults): [notes.benoror.com](http://notes.benoror.com/)
 - 💭 Blog: [blog.benoror.com](https://blog.benoror.com/)
-- 🧵 Feed (\[most\] of my activity): [benoror.com/feed](https://www.benoror.com/feed)
+- 🧵 Feed (\[most\] of my activity): [feed.benoror.com](https://feed.benoror.com)
 
 ### Open Source
 

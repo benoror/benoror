@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google"
 
 import "@workspace/ui/globals.css"
 import { Providers } from "@/components/providers"
+import { LINKS } from "@workspace/data/personal"
 
 const fontSans = Geist({
   subsets: ["latin"],
@@ -15,8 +16,30 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(LINKS.website.url),
   title: "Ben Orozco | Full-stack Developer",
   description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+  alternates: {
+    canonical: "/",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.rss", title: "RSS Feed" },
+        { url: "/feed.xml", title: "RSS Feed (XML)" },
+      ],
+    },
+  },
+  openGraph: {
+    type: "website",
+    url: LINKS.website.url,
+    title: "Ben Orozco | Full-stack Developer",
+    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+    siteName: "Ben Orozco",
+  },
+  twitter: {
+    card: "summary",
+    title: "Ben Orozco | Full-stack Developer",
+    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+  },
 }
 
 export default function RootLayout({

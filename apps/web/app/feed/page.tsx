@@ -5,6 +5,25 @@ import { FeedPageClient } from "./feed-page.client"
 export const metadata: Metadata = {
   title: "Feed | Ben Orozco",
   description: "Aggregated personal feed from blog posts, social updates, podcasts, and gists.",
+  alternates: {
+    canonical: "/feed",
+    types: {
+      "application/rss+xml": [
+        { url: "/feed.rss", title: "RSS Feed" },
+        { url: "/feed.xml", title: "RSS Feed (XML)" },
+      ],
+    },
+  },
+  openGraph: {
+    url: "/feed",
+    title: "Feed | Ben Orozco",
+    description: "Aggregated personal feed from blog posts, social updates, podcasts, and gists.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Feed | Ben Orozco",
+    description: "Aggregated personal feed from blog posts, social updates, podcasts, and gists.",
+  },
 }
 
 export const dynamic = "force-dynamic"

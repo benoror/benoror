@@ -119,7 +119,7 @@ export const SocialIcons = ({
       <IconLink Icon={Mail} link={`mailto:${HOME.public_email}`} text={shortURL(HOME.public_email)} legend="Email" className={iconClassName} tooltipClassName={tooltipClassName} tooltipShowArrow={false} />
       <IconLink Icon={ObsidianIcon} link={LINKS.notes.url} text={shortURL(LINKS.notes.url)} legend={LINKS.notes.legend} className={iconClassName} tooltipClassName={tooltipClassName} tooltipShowArrow={false} />
       <IconLink Icon={NotebookPen} link={LINKS.blog.url} text={shortURL(LINKS.blog.url)} legend={LINKS.blog.legend} className={iconClassName} tooltipClassName={tooltipClassName} tooltipShowArrow={false} />
-      <IconLink Icon={Rss} link={LINKS.feed.url} text={shortURL(LINKS.feed.url)} legend={LINKS.feed.legend} className={iconClassName} tooltipClassName={tooltipClassName} tooltipShowArrow={false} />
+      <IconLink Icon={Rss} link={LINKS.feed_page.url} text={shortURL(LINKS.feed.url)} legend={LINKS.feed.legend} className={iconClassName} tooltipClassName={tooltipClassName} tooltipShowArrow={false} />
     </motion.div>
   )
 }

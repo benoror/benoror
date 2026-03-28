@@ -174,8 +174,7 @@ export function FeedPageClient({
                 rel="noopener noreferrer"
                 aria-label="Open consolidated RSS feed"
               >
-                <Rss className="h-4 w-4" />
-                Consolidated RSS feed
+                <Rss className="h-4 w-4" /> RSS
               </a>
             </div>
 

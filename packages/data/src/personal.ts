@@ -98,7 +98,7 @@ export const LINKS = {
 export const FEED_SOURCES: FeedSource[] = [
   {
     id: "bear_blog",
-    name: "Blog (Bear Blog)",
+    name: "Blog",
     site_url: LINKS.bear_blog.url,
     rss_url: "https://benoror.bearblog.dev/feed/?type=rss",
     status: "active",
@@ -113,21 +113,21 @@ export const FEED_SOURCES: FeedSource[] = [
   },
   {
     id: "medium",
-    name: "Old Medium Blog (2016-2020)",
+    name: "Medium",
     site_url: LINKS.medium.url,
     rss_url: "https://medium.com/feed/@benoror",
     status: "active",
   },
   {
     id: "blogger",
-    name: "Older Blogger Blog (2006-2016)",
+    name: "Blogger",
     site_url: LINKS.blogspot.url,
     rss_url: "https://benjiorozco.blogspot.com/feeds/posts/default?alt=rss",
     status: "active",
   },
   {
     id: "gist_starred_own",
-    name: "GitHub Gists (starred and authored by Ben)",
+    name: "Gists",
     site_url: "https://gist.github.com/benoror/starred",
     rss_url: "https://gist.github.com/benoror/starred.atom",
     status: "active",
@@ -142,21 +142,21 @@ export const FEED_SOURCES: FeedSource[] = [
   },
   {
     id: "bluesky_posts",
-    name: "Bluesky Posts",
+    name: "Bluesky",
     site_url: LINKS.bluesky.url,
     status: "active",
     note: "Public author feed from Bluesky API (excluding replies and reposts).",
   },
   {
     id: "linkedin_posts",
-    name: "LinkedIn Posts (manual subset)",
+    name: "LinkedIn (manual subset)",
     site_url: LINKS.linkedin.url,
     status: "manual",
     note: "LinkedIn does not provide an official public RSS endpoint for member posts.",
   },
   {
     id: "stack_overflow",
-    name: "Stack Overflow Activity",
+    name: "Stack Overflow",
     site_url: "https://stackoverflow.com/users/171809/ben-orozco?tab=questions&sort=votes",
     rss_url: "https://stackoverflow.com/feeds/user/171809",
     status: "active",

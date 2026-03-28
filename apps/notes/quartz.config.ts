@@ -1,6 +1,12 @@
 import { QuartzConfig } from "./quartz/cfg"
 import * as Plugin from "./quartz/plugins"
 
+const quartzBaseUrl =
+  process.env.QUARTZ_BASE_URL ??
+  (process.env.VERCEL === "1" || process.env.VERCEL_ENV === "production"
+    ? "notes.benoror.com"
+    : "localhost:3002")
+
 const config: QuartzConfig = {
   configuration: {
     pageTitle: "Ben Orozco Vaults",
@@ -9,7 +15,7 @@ const config: QuartzConfig = {
     enablePopovers: true,
     analytics: null,
     locale: "en-US",
-    baseUrl: "notes.benoror.com",
+    baseUrl: quartzBaseUrl,
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {

@@ -1,6 +1,11 @@
 import { gmailAlias } from '@workspace/utils/email';
 import type { FeedSource } from './types/feed.js';
 
+const isProductionDeployment =
+  process.env.VERCEL === "1" ||
+  process.env.VERCEL_ENV === "production" ||
+  process.env.DEPLOYMENT_ENV === "production";
+
 export const PERSONAL = {
   full_name: "Benjamin Orozco Rios",
   short_name: 'Ben Orozco',
@@ -14,23 +19,25 @@ type LinkEntry = {
 
 export const LINKS = {
   website: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://www.benoror.com",
+    url: isProductionDeployment ? "https://www.benoror.com" : "http://localhost:3000",
     legend: "Website",
   },
   resume: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3001" : "https://resume.benoror.com",
+    url: isProductionDeployment ? "https://resume.benoror.com" : "http://localhost:3001",
     legend: "Resume",
   },
   resume_pdf: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3001/Ben%20Orozco%20-%20Resume.pdf" : "https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf",
+    url: isProductionDeployment
+      ? "https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf"
+      : "http://localhost:3001/Ben%20Orozco%20-%20Resume.pdf",
     legend: "Resume (PDF)",
   },
   resume_markdown: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3001/resume.md" : "https://resume.benoror.com/resume.md",
+    url: isProductionDeployment ? "https://resume.benoror.com/resume.md" : "http://localhost:3001/resume.md",
     legend: "Resume (Markdown)",
   },
   notes: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3002" : "http://notes.benoror.com",
+    url: isProductionDeployment ? "https://notes.benoror.com" : "http://localhost:3002",
     legend: "Obsidian Notes",
   },
   blog: {
@@ -41,11 +48,11 @@ export const LINKS = {
     url: "https://benoror.bearblog.dev",
   },
   feed: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed.rss" : "https://www.benoror.com/feed.rss",
+    url: isProductionDeployment ? "https://www.benoror.com/feed.rss" : "http://localhost:3000/feed.rss",
     legend: "RSS Feed",
   },
   feed_page: {
-    url: process.env.NODE_ENV === "development" ? "http://localhost:3000/feed" : "https://www.benoror.com/feed",
+    url: isProductionDeployment ? "https://www.benoror.com/feed" : "http://localhost:3000/feed",
     legend: "Activity Feed",
   },
   github: {

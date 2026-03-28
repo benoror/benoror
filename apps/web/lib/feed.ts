@@ -46,6 +46,9 @@ export type AggregatedFeed = {
 }
 
 const normalizeUrl = (value: string): string => value.trim().replace(/\/+$/, "")
+const normalizeLocalhostNotesLink = (value: string): string =>
+  value.replace(/^https:\/\/localhost:3002/i, "http://localhost:3002")
+const isNotesRootLink = (value: string): boolean => /^https?:\/\/localhost:3002\/?$/i.test(value)
 
 const getSourcePriority = (sourceUrl: string): number => {
   const normalizedSourceUrl = normalizeUrl(sourceUrl)
@@ -566,7 +569,7 @@ const normalizeItem = async (
 
 const getSourceItems = async (
   source: (typeof FEED_SOURCES)[number],
-): Promise<{ items: AggregatedFeedItem[]; error?: string }> => {
+): Promise<{ items: AggregatedFeedItem[]; error?: string; resolvedSiteUrl?: string; resolvedRssUrl?: string }> => {
   if (source.id === "bluesky_posts") {
     return fetchBlueskyItems(source)
   }
@@ -576,27 +579,62 @@ const getSourceItems = async (
   }
 
   try {
-    const response = await fetch(source.rss_url, {
-      headers: {
-        "User-Agent": RSS_USER_AGENT,
-      },
-      signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
-      next: { revalidate: 1800 },
-    })
+    const isNotesSource = source.id === "notes"
+    const rssCandidates = isNotesSource ? ["http://localhost:3002/index.xml", source.rss_url] : [source.rss_url]
 
-    if (!response.ok) {
+    let response: Response | null = null
+    let resolvedRssUrl: string | undefined
+    for (const candidate of rssCandidates) {
+      try {
+        const candidateResponse = await fetch(candidate, {
+          headers: {
+            "User-Agent": RSS_USER_AGENT,
+          },
+          signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+          ...(isNotesSource ? { cache: "no-store" as const } : { next: { revalidate: 1800 } }),
+        })
+
+        if (candidateResponse.ok) {
+          response = candidateResponse
+          resolvedRssUrl = candidate
+          break
+        }
+      } catch {
+        // Continue with fallback candidate.
+      }
+    }
+
+    if (!response || !resolvedRssUrl) {
       return {
         items: [],
-        error: `Unable to fetch feed (HTTP ${response.status})`,
+        error: "Unable to fetch feed from all configured endpoints",
       }
     }
 
     const xml = await response.text()
     const parsed = await parser.parseString(xml)
+    const resolvedSiteUrl =
+      isNotesSource && resolvedRssUrl.startsWith("http://localhost")
+        ? "http://localhost:3002"
+        : source.site_url
     const normalizedItems = (await Promise.all((parsed.items ?? []).map((item) => normalizeItem(item, source))))
       .filter((item): item is AggregatedFeedItem => item !== null)
+      .map((item) => {
+        if (!isNotesSource) {
+          return { ...item, sourceUrl: resolvedSiteUrl }
+        }
 
-    return { items: normalizedItems }
+        const normalizedLink = normalizeLocalhostNotesLink(item.link)
+        return {
+          ...item,
+          id: item.id.replace(item.link, normalizedLink),
+          link: normalizedLink,
+          sourceUrl: resolvedSiteUrl,
+        }
+      })
+      .filter((item) => !(isNotesSource && isNotesRootLink(item.link)))
+
+    return { items: normalizedItems, resolvedSiteUrl, resolvedRssUrl }
   } catch (error) {
     return {
       items: [],
@@ -644,8 +682,8 @@ export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
   const sources: AggregatedFeedSource[] = FEED_SOURCES.map((source, index) => ({
     id: source.id,
     name: source.name,
-    siteUrl: source.site_url,
-    rssUrl: source.rss_url,
+    siteUrl: sourceResults[index]?.resolvedSiteUrl ?? source.site_url,
+    rssUrl: sourceResults[index]?.resolvedRssUrl ?? source.rss_url,
     status: source.status,
     note: source.note,
     error: sourceResults[index]?.error,

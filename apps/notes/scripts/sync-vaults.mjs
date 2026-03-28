@@ -86,6 +86,10 @@ function formatDate(date) {
   return date.toISOString();
 }
 
+function getSourceCreationDate(fileStats) {
+  return fileStats.birthtime;
+}
+
 function ensureTemporalFrontmatter(rawContents, fileStats) {
   const parsed = extractFrontmatter(rawContents);
   if (!parsed) return rawContents;
@@ -95,17 +99,18 @@ function ensureTemporalFrontmatter(rawContents, fileStats) {
 
   const hasDate = hasDateFrontmatter(parsed.content);
   const hasCreated = hasCreatedFrontmatter(parsed.content);
+  const sourceCreationDate = getSourceCreationDate(fileStats);
   const createdDate =
-    parseDateValue(getFrontmatterField(parsed.content, "created")) ?? fileStats.ctime;
+    parseDateValue(getFrontmatterField(parsed.content, "created")) ?? sourceCreationDate;
 
-  // Priority: date > created > original source ctime.
+  // Priority: date > created > original source birthtime.
   if (!hasDate) {
     const preferredDate =
-      parseDateValue(getFrontmatterField(parsed.content, "created")) ?? fileStats.ctime;
+      parseDateValue(getFrontmatterField(parsed.content, "created")) ?? sourceCreationDate;
     frontmatterLines.push(`date: "${formatDate(preferredDate)}"`);
   }
 
-  // Preserve original source file ctime metadata when created is missing.
+  // Preserve original source file birthtime metadata when created is missing.
   if (!hasCreated) {
     frontmatterLines.push(`created: "${formatDate(createdDate)}"`);
   }

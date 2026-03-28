@@ -44,6 +44,16 @@ Notes:
 - The wrapper downloads and runs the upstream `action.sh` from `quartz-themes` in `apps/notes`, so Quartz root detection works as intended.
 - Upstream installer applies one theme package at a time. If you need mixed-mode setup (for example, light from one theme and dark from another), keep using Quartz tokens/overrides for the mode split.
 
+## Discoverability outputs
+
+The Notes site now emits machine-discovery assets by default:
+
+- `sitemap.xml` and `index.xml` (RSS) via Quartz content index.
+- `robots.txt`, `llms.txt`, and `agents.txt` at site root.
+- Per-page Markdown mirror under `/md/<slug>.md`.
+- A "Download Markdown" action on content pages that links to the mirrored `.md`.
+- Canonical URL, robots meta (`noindex` for `hidden: true` pages), and JSON-LD schema metadata in page `<head>`.
+
 ## Upgrading Quartz
 
 This app vendors Quartz core source in `apps/notes/quartz`, so upgrades are explicit:

@@ -1,4 +1,5 @@
 import { i18n } from "../i18n"
+import { getDate } from "./Date"
 import { FullSlug, getFileExtension, joinSegments, pathToRoot } from "../util/path"
 import { CSSResourceToStyleElement, JSResourceToScriptElement } from "../util/resources"
 import { googleFontHref, googleFontSubsetHref } from "../util/theme"
@@ -30,6 +31,23 @@ export default (() => {
     // Url of current page
     const socialUrl =
       fileData.slug === "404" ? url.toString() : joinSegments(url.toString(), fileData.slug!)
+    const canonicalUrl = socialUrl
+    const isHidden =
+      fileData.frontmatter?.hidden === true || fileData.frontmatter?.hidden === "true"
+    const pageDate = getDate(cfg, fileData)?.toISOString()
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": fileData.slug === "index" ? "WebSite" : "Article",
+      headline: title,
+      description,
+      url: canonicalUrl,
+      dateModified: pageDate,
+      isPartOf: {
+        "@type": "WebSite",
+        name: cfg.pageTitle,
+        url: `https://${cfg.baseUrl ?? "example.com"}`,
+      },
+    }
 
     const usesCustomOgImage = ctx.cfg.plugins.emitters.some(
       (e) => e.name === CustomOgImagesEmitterName,
@@ -83,8 +101,11 @@ export default (() => {
         )}
 
         <link rel="icon" href={iconPath} />
+        <link rel="canonical" href={canonicalUrl} />
         <meta name="description" content={description} />
         <meta name="generator" content="Quartz" />
+        <meta name="robots" content={isHidden ? "noindex, nofollow" : "index, follow"} />
+        <script type="application/ld+json">{JSON.stringify(schema)}</script>
 
         {css.map((resource) => CSSResourceToStyleElement(resource, true))}
         {js

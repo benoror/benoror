@@ -174,7 +174,7 @@ export const FEED_SOURCES: FeedSource[] = [
 export const HOME = {
   title: PERSONAL.short_name,
   header: "Technologist, Software Engineer & Entrepreneur",
-  public_email: gmailAlias(PERSONAL.private_email, 'homepage'),
+  public_email: "hello@benoror.com",
   about_me: "I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products, growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting."
 }
 

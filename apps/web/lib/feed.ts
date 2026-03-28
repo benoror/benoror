@@ -4,6 +4,7 @@ import { FEED_SOURCES } from "@workspace/data/personal"
 const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000
 const MAX_ITEMS = 200
+const GIST_API_BASE_URL = "https://api.github.com/gists"
 
 const parser = new Parser()
 
@@ -110,22 +111,161 @@ const stripHtmlTags = (input: string): string =>
 
 const stripInlineHtml = (input: string): string => decodeHtmlEntities(input.replace(/<[^>]+>/g, ""))
 
-const extractGistCodeFromHtml = (html: string): string | undefined => {
+type GistFile = {
+  filename: string
+  content: string
+  language?: string
+}
+
+const extractCodeLinesFromHtml = (html: string): string[] => {
   const lineMatches = Array.from(
     html.matchAll(/<td[^>]*class="[^"]*blob-code-inner[^"]*"[^>]*>([\s\S]*?)<\/td>/gi),
   )
 
-  if (lineMatches.length === 0) {
-    return undefined
+  return lineMatches.map((match) => stripInlineHtml(match[1] ?? "").replace(/\u00a0/g, " ").trimEnd())
+}
+
+const extractGistFilesFromHtml = (html: string): GistFile[] => {
+  const sections = Array.from(
+    html.matchAll(/<a[^>]*href="[^"]*#file-[^"]+"[^>]*>([\s\S]*?)<\/a>([\s\S]*?)(?=<a[^>]*href="[^"]*#file-[^"]+"|$)/gi),
+  )
+
+  const files = sections
+    .map((section) => {
+      const filename = stripInlineHtml(section[1] ?? "").trim()
+      const lines = extractCodeLinesFromHtml(section[2] ?? "")
+      return {
+        filename,
+        content: lines.join("\n").trim(),
+      }
+    })
+    .filter((file) => file.filename.length > 0 && file.content.length > 0)
+
+  // Fallback for layouts without per-file anchors.
+  if (files.length === 0) {
+    const lines = extractCodeLinesFromHtml(html)
+    if (lines.length > 0) {
+      return [{ filename: "unknown.txt", content: lines.join("\n").trim() }]
+    }
   }
 
-  const lines = lineMatches.map((match) => stripInlineHtml(match[1] ?? "").replace(/\u00a0/g, " ").trimEnd())
+  return files
+}
+
+const extractGistCodeFromHtml = (html: string): string | undefined => {
+  const lines = extractCodeLinesFromHtml(html)
   const hasUsefulContent = lines.some((line) => line.trim().length > 0)
   if (!hasUsefulContent) {
     return undefined
   }
 
   return lines.join("\n").trim()
+}
+
+const parseGistIdFromLink = (link: string): string | null => {
+  const match = link.match(/gist\.github\.com\/[^/]+\/([a-f0-9]+)/i)
+  return match?.[1] ?? null
+}
+
+const mapLanguageFromExtension = (filename: string | undefined): string | undefined => {
+  const ext = getFileExtension(filename)
+  return ext ? EXTENSION_TO_LANGUAGE[ext] : undefined
+}
+
+const mapGitHubLanguage = (language: string | undefined): string | undefined => {
+  if (!language) return undefined
+  const normalized = language.toLowerCase()
+  const fromExtensionMap = EXTENSION_TO_LANGUAGE[normalized]
+  if (fromExtensionMap) return fromExtensionMap
+
+  const direct: Record<string, string> = {
+    javascript: "javascript",
+    typescript: "typescript",
+    markdown: "markdown",
+    ruby: "ruby",
+    python: "python",
+    shell: "bash",
+    bash: "bash",
+    json: "json",
+    yaml: "yaml",
+    html: "html",
+    css: "css",
+    scss: "scss",
+    go: "go",
+    rust: "rust",
+    java: "java",
+    kotlin: "kotlin",
+    swift: "swift",
+    c: "c",
+    "c++": "cpp",
+    sql: "sql",
+  }
+
+  return direct[normalized]
+}
+
+const fetchGistFilesFromApi = async (link: string): Promise<GistFile[] | null> => {
+  const gistId = parseGistIdFromLink(link)
+  if (!gistId) return null
+
+  try {
+    const gistResponse = await fetch(`${GIST_API_BASE_URL}/${gistId}`, {
+      headers: {
+        "User-Agent": RSS_USER_AGENT,
+        Accept: "application/vnd.github+json",
+      },
+      signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+      next: { revalidate: 1800 },
+    })
+
+    if (!gistResponse.ok) {
+      return null
+    }
+
+    const gist = (await gistResponse.json()) as {
+      files?: Record<
+        string,
+        {
+          filename?: string
+          content?: string
+          raw_url?: string
+          language?: string
+          truncated?: boolean
+        }
+      >
+    }
+
+    const files = gist.files ? Object.values(gist.files) : []
+    if (files.length === 0) return null
+
+    const enrichedFiles = await Promise.all(
+      files.map(async (file) => {
+        let content = file.content ?? ""
+        if (!content && file.raw_url) {
+          const rawResponse = await fetch(file.raw_url, {
+            headers: {
+              "User-Agent": RSS_USER_AGENT,
+            },
+            signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+            next: { revalidate: 1800 },
+          })
+          if (rawResponse.ok) {
+            content = await rawResponse.text()
+          }
+        }
+
+        return {
+          filename: file.filename ?? "unknown.txt",
+          content: content.trim(),
+          language: file.language,
+        } satisfies GistFile
+      }),
+    )
+
+    return enrichedFiles.filter((file) => file.content.length > 0)
+  } catch {
+    return null
+  }
 }
 
 const normalizeMaybeEmpty = (value: string | undefined): string | undefined => {
@@ -139,10 +279,10 @@ const getBodyContent = (item: Parser.Item): string => {
   return encodedContent || item.content || item.contentSnippet || ""
 }
 
-const inferBodyKind = (
+const inferBodyKind = async (
   item: Parser.Item,
   source: (typeof FEED_SOURCES)[number],
-): Pick<AggregatedFeedItem, "body" | "bodyFormat" | "codeLanguage"> => {
+): Promise<Pick<AggregatedFeedItem, "body" | "bodyFormat" | "codeLanguage">> => {
   const body = getBodyContent(item).trim()
   if (!body) {
     return {}
@@ -154,6 +294,50 @@ const inferBodyKind = (
   const ext = titleExt ?? snippetExt ?? linkExt
   const codeLanguage = ext ? EXTENSION_TO_LANGUAGE[ext] : undefined
   const isCodeSource = source.id.startsWith("gist_") || Boolean(codeLanguage)
+
+  if (source.id.startsWith("gist_")) {
+    const gistFilesFromApi = item.link ? await fetchGistFilesFromApi(item.link) : null
+    const gistFiles = gistFilesFromApi && gistFilesFromApi.length > 0
+      ? gistFilesFromApi
+      : isLikelyHtml(body)
+        ? extractGistFilesFromHtml(body)
+        : []
+
+    if (gistFiles.length > 0) {
+      const markdownFiles = gistFiles.filter((file) => {
+        const fileExt = getFileExtension(file.filename)
+        return fileExt === "md" || fileExt === "markdown"
+      })
+
+      if (markdownFiles.length > 0) {
+        const markdownBody = markdownFiles
+          .map((file) => (markdownFiles.length > 1 ? `## ${file.filename}\n\n${file.content}` : file.content))
+          .join("\n\n---\n\n")
+
+        return {
+          body: normalizeMaybeEmpty(markdownBody),
+          bodyFormat: "markdown",
+          codeLanguage: "markdown",
+        }
+      }
+
+      const primaryFile =
+        gistFiles.find((file) => {
+          return Boolean(mapLanguageFromExtension(file.filename) ?? mapGitHubLanguage(file.language))
+        }) ?? gistFiles[0]
+
+      const primaryLanguage =
+        mapLanguageFromExtension(primaryFile?.filename) ??
+        mapGitHubLanguage(primaryFile?.language) ??
+        codeLanguage
+
+      return {
+        body: normalizeMaybeEmpty(primaryFile?.content),
+        bodyFormat: primaryLanguage === "markdown" ? "markdown" : "code",
+        codeLanguage: primaryLanguage,
+      }
+    }
+  }
 
   if (codeLanguage === "markdown") {
     const markdownBody = normalizeMaybeEmpty(stripHtmlTags(body)) ?? normalizeMaybeEmpty(item.contentSnippet)
@@ -191,10 +375,10 @@ const inferBodyKind = (
   }
 }
 
-const normalizeItem = (
+const normalizeItem = async (
   item: Parser.Item,
   source: (typeof FEED_SOURCES)[number],
-): AggregatedFeedItem | null => {
+): Promise<AggregatedFeedItem | null> => {
   const publishedDate = parseDate(item.isoDate) ?? parseDate(item.pubDate)
   if (!publishedDate || !item.link || !item.title) {
     return null
@@ -205,12 +389,14 @@ const normalizeItem = (
     return null
   }
 
+  const inferredBody = await inferBodyKind(item, source)
+
   return {
     id: `${source.id}::${item.guid ?? item.link}`,
     title: item.title,
     link: item.link,
     summary: item.contentSnippet ?? undefined,
-    ...inferBodyKind(item, source),
+    ...inferredBody,
     publishedAt: publishedDate.toISOString(),
     sourceId: source.id,
     sourceName: source.name,
@@ -243,8 +429,7 @@ const getSourceItems = async (
 
     const xml = await response.text()
     const parsed = await parser.parseString(xml)
-    const normalizedItems = (parsed.items ?? [])
-      .map((item) => normalizeItem(item, source))
+    const normalizedItems = (await Promise.all((parsed.items ?? []).map((item) => normalizeItem(item, source))))
       .filter((item): item is AggregatedFeedItem => item !== null)
 
     return { items: normalizedItems }

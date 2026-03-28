@@ -3,6 +3,10 @@
 
 // put your custom CSS here!
 
+html {
+  font-size: 16px;
+}
+
 :root[saved-theme="dark"][data-theme-variant="outrun"] {
   --light: #10051f;
   --lightgray: #2a1646;

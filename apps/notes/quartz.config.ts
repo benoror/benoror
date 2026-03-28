@@ -13,12 +13,13 @@ const config: QuartzConfig = {
     ignorePatterns: ["private", "templates", ".obsidian"],
     defaultDateType: "modified",
     theme: {
-      fontOrigin: "googleFonts",
+      // Align with Obsidian appearance settings (local installed font families).
+      fontOrigin: "local",
       cdnCaching: true,
       typography: {
-        header: "Schibsted Grotesk",
-        body: "Source Sans Pro",
-        code: "IBM Plex Mono",
+        header: "JetBrainsMono Nerd Font Mono",
+        body: "JetBrainsMono Nerd Font Mono",
+        code: "JetBrainsMono Nerd Font Mono",
       },
       colors: {
         lightMode: {

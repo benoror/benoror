@@ -1,7 +1,20 @@
 'use client'
 
 import { Button } from '@workspace/ui/components/button'
-import { FileText } from 'lucide-react'
+import Image from 'next/image'
+import markdownIcon from '@/app/markdown.svg'
+
+function MarkdownIcon() {
+  return (
+    <Image
+      src={markdownIcon}
+      alt="Markdown"
+      width={24}
+      height={24}
+      className="dark:invert"
+    />
+  )
+}
 
 export default function DownloadMarkdownButton() {
   function handleClick() {
@@ -10,7 +23,7 @@ export default function DownloadMarkdownButton() {
 
   return (
     <Button onClick={handleClick} className="print:hidden cursor-pointer" variant={'outline'} size="icon">
-      <FileText width={20} strokeWidth={1} />
+      <MarkdownIcon />
     </Button>
   )
 }

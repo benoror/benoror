@@ -10,8 +10,8 @@ export default function DownloadPDFButton(){
   }
 
   return (
-    <Button onClick={handleClick} className="print:hidden cursor-pointer" variant={'outline'} size="icon">
-      <Download width={20} strokeWidth={1} />
+    <Button onClick={handleClick} className="print:hidden cursor-pointer text-foreground" variant={'outline'} size="icon">
+      <Download width={20} strokeWidth={1.25} className="text-foreground" />
     </Button>
   )
 

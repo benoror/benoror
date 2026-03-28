@@ -10,8 +10,8 @@ export default function PrintButton(){
   }
 
   return (
-    <Button onClick={handlePrint} className="print:hidden cursor-pointer" variant={'outline'} size="icon">
-      <Printer width={20} strokeWidth={1} />
+    <Button onClick={handlePrint} className="print:hidden cursor-pointer text-foreground" variant={'outline'} size="icon">
+      <Printer width={20} strokeWidth={1.25} className="text-foreground" />
     </Button>
   )
 

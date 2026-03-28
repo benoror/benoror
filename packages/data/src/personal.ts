@@ -48,6 +48,14 @@ export const FEED_SOURCES: FeedSource[] = [
     status: "active",
   },
   {
+    id: "gist_starred_own",
+    name: "GitHub Gists (starred and authored by Ben)",
+    site_url: "https://gist.github.com/benoror/starred",
+    rss_url: "https://gist.github.com/benoror/starred.atom",
+    status: "active",
+    note: "Filtered to entries authored under the benoror namespace.",
+  },
+  {
     id: "x_likes_bookmarks",
     name: "X / Twitter (manual likes/bookmarks subset)",
     site_url: "https://x.com/benoror",
@@ -55,19 +63,18 @@ export const FEED_SOURCES: FeedSource[] = [
     note: "X does not provide an official public RSS for likes/bookmarks.",
   },
   {
+    id: "linkedin_posts",
+    name: "LinkedIn Posts (manual subset)",
+    site_url: LINKS.linkedin_url,
+    status: "manual",
+    note: "LinkedIn does not provide an official public RSS endpoint for member posts.",
+  },
+  {
     id: "pocketcasts_starred",
     name: "Pocket Casts Starred",
     site_url: "https://pocketcasts.com/starred",
     status: "private",
     note: "Pocket Casts starred items are account-scoped and not publicly exposed via RSS.",
-  },
-  {
-    id: "gist_starred_own",
-    name: "GitHub Gists (starred and authored by Ben)",
-    site_url: "https://gist.github.com/benoror/starred",
-    rss_url: "https://gist.github.com/benoror/starred.atom",
-    status: "active",
-    note: "Filtered to entries authored under the benoror namespace.",
   },
 ]
 

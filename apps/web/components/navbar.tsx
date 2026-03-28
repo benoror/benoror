@@ -64,6 +64,9 @@ export default function Navbar() {
                   <Link href={LINKS.resume_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Resume
                   </Link>
+                  <Link href={LINKS.notes_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                    Notes
+                  </Link>
                   <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
@@ -91,6 +94,9 @@ export default function Navbar() {
               </Link>
               <Link href={LINKS.blog_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Blog
+              </Link>
+              <Link href={LINKS.notes_url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+                Notes
               </Link>
               <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Feed

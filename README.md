@@ -16,6 +16,14 @@ I am a Computer Science Engineer specialized in Full Stack development, passiona
 
 Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 
+- 📑 Resume:
+  - Web: [resume.benoror.com](https://resume.benoror.com/)
+  - PDF: [resume.benoror.com/Ben Orozco - Resume.pdf](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf)
+  - Markdown: [resume.benoror.com/resume.md](https://resume.benoror.com/resume.md)
+- 📝 Notes (public from my Obsidian Vaults): [notes.benoror.com](http://notes.benoror.com/)
+- 💭 Blog: [blog.benoror.com](https://blog.benoror.com/)
+- 🧵 Feed (\[most\] of my activity): [benoror.com/feed](https://www.benoror.com/feed)
+
 ### Open Source
 
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&card_width=384&description_lines_count=2&repo=obsidianos_work&show=prs_reviewed,issues_commented)](https://github.com/benoror/obsidianos_work)
@@ -40,6 +48,7 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
 - 🏠 [`web/`](apps/web) — Website Homepage — [benoror.com](https://benoror.com)
     - 💼 [`portfolio/`](apps/web/app/portfolio) — Portfolio — [portfolio.benoror.com](https://portfolio.benoror.com)
 - 📑 [`resume/`](apps/resume) — Résumé — [resume.benoror.com](http://resume.benoror.com/)
+- 📝 [`notes/`](apps/notes) — Obsidian notes published with Quartz — [notes.benoror.com](http://notes.benoror.com/)
 
 ### `packages/`
 
@@ -64,4 +73,3 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
 ## Others
 
 - 📃 Cover Letter: [gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe](https://gist.github.com/benoror/0463faf56e81cc36ea2ce9962b9776fe)
-- 💭 Blog: [blog.benoror.com](http://blog.benoror.com/)

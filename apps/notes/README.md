@@ -31,6 +31,20 @@ Sync behavior:
 Quartz source is committed locally in `apps/notes/quartz` (standard Quartz project layout).
 Dev server uses port `3002` (`wsPort` `3003`).
 
+## 3) Install themes from quartz-themes
+
+This app includes a wrapper for the official `quartz-themes` installer flow.
+
+- Install/update a theme into `apps/notes/quartz/styles/themes`:
+  - `pnpm --filter notes theme:install -- "catppuccin"`
+  - `pnpm --filter notes theme:install -- "obsidian-nord"`
+
+Notes:
+
+- The wrapper downloads and runs the upstream `action.sh` from `quartz-themes` in `apps/notes`, so Quartz root detection works as intended.
+- Upstream installer applies one theme package at a time. If you need mixed-mode setup (for example, light from one theme and dark from another), keep using Quartz tokens/overrides for the mode split.
+- Outrun remains a local custom variant in `quartz/styles/custom.scss`.
+
 ## Upgrading Quartz
 
 This app vendors Quartz core source in `apps/notes/quartz`, so upgrades are explicit:

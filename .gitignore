@@ -30,6 +30,8 @@ build
 dist
 apps/notes/public
 apps/notes/quartz/.quartz-cache/
+apps/notes/scripts/quartz-themes/.cache/
+apps/notes/quartz/styles/*.scssr
 
 
 # Debug

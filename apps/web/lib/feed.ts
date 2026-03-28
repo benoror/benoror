@@ -273,6 +273,17 @@ const normalizeMaybeEmpty = (value: string | undefined): string | undefined => {
   return normalized ? normalized : undefined
 }
 
+const isStackOverflowCommentItem = (item: Parser.Item): boolean => {
+  const title = item.title?.toLowerCase() ?? ""
+  const link = item.link?.toLowerCase() ?? ""
+
+  return (
+    title.startsWith("comment by ") ||
+    link.includes("/posts/comments/") ||
+    link.includes("#comment")
+  )
+}
+
 const getBodyContent = (item: Parser.Item): string => {
   const encoded = (item as Record<string, unknown>)["content:encoded"]
   const encodedContent = typeof encoded === "string" ? encoded : ""
@@ -386,6 +397,11 @@ const normalizeItem = async (
 
   // Keep only gists under benoror namespace for the "own starred gists" source.
   if (source.id === "gist_starred_own" && !item.link.includes("gist.github.com/benoror/")) {
+    return null
+  }
+
+  // Keep Stack Overflow to posts (questions/answers), excluding comments.
+  if (source.id === "stack_overflow" && isStackOverflowCommentItem(item)) {
     return null
   }
 

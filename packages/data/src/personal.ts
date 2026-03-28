@@ -70,6 +70,14 @@ export const FEED_SOURCES: FeedSource[] = [
     note: "LinkedIn does not provide an official public RSS endpoint for member posts.",
   },
   {
+    id: "stack_overflow",
+    name: "Stack Overflow Activity",
+    site_url: "https://stackoverflow.com/users/171809/ben-orozco?tab=questions&sort=votes",
+    rss_url: "https://stackoverflow.com/feeds/user/171809",
+    status: "active",
+    note: "Public Stack Overflow user feed (recent activity).",
+  },
+  {
     id: "pocketcasts_starred",
     name: "Pocket Casts Starred",
     site_url: "https://pocketcasts.com/starred",

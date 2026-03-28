@@ -105,6 +105,9 @@ importers:
       react-dom:
         specifier: ^19.0.0
         version: 19.0.0(react@19.0.0)
+      react-markdown:
+        specifier: ^10.1.0
+        version: 10.1.0(@types/react@19.0.10)(react@19.0.0)
       rss-parser:
         specifier: ^3.13.0
         version: 3.13.0
@@ -133,9 +136,6 @@ importers:
       framer-motion:
         specifier: ^12.6.2
         version: 12.6.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
-      react-markdown:
-        specifier: ^10.1.0
-        version: 10.1.0(@types/react@19.0.10)(react@19.0.0)
       typescript:
         specifier: ^5.7.3
         version: 5.7.3

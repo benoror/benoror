@@ -1,28 +1,26 @@
-<!-- <p align="center">
+<div align="center">
+  <h1>Ben Orozco</h1>
   <a href="https://benoror.com/">
-    <img alt="Ben Orozco" src="https://avatars2.githubusercontent.com/u/119117?s=460&u=90226a2b669f648db10bcfcdea19a71b3bf667bb&v=4" width="128" style="border-radius: 128px;" />
+     <kbd>
+       <img alt="Ben Orozco" src="https://www.benoror.com/images/ben/ben-bw.jpeg" width="128" style="border-radius: 128px;" />
+     </kbd>
   </a>
-</p> -->
-
-# Ben Orozco
+</div>
 
 ## About me
 
 I am a Computer Science Engineer specialized in Full Stack development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
+
+- 📑 Resume: [resume.benoror.com](https://resume.benoror.com/) [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/960px-PDF_file_icon.svg.png" height="14">](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [Ben Orozco - Resume.pdf](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [<img src="https://www.markdownguide.org/assets/images/markdown-mark-white.svg" height="10">](https://resume.benoror.com/resume.md) [resume.md](https://resume.benoror.com/resume.md)
+- 📝 Notes: [notes.benoror.com](http://notes.benoror.com/)
+- 💭 Blog: [blog.benoror.com](https://blog.benoror.com/)
+- 🧵 Feed: [feed.benoror.com](https://feed.benoror.com) [<img src="https://rss.com/blog/wp-content/uploads/2023/12/1024px-Feed-icon.svg_.png" height="14">](https://www.benoror.com/feed.rss) [feed.rss](https://www.benoror.com/feed.rss)
 
 ![Github Stats](https://github-stats-extended.vercel.app/api?username=benoror&count_private=true&hide=contribs&show_icons=true&theme=nord&show=prs_merged_percentage,issues_authored,issues_commented)
 
 ## Projects
 
 Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
-
-- 📑 Resume:
-  - Web: [resume.benoror.com](https://resume.benoror.com/)
-  - PDF: [resume.benoror.com/Ben Orozco - Resume.pdf](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf)
-  - Markdown: [resume.benoror.com/resume.md](https://resume.benoror.com/resume.md)
-- 📝 Notes (public from my Obsidian Vaults): [notes.benoror.com](http://notes.benoror.com/)
-- 💭 Blog: [blog.benoror.com](https://blog.benoror.com/)
-- 🧵 Feed (\[most\] of my activity): [feed.benoror.com](https://feed.benoror.com)
 
 ### Open Source
 
@@ -39,16 +37,15 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 
 This monorepo powers my personal website: [benoror.com](https://www.benoror.com)
 
-I effectively use it as a playground to experiment with [Web & AI tech](#tech-stack)
-
-(See v0 prompts for this app: [v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP](https://v0.dev/chat/ben-orozco-rios-homepage-TdDRrQubqHP))
+I use it as a playground to experiment with [Web & AI technologies](#tech-stack)
 
 ### `apps/`
 
 - 🏠 [`web/`](apps/web) — Website Homepage — [benoror.com](https://benoror.com)
     - 💼 [`portfolio/`](apps/web/app/portfolio) — Portfolio — [portfolio.benoror.com](https://portfolio.benoror.com)
+    - 🧵 [`feed`](apps/web/app/feed) — Activity Feed — [feed.benoror.com](https://feed.benoror.com)
 - 📑 [`resume/`](apps/resume) — Résumé — [resume.benoror.com](http://resume.benoror.com/)
-- 📝 [`notes/`](apps/notes) — Obsidian notes published with Quartz — [notes.benoror.com](http://notes.benoror.com/)
+- 📝 [`notes/`](apps/notes) — Obsidian Notes Vaults — [notes.benoror.com](http://notes.benoror.com/)
 
 ### `packages/`
 
@@ -64,8 +61,8 @@ I effectively use it as a playground to experiment with [Web & AI tech](#tech-st
 - Components: [shadcn/ui](https://ui.shadcn.com/)
 - CSS styling: [Tailwind v4](https://tailwindcss.com/)
 - IDE/AI/Misc tools:
-  - [Cursor](https://www.cursor.com/) / [Claude 3.7 Sonnet](https://www.anthropic.com/claude/sonnet)
-  - [VSCode](https://code.visualstudio.com/) / [Copilot](https://docs.github.com/en/copilot)
+  - [Claude Code](https://claude.com/product/claude-code)
+  - [Cursor](https://www.cursor.com/)
   - [v0](https://v0.dev/)
   - [Neovim](https://neovim.io/) / [LazyVim](https://www.lazyvim.org/)
   - [benoror/dotfiles](https://github.com/benoror/dotfiles)

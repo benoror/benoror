@@ -1,12 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google"
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
+import { Geist, Geist_Mono } from "next/font/google"
 import PrintButton from '@/components/PrintButton';
 import DownloadPDFButton from '@/components/DownloadPDFButton';
 import DownloadMarkdownButton from '@/components/DownloadMarkdownButton';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { Providers } from "@/components/providers"
 import { LINKS } from "@workspace/data/personal";
-// import { Analytics } from "@vercel/analytics/react";
 
 import "@workspace/ui/globals.css"
 
@@ -57,7 +57,6 @@ export default function RootLayout({
       >
         <Providers>
           {children}
-          {/* <Analytics /> */}
           <div className="print:hidden fixed top-1 right-1 flex gap-2">
             <DownloadPDFButton />
             <PrintButton />
@@ -65,6 +64,7 @@ export default function RootLayout({
             <ThemeToggleButton />
           </div>
         </Providers>
+        <Analytics />
       </body>
     </html>
   )

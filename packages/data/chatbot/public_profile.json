@@ -1,0 +1,30 @@
+{
+  "last_updated": "2026-04-03",
+  "summary": "Ben Orozco is a full-stack developer, hands-on engineering leader, and product builder with a strong background in software engineering. He's passionate about building impactful products, leading development teams, and leveraging technology (especially AI) to solve real-world problems. His work spans open-source, SaaS, gaming, and various tech stacks. He also maintains a public blog and notes on diverse intellectual interests.",
+  "faqs": [
+    {
+      "question": "What is Ben's professional background?",
+      "answer": "Ben Orozco is an experienced engineering leader and full-stack developer, with a trajectory as VP of Engineering and CTO. He has a strong background in building and scaling software products and teams, with experience in both U.S. and LatAm markets."
+    },
+    {
+      "question": "What are Ben's key technical skills?",
+      "answer": "Ben's key technical skills include: Backend (Ruby on Rails, Node.js, Elixir, Java), Frontend (React.js, Next.js, Vue.js, Ember.js, Angular.js, Tailwind CSS), Databases (PostgreSQL, MongoDB, Redis, SQL Server), DevOps & Cloud (AWS, Kubernetes, Docker, CI/CD), and AI Tooling (Claude Code, Cursor, Gemini, Python for ML)."
+    },
+    {
+      "question": "What are Ben's main interests?",
+      "answer": "Ben's interests are broad, encompassing Software Engineering, Startups, Science, Artificial Intelligence, Economics, Crypto, Politics, and History. He also has a strong interest in structured knowledge management, particularly with Obsidian vaults and agentic workflows."
+    },
+    {
+      "question": "Can you summarize Ben's career trajectory?",
+      "answer": "Ben started his career with various software development roles, including an internship at SAP and co-founding CotizaHoy. He then moved into full-stack development and architectural roles, becoming a CTO at Nimbo and eventually VP of Engineering at Apptegy, where he leads a large engineering team and drives AI enablement."
+    },
+    {
+      "question": "What kind of projects does Ben work on?",
+      "answer": "Ben works on a diverse range of projects including open-source tools (e.g., ObsidianOS: Work, gpg.nvim, better-npm-run), SaaS platforms (e.g., BaseQL, HealthTree, Nimbo), gaming (e.g., BloxCraft, GBA Dev), and experimental software development. He often integrates AI and modern web technologies into his projects."
+    },
+    {
+      "question": "Does Ben have a public blog or notes?",
+      "answer": "Yes, Ben maintains a public blog called 'Pursuit of Polymathy' at blog.benoror.com, covering various tech and intellectual topics. He also has a notes section at notes.benoror.com, selectively publishing from his Obsidian vaults."
+    }
+  ]
+}

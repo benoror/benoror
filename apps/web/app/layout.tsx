@@ -1,3 +1,4 @@
+import { ChatbotUI } from "@/components/chatbot/chatbot-ui"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Geist, Geist_Mono } from "next/font/google"
@@ -55,6 +56,7 @@ export default function RootLayout({
       >
         <Providers>{children}</Providers>
         <Analytics />
+        <ChatbotUI />
       </body>
     </html>
   )

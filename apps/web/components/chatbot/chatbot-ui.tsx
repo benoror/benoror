@@ -24,7 +24,7 @@ interface ChatMessage {
 }
 
 export default function ChatbotUI() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
   const [currentPromptIndex, setCurrentPromptIndex] = useState(0)
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [input, setInput] = useState("")

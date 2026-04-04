@@ -53,20 +53,14 @@ export async function POST(req: Request) {
     # User's Question:
     ${lastUserMessage}`;
 
-    // For now, let's just return a placeholder to ensure the setup is correct.
-    // We will integrate the LLM streaming later.
-    // const response = await openai.chat.completions.create({
-    //   model: 'gpt-3.5-turbo', // Or your preferred model
-    //   stream: true,
-    //   messages: [{ role: 'system', content: systemPrompt }],
-    // });
-    // const stream = OpenAIStream(response);
-    // return new StreamingTextResponse(stream);
-
-    return NextResponse.json({
-        message: "API endpoint is working! LLM integration is pending.",
-        debug_prompt: systemPrompt // For debugging, remove in production
+    const response = await openai.chat.completions.create({
+      model: 'gpt-4o', // Using a more capable model for better responses
+      stream: true,
+      messages: [{ role: 'system', content: systemPrompt }],
+      max_tokens: 500, // Added for safety and response length control
     });
+    const stream = OpenAIStream(response);
+    return new StreamingTextResponse(stream);
 
   } catch (error) {
     console.error("Chat API error:", error);

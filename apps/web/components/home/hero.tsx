@@ -4,7 +4,6 @@ import type React from "react"
 
 import { useState, useEffect, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowDown, ArrowUp } from "lucide-react"
 import { HOME } from "@workspace/data/personal"
 import { SocialIcons } from "../ui/social-icons"
 import OutrunGrid from "@/components/outrun-hero-background"
@@ -18,7 +17,6 @@ export default function Hero() {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
-  const [isScrolled, setIsScrolled] = useState(false)
   const baseImages = useMemo(
     () => [
       "/images/ben/ben-bw.jpeg",
@@ -62,37 +60,6 @@ export default function Hero() {
 
     return () => clearInterval(interval)
   }, [images.length])
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Check if we've scrolled down to the About section
-      const aboutSection = document.getElementById("about")
-      if (aboutSection) {
-        const aboutPosition = aboutSection.getBoundingClientRect().top
-        setIsScrolled(aboutPosition < window.innerHeight / 2)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
-
-  const handleArrowClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault()
-    const targetId = isScrolled ? "top" : "about"
-
-    if (targetId === "top") {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      })
-    } else {
-      const aboutSection = document.getElementById("about")
-      if (aboutSection) {
-        aboutSection.scrollIntoView({ behavior: "smooth" })
-      }
-    }
-  }
 
   return (
     <section id="top" className={`min-h-screen flex flex-col justify-center items-center relative overflow-hidden ${classes.section}`}>
@@ -188,15 +155,6 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-        <a
-          href={isScrolled ? "#top" : "#about"}
-          onClick={handleArrowClick}
-          aria-label={isScrolled ? "Scroll to top" : "Scroll to about section"}
-        >
-          {isScrolled ? <ArrowUp className={`h-6 w-6 ${classes.arrow}`} /> : <ArrowDown className={`h-6 w-6 ${classes.arrow}`} />}
-        </a>
-      </div>
     </section>
   )
 }

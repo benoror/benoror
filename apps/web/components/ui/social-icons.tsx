@@ -54,7 +54,6 @@ function IconLink({
   legend,
   className,
   tooltipClassName,
-  tooltipShowArrow,
 }: {
   Icon: React.ElementType
   link: string
@@ -62,7 +61,6 @@ function IconLink({
   legend?: string
   className: string
   tooltipClassName?: string
-  tooltipShowArrow?: boolean
 }) {
   return (
     <Tooltip>
@@ -78,12 +76,7 @@ function IconLink({
           <Icon className="h-6 w-6 block shrink-0" />
         </a>
       </TooltipTrigger>
-      <TooltipContent
-        side="top"
-        sideOffset={14}
-        className={tooltipClassName}
-        showArrow={tooltipShowArrow}
-      >
+      <TooltipContent side="top" sideOffset={14} className={tooltipClassName}>
         {legend ?? text}
       </TooltipContent>
     </Tooltip>
@@ -103,7 +96,7 @@ export function SocialIcons({
     themeKind === "outrun"
       ? "bg-slate-950/65 border border-cyan-300/25 text-cyan-100 backdrop-blur-md"
       : themeKind === "light"
-        ? "bg-slate-950/65 border border-slate-700/25 text-sky-100 backdrop-blur-md"
+        ? "bg-white/95 border border-sky-200/80 text-sky-800 backdrop-blur-md shadow-[0_10px_30px_rgba(15,23,42,0.10)]"
         : "bg-slate-950/70 border border-sky-300/20 text-sky-100 backdrop-blur-md"
 
   return (
@@ -121,7 +114,6 @@ export function SocialIcons({
         legend={LINKS.github.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={Twitter}
@@ -130,7 +122,6 @@ export function SocialIcons({
         legend={LINKS.twitter.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={BlueskyIcon}
@@ -139,7 +130,6 @@ export function SocialIcons({
         legend={LINKS.bluesky.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={Linkedin}
@@ -148,7 +138,6 @@ export function SocialIcons({
         legend={LINKS.linkedin.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={Mail}
@@ -157,7 +146,6 @@ export function SocialIcons({
         legend="Email"
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={ObsidianIcon}
@@ -166,7 +154,6 @@ export function SocialIcons({
         legend={LINKS.notes.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={NotebookPen}
@@ -175,7 +162,6 @@ export function SocialIcons({
         legend={LINKS.blog.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
       <IconLink
         Icon={Rss}
@@ -184,7 +170,6 @@ export function SocialIcons({
         legend={LINKS.feed.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
-        tooltipShowArrow={false}
       />
     </motion.div>
   )

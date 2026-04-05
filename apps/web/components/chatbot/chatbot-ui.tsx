@@ -1,9 +1,34 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion"
-import { ChatMessageList } from "@/components/chatbot/chat-message-list"
-import { PromptCarousel } from "@/components/chatbot/prompt-carousel"
-import { useChatbotController } from "@/components/chatbot/use-chatbot-controller"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import { useEffect, useState } from "react"
+import {
+  Conversation,
+  ConversationContent,
+  ConversationEmptyState,
+  ConversationScrollButton,
+} from "@/components/ai-elements/conversation"
+import {
+  Message,
+  MessageContent,
+  MessageResponse,
+} from "@/components/ai-elements/message"
+import {
+  PromptInput,
+  PromptInputSubmit,
+  PromptInputTextarea,
+  type PromptInputMessage,
+} from "@/components/ai-elements/prompt-input"
+import { Button } from "@workspace/ui/components/button"
+import { useAppTheme } from "@/hooks/use-app-theme"
+import { getClasses } from "@/components/chatbot/chatbot-ui.theme"
+
+interface ChatMessage {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
 
 // Placeholder prompts for the carousel
 const examplePrompts = [
@@ -20,84 +45,234 @@ const examplePrompts = [
 ]
 
 export function ChatbotUI() {
-  const { isOpen, currentPrompt, messages, input, isLoading, messagesEndRef, actions } =
-    useChatbotController(examplePrompts)
+  const { themeKind } = useAppTheme()
+  const classes = getClasses(themeKind)
+  const [input, setInput] = useState("")
+  const [isConversationOpen, setIsConversationOpen] = useState(false)
+  const [messages, setMessages] = useState<ChatMessage[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [currentPromptIndex, setCurrentPromptIndex] = useState(0)
+  const [typedCharCount, setTypedCharCount] = useState(0)
+
+  const currentPrompt =
+    examplePrompts[currentPromptIndex % Math.max(1, examplePrompts.length)] ?? ""
+  const typedPrompt = currentPrompt.slice(0, typedCharCount)
+
+  useEffect(() => {
+    if (!currentPrompt) return
+
+    const isTyping = typedCharCount < currentPrompt.length
+    const delayMs = isTyping ? 42 : 1600
+    const timeout = setTimeout(() => {
+      if (isTyping) {
+        setTypedCharCount((count) => count + 1)
+        return
+      }
+
+      setCurrentPromptIndex((prevIndex) => (prevIndex + 1) % examplePrompts.length)
+      setTypedCharCount(0)
+    }, delayMs)
+
+    return () => clearTimeout(timeout)
+  }, [typedCharCount, currentPrompt])
+
+  const hasMessages = messages.length > 0
+  const isExpanded = hasMessages && isConversationOpen
+
+  const submitPrompt = async (message: PromptInputMessage) => {
+    const text = message.text.trim()
+    if (!text) return
+
+    const userMessage: ChatMessage = {
+      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+      role: "user",
+      content: text,
+    }
+    const assistantMessageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`
+
+    setMessages((prev) => [
+      ...prev,
+      userMessage,
+      { id: assistantMessageId, role: "assistant", content: "" },
+    ])
+    setIsConversationOpen(true)
+    setInput("")
+    setIsLoading(true)
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          messages: [...messages, userMessage].map((item) => ({
+            role: item.role,
+            content: item.content,
+          })),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      if (!response.body) {
+        throw new Error("No response body from chat API")
+      }
+
+      const reader = response.body.getReader()
+      const decoder = new TextDecoder()
+      let assistantContent = ""
+
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        assistantContent += decoder.decode(value, { stream: true })
+
+        setMessages((prev) =>
+          prev.map((item) =>
+            item.id === assistantMessageId
+              ? { ...item, content: assistantContent }
+              : item,
+          ),
+        )
+      }
+
+      assistantContent += decoder.decode()
+      if (!assistantContent.trim()) {
+        setMessages((prev) =>
+          prev.map((item) =>
+            item.id === assistantMessageId
+              ? {
+                  ...item,
+                  content:
+                    "I could not generate a response. Please try again with a different question.",
+                }
+              : item,
+          ),
+        )
+      }
+    } catch (error) {
+      console.error("Failed to send message:", error)
+      setMessages((prev) =>
+        prev.map((item) =>
+          item.id === assistantMessageId
+            ? {
+                ...item,
+                content: "Oops! Something went wrong. Please try again.",
+              }
+            : item,
+        ),
+      )
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   return (
-    <>
-      {/* Floating Chat Bubble */}
-      {!isOpen && (
-        <motion.div
-          className="fixed bottom-4 right-4 bg-sky-600 text-white p-4 rounded-full shadow-lg cursor-pointer z-[100]"
-            onClick={actions.toggleChat}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-message-square">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </motion.div>
-      )}
-
-      {/* Expanded Chat UI */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="fixed bottom-4 right-4 w-80 md:w-96 h-[70vh] bg-white rounded-lg shadow-xl flex flex-col z-[100] border border-gray-200"
-            initial={{ opacity: 0, scale: 0.8, y: 100 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 100 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Chat Header */}
-            <div className="flex justify-between items-center p-4 bg-sky-700 text-white rounded-t-lg">
-              <h3 className="font-semibold">Ask Ben AI</h3>
-              <button
-                onClick={actions.toggleChat}
-                className="text-white hover:text-gray-200"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-minus">
-                  <path d="M5 12h14"></path>
-                </svg>
-              </button>
-            </div>
-
-            {/* Chat Messages Area */}
-            <ChatMessageList
-              messages={messages}
-              isLoading={isLoading}
-              messagesEndRef={messagesEndRef}
-            />
-
-            {/* Prompt Input */}
-            <div className="p-4 border-t border-gray-200">
-              <PromptCarousel
-                prompt={currentPrompt}
-                onClick={actions.setInputFromPrompt}
-              />
-              <form onSubmit={actions.onSubmit} className="flex">
-                <input
-                  type="text"
-                  placeholder="Ask a question about Ben..."
-                  className="flex-1 p-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-sky-500"
-                  value={input}
-                  onChange={(e) => actions.setInput(e.target.value)}
-                  disabled={isLoading}
-                />
-                <button
-                  type="submit"
-                  className="bg-sky-600 text-white p-2 rounded-r-md hover:bg-sky-700 focus:outline-none focus:ring-2 focus:ring-sky-500"
-                  disabled={isLoading}
-                >
-                  Send
-                </button>
-              </form>
-            </div>
-          </motion.div>
+    <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[100] flex justify-center px-4">
+      <div className="pointer-events-auto w-full max-w-2xl">
+        {hasMessages && (
+          <div className="mb-2 flex justify-center">
+            <Button
+              aria-label={isExpanded ? "Minimize conversation" : "Show conversation"}
+              className={classes.minimizeButton}
+              onClick={() => setIsConversationOpen((value) => !value)}
+              size="icon"
+              type="button"
+              variant="outline"
+            >
+              {isExpanded ? (
+                <ChevronDown className="h-4 w-4" />
+              ) : (
+                <ChevronUp className="h-4 w-4" />
+              )}
+            </Button>
+          </div>
         )}
-      </AnimatePresence>
-    </>
+
+        <AnimatePresence>
+          {isExpanded && (
+            <motion.div
+              className={classes.conversationPanel}
+              initial={{ opacity: 0, y: 24, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 16, scale: 0.98 }}
+              transition={{ duration: 0.2 }}
+            >
+              <Conversation className="h-full">
+                <ConversationContent>
+                  {messages.length === 0 ? (
+                    <ConversationEmptyState
+                      title="Ask Ben AI"
+                      description="Start a conversation below."
+                    />
+                  ) : (
+                    messages.map((message) => (
+                      <Message key={message.id} from={message.role}>
+                        <MessageContent>
+                          {message.role === "assistant" ? <MessageResponse>{message.content}</MessageResponse> : message.content}
+                        </MessageContent>
+                      </Message>
+                    ))
+                  )}
+                </ConversationContent>
+                <ConversationScrollButton />
+              </Conversation>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        <motion.div
+          className={`${
+            hasMessages
+              ? classes.promptShellActive
+              : classes.promptShellInitial
+          }`}
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.2 }}
+        >
+          <PromptInput
+            className="[&_[data-slot=input-group]]:bg-transparent [&_[data-slot=input-group]]:dark:bg-transparent [&_[data-slot=input-group]]:border-transparent [&_[data-slot=input-group]]:backdrop-blur-md [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:border-transparent [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:ring-0 [&_[data-slot=input-group-control]]:focus-visible:border-transparent [&_[data-slot=input-group-control]]:focus-visible:ring-0 [&_[data-slot=input-group-control]]:focus:outline-none"
+            onSubmit={async (message, event) => {
+              event.preventDefault()
+              await submitPrompt(message)
+            }}
+          >
+            <div className="relative flex-1">
+              {!input && (
+                <div
+                  className={`pointer-events-none absolute inset-y-0 left-4 z-10 flex items-center text-sm ${classes.placeholderText}`}
+                >
+                  <span className="mr-1">Try:</span>
+                  <span className="mr-1">"</span>
+                  <em>{typedPrompt}</em>
+                  <span>"</span>
+                  <motion.span
+                    className={`ml-0.5 inline-block h-4 w-px ${classes.placeholderCaret}`}
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 1, repeat: Number.POSITIVE_INFINITY }}
+                  />
+                </div>
+              )}
+              <PromptInputTextarea
+                className={hasMessages ? classes.textarea : classes.initialTextarea}
+                onChange={(event) => setInput(event.currentTarget.value)}
+                placeholder=""
+                value={input}
+              />
+            </div>
+            <PromptInputSubmit
+              className={hasMessages ? classes.submit : classes.initialSubmit}
+              disabled={!input.trim()}
+              onStop={() => {}}
+              status={isLoading ? "streaming" : "ready"}
+            />
+          </PromptInput>
+        </motion.div>
+      </div>
+    </div>
   )
 }
 

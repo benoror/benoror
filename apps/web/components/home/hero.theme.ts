@@ -33,7 +33,7 @@ export function getClasses(themeKind: AppThemeKind) {
     socialPanel: pickThemeValue(themeKind, {
       outrun: "rounded-2xl px-4 py-3 bg-slate-950/65 border border-cyan-300/25 backdrop-blur-md",
       dark: "rounded-2xl px-4 py-3 bg-slate-950/70 border border-sky-300/20 backdrop-blur-md",
-      light: "rounded-2xl px-4 py-3 bg-slate-950/65 border border-slate-700/25 backdrop-blur-md",
+      light: "rounded-2xl px-4 py-3 bg-white/90 border border-sky-200/80 backdrop-blur-md shadow-[0_10px_30px_rgba(15,23,42,0.10)]",
     }),
   }
 }

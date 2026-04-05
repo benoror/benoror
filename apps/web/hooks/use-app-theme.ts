@@ -15,8 +15,13 @@ export function useAppTheme() {
 
   const activeTheme = mounted ? theme : undefined
   const activeResolvedTheme = mounted ? resolvedTheme : undefined
+  const rootHasOutrunClass =
+    mounted &&
+    typeof document !== "undefined" &&
+    document.documentElement.classList.contains("outrun")
 
-  const isOutrun = activeTheme === "outrun"
+  // Fallback to the HTML class in case the provider reports a stale value.
+  const isOutrun = activeTheme === "outrun" || rootHasOutrunClass
   const isDark = activeTheme !== "outrun" && activeResolvedTheme === "dark"
   const isBlueDark = isOutrun || isDark
 

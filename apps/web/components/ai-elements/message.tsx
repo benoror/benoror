@@ -325,14 +325,16 @@ const streamdownPlugins = { cjk, code, math, mermaid } as any;
 
 export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
-    <Streamdown
-      className={cn(
-        "size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
-        className
-      )}
-      plugins={streamdownPlugins}
-      {...props}
-    />
+    <div className="[font-family:var(--font-mono),ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace]">
+      <Streamdown
+        className={cn(
+          "size-full !font-mono [&_*]:!font-mono [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+          className
+        )}
+        plugins={streamdownPlugins}
+        {...props}
+      />
+    </div>
   ),
   (prevProps, nextProps) =>
     prevProps.children === nextProps.children &&

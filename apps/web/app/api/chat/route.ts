@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { OpenAIStream, StreamingTextResponse } from "ai"
 import { getChatbotContext } from "@/lib/chatbot/context"
 import type { ChatRequestBody } from "@/lib/chatbot/types"
 
@@ -103,8 +102,12 @@ ${contextContent}`,
       contextChars: contextContent.length,
     })
 
-    const stream = OpenAIStream(response)
-    return new StreamingTextResponse(stream)
+    return new Response(response.body, {
+      headers: {
+        "Content-Type": "text/plain; charset=utf-8",
+      },
+      status: 200,
+    })
   } catch (error) {
     console.error("Chat API error:", error)
     return NextResponse.json({ error: (error as Error).message }, { status: 500 })

@@ -100,6 +100,7 @@ export function ChatbotUI() {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const rootRef = useRef<HTMLDivElement | null>(null)
+  const promptContainerRef = useRef<HTMLDivElement | null>(null)
   const [input, setInput] = useState("")
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [isConversationOpen, setIsConversationOpen] = useState(false)
@@ -111,8 +112,13 @@ export function ChatbotUI() {
   const currentPrompt =
     examplePrompts[currentPromptIndex % Math.max(1, examplePrompts.length)] ?? ""
   const typedPrompt = currentPrompt.slice(0, typedCharCount)
+  const hasMessages = messages.length > 0
+  const isExpanded = hasMessages && isConversationOpen
+  const isPromptActive = isInputFocused || input.trim().length > 0
+  const showCarousel = !hasMessages && !input
 
   useEffect(() => {
+    if (hasMessages) return
     if (!currentPrompt) return
 
     const isTyping = typedCharCount < currentPrompt.length
@@ -129,11 +135,7 @@ export function ChatbotUI() {
     }, delayMs)
 
     return () => clearTimeout(timeout)
-  }, [typedCharCount, currentPrompt])
-
-  const hasMessages = messages.length > 0
-  const isExpanded = hasMessages && isConversationOpen
-  const isPromptActive = isInputFocused || input.trim().length > 0
+  }, [typedCharCount, currentPrompt, hasMessages])
 
   useEffect(() => {
     if (!isExpanded) return
@@ -321,6 +323,7 @@ export function ChatbotUI() {
         </AnimatePresence>
 
         <motion.div
+          ref={promptContainerRef}
           className={`${
             hasMessages
               ? classes.promptShellActive
@@ -334,6 +337,10 @@ export function ChatbotUI() {
             className="[&_[data-slot=input-group]]:bg-transparent [&_[data-slot=input-group]]:dark:bg-transparent [&_[data-slot=input-group]]:border-transparent [&_[data-slot=input-group]]:backdrop-blur-md [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:border-transparent [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:ring-0 [&_[data-slot=input-group-control]]:!font-mono [&_[data-slot=input-group-control]]:focus-visible:border-transparent [&_[data-slot=input-group-control]]:focus-visible:ring-0 [&_[data-slot=input-group-control]]:focus:outline-none [&_[data-slot=button]]:!font-mono [&_textarea]:!font-mono [&_button]:!font-mono"
             onClick={() => {
               if (hasMessages) setIsConversationOpen(true)
+              const textarea = promptContainerRef.current?.querySelector(
+                'textarea[name="message"]',
+              ) as HTMLTextAreaElement | null
+              textarea?.focus()
             }}
             onSubmit={async (message, event) => {
               event.preventDefault()
@@ -346,7 +353,7 @@ export function ChatbotUI() {
               >
                 ❯
               </div>
-              {!input && (
+              {showCarousel && (
                 <div
                   className={`pointer-events-none absolute inset-y-0 left-10 z-10 flex items-center font-mono text-sm transition-opacity duration-200 ${isPromptActive ? "opacity-20" : "opacity-100"} ${classes.placeholderText}`}
                 >

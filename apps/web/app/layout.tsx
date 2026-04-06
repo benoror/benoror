@@ -54,9 +54,11 @@ export default function RootLayout({
       <body
         className={`${fontSans.variable} ${fontMono.variable} font-sans antialiased `}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <ChatbotUI />
+        </Providers>
         <Analytics />
-        <ChatbotUI />
       </body>
     </html>
   )

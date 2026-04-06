@@ -1,6 +1,5 @@
 import fs from "node:fs/promises"
 import path from "node:path"
-import { fileURLToPath } from "node:url"
 
 interface ContextFileMeta {
   id: string
@@ -25,9 +24,14 @@ interface ContextSection {
   searchableText: string
 }
 
-const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../")
-const CHATBOT_DATA_PATH = path.join(REPO_ROOT, "packages", "data", "chatbot")
 const PUBLIC_PROFILE_FILE = "public_profile.json"
+const cwd = process.cwd()
+const defaultChatbotDataPath = cwd.endsWith(`${path.sep}apps${path.sep}web`)
+  ? path.join(cwd, "..", "..", "packages", "data", "chatbot")
+  : path.join(cwd, "packages", "data", "chatbot")
+const CHATBOT_DATA_PATH =
+  process.env.CHATBOT_DATA_PATH ||
+  defaultChatbotDataPath
 
 let contextCache: ContextCache | null = null
 

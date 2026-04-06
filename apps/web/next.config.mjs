@@ -1,6 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
+  outputFileTracingIncludes: {
+    "/api/chat": ["../../packages/data/chatbot/**/*"],
+  },
   images: {
     remotePatterns: [
       {

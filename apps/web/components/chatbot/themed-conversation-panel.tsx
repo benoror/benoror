@@ -98,7 +98,7 @@ export const ThemedConversationPanel = memo(function ThemedConversationPanel({
             type="button"
             variant="ghost"
           >
-            <ChevronDown className="h-4 w-4" />
+            <ChevronDown className="h-3 w-3" />
           </Button>
         </div>
       )}

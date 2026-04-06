@@ -6,42 +6,42 @@ export function getClasses(themeKind: AppThemeKind) {
   const darkTextSoft = "!text-[#e7ffff]/80"
   const darkTextPlaceholder = "!text-[#e7ffff]/55"
   const darkCursor = "text-[#e7ffff]"
-  const tabBase = "h-7 min-w-14 rounded-b-none rounded-t-md !border !border-b-0 px-3"
+  const tabBase = "h-[1.05rem] min-w-14 rounded-b-none rounded-t-md !border !border-b-0 px-3"
   const panelBase = "mb-3 h-[55vh] overflow-hidden rounded-2xl border backdrop-blur-xl"
   const promptShellActiveBase = "rounded-2xl border p-3 backdrop-blur-xl"
   const promptShellInitialBase = "rounded-2xl border p-2 backdrop-blur-lg shadow-none"
 
   const minimizeButtonByTheme = {
     outrun:
-      `${tabBase} !border-[oklch(0.7_0.16_353.75)] !bg-slate-950/88 !text-[oklch(0.95_0.03_353.75)] shadow-[0_8px_22px_rgba(213,53,103,0.30)] backdrop-blur-md hover:!bg-slate-900/94`,
+      `${tabBase} !border-[oklch(0.7_0.16_353.75)] !bg-slate-950/76 !text-[oklch(0.95_0.03_353.75)] shadow-[0_8px_22px_rgba(213,53,103,0.30)] backdrop-blur-md hover:!bg-slate-950/84`,
     dark:
-      `${tabBase} !border-cyan-300/40 !bg-[#020617] !text-[#e7ffff] shadow-[0_8px_22px_rgba(8,145,178,0.24)] hover:!bg-[#01040f]`,
+      `${tabBase} !border-cyan-300/40 !bg-slate-950/76 !text-[#e7ffff] shadow-[0_8px_22px_rgba(8,145,178,0.24)] backdrop-blur-md hover:!bg-slate-950/84`,
     light:
-      `${tabBase} !border-sky-300/80 !bg-white/94 !text-sky-700 shadow-[0_8px_22px_rgba(15,23,42,0.10)] backdrop-blur-md hover:!bg-white`,
+      `${tabBase} !border-sky-300/80 !bg-white/76 !text-sky-700 shadow-[0_8px_22px_rgba(15,23,42,0.10)] backdrop-blur-md hover:!bg-white/84`,
   } satisfies Record<AppThemeKind, string>
 
   const conversationPanelByTheme = {
     outrun:
       `${panelBase} border-[oklch(0.7_0.16_353.75)] bg-slate-950/76 shadow-[0_24px_80px_rgba(213,53,103,0.26)]`,
     dark:
-      `${panelBase} border-cyan-300/35 bg-transparent shadow-[0_24px_80px_rgba(8,145,178,0.22)]`,
+      `${panelBase} border-cyan-300/35 bg-slate-950/76 shadow-[0_24px_80px_rgba(8,145,178,0.22)]`,
     light:
-      `${panelBase} border-sky-300/70 bg-transparent shadow-[0_24px_80px_rgba(15,23,42,0.08)]`,
+      `${panelBase} border-sky-300/70 bg-white/76 shadow-[0_24px_80px_rgba(15,23,42,0.08)]`,
   } satisfies Record<AppThemeKind, string>
 
   const promptShellActiveByTheme = {
     outrun:
       `${promptShellActiveBase} border-[oklch(0.7_0.16_353.75)] bg-slate-950/72 shadow-[0_18px_50px_rgba(213,53,103,0.24)]`,
     dark:
-      `${promptShellActiveBase} border-cyan-300/35 bg-transparent shadow-[0_18px_50px_rgba(8,145,178,0.20)]`,
+      `${promptShellActiveBase} border-cyan-300/35 bg-slate-950/72 shadow-[0_18px_50px_rgba(8,145,178,0.20)]`,
     light:
-      `${promptShellActiveBase} border-sky-300/70 bg-transparent shadow-[0_18px_50px_rgba(15,23,42,0.08)]`,
+      `${promptShellActiveBase} border-sky-300/70 bg-white/72 shadow-[0_18px_50px_rgba(15,23,42,0.08)]`,
   } satisfies Record<AppThemeKind, string>
 
   const promptShellInitialByTheme = {
     outrun: `${promptShellInitialBase} border-[oklch(0.7_0.16_353.75)] bg-slate-950/68`,
-    dark: `${promptShellInitialBase} border-cyan-300/35 bg-transparent`,
-    light: `${promptShellInitialBase} border-sky-300/70 bg-transparent`,
+    dark: `${promptShellInitialBase} border-cyan-300/35 bg-slate-950/68`,
+    light: `${promptShellInitialBase} border-sky-300/70 bg-white/68`,
   } satisfies Record<AppThemeKind, string>
 
   const textareaByTheme = {

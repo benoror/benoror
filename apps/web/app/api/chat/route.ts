@@ -2,7 +2,8 @@ import { NextResponse } from "next/server"
 import { getChatbotContextForQuery } from "@/lib/chatbot/context"
 import type { ChatRequestBody } from "@/lib/chatbot/types"
 
-const VERCEL_AI_GATEWAY_URL = "https://gateway.ai.vercel.com/v1/chat/completions"
+const VERCEL_AI_GATEWAY_URL =
+  process.env.AI_GATEWAY_BASE_URL || "https://ai-gateway.vercel.sh/v1/chat/completions"
 const DEFAULT_GATEWAY_MODEL = "google/gemma-4-31b-it"
 const MAX_CONTEXT_SECTIONS = 3
 const MAX_RECENT_MESSAGES = 8
@@ -79,28 +80,18 @@ function buildGatewayHeaders() {
   }
 
   if (process.env.AI_GATEWAY_API_KEY) {
-    headers["X-Vercel-AI-Gateway-Api-Key"] = process.env.AI_GATEWAY_API_KEY
+    headers.Authorization = `Bearer ${process.env.AI_GATEWAY_API_KEY}`
     return headers
   }
 
   // Backward compatibility for older env naming.
   if (process.env.VERCEL_AI_GATEWAY_API_KEY) {
-    headers["X-Vercel-AI-Gateway-Api-Key"] = process.env.VERCEL_AI_GATEWAY_API_KEY
-    return headers
-  }
-
-  if (process.env.GOOGLE_API_KEY) {
-    headers["X-Vercel-AI-Gateway-Api-Key"] = process.env.GOOGLE_API_KEY
-    return headers
-  }
-
-  if (process.env.OPENAI_API_KEY) {
-    headers.Authorization = `Bearer ${process.env.OPENAI_API_KEY}`
+    headers.Authorization = `Bearer ${process.env.VERCEL_AI_GATEWAY_API_KEY}`
     return headers
   }
 
   throw new Error(
-    "Missing AI Gateway or Provider API Key. Please set AI_GATEWAY_API_KEY (preferred), VERCEL_AI_GATEWAY_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY environment variable.",
+    "Missing AI Gateway API Key. Please set AI_GATEWAY_API_KEY (preferred) or VERCEL_AI_GATEWAY_API_KEY.",
   )
 }
 

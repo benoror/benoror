@@ -3,6 +3,7 @@ import { getChatbotContext } from "@/lib/chatbot/context"
 import type { ChatRequestBody } from "@/lib/chatbot/types"
 
 const VERCEL_AI_GATEWAY_URL = "https://gateway.ai.vercel.com/v1/chat/completions"
+const DEFAULT_GATEWAY_MODEL = "google/gemma-4-31b-it"
 
 function isValidChatRequest(value: unknown): value is ChatRequestBody {
   if (!value || typeof value !== "object") return false
@@ -25,6 +26,12 @@ function buildGatewayHeaders() {
     "Content-Type": "application/json",
   }
 
+  if (process.env.AI_GATEWAY_API_KEY) {
+    headers["X-Vercel-AI-Gateway-Api-Key"] = process.env.AI_GATEWAY_API_KEY
+    return headers
+  }
+
+  // Backward compatibility for older env naming.
   if (process.env.VERCEL_AI_GATEWAY_API_KEY) {
     headers["X-Vercel-AI-Gateway-Api-Key"] = process.env.VERCEL_AI_GATEWAY_API_KEY
     return headers
@@ -41,7 +48,7 @@ function buildGatewayHeaders() {
   }
 
   throw new Error(
-    "Missing AI Gateway or Provider API Key. Please set VERCEL_AI_GATEWAY_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY environment variable.",
+    "Missing AI Gateway or Provider API Key. Please set AI_GATEWAY_API_KEY (preferred), VERCEL_AI_GATEWAY_API_KEY, GOOGLE_API_KEY, or OPENAI_API_KEY environment variable.",
   )
 }
 
@@ -73,11 +80,12 @@ ${contextContent}`,
     ]
 
     const gatewayStartedAt = Date.now()
+    const model = process.env.AI_GATEWAY_MODEL || DEFAULT_GATEWAY_MODEL
     const response = await fetch(VERCEL_AI_GATEWAY_URL, {
       method: "POST",
       headers: buildGatewayHeaders(),
       body: JSON.stringify({
-        model: "gemini-1.5-flash",
+        model,
         messages: llmMessages,
         stream: true,
         max_tokens: 500,

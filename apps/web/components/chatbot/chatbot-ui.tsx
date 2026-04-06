@@ -33,8 +33,7 @@ export function ChatbotUI() {
   const hasMessages = messages.length > 0
   const focusPromptTextarea = () => textareaRef.current?.focus()
   const {
-    isConversationOpen,
-    isExpanded,
+    uiMode,
     isPromptActive,
     showCarousel,
     setIsConversationOpen,
@@ -47,7 +46,9 @@ export function ChatbotUI() {
     rootElement: rootRef.current,
     focusTextarea: focusPromptTextarea,
   })
-  const { typedPrompt } = usePromptCarousel(examplePrompts, !hasMessages)
+  const isExpanded = uiMode === "expanded"
+  const isIdle = uiMode === "idle"
+  const { typedPrompt } = usePromptCarousel(examplePrompts, isIdle)
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[100] flex justify-center px-4">

@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useReducer } from "react"
 
 type UseConversationUIOptions = {
   hasMessages: boolean
@@ -15,12 +15,54 @@ export function useConversationUI({
   rootElement,
   focusTextarea,
 }: UseConversationUIOptions) {
-  const [isInputFocused, setIsInputFocused] = useState(false)
-  const [isConversationOpen, setIsConversationOpen] = useState(false)
+  type ConversationUIState = {
+    isInputFocused: boolean
+    isConversationOpen: boolean
+  }
 
-  const isExpanded = hasMessages && isConversationOpen
-  const isPromptActive = isInputFocused || input.trim().length > 0
+  type ConversationUIAction =
+    | { type: "INPUT_FOCUS"; hasMessages: boolean }
+    | { type: "INPUT_BLUR" }
+    | { type: "PROMPT_INTERACT"; hasMessages: boolean }
+    | { type: "MINIMIZE" }
+    | { type: "SET_OPEN"; value: boolean }
+
+  const reducer = (
+    state: ConversationUIState,
+    action: ConversationUIAction,
+  ): ConversationUIState => {
+    switch (action.type) {
+      case "INPUT_FOCUS":
+        return {
+          ...state,
+          isInputFocused: true,
+          isConversationOpen: action.hasMessages ? true : state.isConversationOpen,
+        }
+      case "INPUT_BLUR":
+        return { ...state, isInputFocused: false }
+      case "PROMPT_INTERACT":
+        return {
+          ...state,
+          isConversationOpen: action.hasMessages ? true : state.isConversationOpen,
+        }
+      case "MINIMIZE":
+        return { ...state, isConversationOpen: false }
+      case "SET_OPEN":
+        return { ...state, isConversationOpen: action.value }
+      default:
+        return state
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, {
+    isInputFocused: false,
+    isConversationOpen: false,
+  })
+
+  const isExpanded = hasMessages && state.isConversationOpen
+  const isPromptActive = state.isInputFocused || input.trim().length > 0
   const showCarousel = !hasMessages && !input
+  const uiMode = !hasMessages ? "idle" : isExpanded ? "expanded" : "collapsed"
 
   useEffect(() => {
     if (!isExpanded) return
@@ -29,7 +71,7 @@ export function useConversationUI({
       const target = event.target as Node | null
       if (!target) return
       if (rootElement?.contains(target)) return
-      setIsConversationOpen(false)
+      dispatch({ type: "MINIMIZE" })
     }
 
     document.addEventListener("mousedown", handlePointerDown)
@@ -42,24 +84,28 @@ export function useConversationUI({
   }, [isExpanded, rootElement])
 
   const handlePromptInteract = () => {
-    if (hasMessages) setIsConversationOpen(true)
+    dispatch({ type: "PROMPT_INTERACT", hasMessages })
     focusTextarea()
   }
 
   const handleInputFocus = () => {
-    setIsInputFocused(true)
-    if (hasMessages) setIsConversationOpen(true)
+    dispatch({ type: "INPUT_FOCUS", hasMessages })
   }
 
   const handleInputBlur = () => {
-    setIsInputFocused(false)
+    dispatch({ type: "INPUT_BLUR" })
+  }
+
+  const setIsConversationOpen = (value: boolean) => {
+    dispatch({ type: "SET_OPEN", value })
   }
 
   return {
-    isConversationOpen,
+    isConversationOpen: state.isConversationOpen,
     isExpanded,
     isPromptActive,
     showCarousel,
+    uiMode,
     setIsConversationOpen,
     handlePromptInteract,
     handleInputFocus,

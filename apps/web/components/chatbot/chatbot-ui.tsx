@@ -24,12 +24,9 @@ import { Button } from "@workspace/ui/components/button"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "@/components/chatbot/chatbot-ui.theme"
 import { BlinkingCursor } from "@/components/chatbot/blinking-cursor"
-
-interface ChatMessage {
-  id: string
-  role: "user" | "assistant"
-  content: string
-}
+import { usePromptCarousel } from "@/components/chatbot/use-prompt-carousel"
+import { useConversationUI } from "@/components/chatbot/use-conversation-ui"
+import { useChatTransport } from "@/components/chatbot/use-chat-transport"
 
 function StreamReveal({
   content,
@@ -102,149 +99,30 @@ export function ChatbotUI() {
   const rootRef = useRef<HTMLDivElement | null>(null)
   const promptContainerRef = useRef<HTMLDivElement | null>(null)
   const [input, setInput] = useState("")
-  const [isInputFocused, setIsInputFocused] = useState(false)
-  const [isConversationOpen, setIsConversationOpen] = useState(false)
-  const [messages, setMessages] = useState<ChatMessage[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [currentPromptIndex, setCurrentPromptIndex] = useState(0)
-  const [typedCharCount, setTypedCharCount] = useState(0)
-
-  const currentPrompt =
-    examplePrompts[currentPromptIndex % Math.max(1, examplePrompts.length)] ?? ""
-  const typedPrompt = currentPrompt.slice(0, typedCharCount)
+  const { messages, isLoading, submitPromptText } = useChatTransport()
   const hasMessages = messages.length > 0
-  const isExpanded = hasMessages && isConversationOpen
-  const isPromptActive = isInputFocused || input.trim().length > 0
-  const showCarousel = !hasMessages && !input
-
-  useEffect(() => {
-    if (hasMessages) return
-    if (!currentPrompt) return
-
-    const isTyping = typedCharCount < currentPrompt.length
-    const delayMs = isTyping ? 42 : 1600
-
-    const timeout = setTimeout(() => {
-      if (isTyping) {
-        setTypedCharCount((count) => count + 1)
-        return
-      }
-
-      setCurrentPromptIndex((prevIndex) => (prevIndex + 1) % examplePrompts.length)
-      setTypedCharCount(0)
-    }, delayMs)
-
-    return () => clearTimeout(timeout)
-  }, [typedCharCount, currentPrompt, hasMessages])
-
-  useEffect(() => {
-    if (!isExpanded) return
-
-    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node | null
-      if (!target) return
-      if (rootRef.current?.contains(target)) return
-      setIsConversationOpen(false)
-    }
-
-    document.addEventListener("mousedown", handlePointerDown)
-    document.addEventListener("touchstart", handlePointerDown)
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown)
-      document.removeEventListener("touchstart", handlePointerDown)
-    }
-  }, [isExpanded])
-
-  const submitPrompt = async (message: PromptInputMessage) => {
-    const text = message.text.trim()
-    if (!text) return
-
-    const userMessage: ChatMessage = {
-      id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-      role: "user",
-      content: text,
-    }
-    const assistantMessageId = `${Date.now()}-${Math.random().toString(16).slice(2)}`
-
-    setMessages((prev) => [
-      ...prev,
-      userMessage,
-      { id: assistantMessageId, role: "assistant", content: "" },
-    ])
-    setIsConversationOpen(true)
-    setInput("")
-    setIsLoading(true)
-
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          messages: [...messages, userMessage].map((item) => ({
-            role: item.role,
-            content: item.content,
-          })),
-        }),
-      })
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`)
-      }
-      if (!response.body) {
-        throw new Error("No response body from chat API")
-      }
-
-      const reader = response.body.getReader()
-      const decoder = new TextDecoder()
-      let assistantContent = ""
-
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        assistantContent += decoder.decode(value, { stream: true })
-
-        setMessages((prev) =>
-          prev.map((item) =>
-            item.id === assistantMessageId
-              ? { ...item, content: assistantContent }
-              : item,
-          ),
-        )
-      }
-
-      assistantContent += decoder.decode()
-      if (!assistantContent.trim()) {
-        setMessages((prev) =>
-          prev.map((item) =>
-            item.id === assistantMessageId
-              ? {
-                  ...item,
-                  content:
-                    "I could not generate a response. Please try again with a different question.",
-                }
-              : item,
-          ),
-        )
-      }
-    } catch (error) {
-      console.error("Failed to send message:", error)
-      setMessages((prev) =>
-        prev.map((item) =>
-          item.id === assistantMessageId
-            ? {
-                ...item,
-                content: "Oops! Something went wrong. Please try again.",
-              }
-            : item,
-        ),
-      )
-    } finally {
-      setIsLoading(false)
-    }
+  const focusPromptTextarea = () => {
+    const textarea = promptContainerRef.current?.querySelector(
+      'textarea[name="message"]',
+    ) as HTMLTextAreaElement | null
+    textarea?.focus()
   }
+  const {
+    isConversationOpen,
+    isExpanded,
+    isPromptActive,
+    showCarousel,
+    setIsConversationOpen,
+    handlePromptInteract,
+    handleInputFocus,
+    handleInputBlur,
+  } = useConversationUI({
+    hasMessages,
+    input,
+    rootElement: rootRef.current,
+    focusTextarea: focusPromptTextarea,
+  })
+  const { typedPrompt } = usePromptCarousel(examplePrompts, !hasMessages)
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[100] flex justify-center px-4">
@@ -334,17 +212,14 @@ export function ChatbotUI() {
           transition={{ duration: 0.2 }}
         >
           <PromptInput
-            className="[&_[data-slot=input-group]]:bg-transparent [&_[data-slot=input-group]]:dark:bg-transparent [&_[data-slot=input-group]]:border-transparent [&_[data-slot=input-group]]:backdrop-blur-md [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:border-transparent [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:ring-0 [&_[data-slot=input-group-control]]:!font-mono [&_[data-slot=input-group-control]]:focus-visible:border-transparent [&_[data-slot=input-group-control]]:focus-visible:ring-0 [&_[data-slot=input-group-control]]:focus:outline-none [&_[data-slot=button]]:!font-mono [&_textarea]:!font-mono [&_button]:!font-mono"
-            onClick={() => {
-              if (hasMessages) setIsConversationOpen(true)
-              const textarea = promptContainerRef.current?.querySelector(
-                'textarea[name="message"]',
-              ) as HTMLTextAreaElement | null
-              textarea?.focus()
-            }}
+            className="[&_[data-slot=input-group]]:!bg-transparent [&_[data-slot=input-group]]:dark:!bg-transparent [&_[data-slot=input-group]]:!shadow-none [&_[data-slot=input-group]]:border-transparent [&_[data-slot=input-group]]:backdrop-blur-none [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:border-transparent [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:ring-0 [&_[data-slot=input-group-control]]:!bg-transparent [&_[data-slot=input-group-control]]:dark:!bg-transparent [&_[data-slot=input-group-control]]:!font-mono [&_[data-slot=input-group-control]]:focus-visible:border-transparent [&_[data-slot=input-group-control]]:focus-visible:ring-0 [&_[data-slot=input-group-control]]:focus:outline-none [&_[data-slot=button]]:!font-mono [&_textarea]:!bg-transparent [&_textarea]:dark:!bg-transparent [&_textarea]:!font-mono [&_button]:!font-mono"
+            onClick={handlePromptInteract}
             onSubmit={async (message, event) => {
               event.preventDefault()
-              await submitPrompt(message)
+              const didSubmit = await submitPromptText(message.text)
+              if (!didSubmit) return
+              setIsConversationOpen(true)
+              setInput("")
             }}
           >
             <div className="relative flex-1">
@@ -369,11 +244,8 @@ export function ChatbotUI() {
               <PromptInputTextarea
                 className={hasMessages ? classes.textarea : classes.initialTextarea}
                 onChange={(event) => setInput(event.currentTarget.value)}
-                onFocus={() => {
-                  setIsInputFocused(true)
-                  if (hasMessages) setIsConversationOpen(true)
-                }}
-                onBlur={() => setIsInputFocused(false)}
+                onFocus={handleInputFocus}
+                onBlur={handleInputBlur}
                 placeholder=""
                 value={input}
               />

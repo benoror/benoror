@@ -6,6 +6,28 @@ export function getClasses(themeKind: AppThemeKind) {
   const darkTextSoft = "!text-[#e7ffff]/80"
   const darkTextPlaceholder = "!text-[#e7ffff]/55"
   const darkCursor = "text-[#e7ffff]"
+  const textareaByTheme = {
+    outrun:
+      "!min-h-11 border-transparent !bg-transparent dark:!bg-transparent !pb-2 !pt-3 pl-10 !text-[oklch(0.95_0.03_353.75)] caret-[oklch(0.95_0.03_353.75)] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-[oklch(0.95_0.03_353.75)]/65 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
+    dark:
+      `!min-h-11 border-transparent !bg-transparent dark:!bg-transparent !pb-2 !pt-3 pl-10 ${darkText} caret-[#e7ffff] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:${darkTextPlaceholder} focus:border-transparent focus-visible:border-transparent focus-visible:ring-0`,
+    light:
+      "!min-h-11 border-transparent !bg-transparent dark:!bg-transparent !pb-2 !pt-3 pl-10 !text-sky-700 caret-sky-700 [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-sky-700/45 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
+  } satisfies Record<AppThemeKind, string>
+  const initialTextareaByTheme = {
+    ...textareaByTheme,
+    // Keep current initial outrun tone unchanged.
+    outrun:
+      "!min-h-11 border-transparent !bg-transparent dark:!bg-transparent !pb-2 !pt-3 pl-10 !text-[#ffe3ef] caret-[#ffe3ef] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-[#ffe3ef]/65 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
+  } satisfies Record<AppThemeKind, string>
+  const submitByTheme = {
+    outrun:
+      "border-[oklch(0.78_0.12_222)] bg-[oklch(0.78_0.12_222)] font-mono text-slate-950 hover:bg-[oklch(0.78_0.12_222)]/90",
+    dark:
+      "border-cyan-300 bg-cyan-300 font-mono text-slate-950 hover:bg-cyan-200",
+    light:
+      "border-sky-500 bg-sky-500 font-mono text-white hover:bg-sky-600",
+  } satisfies Record<AppThemeKind, string>
 
   return {
     minimizeButton: pickThemeValue(themeKind, {
@@ -79,40 +101,10 @@ export function getClasses(themeKind: AppThemeKind) {
       dark: darkCursor,
       light: "text-sky-700",
     }),
-    textarea: pickThemeValue(themeKind, {
-      outrun:
-        "!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 !text-[oklch(0.95_0.03_353.75)] caret-[oklch(0.95_0.03_353.75)] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-[oklch(0.95_0.03_353.75)]/65 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
-      dark:
-        `!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 ${darkText} caret-[#e7ffff] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:${darkTextPlaceholder} focus:border-transparent focus-visible:border-transparent focus-visible:ring-0`,
-      light:
-        "!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 !text-sky-700 caret-sky-700 [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-sky-700/45 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
-    }),
-    submit: pickThemeValue(themeKind, {
-      outrun:
-        "border-[oklch(0.78_0.12_222)] bg-[oklch(0.78_0.12_222)] font-mono text-slate-950 hover:bg-[oklch(0.78_0.12_222)]/90",
-      dark:
-        "border-cyan-300 bg-cyan-300 font-mono text-slate-950 hover:bg-cyan-200",
-      light:
-        "border-sky-500 bg-sky-500 font-mono text-white hover:bg-sky-600",
-    }),
-    initialTextarea:
-      pickThemeValue(themeKind, {
-        outrun:
-          "!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 !text-[#ffe3ef] caret-[#ffe3ef] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-[#ffe3ef]/65 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
-        dark:
-          `!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 ${darkText} caret-[#e7ffff] [caret-shape:block] !font-mono text-sm !leading-5 placeholder:${darkTextPlaceholder} focus:border-transparent focus-visible:border-transparent focus-visible:ring-0`,
-        light:
-          "!min-h-11 border-transparent bg-transparent !pb-2 !pt-3 pl-10 !text-sky-700 caret-sky-700 [caret-shape:block] !font-mono text-sm !leading-5 placeholder:!text-sky-700/45 focus:border-transparent focus-visible:border-transparent focus-visible:ring-0",
-      }),
-    initialSubmit:
-      pickThemeValue(themeKind, {
-        outrun:
-          "border-[oklch(0.78_0.12_222)] bg-[oklch(0.78_0.12_222)] font-mono text-slate-950 hover:bg-[oklch(0.78_0.12_222)]/90",
-        dark:
-          "border-cyan-300 bg-cyan-300 font-mono text-slate-950 hover:bg-cyan-200",
-        light:
-          "border-sky-500 bg-sky-500 font-mono text-white hover:bg-sky-600",
-      }),
+    textarea: pickThemeValue(themeKind, textareaByTheme),
+    submit: pickThemeValue(themeKind, submitByTheme),
+    initialTextarea: pickThemeValue(themeKind, initialTextareaByTheme),
+    initialSubmit: pickThemeValue(themeKind, submitByTheme),
     scanlineOverlay: pickThemeValue(themeKind, {
       outrun:
         "pointer-events-none absolute inset-0 z-0 opacity-[0.08] [background-image:repeating-linear-gradient(to_bottom,rgba(236,72,153,0.28)_0px,rgba(236,72,153,0.28)_1px,transparent_2px,transparent_4px)] [background-size:100%_4px]",

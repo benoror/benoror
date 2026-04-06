@@ -16,6 +16,13 @@ interface PublicProfile {
 interface ContextCache {
   signature: string
   content: string
+  sections: ContextSection[]
+}
+
+interface ContextSection {
+  title: string
+  content: string
+  searchableText: string
 }
 
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../")
@@ -23,6 +30,49 @@ const CHATBOT_DATA_PATH = path.join(REPO_ROOT, "packages", "data", "chatbot")
 const PUBLIC_PROFILE_FILE = "public_profile.json"
 
 let contextCache: ContextCache | null = null
+
+const STOP_WORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "are",
+  "as",
+  "at",
+  "be",
+  "by",
+  "for",
+  "from",
+  "has",
+  "he",
+  "how",
+  "i",
+  "in",
+  "is",
+  "it",
+  "its",
+  "me",
+  "my",
+  "of",
+  "on",
+  "or",
+  "that",
+  "the",
+  "to",
+  "was",
+  "what",
+  "where",
+  "who",
+  "with",
+  "you",
+])
+
+function tokenize(value: string): string[] {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .split(/\s+/)
+    .filter((token) => token.length > 1 && !STOP_WORDS.has(token))
+}
 
 function isContextFileMeta(value: unknown): value is ContextFileMeta {
   if (!value || typeof value !== "object") return false
@@ -68,7 +118,7 @@ async function readMarkdownFile(filename: string) {
   }
 }
 
-export async function getChatbotContext() {
+async function buildContextCache() {
   const { profile, profilePath } = await readPublicProfile()
   const files = [
     profile.general_summary_file,
@@ -89,22 +139,83 @@ export async function getChatbotContext() {
   )
 
   if (contextCache && contextCache.signature === signature) {
-    return contextCache.content
+    return contextCache
   }
 
-  let contextContent = ""
-  contextContent += `${await readMarkdownFile(profile.general_summary_file)}\n\n`
+  const summaryContent = await readMarkdownFile(profile.general_summary_file)
+  const sections: ContextSection[] = [
+    {
+      title: "General Summary",
+      content: summaryContent,
+      searchableText: `General Summary\n${summaryContent}`.toLowerCase(),
+    },
+  ]
 
   for (const fileMeta of profile.context_files_list) {
     if (fileMeta.file === profile.general_summary_file) continue
-    contextContent += `## ${fileMeta.title}\n`
-    contextContent += `${await readMarkdownFile(fileMeta.file)}\n\n`
+    const fileContent = await readMarkdownFile(fileMeta.file)
+    sections.push({
+      title: fileMeta.title,
+      content: fileContent,
+      searchableText: `${fileMeta.title}\n${fileContent}`.toLowerCase(),
+    })
   }
 
-  contextCache = {
-    signature,
-    content: contextContent,
+  const content = sections
+    .map((section) => `## ${section.title}\n${section.content}`)
+    .join("\n\n")
+
+  contextCache = { signature, content, sections }
+  return contextCache
+}
+
+function pickRelevantSections(
+  sections: ContextSection[],
+  query: string,
+  maxSections: number,
+) {
+  const queryTokens = tokenize(query)
+  if (queryTokens.length === 0) {
+    return sections.slice(0, maxSections)
   }
 
-  return contextContent
+  const querySet = new Set(queryTokens)
+  const scored = sections.map((section, index) => {
+    const sectionTokens = tokenize(section.searchableText)
+    let score = 0
+
+    for (const token of sectionTokens) {
+      if (querySet.has(token)) score += 1
+    }
+
+    // Slightly prioritize earlier sections for tie-break stability.
+    return { section, score, index }
+  })
+
+  return scored
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score
+      return a.index - b.index
+    })
+    .slice(0, maxSections)
+    .map((item) => item.section)
+}
+
+export async function getChatbotContext() {
+  const cache = await buildContextCache()
+  return cache.content
+}
+
+export async function getChatbotContextForQuery(query: string, maxSections = 3) {
+  const cache = await buildContextCache()
+  const selectedSections = pickRelevantSections(cache.sections, query, maxSections)
+  const selectedContent = selectedSections
+    .map((section) => `## ${section.title}\n${section.content}`)
+    .join("\n\n")
+
+  return {
+    signature: cache.signature,
+    context: selectedContent,
+    selectedSections: selectedSections.map((section) => section.title),
+  }
 }

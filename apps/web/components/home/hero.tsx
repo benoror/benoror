@@ -13,6 +13,17 @@ import { getClasses } from "./hero.theme"
 
 import styles from './home.module.css'
 
+function shuffleImages(images: string[]) {
+  const shuffled = [...images]
+  for (let i = shuffled.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(Math.random() * (i + 1))
+    const current = shuffled[i]!
+    shuffled[i] = shuffled[j]!
+    shuffled[j] = current
+  }
+  return shuffled
+}
+
 export default function Hero() {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
@@ -29,9 +40,14 @@ export default function Hero() {
     ],
     [],
   )
-  const images = useMemo(() => [...baseImages].sort(() => Math.random() - 0.5), [baseImages])
+  const [images, setImages] = useState(baseImages)
   const ctaBaseClass =
     "inline-flex h-11 min-h-11 items-center justify-center rounded-md border px-6 text-sm font-medium leading-none shadow-sm backdrop-blur-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+
+  useEffect(() => {
+    // Keep first render deterministic for SSR hydration, then randomize on client.
+    setImages(shuffleImages(baseImages))
+  }, [baseImages])
 
   useEffect(() => {
     const preloadLinks: HTMLLinkElement[] = []

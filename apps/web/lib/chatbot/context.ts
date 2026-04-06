@@ -1,5 +1,6 @@
 import fs from "node:fs/promises"
 import path from "node:path"
+import { fileURLToPath } from "node:url"
 
 interface ContextFileMeta {
   id: string
@@ -17,7 +18,8 @@ interface ContextCache {
   content: string
 }
 
-const CHATBOT_DATA_PATH = path.join(process.cwd(), "packages", "data", "chatbot")
+const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../../")
+const CHATBOT_DATA_PATH = path.join(REPO_ROOT, "packages", "data", "chatbot")
 const PUBLIC_PROFILE_FILE = "public_profile.json"
 
 let contextCache: ContextCache | null = null

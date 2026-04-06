@@ -72,12 +72,45 @@ export function useChatTransport() {
       const reader = response.body.getReader()
       const decoder = new TextDecoder()
       let assistantContent = ""
+      let sseMode: boolean | null = null
+      let sseBuffer = ""
 
-      while (true) {
-        const { done, value } = await reader.read()
-        if (done) break
-        assistantContent += decoder.decode(value, { stream: true })
+      const flushSSEBuffer = (flushAll: boolean) => {
+        const separator = /\r?\n\r?\n/
+        const events = sseBuffer.split(separator)
+        if (!flushAll) {
+          sseBuffer = events.pop() ?? ""
+        } else {
+          sseBuffer = ""
+        }
 
+        for (const eventChunk of events) {
+          const event = eventChunk.trim()
+          if (!event) continue
+
+          for (const line of event.split(/\r?\n/)) {
+            const trimmedLine = line.trim()
+            if (!trimmedLine.startsWith("data:")) continue
+
+            const payload = trimmedLine.slice("data:".length).trim()
+            if (!payload || payload === "[DONE]") continue
+
+            try {
+              const parsed = JSON.parse(payload) as {
+                choices?: Array<{ delta?: { content?: string } }>
+              }
+              const contentDelta = parsed.choices?.[0]?.delta?.content
+              if (contentDelta) {
+                assistantContent += contentDelta
+              }
+            } catch {
+              // Ignore malformed SSE lines and keep processing.
+            }
+          }
+        }
+      }
+
+      const syncAssistantMessage = () => {
         setMessages((prev) =>
           prev.map((item) =>
             item.id === assistantMessageId
@@ -87,7 +120,34 @@ export function useChatTransport() {
         )
       }
 
-      assistantContent += decoder.decode()
+      while (true) {
+        const { done, value } = await reader.read()
+        if (done) break
+        const chunk = decoder.decode(value, { stream: true })
+
+        if (sseMode === null) {
+          sseMode = chunk.trimStart().startsWith("data:")
+        }
+
+        if (sseMode) {
+          sseBuffer += chunk
+          flushSSEBuffer(false)
+        } else {
+          assistantContent += chunk
+        }
+
+        syncAssistantMessage()
+      }
+
+      const tail = decoder.decode()
+      if (sseMode) {
+        sseBuffer += tail
+        flushSSEBuffer(true)
+      } else {
+        assistantContent += tail
+      }
+
+      syncAssistantMessage()
       if (!assistantContent.trim()) {
         setMessages((prev) =>
           prev.map((item) =>

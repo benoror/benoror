@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useCallback, useMemo, useRef, useState } from "react"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "@/components/chatbot/chatbot-ui.theme"
 import { usePromptCarousel } from "@/components/chatbot/use-prompt-carousel"
@@ -25,7 +25,7 @@ const examplePrompts = [
 
 export function ChatbotUI() {
   const { themeKind } = useAppTheme()
-  const classes = getClasses(themeKind)
+  const classes = useMemo(() => getClasses(themeKind), [themeKind])
   const rootRef = useRef<HTMLDivElement | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
   const [input, setInput] = useState("")
@@ -49,6 +49,16 @@ export function ChatbotUI() {
   const isExpanded = uiMode === "expanded"
   const isIdle = uiMode === "idle"
   const { typedPrompt } = usePromptCarousel(examplePrompts, isIdle)
+  const handleMinimize = useCallback(() => setIsConversationOpen(false), [setIsConversationOpen])
+  const handleSubmitText = useCallback(
+    async (text: string) => {
+      const didSubmit = await submitPromptText(text)
+      if (!didSubmit) return
+      setIsConversationOpen(true)
+      setInput("")
+    },
+    [setIsConversationOpen, submitPromptText],
+  )
 
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[100] flex justify-center px-4">
@@ -58,7 +68,7 @@ export function ChatbotUI() {
           isExpanded={isExpanded}
           messages={messages}
           isLoading={isLoading}
-          onMinimize={() => setIsConversationOpen(false)}
+          onMinimize={handleMinimize}
         />
 
         <ThemedPromptInput
@@ -71,12 +81,7 @@ export function ChatbotUI() {
           onInputChange={setInput}
           onInputFocus={handleInputFocus}
           onPromptInteract={handlePromptInteract}
-          onSubmitText={async (text) => {
-            const didSubmit = await submitPromptText(text)
-            if (!didSubmit) return
-            setIsConversationOpen(true)
-            setInput("")
-          }}
+          onSubmitText={handleSubmitText}
           textareaRef={textareaRef}
           showCarousel={showCarousel}
           typedPrompt={typedPrompt}

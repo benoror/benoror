@@ -52,10 +52,15 @@ export function ChatbotUI() {
   const handleMinimize = useCallback(() => setIsConversationOpen(false), [setIsConversationOpen])
   const handleSubmitText = useCallback(
     async (text: string) => {
-      const didSubmit = await submitPromptText(text)
-      if (!didSubmit) return
-      setIsConversationOpen(true)
+      const trimmed = text.trim()
+      if (!trimmed) return
+
+      // Clear immediately so the textarea resets as soon as user submits.
       setInput("")
+      setIsConversationOpen(true)
+
+      const didSubmit = await submitPromptText(trimmed)
+      if (!didSubmit) return
     },
     [setIsConversationOpen, submitPromptText],
   )

@@ -8,13 +8,51 @@ export interface ChatMessage {
   content: string
 }
 
+const CHAT_HISTORY_STORAGE_KEY = "chatbot:messages:v1"
+
+function isChatMessage(value: unknown): value is ChatMessage {
+  if (!value || typeof value !== "object") return false
+  const candidate = value as Record<string, unknown>
+  return (
+    typeof candidate.id === "string" &&
+    (candidate.role === "user" || candidate.role === "assistant") &&
+    typeof candidate.content === "string"
+  )
+}
+
 export function useChatTransport() {
   const [messages, setMessagesState] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const messagesRef = useRef<ChatMessage[]>(messages)
 
   useEffect(() => {
+    if (typeof window === "undefined") return
+
+    try {
+      const raw = window.localStorage.getItem(CHAT_HISTORY_STORAGE_KEY)
+      if (!raw) return
+      const parsed: unknown = JSON.parse(raw)
+      if (!Array.isArray(parsed)) return
+      const restored = parsed.filter(isChatMessage)
+      if (restored.length === 0) return
+      setMessagesState(restored)
+      messagesRef.current = restored
+    } catch {
+      // Ignore corrupted storage and continue with empty history.
+    }
+  }, [])
+
+  useEffect(() => {
     messagesRef.current = messages
+  }, [messages])
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    try {
+      window.localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(messages))
+    } catch {
+      // Ignore storage quota / private mode errors.
+    }
   }, [messages])
 
   const setMessages = useCallback(

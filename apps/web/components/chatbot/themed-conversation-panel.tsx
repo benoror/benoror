@@ -17,59 +17,9 @@ import {
 import { BlinkingCursor } from "@/components/chatbot/blinking-cursor"
 import type { ChatMessage } from "@/components/chatbot/use-chat-transport"
 import type { getClasses } from "@/components/chatbot/chatbot-ui.theme"
-import { memo, useEffect, useState } from "react"
+import { memo } from "react"
 
 type ChatbotClasses = ReturnType<typeof getClasses>
-
-function StreamReveal({
-  content,
-  active,
-  textClassName,
-  cursorClassName,
-}: {
-  content: string
-  active: boolean
-  textClassName: string
-  cursorClassName: string
-}) {
-  const [visibleChars, setVisibleChars] = useState(content.length)
-
-  useEffect(() => {
-    if (!active) {
-      setVisibleChars(content.length)
-      return
-    }
-
-    if (visibleChars >= content.length) return
-
-    const timeout = setTimeout(() => {
-      const remaining = content.length - visibleChars
-      const step = Math.max(1, Math.min(remaining, 3))
-      setVisibleChars((count) => Math.min(content.length, count + step))
-    }, 10)
-
-    return () => clearTimeout(timeout)
-  }, [active, content, visibleChars])
-
-  useEffect(() => {
-    if (!active) return
-    if (content.length > visibleChars) return
-    setVisibleChars(content.length)
-  }, [active, content.length, visibleChars])
-
-  const shownText = active ? content.slice(0, visibleChars) : content
-
-  return (
-    <>
-      <MessageResponse
-        className={`font-mono text-left text-sm leading-5 ${textClassName} [&_*]:!text-inherit`}
-      >
-        {shownText}
-      </MessageResponse>
-      {active && <BlinkingCursor className={`ml-1 ${cursorClassName}`} />}
-    </>
-  )
-}
 
 export type ThemedConversationPanelProps = {
   classes: ChatbotClasses
@@ -135,16 +85,16 @@ export const ThemedConversationPanel = memo(function ThemedConversationPanel({
                         className={`w-full bg-transparent px-0 py-0 text-left text-sm leading-5 ${classes.conversationText} ${classes.userMessage}`}
                       >
                         {message.role === "assistant" ? (
-                          <StreamReveal
-                            active={
-                              isLoading &&
-                              index === messages.length - 1 &&
-                              message.role === "assistant"
-                            }
-                            content={message.content}
-                            cursorClassName={classes.streamCaret}
-                            textClassName={classes.conversationText}
-                          />
+                          <>
+                            <MessageResponse
+                              className={`font-mono text-left text-sm leading-5 ${classes.conversationText} [&_*]:!text-inherit`}
+                            >
+                              {message.content}
+                            </MessageResponse>
+                            {isLoading && index === messages.length - 1 && (
+                              <BlinkingCursor className={`ml-1 ${classes.streamCaret}`} />
+                            )}
+                          </>
                         ) : (
                           message.content
                         )}

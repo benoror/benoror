@@ -86,13 +86,19 @@ export const ThemedConversationPanel = memo(function ThemedConversationPanel({
                       >
                         {message.role === "assistant" ? (
                           <>
-                            <MessageResponse
-                              className={`font-mono text-left text-sm leading-5 ${classes.conversationText} [&_*]:!text-inherit`}
-                            >
-                              {message.content}
-                            </MessageResponse>
-                            {isLoading && index === messages.length - 1 && (
-                              <BlinkingCursor className={`ml-1 ${classes.streamCaret}`} />
+                            {isLoading && index === messages.length - 1 ? (
+                              <div
+                                className={`font-mono text-left text-sm leading-5 whitespace-pre-wrap ${classes.conversationText}`}
+                              >
+                                {message.content}
+                                <BlinkingCursor className={`ml-1 ${classes.streamCaret}`} />
+                              </div>
+                            ) : (
+                              <MessageResponse
+                                className={`font-mono text-left text-sm leading-5 ${classes.conversationText} [&_*]:!text-inherit`}
+                              >
+                                {message.content}
+                              </MessageResponse>
                             )}
                           </>
                         ) : (

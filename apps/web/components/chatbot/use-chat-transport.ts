@@ -9,6 +9,8 @@ export interface ChatMessage {
 }
 
 const CHAT_HISTORY_STORAGE_KEY = "chatbot:messages:v1"
+const CHAT_HISTORY_WRITE_DEBOUNCE_MS = 250
+const STREAM_FLUSH_INTERVAL_MS = 40
 
 function isChatMessage(value: unknown): value is ChatMessage {
   if (!value || typeof value !== "object") return false
@@ -48,11 +50,15 @@ export function useChatTransport() {
 
   useEffect(() => {
     if (typeof window === "undefined") return
-    try {
-      window.localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(messages))
-    } catch {
-      // Ignore storage quota / private mode errors.
-    }
+    const timeoutId = window.setTimeout(() => {
+      try {
+        window.localStorage.setItem(CHAT_HISTORY_STORAGE_KEY, JSON.stringify(messages))
+      } catch {
+        // Ignore storage quota / private mode errors.
+      }
+    }, CHAT_HISTORY_WRITE_DEBOUNCE_MS)
+
+    return () => window.clearTimeout(timeoutId)
   }, [messages])
 
   const setMessages = useCallback(
@@ -112,6 +118,7 @@ export function useChatTransport() {
       let assistantContent = ""
       let sseMode: boolean | null = null
       let sseBuffer = ""
+      let flushTimer: ReturnType<typeof setTimeout> | null = null
 
       const flushSSEBuffer = (flushAll: boolean) => {
         const separator = /\r?\n\r?\n/
@@ -158,6 +165,22 @@ export function useChatTransport() {
         )
       }
 
+      const flushAssistantMessage = () => {
+        if (flushTimer) {
+          clearTimeout(flushTimer)
+          flushTimer = null
+        }
+        syncAssistantMessage()
+      }
+
+      const scheduleAssistantFlush = () => {
+        if (flushTimer) return
+        flushTimer = setTimeout(() => {
+          flushTimer = null
+          syncAssistantMessage()
+        }, STREAM_FLUSH_INTERVAL_MS)
+      }
+
       while (true) {
         const { done, value } = await reader.read()
         if (done) break
@@ -174,7 +197,7 @@ export function useChatTransport() {
           assistantContent += chunk
         }
 
-        syncAssistantMessage()
+        scheduleAssistantFlush()
       }
 
       const tail = decoder.decode()
@@ -185,7 +208,7 @@ export function useChatTransport() {
         assistantContent += tail
       }
 
-      syncAssistantMessage()
+      flushAssistantMessage()
       if (!assistantContent.trim()) {
         setMessages((prev) =>
           prev.map((item) =>
@@ -212,6 +235,16 @@ export function useChatTransport() {
         ),
       )
     } finally {
+      if (typeof window !== "undefined") {
+        try {
+          window.localStorage.setItem(
+            CHAT_HISTORY_STORAGE_KEY,
+            JSON.stringify(messagesRef.current),
+          )
+        } catch {
+          // Ignore storage quota / private mode errors.
+        }
+      }
       setIsLoading(false)
     }
 

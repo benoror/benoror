@@ -1,73 +1,59 @@
 {
-  "last_updated": "2026-04-03",
-  "general_summary_file": "general_summary.md",
-  "faqs": [
+  "last_updated": "2026-04-06",
+  "sections": [
     {
-      "question": "What is Ben's professional background?",
-      "context_file": "resume.md",
-      "tags": ["professional", "background", "career", "experience"]
+      "id": "general_summary",
+      "type": "file",
+      "file": "general_summary.md",
+      "title": "Ben Orozco: General Summary",
+      "keywords": ["summary", "overview", "bio", "introduction"],
+      "aliases": ["who is ben", "tell me about ben"],
+      "priority": 5
     },
     {
-      "question": "What are Ben's key technical skills?",
-      "context_file": "resume.md",
-      "tags": ["skills", "tech", "technical", "technologies"]
+      "id": "faq",
+      "type": "file",
+      "file": "faq.md",
+      "title": "Ben Orozco FAQ",
+      "keywords": ["faq", "common questions", "background", "interests"],
+      "aliases": ["questions about ben", "common questions"],
+      "priority": 4
     },
     {
-      "question": "What are Ben's main interests?",
-      "context_file": "general_summary.md",
-      "tags": ["interests", "hobbies", "focus"]
+      "id": "resume",
+      "type": "runtime",
+      "runtime_key": "resume",
+      "title": "Ben Orozco Professional Background",
+      "keywords": ["resume", "career", "experience", "companies", "education", "skills"],
+      "aliases": ["professional background", "work history", "career trajectory"],
+      "priority": 4
     },
     {
-      "question": "Can you summarize Ben's career trajectory?",
-      "context_file": "resume.md",
-      "tags": ["career", "trajectory", "history", "path"]
+      "id": "projects",
+      "type": "runtime",
+      "runtime_key": "portfolio",
+      "title": "Ben Orozco Projects and Portfolio",
+      "keywords": ["projects", "portfolio", "open source", "maker", "ai projects"],
+      "aliases": ["what has ben built", "project work"],
+      "priority": 3
     },
     {
-      "question": "What kind of projects does Ben work on?",
-      "context_file": "projects.md",
-      "tags": ["projects", "work", "portfolio", "maker", "open source"]
+      "id": "social_media",
+      "type": "runtime",
+      "runtime_key": "personal",
+      "title": "Ben Orozco Online Presence and Interests",
+      "keywords": ["social", "links", "profiles", "interests", "online presence"],
+      "aliases": ["where to find ben online", "social media"],
+      "priority": 2
     },
     {
-      "question": "Does Ben have a public blog or notes?",
-      "context_file": "blog.md",
-      "tags": ["blog", "notes", "writing", "content"]
-    },
-    {
-      "question": "Where can I find Ben's social media or online profiles?",
-      "context_file": "social_media.md",
-      "tags": ["social media", "profiles", "links", "online presence"]
-    },
-    {
-      "question": "Tell me about Ben's AI projects.",
-      "context_file": "projects.md",
-      "tags": ["AI", "artificial intelligence", "agentic workflows", "AI projects"]
-    },
-    {
-      "question": "What companies has Ben worked for?",
-      "context_file": "resume.md",
-      "tags": ["companies", "employers", "work history"]
-    },
-    {
-      "question": "What is Ben's education?",
-      "context_file": "resume.md",
-      "tags": ["education", "university", "degrees"]
-    },
-    {
-      "question": "What technologies does Ben use?",
-      "context_file": "resume.md",
-      "tags": ["technologies", "tech stack", "tools", "languages"]
-    },
-    {
-      "question": "Where can I find Ben's open-source projects?",
-      "context_file": "projects.md",
-      "tags": ["open source", "github", "code"]
+      "id": "blog_feed",
+      "type": "snapshot",
+      "snapshot_key": "feed",
+      "title": "Ben Orozco Recent Writing and Notes",
+      "keywords": ["blog", "notes", "feed", "writing", "recent posts"],
+      "aliases": ["public writing", "recent content"],
+      "priority": 2
     }
-  ],
-  "context_files_list": [
-    { "id": "general_summary", "file": "general_summary.md", "title": "Ben Orozco: General Summary" },
-    { "id": "resume", "file": "resume.md", "title": "Ben Orozco's Professional Resume Summary" },
-    { "id": "projects", "file": "projects.md", "title": "Ben Orozco's Key Projects" },
-    { "id": "blog", "file": "blog.md", "title": "Ben Orozco's Blog Overview" },
-    { "id": "social_media", "file": "social_media.md", "title": "Ben Orozco's Social Media Presence" }
   ]
 }

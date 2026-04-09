@@ -177,11 +177,47 @@ const STOP_WORDS = new Set([
   "you",
 ])
 
+function normalizeToken(token: string): string {
+  let normalized = token.toLowerCase()
+
+  if (normalized.endsWith("ies") && normalized.length > 4) {
+    normalized = `${normalized.slice(0, -3)}y`
+  } else if (
+    normalized.endsWith("s") &&
+    !normalized.endsWith("ss") &&
+    normalized.length > 3
+  ) {
+    normalized = normalized.slice(0, -1)
+  }
+
+  if (normalized.endsWith("ing") && normalized.length > 5) {
+    normalized = normalized.slice(0, -3)
+  } else if (normalized.endsWith("ed") && normalized.length > 4) {
+    normalized = normalized.slice(0, -2)
+  } else if (normalized.endsWith("ment") && normalized.length > 6) {
+    normalized = normalized.slice(0, -4)
+  }
+
+  if (normalized.endsWith("i") && normalized.length > 3) {
+    normalized = `${normalized.slice(0, -1)}y`
+  }
+
+  if (normalized === "videogame") return "game"
+  if (normalized === "gaming") return "game"
+  if (normalized === "develop") return "build"
+  if (normalized === "developer") return "build"
+  if (normalized === "development") return "build"
+  if (normalized === "developed") return "build"
+
+  return normalized
+}
+
 function tokenize(value: string): string[] {
   return value
     .toLowerCase()
     .replace(/[^a-z0-9\s]/g, " ")
     .split(/\s+/)
+    .map((token) => normalizeToken(token))
     .filter((token) => token.length > 1 && !STOP_WORDS.has(token))
 }
 

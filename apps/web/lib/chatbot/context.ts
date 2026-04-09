@@ -60,6 +60,7 @@ type SignatureEntry =
   | {
       kind: "runtime"
       runtimeKey: RuntimeSectionKey
+      signature: string
     }
   | {
       kind: "snapshot"
@@ -77,9 +78,6 @@ interface ContextSection {
 
 const PUBLIC_PROFILE_FILE = "public_profile.json"
 const cwd = process.cwd()
-const REPO_ROOT = cwd.endsWith(`${path.sep}apps${path.sep}web`)
-  ? path.join(cwd, "..", "..")
-  : cwd
 const defaultChatbotDataPath = cwd.endsWith(`${path.sep}apps${path.sep}web`)
   ? path.join(cwd, "..", "..", "packages", "data", "chatbot")
   : path.join(cwd, "packages", "data", "chatbot")
@@ -91,52 +89,16 @@ const runtimeSectionResolvers: Record<
   RuntimeSectionKey,
   {
     load: () => string
-    dependencies: string[]
   }
 > = {
   resume: {
     load: serializeResumeContext,
-    dependencies: [
-      path.join(REPO_ROOT, "packages", "data", "src", "resume.ts"),
-      path.join(REPO_ROOT, "packages", "data", "src", "resume", "roles.ts"),
-      path.join(
-        REPO_ROOT,
-        "packages",
-        "data",
-        "src",
-        "serializers",
-        "resume-context.ts",
-      ),
-      path.join(REPO_ROOT, "packages", "data", "src", "personal.ts"),
-    ],
   },
   portfolio: {
     load: serializePortfolioContext,
-    dependencies: [
-      path.join(REPO_ROOT, "packages", "data", "src", "portfolio.ts"),
-      path.join(
-        REPO_ROOT,
-        "packages",
-        "data",
-        "src",
-        "serializers",
-        "portfolio-context.ts",
-      ),
-    ],
   },
   personal: {
     load: serializePersonalContext,
-    dependencies: [
-      path.join(REPO_ROOT, "packages", "data", "src", "personal.ts"),
-      path.join(
-        REPO_ROOT,
-        "packages",
-        "data",
-        "src",
-        "serializers",
-        "personal-context.ts",
-      ),
-    ],
   },
 }
 
@@ -322,7 +284,7 @@ async function getFileSignatureEntries(files: string[]) {
   const stats = await Promise.all(files.map((file) => fs.stat(file)))
   return stats.map((stat, index): SignatureEntry => ({
     kind: "file",
-    file: path.relative(REPO_ROOT, files[index] ?? ""),
+    file: path.relative(cwd, files[index] ?? ""),
     mtimeMs: stat.mtimeMs,
   }))
 }
@@ -348,10 +310,7 @@ async function resolveFileSection(section: FileSectionMeta) {
 
 async function resolveRuntimeSection(section: RuntimeSectionMeta) {
   const resolver = runtimeSectionResolvers[section.runtime_key]
-  const [signatureEntries, content] = await Promise.all([
-    getFileSignatureEntries(resolver.dependencies),
-    Promise.resolve(resolver.load()),
-  ])
+  const content = resolver.load()
 
   return {
     section: {
@@ -362,10 +321,10 @@ async function resolveRuntimeSection(section: RuntimeSectionMeta) {
       priority: getPriority(section),
     },
     signatureEntries: [
-      ...signatureEntries,
       {
         kind: "runtime",
         runtimeKey: section.runtime_key,
+        signature: content,
       } satisfies SignatureEntry,
     ],
   }

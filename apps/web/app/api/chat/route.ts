@@ -4,7 +4,7 @@ import type { ChatRequestBody } from "@/lib/chatbot/types"
 
 const VERCEL_AI_GATEWAY_URL =
   process.env.AI_GATEWAY_BASE_URL || "https://ai-gateway.vercel.sh/v1/chat/completions"
-const DEFAULT_GATEWAY_MODEL = "google/gemma-4-31b-it"
+const DEFAULT_GATEWAY_MODEL = "google/gemma-4-26b-a4b-it"
 const MAX_CONTEXT_SECTIONS = 3
 const MAX_RECENT_MESSAGES = 8
 const CACHE_TTL_MS = 5 * 60 * 1000

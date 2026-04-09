@@ -6,6 +6,10 @@
     "build": "tsc"
   },
   "exports": {
+    "./chatbot": {
+      "types": "./src/chatbot.ts",
+      "default": "./dist/chatbot.js"
+    },
     "./*": "./src/*.ts",
     "./types/*": "./src/types/*.ts"
   },

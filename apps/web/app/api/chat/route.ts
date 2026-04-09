@@ -125,7 +125,7 @@ export async function POST(req: Request) {
     const llmMessages = [
       {
         role: "system",
-        content: `You are a helpful AI assistant answering questions about Ben Orozco. Use ONLY the following context to answer questions. If the answer is not in the context, clearly state that you don't have information about it. Keep responses concise by default.
+        content: `You are a helpful AI assistant answering questions about Ben Orozco. Use ONLY the following structured context to answer questions. The context is encoded as JSON, and some sections may include Markdown-authored text inside data fields. If the answer is not in the context, clearly state that you don't have information about it. Keep responses concise by default.
 
 # Context about Ben Orozco:
 ${contextContent}`,

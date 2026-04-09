@@ -1,7 +1,8 @@
 import { getAggregatedFeed } from "@/lib/feed"
+import type { ChatbotSection, FeedSectionData } from "@workspace/data/chatbot"
 
 type FeedContextSnapshot = {
-  content: string
+  section: ChatbotSection<FeedSectionData>
   signature: string
 }
 
@@ -18,7 +19,7 @@ export async function getFeedContextSnapshot(): Promise<FeedContextSnapshot> {
   const now = Date.now()
   if (feedContextCache && feedContextCache.expiresAt > now) {
     return {
-      content: feedContextCache.content,
+      section: feedContextCache.section,
       signature: feedContextCache.signature,
     }
   }
@@ -29,32 +30,39 @@ export async function getFeedContextSnapshot(): Promise<FeedContextSnapshot> {
     .filter((source) => source.status === "active" || source.status === "manual")
     .map((source) => source.name)
 
-  const lines: string[] = []
-  lines.push("# Recent Writing, Notes, and Public Activity")
-  lines.push(
-    "Snapshot of Ben Orozco's recent public writing, notes, talks, and social activity feeds.",
-  )
-  lines.push("")
+  const items = recentItems.map((item) => ({
+    id: item.id,
+    title: item.title,
+    publishedAt: item.publishedAt,
+    sourceName: item.sourceName,
+    summary: item.summary ?? item.body?.slice(0, 220) ?? "Recent public activity.",
+  }))
 
-  if (activeSources.length > 0) {
-    lines.push(`Sources: ${activeSources.join(", ")}`)
-    lines.push("")
+  const signature = JSON.stringify({
+    sources: activeSources,
+    items: items.map((item) => ({
+      id: item.id,
+      publishedAt: item.publishedAt,
+      title: item.title,
+      sourceName: item.sourceName,
+    })),
+  })
+
+  const section: ChatbotSection<FeedSectionData> = {
+    id: "blog_feed",
+    kind: "feed",
+    title: "Ben Orozco Recent Writing and Notes",
+    keywords: ["blog", "notes", "feed", "writing", "recent posts"],
+    aliases: ["public writing", "recent content"],
+    priority: 2,
+    data: {
+      sources: activeSources,
+      items,
+    },
   }
-
-  for (const item of recentItems) {
-    const publishedOn = item.publishedAt.slice(0, 10)
-    const summary = item.summary ?? item.body?.slice(0, 220) ?? ""
-    lines.push(
-      `- **${item.title}** (${publishedOn}, ${item.sourceName}) - ${summary || "Recent public activity."}`,
-    )
-  }
-
-  const signature = recentItems
-    .map((item) => `${item.id}:${item.publishedAt}`)
-    .join("|")
 
   const snapshot = {
-    content: lines.join("\n"),
+    section,
     signature,
   }
 

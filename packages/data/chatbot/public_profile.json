@@ -33,8 +33,8 @@
       "type": "runtime",
       "runtime_key": "portfolio",
       "title": "Ben Orozco Projects and Portfolio",
-      "keywords": ["projects", "portfolio", "open source", "maker", "ai projects"],
-      "aliases": ["what has ben built", "project work"],
+      "keywords": ["projects", "portfolio", "open source", "maker", "ai projects", "games", "gaming", "video games", "game development", "bloxcraft", "gba dev"],
+      "aliases": ["what has ben built", "project work", "what games has ben developed", "has ben made games"],
       "priority": 3
     },
     {

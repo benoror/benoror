@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { BASE_COVER_LETTER } from '@workspace/data/cover_letters';
 import { ABOUT } from '@workspace/data/resume';
 import { getCoverLetter, getResumeVariant } from '@workspace/data/resume_variants';
 import { getAbsoluteCoverLetterUrl, getAbsoluteResumeMarkdownUrl, getAbsoluteResumeUrl, getCoverLetterPath, getResumeMarkdownPath, getResumePath } from '@/lib/resumeUrls';
@@ -37,9 +38,9 @@ export function buildResumeMetadata(slug?: string): Metadata {
   };
 }
 
-export function buildCoverLetterMetadata(slug: string): Metadata {
-  const variant = getResumeVariant(slug);
-  const coverLetter = getCoverLetter(slug);
+export function buildCoverLetterMetadata(slug?: string): Metadata {
+  const variant = slug ? getResumeVariant(slug) : undefined;
+  const coverLetter = slug ? getCoverLetter(slug) : BASE_COVER_LETTER;
   const title = coverLetter?.title ?? `${ABOUT.name} - Cover Letter`;
   const description = coverLetter?.summary ?? variant?.metadata?.description ?? `Cover letter for ${ABOUT.name}`;
 

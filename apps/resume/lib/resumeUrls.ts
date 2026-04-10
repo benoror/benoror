@@ -10,8 +10,8 @@ export function getResumeMarkdownPath(slug?: string): string {
   return slug ? `/${slug}/resume.md` : '/resume.md';
 }
 
-export function getCoverLetterPath(slug: string): string {
-  return `/${slug}/cover-letter`;
+export function getCoverLetterPath(slug?: string): string {
+  return slug ? `/${slug}/cover-letter` : '/cover-letter';
 }
 
 export function getAbsoluteResumeUrl(slug?: string): string {
@@ -22,6 +22,6 @@ export function getAbsoluteResumeMarkdownUrl(slug?: string): string {
   return `${PUBLIC_RESUME_ROOT_URL}${getResumeMarkdownPath(slug)}`;
 }
 
-export function getAbsoluteCoverLetterUrl(slug: string): string {
+export function getAbsoluteCoverLetterUrl(slug?: string): string {
   return `${PUBLIC_RESUME_ROOT_URL}${getCoverLetterPath(slug)}`;
 }

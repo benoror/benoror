@@ -10,7 +10,7 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: {
       userAgent: "*",
-      allow: ["/", "/resume.md", "/Ben%20Orozco%20-%20Resume.pdf", ...allowedVariantPaths, ...allowedCoverLetterPaths],
+      allow: ["/", "/cover-letter", "/resume.md", "/Ben%20Orozco%20-%20Resume.pdf", ...allowedVariantPaths, ...allowedCoverLetterPaths],
     },
     sitemap: `${resumeUrl}/sitemap.xml`,
   }

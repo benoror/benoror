@@ -39,6 +39,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${resumeUrl}/cover-letter`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
       url: `${resumeUrl}/resume.md`,
       lastModified: now,
       changeFrequency: "monthly",

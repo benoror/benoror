@@ -49,6 +49,29 @@ export type ResumeChatbotSkill = Pick<ISkill, "name" | "level" | "description"> 
   coreAreas: string[]
 }
 
+export interface ResumeChatbotVariant {
+  slug: string
+  label?: string
+  metadata?: {
+    title?: string
+    description?: string
+  }
+  tailoredAbout?: {
+    header: string
+    summary: string
+  }
+  highlightedCompanies: string[]
+  highlightedSkills: string[]
+  coverLetter?: {
+    title?: string
+    targetCompany?: string
+    targetRole?: string
+    recipient?: string
+    summary?: string
+    keyThemes: string[]
+  }
+}
+
 export interface ResumeSectionData {
   about: {
     name: string
@@ -69,6 +92,14 @@ export interface ResumeSectionData {
     name: string
     proficiency: string
   }>
+  baseCoverLetter: {
+    title?: string
+    targetRole?: string
+    recipient?: string
+    summary?: string
+    keyThemes: string[]
+  }
+  variants: ResumeChatbotVariant[]
 }
 
 export type PortfolioSectionItem = Pick<

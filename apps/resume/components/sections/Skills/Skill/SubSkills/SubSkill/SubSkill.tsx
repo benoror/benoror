@@ -4,15 +4,20 @@ import { useEffect, useState } from 'react';
 import SubSkillContent from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillContent';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@workspace/ui/components/dialog';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@workspace/ui/components/tooltip';
-import { sinceToString, sinceToYears } from '@workspace/utils/date';
 import { ISkill } from '@workspace/data/types/resume';
 import SkillBadge from '@/components/SkillBadge';
 import { ExternalLink } from 'lucide-react';
 
-export default function SubSkill({ skill }: { skill: ISkill }) {
+export default function SubSkill({
+  skill,
+  years,
+  yearsOfExperience,
+}: {
+  skill: ISkill;
+  years: number;
+  yearsOfExperience: string;
+}) {
   const [dialogOpen, setDialogOpen] = useState(false)
-  const years = sinceToYears(skill.since)
-  const yearsOfExperience = sinceToString(skill.since)
   const hasContent = skill.description || (skill.subSkills && skill.subSkills.length > 0)
 
   useEffect(() => {

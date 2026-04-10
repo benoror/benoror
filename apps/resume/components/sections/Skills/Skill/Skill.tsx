@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { sinceToString } from '@workspace/utils/date';
 import { ISkill } from '@workspace/data/types/resume';
 import PrintSubSkill from '@/components/sections/Skills/Skill/SubSkills/PrintSubSkill/PrintSubSkill';
 import SubSkill from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubSkill';
@@ -10,10 +9,21 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@workspace/
 import { ChevronDown } from 'lucide-react';
 import { cn } from '@workspace/ui/lib/utils';
 
+type SubSkillExperience = {
+  years: number;
+  yearsOfExperience: string;
+};
 
-export default function Skill({ skill }: { skill: ISkill }) {
+export default function Skill({
+  skill,
+  yearsOfExperience,
+  subSkillExperience,
+}: {
+  skill: ISkill;
+  yearsOfExperience: string;
+  subSkillExperience: SubSkillExperience[];
+}) {
   const [isOpen, setIsOpen] = useState(false)
-  const yearsOfExperience = sinceToString(skill.since)
   const subSkillCount = skill.subSkills?.length ?? 0
 
   useEffect(() => {
@@ -98,7 +108,14 @@ export default function Skill({ skill }: { skill: ISkill }) {
                   <p className="text-xs text-muted-foreground mb-2">{skill.description}</p>
                 )}
                 <div className="flex flex-wrap justify-center gap-1.5">
-                  {skill.subSkills?.map((subSkill, index) => <SubSkill key={index} skill={subSkill} />)}
+                  {skill.subSkills?.map((subSkill, index) => (
+                    <SubSkill
+                      key={index}
+                      skill={subSkill}
+                      years={subSkillExperience[index]?.years ?? 0}
+                      yearsOfExperience={subSkillExperience[index]?.yearsOfExperience ?? ''}
+                    />
+                  ))}
                 </div>
               </div>
             </CollapsibleContent>

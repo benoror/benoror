@@ -19,7 +19,7 @@ export default function ResumePageContent({
   return (
     <main className="container mx-auto flex flex-col items-center gap-8 print:gap-8 px-6 py-16 print:py-2 md:p-8 max-w-5xl text-sm">
       <Intro about={document.about} resumeUrl={resumeUrl} />
-      <Contact about={document.about} resumeUrl={resumeUrl} />
+      <Contact about={document.about} />
       <About about={document.about} />
       <CoreSkills skills={document.skills} />
       <Experience companies={document.companies} />

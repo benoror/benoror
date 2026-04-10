@@ -21,8 +21,8 @@ export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
   },
   resume: {
     about: {
-      header: 'VP Engineering / Director of AI Engineering · AI Product Strategy · Agentic Systems',
-      about_me: 'Executive-level engineering leader with a hands-on software foundation and repeated experience owning product, engineering, architecture, and AI strategy in SaaS environments. Built and led organizations from early-stage startup teams to 140+ engineers, partnered closely with CTOs, CEOs, product, and go-to-market leaders, and stayed close to delivery, architecture, and quality. Particularly relevant for senior AI engineering leadership roles: AI-first product architecture, agentic workflow enablement, globally distributed team leadership, and measurable business impact across high-growth environments including 10MM+ end users, Series-C scale execution, 100MM+ ARR context, and practical AI adoption that improved productivity by 10% while reducing code review time by 60%.',
+      header: 'VP Engineering / Director of AI Engineering · Technical Generalist · AI Product Strategy',
+      about_me: 'Executive-level engineering leader with a hands-on software foundation and repeated experience owning product, engineering, architecture, and AI strategy in SaaS environments. Built and led organizations from early-stage startup teams to 140+ engineers, partnered closely with CTOs, CEOs, product, and go-to-market leaders, and stayed close to delivery, architecture, and quality with a strong generalist mindset. Particularly relevant for senior AI engineering leadership roles: AI-first product architecture, agentic workflow enablement, globally distributed team leadership, and measurable business impact across high-growth environments including 10MM+ end users, Series-C scale execution, 100MM+ ARR context, and practical AI adoption that improved productivity by 10% while reducing code review time by 60%.',
     },
     companies: [
       {
@@ -164,7 +164,7 @@ export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
     skills: [
       {
         ...getBaseVariantSkill('leadership'),
-        description: 'Executive-level engineering leadership across product, engineering, architecture, hiring, and AI strategy. Experienced scaling organizations from early-stage teams to 140+ engineers while staying hands-on where needed.',
+        description: 'Executive-level engineering leadership across product, engineering, architecture, hiring, and AI strategy. Experienced scaling organizations from early-stage teams to 140+ engineers while staying hands-on where needed with a practical generalist orientation.',
       },
       {
         ...getBaseVariantSkill('product'),
@@ -202,7 +202,7 @@ export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
     paragraphs: [
       'Thank you for sharing the Director of AI Engineering and VP of Engineering (AI Products) mandates. I prepared this tailored version of my resume to more clearly reflect the areas your team highlighted: executive leadership scope, measurable AI-first product impact, team scale, and strategic business contribution.',
       'My background is strongest at the intersection of engineering leadership, product strategy, and hands-on technical execution. Most recently at Apptegy, I helped shape and lead an organization of 140+ engineers, supported scale-up execution toward Series-C and 100MM+ ARR complexity, and led AI enablement efforts that improved engineering productivity by 10% and reduced code review time by 60%. Across HealthTree and Ecaresoft, I operated in CTO roles spanning product direction, architecture, hiring, delivery systems, and cross-functional execution in high-growth environments.',
-      'What I believe aligns especially well with your mandates is the combination of executive scope and builder mentality: I have led teams, managers, and cross-functional initiatives while still contributing directly to architecture, platform evolution, AI workflows, and product delivery. That mix has been especially valuable in ambiguous, fast-moving SaaS environments where organizations need both strategic leadership and technical depth.',
+      'What I believe aligns especially well with your mandates is the combination of executive scope, builder mentality, and a technical generalist approach: I have led teams, managers, and cross-functional initiatives while still contributing directly to architecture, platform evolution, AI workflows, and product delivery. That mix has been especially valuable in ambiguous, fast-moving SaaS environments where organizations need both strategic leadership and technical depth.',
       'I would be glad to continue the conversation and provide any additional context that helps position my profile for the current searches. Thank you again for the opportunity and for the thoughtful feedback on how to strengthen alignment.',
     ],
     closing: 'Best regards,',

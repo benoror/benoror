@@ -212,7 +212,13 @@ export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
         description: 'Strong backend and platform foundation across APIs, distributed systems, service architecture, integrations, and scalable cloud systems used as the backbone for product and AI delivery.',
       },
       {
+        ...getSkill('frontend'),
+        order: 5,
+        description: 'Frontend and product-surface experience across React, Next.js, TypeScript, and UX-sensitive delivery, useful when AI products need fast iteration across the full stack.',
+      },
+      {
         ...getSkill('devops'),
+        order: 6,
         description: 'Infrastructure and delivery leadership across CI/CD, cloud architecture, Kubernetes, observability, and operational reliability in growing organizations.',
       },
     ],

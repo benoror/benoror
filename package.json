@@ -6,8 +6,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "dev:web": "turbo dev --filter=web",
-    "dev:resume": "turbo dev --filter=resume",
+    "dev:web": "turbo dev --filter=web --filter=@workspace/data --filter=@workspace/utils",
+    "dev:resume": "turbo dev --filter=resume --filter=@workspace/data --filter=@workspace/utils",
     "notes:sync:vaults": "pnpm --filter notes sync:vaults",
     "notes:dev": "pnpm --filter notes dev",
     "notes:build": "pnpm --filter notes build",

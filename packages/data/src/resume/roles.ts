@@ -1,4 +1,4 @@
-import { IRole } from '@workspace/data/types/resume';
+import { IRole } from '../types/resume.js';
 
 export const APPTEGY: IRole[] = [
   {

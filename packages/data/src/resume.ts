@@ -1,7 +1,7 @@
-import { IEducationEntry, ILanguageEntry, IResumeAbout, IResumeDocument, ISkill } from '@workspace/data/types/resume';
+import { IEducationEntry, ILanguageEntry, IResumeAbout, IResumeDocument, ISkill } from './types/resume.js';
 import { gmailAlias } from '@workspace/utils/email';
-import { PERSONAL } from '@workspace/data/personal';
-import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
+import { PERSONAL } from './personal.js';
+import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from './resume/roles.js';
 
 const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,

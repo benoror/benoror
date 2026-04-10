@@ -5,8 +5,14 @@
     "dev": "tsc --watch",
     "build": "tsc"
   },
+  "files": [
+    "dist"
+  ],
   "exports": {
-    "./*": "./src/*.ts"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
   },
   "devDependencies": {
     "@workspace/typescript-config": "workspace:*",

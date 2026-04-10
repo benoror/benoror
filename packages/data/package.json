@@ -5,13 +5,18 @@
     "dev": "tsc --watch",
     "build": "tsc"
   },
+  "files": [
+    "dist"
+  ],
   "exports": {
     "./chatbot": {
-      "types": "./src/chatbot.ts",
+      "types": "./dist/chatbot.d.ts",
       "default": "./dist/chatbot.js"
     },
-    "./*": "./src/*.ts",
-    "./types/*": "./src/types/*.ts"
+    "./*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    }
   },
   "dependencies": {
     "@workspace/utils": "workspace:*"

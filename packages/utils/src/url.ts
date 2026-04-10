@@ -1,1 +1,1 @@
-export const shortURL = (url: string) => url.replace(/http(s):\/\/(www\.)*/, '');
+export const shortURL = (url: string) => url.replace(/^https?:\/\/(?:www\.)?/, '');

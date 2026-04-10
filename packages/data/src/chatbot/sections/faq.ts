@@ -1,6 +1,5 @@
 import type { ChatbotSection } from "../types.js"
-
-import { readChatbotMarkdown } from "./editorial.js"
+import { FAQ_MARKDOWN } from "./editorial-content.js"
 
 export async function buildFaqSection(): Promise<ChatbotSection> {
   return {
@@ -11,7 +10,7 @@ export async function buildFaqSection(): Promise<ChatbotSection> {
     aliases: ["questions about ben", "common questions"],
     priority: 4,
     data: {
-      markdown: await readChatbotMarkdown("faq.md"),
+      markdown: FAQ_MARKDOWN,
     },
   }
 }

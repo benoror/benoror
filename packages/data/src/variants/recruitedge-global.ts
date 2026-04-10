@@ -1,46 +1,16 @@
-import { BASE_RESUME_DOCUMENT } from '../resume.js';
-import type { ICompany, IResumeVariantDefinition, IRole, ISkill } from '../types/resume.js';
+import type { IResumeVariantDefinition } from '../types/resume.js';
+import { getBaseVariantCompany, getBaseVariantRole, getBaseVariantSkill } from './utils.js';
 
-function getCompany(name: string): ICompany {
-  const company = BASE_RESUME_DOCUMENT.companies.find((entry) => entry.name === name);
-
-  if (!company) {
-    throw new Error(`Unknown company for resume variant: ${name}`);
-  }
-
-  return company;
-}
-
-function getSkill(slug: string): ISkill {
-  const skill = BASE_RESUME_DOCUMENT.skills.find((entry) => entry.slug === slug);
-
-  if (!skill) {
-    throw new Error(`Unknown skill for resume variant: ${slug}`);
-  }
-
-  return skill;
-}
-
-function getRole(company: ICompany, index: number): IRole {
-  const role = company.roles[index];
-
-  if (!role) {
-    throw new Error(`Unknown role index ${index} for company ${company.name}`);
-  }
-
-  return role;
-}
-
-const apptegy = getCompany('Apptegy');
-const healthTree = getCompany('HealthTree');
-const ecaresoft = getCompany('Ecaresoft');
-const baseql = getCompany('BaseQL');
-const apptegyVpRole = getRole(apptegy, 0);
-const apptegyLeadRole = getRole(apptegy, 1);
-const healthTreeCtoRole = getRole(healthTree, 0);
-const ecaresoftIntlCtoRole = getRole(ecaresoft, 0);
-const ecaresoftNimboCtoRole = getRole(ecaresoft, 1);
-const baseqlFounderRole = getRole(baseql, 0);
+const apptegy = getBaseVariantCompany('Apptegy');
+const healthTree = getBaseVariantCompany('HealthTree');
+const ecaresoft = getBaseVariantCompany('Ecaresoft');
+const baseql = getBaseVariantCompany('BaseQL');
+const apptegyVpRole = getBaseVariantRole(apptegy, 0);
+const apptegyLeadRole = getBaseVariantRole(apptegy, 1);
+const healthTreeCtoRole = getBaseVariantRole(healthTree, 0);
+const ecaresoftIntlCtoRole = getBaseVariantRole(ecaresoft, 0);
+const ecaresoftNimboCtoRole = getBaseVariantRole(ecaresoft, 1);
+const baseqlFounderRole = getBaseVariantRole(baseql, 0);
 
 export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
   slug: 'recruitedge-global',
@@ -193,31 +163,31 @@ export const recruitedgeGlobalVariant: IResumeVariantDefinition = {
     ],
     skills: [
       {
-        ...getSkill('leadership'),
+        ...getBaseVariantSkill('leadership'),
         description: 'Executive-level engineering leadership across product, engineering, architecture, hiring, and AI strategy. Experienced scaling organizations from early-stage teams to 140+ engineers while staying hands-on where needed.',
       },
       {
-        ...getSkill('product'),
+        ...getBaseVariantSkill('product'),
         description: 'Product-minded technical leadership with ownership of roadmap trade-offs, delivery strategy, UX quality, and business outcomes in SaaS and platform environments.',
       },
       {
-        ...getSkill('ai'),
+        ...getBaseVariantSkill('ai'),
         order: 3,
         level: 85,
         description: 'AI engineering leadership spanning AI-first product architecture, practical AI adoption, agentic workflows, internal enablement, and production-oriented experimentation.',
       },
       {
-        ...getSkill('backend'),
+        ...getBaseVariantSkill('backend'),
         order: 4,
         description: 'Strong backend and platform foundation across APIs, distributed systems, service architecture, integrations, and scalable cloud systems used as the backbone for product and AI delivery.',
       },
       {
-        ...getSkill('frontend'),
+        ...getBaseVariantSkill('frontend'),
         order: 5,
         description: 'Frontend and product-surface experience across React, Next.js, TypeScript, and UX-sensitive delivery, useful when AI products need fast iteration across the full stack.',
       },
       {
-        ...getSkill('devops'),
+        ...getBaseVariantSkill('devops'),
         order: 6,
         description: 'Infrastructure and delivery leadership across CI/CD, cloud architecture, Kubernetes, observability, and operational reliability in growing organizations.',
       },

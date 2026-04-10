@@ -1,36 +1,10 @@
 import { BASE_RESUME_DOCUMENT } from './resume.js';
 import type { ICoverLetterDocument, IResumeDocument, IResumeDocumentOverride, IResumeVariantDefinition } from './types/resume.js';
+import { RESUME_VARIANT_LIST } from './variants/index.js';
 
-export const RESUME_VARIANTS: Record<string, IResumeVariantDefinition> = {
-  // Example:
-  // 'acme-cto': {
-  //   slug: 'acme-cto',
-  //   label: 'Acme CTO',
-  //   metadata: {
-  //     title: 'Ben Orozco - Resume for Acme CTO',
-  //     description: 'Tailored resume and cover letter for the Acme CTO role.',
-  //   },
-  //   resume: {
-  //     about: {
-  //       header: 'Hands-on Engineering Leader · CTO Candidate',
-  //     },
-  //     companies: [
-  //       ...BASE_RESUME_DOCUMENT.companies.slice(0, 3),
-  //     ],
-  //   },
-  //   coverLetter: {
-  //     targetCompany: 'Acme',
-  //     targetRole: 'CTO',
-  //     greeting: 'Dear Acme team,',
-  //     paragraphs: [
-  //       'Short tailored intro...',
-  //       'Why this role is a fit...',
-  //     ],
-  //     closing: 'Best regards,',
-  //     signature: 'Ben Orozco',
-  //   },
-  // },
-};
+export const RESUME_VARIANTS: Record<string, IResumeVariantDefinition> = Object.fromEntries(
+  RESUME_VARIANT_LIST.map((variant) => [variant.slug, variant])
+) as Record<string, IResumeVariantDefinition>;
 
 function isPlainObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);

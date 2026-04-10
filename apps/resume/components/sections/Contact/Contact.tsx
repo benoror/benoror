@@ -1,12 +1,12 @@
-import { LINKS, PERSONAL } from '@workspace/data/personal';
-import { ABOUT } from '@workspace/data/resume';
+import { LINKS } from '@workspace/data/personal';
+import type { IResumeAbout } from '@workspace/data/types/resume';
 import { Button } from '@workspace/ui/components/button';
 import { MailIcon, GlobeIcon, NotebookIcon } from "lucide-react";
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
 import { LinkedInIcon } from '@/components/icons/LinkedInIcon';
 import { shortURL } from '@workspace/utils/url';
 
-export default function Contact() {
+export default function Contact({ about }: { about: IResumeAbout }) {
   const IconLink = ({ Icon, link, text }: { Icon: React.ElementType, link: string, text: string }) => (
     <div className="flex items-center gap-2">
       <Button
@@ -27,7 +27,7 @@ export default function Contact() {
 
   return (
     <div className="flex gap-4 pt-1 text-xs text-muted-foreground flex-col sm:flex-row sm:items-baseline">
-      <IconLink Icon={MailIcon} link={`mailto:${ABOUT.public_email}`} text={shortURL(ABOUT.public_email)} />
+      <IconLink Icon={MailIcon} link={`mailto:${about.public_email}`} text={shortURL(about.public_email)} />
       <IconLink Icon={GlobeIcon} link={LINKS.website.url} text={shortURL(LINKS.website.url)} />
       <IconLink Icon={GitHubIcon} link={LINKS.github.url} text={shortURL(LINKS.github.url)} />
       <IconLink Icon={LinkedInIcon} link={LINKS.linkedin.url} text={shortURL(LINKS.linkedin.url)} />

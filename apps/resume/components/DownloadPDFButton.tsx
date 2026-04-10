@@ -2,9 +2,15 @@
 
 import { Button } from '@workspace/ui/components/button'
 import { Download } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 export default function DownloadPDFButton(){
-  
+  const pathname = usePathname()
+
+  if (pathname !== '/') {
+    return null
+  }
+
   function handleClick() {
     window.open('Ben Orozco - Resume.pdf', '_blank')
   }

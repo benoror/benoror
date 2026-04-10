@@ -2,7 +2,9 @@
 
 import { Button } from '@workspace/ui/components/button'
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import markdownIcon from '@/app/markdown.svg'
+import { getResumeMarkdownPath } from '@/lib/resumeUrls'
 
 function MarkdownIcon() {
   return (
@@ -17,8 +19,15 @@ function MarkdownIcon() {
 }
 
 export default function DownloadMarkdownButton() {
+  const pathname = usePathname()
+
+  if (!pathname || pathname.endsWith('/cover-letter')) {
+    return null
+  }
+
   function handleClick() {
-    window.open('resume.md', '_blank')
+    const slug = pathname === '/' ? undefined : pathname.slice(1)
+    window.open(getResumeMarkdownPath(slug), '_blank')
   }
 
   return (

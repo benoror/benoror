@@ -1,28 +1,33 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BriefcaseBusinessIcon } from "lucide-react";
 import Role from '@/components/sections/Experience/Role'
 import Section from '@/components/Section';
-import { COMPANIES } from '@workspace/data/resume'
 import { ICompany, IRole } from '@workspace/data/types/resume';
 import MetadataRow from '@/components/sections/Experience/MetadataRow';
 import { ExternalLink } from "lucide-react"
 import { shortURL } from '@workspace/utils/url';
 import MDDescription from "@/components/MarkdownDescription";
 
-export default function Experience() {
-  // Track open/closed state for each role
-  const [openStates, setOpenStates] = useState<Record<string, boolean>>(() => {
-    const initialState: Record<string, boolean> = {}
-    // Initialize all as closed by default except the first N companies
-    COMPANIES.forEach((company: ICompany, companyIndex: number) => {
-      (company.roles ?? []).forEach((_: IRole, roleIndex: number) => {
-        initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 5
-      })
+function createInitialOpenStates(companies: ICompany[]): Record<string, boolean> {
+  const initialState: Record<string, boolean> = {}
+
+  companies.forEach((company: ICompany, companyIndex: number) => {
+    (company.roles ?? []).forEach((_: IRole, roleIndex: number) => {
+      initialState[`${companyIndex}-${roleIndex}`] = companyIndex < 5
     })
-    return initialState
   })
+
+  return initialState
+}
+
+export default function Experience({ companies }: { companies: ICompany[] }) {
+  const [openStates, setOpenStates] = useState<Record<string, boolean>>(() => createInitialOpenStates(companies))
+
+  useEffect(() => {
+    setOpenStates(createInitialOpenStates(companies))
+  }, [companies])
 
   const toggleCollapsible = (key: string) => {
     setOpenStates((prev) => ({
@@ -34,7 +39,7 @@ export default function Experience() {
   return (
     <Section title="Experience" icon={<BriefcaseBusinessIcon />}>
       <div>
-        {COMPANIES.map((company: ICompany, companyIndex: number) => (
+        {companies.map((company: ICompany, companyIndex: number) => (
           <div
             key={companyIndex}
             className={[

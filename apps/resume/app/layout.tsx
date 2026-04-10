@@ -8,6 +8,7 @@ import DownloadMarkdownButton from '@/components/DownloadMarkdownButton';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { Providers } from "@/components/providers"
 import { LINKS } from "@workspace/data/personal";
+import { ABOUT } from "@workspace/data/resume";
 
 import "@workspace/ui/globals.css"
 
@@ -23,8 +24,8 @@ const fontMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(LINKS.resume.url),
-  title: "Ben Orozco - Resume",
-  description: "Resume of Ben Orozco",
+  title: `${ABOUT.name} - Resume`,
+  description: `Resume of ${ABOUT.name}`,
   alternates: {
     canonical: "/",
     types: {
@@ -35,14 +36,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "profile",
     url: LINKS.resume.url,
-    title: "Ben Orozco - Resume",
-    description: "Resume of Ben Orozco",
-    siteName: "Ben Orozco Resume",
+    title: `${ABOUT.name} - Resume`,
+    description: `Resume of ${ABOUT.name}`,
+    siteName: `${ABOUT.name} Resume`,
   },
   twitter: {
     card: "summary",
-    title: "Ben Orozco - Resume",
-    description: "Resume of Ben Orozco",
+    title: `${ABOUT.name} - Resume`,
+    description: `Resume of ${ABOUT.name}`,
   },
 };
 

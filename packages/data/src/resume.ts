@@ -1,9 +1,9 @@
-import { ISkill } from '@workspace/data/types/resume';
+import { IEducationEntry, ILanguageEntry, IResumeAbout, IResumeDocument, ISkill } from '@workspace/data/types/resume';
 import { gmailAlias } from '@workspace/utils/email';
 import { PERSONAL } from '@workspace/data/personal';
 import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from '@workspace/data/resume/roles';
 
-export const ABOUT = {
+const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,
   header: 'Hands-on Engineering Leader · Full Stack Developer · Product Builder',
   location: 'Monterrey, MX 🇲🇽',
@@ -11,7 +11,7 @@ export const ABOUT = {
   about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to code, architecture, product, UI/UX design and delivery across backend, frontend, infrastructure and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
 }
 
-export const COMPANIES = [
+const COMPANIES = [
   {
     name: 'Apptegy',
     url: 'https://www.apptegy.com',
@@ -110,7 +110,7 @@ export const COMPANIES = [
   }
 ]
 
-export const SKILLS: ISkill[] = [{
+const SKILLS: ISkill[] = [{
   name: 'Leadership',
   slug: 'leadership',
   order: 1,
@@ -403,7 +403,7 @@ export const SKILLS: ISkill[] = [{
   }]
 }]
 
-export const EDUCATION = [{
+const EDUCATION: IEducationEntry[] = [{
   institution: 'Hochschule Offenburg',
   institutionUrl: 'https://www.hs-offenburg.de/',
   location: 'Offenburg, Germany',
@@ -421,8 +421,18 @@ export const EDUCATION = [{
   endDate: 'Dec 2009',
 }]
 
-export const LANGUAGES = [
+const LANGUAGES: ILanguageEntry[] = [
   { name: '🇪🇸 Spanish', level: 100, proficiency: 'Native' },
   { name: '🇬🇧 English', level: 100, proficiency: 'Fluent' },
   { name: '🇩🇪 German', level: 25, proficiency: 'Basic' },
 ]
+
+export const BASE_RESUME_DOCUMENT: IResumeDocument = {
+  about: ABOUT,
+  companies: COMPANIES,
+  skills: SKILLS,
+  education: EDUCATION,
+  languages: LANGUAGES,
+}
+
+export { ABOUT, COMPANIES, SKILLS, EDUCATION, LANGUAGES }

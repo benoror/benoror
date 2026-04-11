@@ -1,9 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "ui": "tui",
+  "globalEnv": ["AI_GATEWAY_API_KEY"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
+      "env": [
+        "AI_GATEWAY_API_KEY",
+        "AI_GATEWAY_BASE_URL",
+        "AI_GATEWAY_MODEL",
+        "VERCEL_AI_GATEWAY_API_KEY"
+      ],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
       "outputs": [".next/**", "!.next/cache/**", "dist/**"]
     },

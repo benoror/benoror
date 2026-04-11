@@ -1,4 +1,4 @@
-import { INTERESTS } from '@workspace/data/personal';
+import { INTERESTS } from '@workspace/data/shared/profile';
 import { Badge } from '@workspace/ui/components/badge';
 
 export default function Interests() {

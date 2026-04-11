@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { BASE_COVER_LETTER } from '@workspace/data/cover_letters';
+import { BASE_COVER_LETTER } from '@workspace/data/resume/cover-letters';
 import { ABOUT } from '@workspace/data/resume';
-import { getCoverLetter, getResumeVariant } from '@workspace/data/resume_variants';
+import { getCoverLetter, getResumeVariant } from '@workspace/data/resume/variants';
 import { getAbsoluteCoverLetterUrl, getAbsoluteResumeMarkdownUrl, getAbsoluteResumeUrl, getCoverLetterPath, getResumeMarkdownPath, getResumePath } from '@/lib/resumeUrls';
 
 const BASE_RESUME_TITLE = `${ABOUT.name} - Resume`;

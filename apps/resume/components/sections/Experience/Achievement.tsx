@@ -1,4 +1,4 @@
-import { IAchievement } from '@workspace/data/types/resume';
+import { IAchievement } from '@workspace/data/resume/schema';
 import MDDescription from '@/components/MarkdownDescription';
 
 export default function Achievement({ achievement }: { achievement: IAchievement }) {

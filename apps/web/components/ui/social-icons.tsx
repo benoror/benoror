@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, NotebookPen, Rss, Twitter } from "lucide-react"
-import { HOME, LINKS } from "@workspace/data/personal"
+import { HOME, LINKS } from "@workspace/data/shared/profile"
 import { shortURL } from "@workspace/utils/url"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@workspace/ui/components/tooltip"

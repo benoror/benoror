@@ -1,6 +1,6 @@
 import PrintSubSkill from '@/components/sections/Skills/Skill/SubSkills/PrintSubSkill/PrintSubSkill';
 import SubSkill from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubSkill';
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 import { sinceToString, sinceToYears } from '@workspace/utils/date';
 
 export default function SubSkills({ skills }: { skills: ISkill[] }) {

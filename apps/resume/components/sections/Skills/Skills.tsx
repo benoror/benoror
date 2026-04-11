@@ -1,7 +1,7 @@
 import Skill from '@/components/sections/Skills/Skill/Skill';
 import Section from '@/components/Section';
 import { HammerIcon } from "lucide-react";
-import type { ISkill } from '@workspace/data/types/resume';
+import type { ISkill } from '@workspace/data/resume/schema';
 import { sinceToString, sinceToYears } from '@workspace/utils/date';
 
 export default function Skills({ skills }: { skills: ISkill[] }) {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { BriefcaseBusinessIcon } from "lucide-react";
 import Role from '@/components/sections/Experience/Role'
 import Section from '@/components/Section';
-import { ICompany, IRole } from '@workspace/data/types/resume';
+import { ICompany, IRole } from '@workspace/data/resume/schema';
 import MetadataRow from '@/components/sections/Experience/MetadataRow';
 import { ExternalLink } from "lucide-react"
 import { shortURL } from '@workspace/utils/url';

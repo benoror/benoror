@@ -1,5 +1,5 @@
 import Parser from "rss-parser"
-import { FEED_SOURCES, LINKS } from "@workspace/data/personal"
+import { FEED_SOURCES, LINKS } from "@workspace/data/shared/profile"
 
 const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000

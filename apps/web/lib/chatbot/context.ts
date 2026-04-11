@@ -2,7 +2,7 @@ import { getFeedContextSnapshot } from "@/lib/feed/serialize-feed-context"
 import {
   buildStaticChatbotKnowledgeBase,
   type ChatbotSection,
-} from "@workspace/data/chatbot"
+} from "@workspace/data/web/chatbot"
 
 interface ContextCache {
   signature: string

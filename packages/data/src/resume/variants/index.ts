@@ -1,6 +1,15 @@
-import { BASE_RESUME_DOCUMENT } from './resume.js';
-import type { ICoverLetterDocument, IResumeDocument, IResumeDocumentOverride, IResumeVariantDefinition } from './types/resume.js';
-import { RESUME_VARIANT_LIST } from './variants/index.js';
+import { BASE_RESUME_DOCUMENT } from '../index.js';
+import type {
+  ICoverLetterDocument,
+  IResumeDocument,
+  IResumeDocumentOverride,
+  IResumeVariantDefinition,
+} from '../schema.js';
+import { recruitedgeGlobalVariant } from './recruitedge-global.js';
+
+export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
+  recruitedgeGlobalVariant,
+];
 
 export const RESUME_VARIANTS: Record<string, IResumeVariantDefinition> = Object.fromEntries(
   RESUME_VARIANT_LIST.map((variant) => [variant.slug, variant])
@@ -32,6 +41,7 @@ function mergeObjects(base: Record<string, unknown>, override: Record<string, un
 
     merged[key] = value;
   }
+
   return merged;
 }
 

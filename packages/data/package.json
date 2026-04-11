@@ -9,13 +9,41 @@
     "dist"
   ],
   "exports": {
-    "./chatbot": {
-      "types": "./dist/chatbot.d.ts",
-      "default": "./dist/chatbot.js"
+    "./shared/profile": {
+      "types": "./dist/shared/profile/index.d.ts",
+      "default": "./dist/shared/profile/index.js"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
+    "./shared/*": {
+      "types": "./dist/shared/*.d.ts",
+      "default": "./dist/shared/*.js"
+    },
+    "./web/chatbot": {
+      "types": "./dist/web/chatbot/index.d.ts",
+      "default": "./dist/web/chatbot/index.js"
+    },
+    "./web/portfolio": {
+      "types": "./dist/web/portfolio/index.d.ts",
+      "default": "./dist/web/portfolio/index.js"
+    },
+    "./web/*": {
+      "types": "./dist/web/*.d.ts",
+      "default": "./dist/web/*.js"
+    },
+    "./resume": {
+      "types": "./dist/resume/index.d.ts",
+      "default": "./dist/resume/index.js"
+    },
+    "./resume/cover-letters": {
+      "types": "./dist/resume/cover-letters.d.ts",
+      "default": "./dist/resume/cover-letters.js"
+    },
+    "./resume/variants": {
+      "types": "./dist/resume/variants/index.d.ts",
+      "default": "./dist/resume/variants/index.js"
+    },
+    "./resume/*": {
+      "types": "./dist/resume/*.d.ts",
+      "default": "./dist/resume/*.js"
     }
   },
   "dependencies": {

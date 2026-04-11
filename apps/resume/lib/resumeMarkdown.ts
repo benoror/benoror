@@ -1,5 +1,5 @@
-import { LINKS } from '@workspace/data/personal';
-import type { IAchievement, IResumeDocument, IRole, ISkill } from '@workspace/data/types/resume';
+import { LINKS } from '@workspace/data/shared/profile';
+import type { IAchievement, IResumeDocument, IRole, ISkill } from '@workspace/data/resume/schema';
 import { shortURL } from '@workspace/utils/url';
 import { sinceToString } from '@workspace/utils/date';
 

@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import ResumePageContent from '@/components/ResumePageContent';
 import { buildResumeMetadata } from '@/lib/resumeMetadata';
 import { getAbsoluteResumeUrl } from '@/lib/resumeUrls';
-import { getResumeDocument, getResumeSlugs, isKnownResumeSlug } from '@workspace/data/resume_variants';
+import { getResumeDocument, getResumeSlugs, isKnownResumeSlug } from '@workspace/data/resume/variants';
 
 type ResumePageProps = {
   params: Promise<{

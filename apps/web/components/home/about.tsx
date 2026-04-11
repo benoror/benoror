@@ -1,6 +1,6 @@
 "use client"
 
-import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/personal"
+import { HOME, SKILLS, INTERESTS, LINKS } from "@workspace/data/shared/profile"
 import { motion } from "framer-motion"
 import ExternalLink from "@/components/ui/external-link"
 import { useAppTheme } from "@/hooks/use-app-theme"

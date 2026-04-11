@@ -1,5 +1,5 @@
 import { gmailAlias } from '@workspace/utils/email';
-import type { FeedSource } from './types/feed.js';
+import type { FeedSource, LinkEntry } from './schema.js';
 
 const isProductionDeployment =
   process.env.NODE_ENV === "production" ||
@@ -11,12 +11,7 @@ export const PERSONAL = {
   full_name: "Benjamin Orozco Rios",
   short_name: 'Ben Orozco',
   private_email: 'benoror@gmail.com',
-}
-
-type LinkEntry = {
-  url: string
-  legend?: string
-}
+};
 
 export const LINKS = {
   website: {
@@ -93,7 +88,7 @@ export const LINKS = {
   stack_overflow: {
     url: "https://stackoverflow.com/users/171809/ben-orozco",
   },
-} satisfies Record<string, LinkEntry>
+} satisfies Record<string, LinkEntry>;
 
 export const FEED_SOURCES: FeedSource[] = [
   {
@@ -169,14 +164,14 @@ export const FEED_SOURCES: FeedSource[] = [
     status: "private",
     note: "Pocket Casts starred items are account-scoped and not publicly exposed via RSS.",
   },
-]
+];
 
 export const HOME = {
   title: PERSONAL.short_name,
   header: "Technologist, Software Engineer & Entrepreneur",
   public_email: "hello@benoror.com",
-  about_me: "I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products, growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting."
-}
+  about_me: "I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products, growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting.",
+};
 
 export const SKILLS = [
   { name: 'Technical Leadership', slug: 'technical-leadership' },
@@ -189,7 +184,7 @@ export const SKILLS = [
   { name: 'Frontend UI/UX', slug: 'frontend' },
   { name: 'Product & UX', slug: 'product' },
   { name: 'DevOps Infrastructure', slug: 'devops' },
-]
+];
 
 export const INTERESTS = [
   "Building & Shipping Products",
@@ -202,4 +197,6 @@ export const INTERESTS = [
   "Crypto & Decentralized Systems",
   "Science, Sci-Fi, and History",
   "Technology, Business & Economics",
-]
+];
+
+export { FeedSource, LinkEntry };

@@ -1,10 +1,9 @@
-import { FEED_SOURCES, HOME, INTERESTS, LINKS, PERSONAL, SKILLS } from "../../personal.js"
-import type { ChatbotSection } from "../types.js"
+import { FEED_SOURCES, HOME, INTERESTS, LINKS, PERSONAL, SKILLS } from "../../../shared/profile/index.js";
+import type { ChatbotSection } from "../schema.js";
 
-type LinkEntry = (typeof LINKS)[keyof typeof LINKS]
-type LinkTuple = [string, LinkEntry]
+type LinkTuple = [string, (typeof LINKS)[keyof typeof LINKS]];
 
-export function buildPersonalSection(): ChatbotSection {
+export function buildProfileSection(): ChatbotSection {
   return {
     id: "social_media",
     kind: "personal",
@@ -37,5 +36,5 @@ export function buildPersonalSection(): ChatbotSection {
         note: source.note,
       })),
     },
-  }
+  };
 }

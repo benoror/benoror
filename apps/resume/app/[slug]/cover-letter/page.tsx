@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import CoverLetterPageContent from '@/components/CoverLetterPageContent';
 import { buildCoverLetterMetadata } from '@/lib/resumeMetadata';
-import { getCoverLetter, getCoverLetterSlugs } from '@workspace/data/resume_variants';
+import { getCoverLetter, getCoverLetterSlugs } from '@workspace/data/resume/variants';
 
 type CoverLetterPageProps = {
   params: Promise<{

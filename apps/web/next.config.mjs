@@ -2,7 +2,7 @@
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
   outputFileTracingIncludes: {
-    "/api/chat": ["../../packages/data/chatbot/**/*"],
+    "/api/chat": ["../../packages/data/src/web/chatbot/**/*"],
   },
   images: {
     remotePatterns: [

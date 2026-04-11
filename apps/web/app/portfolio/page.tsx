@@ -1,4 +1,4 @@
-import { portfolioItems } from "@workspace/data/portfolio"
+import { portfolioItems } from "@workspace/data/web/portfolio"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import PortfolioClientTabs from "./portfolio-client-tabs" // New client component

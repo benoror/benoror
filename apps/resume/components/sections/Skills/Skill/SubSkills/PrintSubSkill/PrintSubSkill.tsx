@@ -1,4 +1,4 @@
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 
 export default function PrintSubSkill({ skill }: { skill: ISkill }) {
   const nestedSkills = skill.subSkills?.map((subSkill) => subSkill.name).join(', ')

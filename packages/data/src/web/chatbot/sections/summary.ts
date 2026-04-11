@@ -1,5 +1,5 @@
-import type { ChatbotSection } from "../types.js"
-import { GENERAL_SUMMARY_MARKDOWN } from "./editorial-content.js"
+import type { ChatbotSection } from "../schema.js";
+import { GENERAL_SUMMARY_MARKDOWN } from "./editorial-content.js";
 
 export async function buildSummarySection(): Promise<ChatbotSection> {
   return {
@@ -12,5 +12,5 @@ export async function buildSummarySection(): Promise<ChatbotSection> {
     data: {
       markdown: GENERAL_SUMMARY_MARKDOWN,
     },
-  }
+  };
 }

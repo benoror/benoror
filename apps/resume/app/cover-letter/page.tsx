@@ -1,6 +1,6 @@
 import CoverLetterPageContent from '@/components/CoverLetterPageContent';
 import { buildCoverLetterMetadata } from '@/lib/resumeMetadata';
-import { BASE_COVER_LETTER } from '@workspace/data/cover_letters';
+import { BASE_COVER_LETTER } from '@workspace/data/resume/cover-letters';
 
 export const metadata = buildCoverLetterMetadata();
 

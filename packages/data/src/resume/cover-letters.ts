@@ -1,5 +1,5 @@
-import { RESUME_VARIANTS, getCoverLetter } from './resume_variants.js';
-import type { ICoverLetterDocument } from './types/resume.js';
+import { RESUME_VARIANTS, getCoverLetter } from './variants/index.js';
+import type { ICoverLetterDocument } from './schema.js';
 
 export const BASE_COVER_LETTER: ICoverLetterDocument = {
   title: 'Ben Orozco - Cover Letter',

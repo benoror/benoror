@@ -1,4 +1,4 @@
-import { IRole } from '@workspace/data/types/resume';
+import { IRole } from '@workspace/data/resume/schema';
 import Achievement from '@/components/sections/Experience/Achievement'
 import MetadataRow from '@/components/sections/Experience/MetadataRow';
 import MDDescription from '@/components/MarkdownDescription';

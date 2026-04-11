@@ -1,5 +1,5 @@
 import CoreSkill from '@/components/sections/CoreSkills/CoreSkill';
-import type { ISkill } from '@workspace/data/types/resume';
+import type { ISkill } from '@workspace/data/resume/schema';
 
 export default function CoreSkills({ skills }: { skills: ISkill[] }) {
   const sortedSkills = [...skills].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))

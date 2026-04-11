@@ -1,5 +1,5 @@
-import { BASE_RESUME_DOCUMENT } from '../resume.js';
-import type { ICompany, IRole, ISkill } from '../types/resume.js';
+import { BASE_RESUME_DOCUMENT } from '../index.js';
+import type { ICompany, IRole, ISkill } from '../schema.js';
 
 export function getBaseVariantCompany(name: string): ICompany {
   const company = BASE_RESUME_DOCUMENT.companies.find((entry) => entry.name === name);

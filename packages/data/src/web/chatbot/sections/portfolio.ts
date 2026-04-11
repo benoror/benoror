@@ -3,8 +3,8 @@ import {
   publicationsItems,
   talksItems,
   type PortfolioItem,
-} from "../../portfolio.js"
-import type { ChatbotSection, PortfolioSectionItem } from "../types.js"
+} from "../../portfolio/index.js";
+import type { ChatbotSection, PortfolioSectionItem } from "../schema.js";
 
 function mapPortfolioItem(item: PortfolioItem): PortfolioSectionItem {
   return {
@@ -17,7 +17,7 @@ function mapPortfolioItem(item: PortfolioItem): PortfolioSectionItem {
     url: item.url,
     techStack: item.techStack,
     links: item.links,
-  }
+  };
 }
 
 export function buildPortfolioSection(): ChatbotSection {
@@ -52,5 +52,5 @@ export function buildPortfolioSection(): ChatbotSection {
       talks: talksItems.map(mapPortfolioItem),
       publications: publicationsItems.map(mapPortfolioItem),
     },
-  }
+  };
 }

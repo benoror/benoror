@@ -1,4 +1,4 @@
-import type { IResumeVariantDefinition } from '../types/resume.js';
+import type { IResumeVariantDefinition } from '../schema.js';
 import { getBaseVariantCompany, getBaseVariantRole, getBaseVariantSkill } from './utils.js';
 
 const apptegy = getBaseVariantCompany('Apptegy');

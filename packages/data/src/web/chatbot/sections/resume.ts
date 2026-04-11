@@ -1,29 +1,29 @@
-import { ABOUT, COMPANIES, EDUCATION, LANGUAGES, SKILLS } from "../../resume.js"
-import { BASE_COVER_LETTER } from "../../cover_letters.js"
-import { getResumeDocument, RESUME_VARIANTS } from "../../resume_variants.js"
-import type { IAchievement, IRole, ISkill } from "../../types/resume.js"
+import { ABOUT, COMPANIES, EDUCATION, LANGUAGES, SKILLS } from "../../../resume/index.js";
+import { BASE_COVER_LETTER } from "../../../resume/cover-letters.js";
+import { getResumeDocument, RESUME_VARIANTS } from "../../../resume/variants/index.js";
+import type { IAchievement, IRole, ISkill } from "../../../resume/schema.js";
 import type {
   ChatbotSection,
   ResumeChatbotCompany,
   ResumeChatbotRole,
   ResumeChatbotSkill,
   ResumeChatbotVariant,
-} from "../types.js"
+} from "../schema.js";
 
-const MAX_ACHIEVEMENTS_PER_ROLE = 10
+const MAX_ACHIEVEMENTS_PER_ROLE = 10;
 
 function flattenAchievementDescriptions(
   achievements: IAchievement[] = [],
   depth = 0,
 ): string[] {
   return achievements.flatMap((achievement) => {
-    const prefix = depth === 0 ? "" : "  "
+    const prefix = depth === 0 ? "" : "  ";
     const nested = flattenAchievementDescriptions(
       achievement.subAchievements ?? [],
       depth + 1,
-    )
-    return [`${prefix}${achievement.description}`, ...nested]
-  })
+    );
+    return [`${prefix}${achievement.description}`, ...nested];
+  });
 }
 
 function summarizeRole(role: IRole): ResumeChatbotRole {
@@ -39,7 +39,7 @@ function summarizeRole(role: IRole): ResumeChatbotRole {
       MAX_ACHIEVEMENTS_PER_ROLE,
     ),
     skills: role.skills.map((skill) => skill.name),
-  }
+  };
 }
 
 function summarizeCompany(company: (typeof COMPANIES)[number]): ResumeChatbotCompany {
@@ -51,7 +51,7 @@ function summarizeCompany(company: (typeof COMPANIES)[number]): ResumeChatbotCom
     endDate: company.endDate,
     description: company.description,
     roles: (company.roles ?? []).map(summarizeRole),
-  }
+  };
 }
 
 function summarizeSkill(skill: ISkill): ResumeChatbotSkill {
@@ -60,19 +60,19 @@ function summarizeSkill(skill: ISkill): ResumeChatbotSkill {
     level: skill.level,
     description: skill.description,
     coreAreas: (skill.subSkills ?? []).slice(0, 6).map((subSkill) => subSkill.name),
-  }
+  };
 }
 
 function summarizeVariants(): ResumeChatbotVariant[] {
   return Object.values(RESUME_VARIANTS).map((variant) => {
-    const resumeDocument = getResumeDocument(variant.slug)
+    const resumeDocument = getResumeDocument(variant.slug);
     const highlightedCompanies = (resumeDocument?.companies ?? [])
       .slice(0, 6)
-      .map((company) => company.name)
+      .map((company) => company.name);
     const highlightedSkills = (resumeDocument?.skills ?? [])
       .slice(0, 8)
-      .map((skill) => skill.name)
-    const coverLetter = variant.coverLetter
+      .map((skill) => skill.name);
+    const coverLetter = variant.coverLetter;
 
     return {
       slug: variant.slug,
@@ -96,13 +96,13 @@ function summarizeVariants(): ResumeChatbotVariant[] {
             keyThemes: coverLetter.paragraphs,
           }
         : undefined,
-    }
-  })
+    };
+  });
 }
 
 export function buildResumeSection(): ChatbotSection {
-  const sortedSkills = [...SKILLS].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
-  const variants = summarizeVariants()
+  const sortedSkills = [...SKILLS].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+  const variants = summarizeVariants();
   const variantKeywords = variants.flatMap((variant) =>
     [
       variant.slug,
@@ -112,7 +112,7 @@ export function buildResumeSection(): ChatbotSection {
       variant.coverLetter?.targetCompany,
       variant.coverLetter?.targetRole,
     ].filter((value): value is string => Boolean(value)),
-  )
+  );
 
   return {
     id: "resume",
@@ -167,5 +167,5 @@ export function buildResumeSection(): ChatbotSection {
       },
       variants,
     },
-  }
+  };
 }

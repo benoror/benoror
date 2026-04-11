@@ -1,6 +1,6 @@
 import Section from '@/components/Section';
 import CompactCard from '@/components/CompactCard';
-import type { IEducationEntry } from '@workspace/data/types/resume';
+import type { IEducationEntry } from '@workspace/data/resume/schema';
 import { ExternalLink, GraduationCap } from "lucide-react"
 
 export default function Education({ education }: { education: IEducationEntry[] }) {

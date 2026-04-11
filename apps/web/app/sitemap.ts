@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { LINKS } from "@workspace/data/personal"
+import { LINKS } from "@workspace/data/shared/profile"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const websiteUrl = LINKS.website.url.replace(/\/$/, "")

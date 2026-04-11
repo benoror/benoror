@@ -1,5 +1,5 @@
 import { getAggregatedFeed } from "@/lib/feed"
-import type { ChatbotSection, FeedSectionData } from "@workspace/data/chatbot"
+import type { ChatbotSection, FeedSectionData } from "@workspace/data/web/chatbot"
 
 type FeedContextSnapshot = {
   section: ChatbotSection<FeedSectionData>

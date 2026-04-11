@@ -7,7 +7,7 @@ import Intro from '@/components/sections/Intro';
 import Skills from '@/components/sections/Skills/Skills';
 import Languages from '@/components/sections/Languages/Languages';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
-import type { IResumeDocument } from '@workspace/data/types/resume';
+import type { IResumeDocument } from '@workspace/data/resume/schema';
 
 export default function ResumePageContent({
   document,

@@ -1,5 +1,5 @@
-import { LINKS } from '@workspace/data/personal';
-import type { IResumeAbout } from '@workspace/data/types/resume';
+import { LINKS } from '@workspace/data/shared/profile';
+import type { IResumeAbout } from '@workspace/data/resume/schema';
 import { Button } from '@workspace/ui/components/button';
 import { MailIcon, GlobeIcon, NotebookIcon } from "lucide-react";
 import { GitHubIcon } from '@/components/icons/GitHubIcon';

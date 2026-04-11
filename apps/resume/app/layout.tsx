@@ -7,7 +7,7 @@ import DownloadPDFButton from '@/components/DownloadPDFButton';
 import DownloadMarkdownButton from '@/components/DownloadMarkdownButton';
 import ThemeToggleButton from '@/components/ThemeToggleButton';
 import { Providers } from "@/components/providers"
-import { LINKS } from "@workspace/data/personal";
+import { LINKS } from "@workspace/data/shared/profile";
 import { ABOUT } from "@workspace/data/resume";
 
 import "@workspace/ui/globals.css"

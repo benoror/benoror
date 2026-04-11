@@ -1,7 +1,7 @@
 import { createResumeMarkdownResponse, buildResumeMarkdown } from '@/lib/resumeMarkdown';
 import { getResumeMarkdownFilename } from '@/lib/resumeMetadata';
 import { getAbsoluteResumeUrl } from '@/lib/resumeUrls';
-import { getResumeDocument } from '@workspace/data/resume_variants';
+import { getResumeDocument } from '@workspace/data/resume/variants';
 
 type ResumeMarkdownRouteProps = {
   params: Promise<{

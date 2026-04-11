@@ -1,4 +1,4 @@
-import { LINKS } from "@workspace/data/personal"
+import { LINKS } from "@workspace/data/shared/profile"
 import { getAggregatedFeed } from "@/lib/feed"
 
 const escapeXml = (value: string) =>

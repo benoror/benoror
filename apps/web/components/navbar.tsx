@@ -5,7 +5,7 @@ import Link from "next/link"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Menu, X } from "lucide-react"
 import { useMediaQuery } from "@/hooks/use-media-query"
-import { LINKS } from '@workspace/data/personal';
+import { LINKS } from '@workspace/data/shared/profile';
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "./navbar.theme"
 

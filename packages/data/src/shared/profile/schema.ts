@@ -8,3 +8,8 @@ export type FeedSource = {
   status: FeedSourceStatus;
   note?: string;
 };
+
+export type LinkEntry = {
+  url: string;
+  legend?: string;
+};

@@ -1,6 +1,6 @@
 "use client"
 
-import type { PortfolioItem } from "@workspace/data/portfolio"
+import type { PortfolioItem } from "@workspace/data/web/portfolio"
 import PortfolioCard from "./portfolio-card"
 
 export default function PortfolioGrid({ items }: { items: PortfolioItem[] }) {

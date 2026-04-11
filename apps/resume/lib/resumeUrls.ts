@@ -1,4 +1,4 @@
-import { LINKS } from '@workspace/data/personal';
+import { LINKS } from '@workspace/data/shared/profile';
 
 const PUBLIC_RESUME_ROOT_URL = LINKS.resume.url.replace(/\/$/, '');
 

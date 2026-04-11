@@ -1,6 +1,6 @@
 import Language from '@/components/sections/Languages/Language';
 import Section from '@/components/Section';
-import type { ILanguageEntry } from '@workspace/data/types/resume';
+import type { ILanguageEntry } from '@workspace/data/resume/schema';
 import { Earth } from "lucide-react"
 
 export default function Languages({ languages }: { languages: ILanguageEntry[] }) {

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
-import { LINKS } from "@workspace/data/personal"
-import { getCoverLetterSlugs, getResumeSlugs } from "@workspace/data/resume_variants"
+import { LINKS } from "@workspace/data/shared/profile"
+import { getCoverLetterSlugs, getResumeSlugs } from "@workspace/data/resume/variants"
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const resumeUrl = LINKS.resume.url.replace(/\/$/, "")

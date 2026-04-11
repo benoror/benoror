@@ -1,7 +1,7 @@
-import { IEducationEntry, ILanguageEntry, IResumeAbout, IResumeDocument, ISkill } from './types/resume.js';
+import { IEducationEntry, ILanguageEntry, IResumeAbout, IResumeDocument, ISkill } from './schema.js';
 import { gmailAlias } from '@workspace/utils/email';
-import { PERSONAL } from './personal.js';
-import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from './resume/roles.js';
+import { PERSONAL } from '../shared/profile/index.js';
+import { APPTEGY, BROKERLIT, BASEQL, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OPERIT, PANAX, SAP } from './roles.js';
 
 const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,
@@ -9,7 +9,7 @@ const ABOUT: IResumeAbout = {
   location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
   about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to code, architecture, product, UI/UX design and delivery across backend, frontend, infrastructure and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
-}
+};
 
 const COMPANIES = [
   {
@@ -20,7 +20,7 @@ const COMPANIES = [
     startDate: '2020',
     endDate: 'Present (5yr)',
     description: 'Industry-leading EdTech SaaS company with 6,000+ school districts in the US & Canada and 10MM+ of active users.',
-    roles: APPTEGY
+    roles: APPTEGY,
   },
   {
     name: 'Brokerlit',
@@ -29,7 +29,7 @@ const COMPANIES = [
     startDate: '2023',
     endDate: 'Present',
     description: 'Real Estate SaaS providing an MLS, CMS & CRM platform for brokers to manage their properties and inbound leads generation.',
-    roles: BROKERLIT
+    roles: BROKERLIT,
   },
   {
     name: 'BaseQL',
@@ -38,7 +38,7 @@ const COMPANIES = [
     startDate: '2020',
     endDate: '2024',
     description: `GraphQL access point for your Cloud data (Airtable & Google Sheets). 🎯 **Acquired in 2024**`,
-    roles: BASEQL
+    roles: BASEQL,
   },
   {
     name: 'HealthTree',
@@ -47,7 +47,7 @@ const COMPANIES = [
     startDate: 'Jan 2019',
     endDate: 'Mar 2020',
     description: 'Healthcare platform for cancer patients, their families and caregivers, with the mission of accelerating the finding of a cure',
-    roles: HEALTHTREE
+    roles: HEALTHTREE,
   },
   {
     name: 'Ecaresoft',
@@ -56,7 +56,7 @@ const COMPANIES = [
     startDate: '2016',
     endDate: '2019',
     description: 'EHR & HIS systems for hospitals and clinics in Latin America and Middle East.',
-    roles: ECARESOFT
+    roles: ECARESOFT,
   },
   {
     short: true,
@@ -66,7 +66,7 @@ const COMPANIES = [
     startDate: '2014',
     endDate: '2016',
     description: 'Low-code tool for building business applications.',
-    roles: PANAX
+    roles: PANAX,
   },
   {
     short: true,
@@ -76,7 +76,7 @@ const COMPANIES = [
     startDate: '2014',
     endDate: '2014',
     description: 'IT nearshoring consultancy services for U.S. companies',
-    roles: OPERIT
+    roles: OPERIT,
   },
   {
     short: true,
@@ -86,7 +86,7 @@ const COMPANIES = [
     startDate: '2013',
     endDate: '2014',
     description: 'World\'s largest company of ERP software',
-    roles: SAP
+    roles: SAP,
   },
   {
     short: true,
@@ -96,7 +96,7 @@ const COMPANIES = [
     startDate: '2010',
     endDate: '2013',
     description: 'B2B startup for car manufacturing industry',
-    roles: COTIZAHOY
+    roles: COTIZAHOY,
   },
   {
     short: true,
@@ -106,9 +106,9 @@ const COMPANIES = [
     startDate: '2008',
     endDate: '2009',
     description: 'NIC organization for .mx top-level domains',
-    roles: NICMX
-  }
-]
+    roles: NICMX,
+  },
+];
 
 const SKILLS: ISkill[] = [{
   name: 'Leadership',
@@ -130,7 +130,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Mentoring & Coaching' },
       { name: 'Agile Methodologies' },
       { name: 'Roadmaps Planning' },
-    ]
+    ],
   }, {
     name: 'Strategic Planning',
     slug: 'strategic-planning',
@@ -144,7 +144,7 @@ const SKILLS: ISkill[] = [{
       { name: 'RFC/RFD technical documentation' },
       { name: 'Product + Engineering leadership alignment' },
       { name: 'Resource allocation' },
-    ]
+    ],
   }, {
     name: 'People Management',
     slug: 'management',
@@ -155,7 +155,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Performance reviews' },
       { name: 'Performance management' },
       { name: 'Conflict resolution' },
-    ]
+    ],
   }, {
     name: 'Recruitment',
     slug: 'recruitment',
@@ -167,8 +167,8 @@ const SKILLS: ISkill[] = [{
       { name: 'Technical screening scripts/challenges' },
       { name: 'Interviewer coaching' },
       { name: 'Recruitment process' },
-    ]
-  }]
+    ],
+  }],
 }, {
   name: 'Backend',
   slug: 'backend',
@@ -194,7 +194,7 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'REST API' },
       { name: 'GraphQL' },
-    ]
+    ],
   }, {
     name: 'Serverless on AWS',
     slug: 'serverless-aws',
@@ -204,7 +204,7 @@ const SKILLS: ISkill[] = [{
       { name: 'DynamoDB' },
       { name: 'Amplify' },
       { name: 'Cognito' },
-    ]
+    ],
   }, {
     name: 'Databases',
     slug: 'databases',
@@ -214,7 +214,7 @@ const SKILLS: ISkill[] = [{
       { name: 'MySQL' },
       { name: 'Redis' },
       { name: 'NoSQL' },
-    ]
+    ],
   }, {
     name: 'API integrations',
     slug: 'integrations',
@@ -222,7 +222,7 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'REST' },
       { name: 'GraphQL' },
-    ]
+    ],
   }, {
     name: 'Other',
     slug: 'backend-other',
@@ -236,7 +236,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Shell' },
       { name: 'Search engines - ElasticSearch, Solr'},
       { name: 'Git'},
-    ]
+    ],
   }],
 }, {
   name: 'Frontend',
@@ -256,13 +256,13 @@ const SKILLS: ISkill[] = [{
       { name: 'Redux' },
       { name: 'Tailwind CSS' },
       { name: 'React Query' },
-    ]
+    ],
   }, {
     name: 'Typescript',
     slug: 'typescript',
     description: 'I created a complex frontend application using Typescript and Next.js. I use Typescript in all my javascript projects.',
     subSkills: [
-    ]
+    ],
   }, {
     name: 'Javascript',
     slug: 'javascript',
@@ -270,7 +270,7 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'Node.js' },
       { name: 'Jest' },
-    ]
+    ],
   }, {
     name: 'Next.js',
     slug: 'next.js',
@@ -278,7 +278,7 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'NextAuth' },
       { name: 'Vercel', url: 'https://vercel.com' },
-    ]
+    ],
   }, {
     name: 'Other',
     slug: 'frontend-other',
@@ -287,7 +287,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Hotwire & Stimulus'},
       { name: 'React Native' },
       { name: 'TailwindCSS' },
-    ]
+    ],
   }],
 }, {
   name: 'DevOps',
@@ -307,13 +307,13 @@ const SKILLS: ISkill[] = [{
       { name: 'RDS' },
       { name: 'Lambda' },
       { name: 'Cloudflare' },
-    ]
+    ],
   }, {
     name: 'Docker',
     slug: 'docker',
     description: "I use Docker on a daily basis in development and production environments.",
     subSkills: [
-    ]
+    ],
   }, {
     name: 'Kubernetes',
     slug: 'kubernetes',
@@ -322,7 +322,7 @@ const SKILLS: ISkill[] = [{
       { name: 'GitOPS - ArgoCD' },
       { name: 'Kustomize' },
       { name: 'Helm' },
-    ]
+    ],
   }, {
     name: 'Other',
     slug: 'devops-other',
@@ -335,8 +335,8 @@ const SKILLS: ISkill[] = [{
       { name: 'Observability' },
       { name: 'Distributed systems' },
       { name: 'Fly.io', url: 'https://fly.io' },
-    ]
-  }]
+    ],
+  }],
 }, {
   name: 'Product',
   slug: 'product',
@@ -351,7 +351,7 @@ const SKILLS: ISkill[] = [{
     { name: 'UI/UX assessment' },
     { name: 'Problem solving with business focus' },
     { name: 'Project management' },
-  ]
+  ],
 }, {
   name: 'AI',
   slug: 'ai',
@@ -369,7 +369,7 @@ const SKILLS: ISkill[] = [{
       { name: 'OpenAI / API', url: 'https://openai.com' },
       { name: 'Gemini', url: 'https://gemini.google.com' },
       { name: 'CodeRabbit', url: 'https://coderabbit.ai' },
-    ]
+    ],
   }, {
     name: 'Multi-agent orchestration',
     slug: 'multi-agent-orchestration',
@@ -380,7 +380,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Agent Skills' },
       { name: 'Parallel agents' },
       { name: 'QMD workflows' },
-    ]
+    ],
   }, {
     name: 'Workflows',
     slug: 'ai-workflows',
@@ -390,7 +390,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Verification-first loops (tests, checks, review)' },
       { name: 'Learn from mistakes via docs/rules updates' },
       { name: 'Automating repeatable workflows (skills/commands)' },
-    ]
+    ],
   }, {
     name: 'AI product features',
     slug: 'ai-product-features',
@@ -399,9 +399,9 @@ const SKILLS: ISkill[] = [{
       { name: 'RAGs (Pinecone, pgvector)' },
       { name: 'Context tuning & prompt refinement' },
       { name: 'Security and privacy guardrails' },
-    ]
-  }]
-}]
+    ],
+  }],
+}];
 
 const EDUCATION: IEducationEntry[] = [{
   institution: 'Hochschule Offenburg',
@@ -419,13 +419,13 @@ const EDUCATION: IEducationEntry[] = [{
   description: 'Monterrey Institute of Technology and Higher Education',
   startDate: 'Aug 2005',
   endDate: 'Dec 2009',
-}]
+}];
 
 const LANGUAGES: ILanguageEntry[] = [
   { name: '🇪🇸 Spanish', level: 100, proficiency: 'Native' },
   { name: '🇬🇧 English', level: 100, proficiency: 'Fluent' },
   { name: '🇩🇪 German', level: 25, proficiency: 'Basic' },
-]
+];
 
 export const BASE_RESUME_DOCUMENT: IResumeDocument = {
   about: ABOUT,
@@ -433,6 +433,6 @@ export const BASE_RESUME_DOCUMENT: IResumeDocument = {
   skills: SKILLS,
   education: EDUCATION,
   languages: LANGUAGES,
-}
+};
 
-export { ABOUT, COMPANIES, SKILLS, EDUCATION, LANGUAGES }
+export { ABOUT, COMPANIES, SKILLS, EDUCATION, LANGUAGES };

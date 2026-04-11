@@ -1,21 +1,21 @@
 export type PortfolioItem = {
-  id: string
-  title: string
-  category: string
-  description: string
-  circa?: string
-  images: string[]
-  icon?: string
-  techStack: string[]
-  url?: string
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  circa?: string;
+  images: string[];
+  icon?: string;
+  techStack: string[];
+  url?: string;
   links?: {
-    github?: string
-    video?: string
-    other?: string
-  }
-  role: string
-  section: "projects" | "publications" | "talks"
-}
+    github?: string;
+    video?: string;
+    other?: string;
+  };
+  role: string;
+  section: "projects" | "publications" | "talks";
+};
 
 export const projectsItems: PortfolioItem[] = [
   {
@@ -32,7 +32,7 @@ export const projectsItems: PortfolioItem[] = [
     techStack: ["JavaScript", "Python", "Shell", "MCP", "Obsidian"],
     links: {
       github: "https://github.com/benoror/obsidianos_work",
-      other: "https://x.com/benoror/status/2027980781985939948"
+      other: "https://x.com/benoror/status/2027980781985939948",
     },
     icon: "/images/portfolio/icons/ObsidianOS-icon.png",
   },
@@ -120,8 +120,8 @@ export const projectsItems: PortfolioItem[] = [
       "EHR SaaS product focused in providing the best physician experience for LatAm market",
     techStack: ["Rails", "Ember.js", "Heroku", "PostgreSQL"],
     links: {
-      github: "https://github.com/ecaresoft"
-    }
+      github: "https://github.com/ecaresoft",
+    },
   },
   {
     id: "nebula",
@@ -200,7 +200,7 @@ export const projectsItems: PortfolioItem[] = [
       "Development tool for quickly bootstraping full-stack applications",
     links: {
       github: "https://github.com/panaxit",
-      video: "https://youtu.be/dcenGE9HMZg"
+      video: "https://youtu.be/dcenGE9HMZg",
     },
   },
   {
@@ -265,37 +265,7 @@ export const projectsItems: PortfolioItem[] = [
     },
     techStack: ["Ruby on Rails", "JQuery"],
   },
-  // {
-  //   title: "Low-code: Airtable-Node-Ember",
-  //   url: "https://github.com/benoror/ember-airtable",
-  //   description: "🥞 A low-code stack for quickly prototyping apps with Airtable, Node & Ember",
-  //   role: "🤩 Open source",
-  //   links: {
-  //     github: "https://github.com/benoror/ember-airtable",
-  //     other: "https://medium.com/the-backlog-by-ecaresoft/creating-a-serverless-web-app-with-node-js-ember-js-and-paas-services-hyperdev-surge-sh-8e3ebe263a76",
-  //   },
-  // },
-  // {
-  //   title: "Awesome Product Development",
-  //   url: "https://github.com/benoror/product-development",
-  //   description:
-  //     "📓General styleguides & documentation for modern product development",
-  //   role: "👷‍♂️ Maker",
-  //   links: {
-  //     github: "https://github.com/benoror/product-development",
-  //   },
-  // },
-  // {
-  //   title: "Procevi",
-  //   url: "http://www.procevi.com/",
-  //   description:
-  //     "Construction & real-estate ERP software & marketing website",
-  //   role: "👷‍♂️ Co-Founder",
-  //   links: {
-  //     github: "https://github.com/Procevi",
-  //   },
-  // },
-]
+];
 
 export const talksItems: PortfolioItem[] = [
   {
@@ -338,22 +308,7 @@ export const talksItems: PortfolioItem[] = [
       "/images/portfolio/fiets3.png",
     ],
   },
-  /*
-    ECS Hack Week - 2018
-      Building decentralized apps with Blockstack<
-      https://docs.google.com/presentation/d/1y3mQibLNdGeQsAWcNJAYusNreznbPwYd0Tk7lnudY94/edit?usp=sharing
-      https://youtu.be/YoYJ6-mudtk
-    ECS Hack Week - 2017
-      Blockchains & Ethereum: Beyond Bitcoin
-      https://slides.com/benoror/hw2017-blockchain
-    GraphQL: R.I.P. REST?
-      https://slides.com/benoror/hw2017-graphql
-    Ember Mty Meetup - 2016
-      https://www.meetup.com/Ember-MTY/
-      Ember Data Overview - https://slides.com/benoror/ember-data
-      https://www.youtube.com/watch?v=gl45TXtd5wI
-  */
-]
+];
 
 export const publicationsItems: PortfolioItem[] = [
   {
@@ -369,47 +324,36 @@ export const publicationsItems: PortfolioItem[] = [
     description: "Design and Implementation of a Balanced Scorecard in SAP BusinessObjects Design Studio and SAP HANA",
     techStack: ["SAP", "HANA", "BO"],
   },
-  /*
-    Award - 2010
-      INPOJUVE Government Entrepreneurship Contest
-    Expositor - 2009
-      ITESM Entrepreneurship Forum
-    Coordinator - 2009
-      SISCTI Computer Science Symposium Registration System
-    Participation - 2006
-      ACM Programming Contest
-  */
- {
-  id: "conthackto-2",
-  title: "Linux Assembler II: Shellcodes",
-  section: "publications",
-  category: "Magazine Article",
-  role: "📝 Writer",
-  circa: "2005",
-  url: "https://github.com/benoror/conthackto/blob/master/contHACKto%20No3%20Ene%202006%20-%20Creaci%C3%B3n%20de%20Shellcodes%20bajo%20Linux.pdf",
-  description: "How to create Shellcodes using Sysclls for fun & profit",
-  images: ["/images/portfolio/conthackto-2.png"],
-  icon: "/images/portfolio/icons/conthackto.jpg",
-  techStack: ["Linux", "Assembler"],
- },
- {
-  id: "conthackto-1",
-  title: "Linux Assembler I: Syscalls",
-  section: "publications",
-  category: "Magazine Article",
-  role: "📝 Writer",
-  circa: "2005",
-  url: "https://github.com/benoror/conthackto/blob/master/Conthackto_Num1_PDF/8-9%20LINUX.pdf",
-  description: "How to use Syscalls under Linux",
-  images: ["/images/portfolio/conthackto-1.png"],
-  icon: "/images/portfolio/icons/conthackto.jpg",
-  techStack: ["Linux", "Assembler"],
- },
-]
-
+  {
+    id: "conthackto-2",
+    title: "Linux Assembler II: Shellcodes",
+    section: "publications",
+    category: "Magazine Article",
+    role: "📝 Writer",
+    circa: "2005",
+    url: "https://github.com/benoror/conthackto/blob/master/contHACKto%20No3%20Ene%202006%20-%20Creaci%C3%B3n%20de%20Shellcodes%20bajo%20Linux.pdf",
+    description: "How to create Shellcodes using Sysclls for fun & profit",
+    images: ["/images/portfolio/conthackto-2.png"],
+    icon: "/images/portfolio/icons/conthackto.jpg",
+    techStack: ["Linux", "Assembler"],
+  },
+  {
+    id: "conthackto-1",
+    title: "Linux Assembler I: Syscalls",
+    section: "publications",
+    category: "Magazine Article",
+    role: "📝 Writer",
+    circa: "2005",
+    url: "https://github.com/benoror/conthackto/blob/master/Conthackto_Num1_PDF/8-9%20LINUX.pdf",
+    description: "How to use Syscalls under Linux",
+    images: ["/images/portfolio/conthackto-1.png"],
+    icon: "/images/portfolio/icons/conthackto.jpg",
+    techStack: ["Linux", "Assembler"],
+  },
+];
 
 export const portfolioItems: PortfolioItem[] = [
   ...projectsItems,
   ...publicationsItems,
   ...talksItems,
-]
+];

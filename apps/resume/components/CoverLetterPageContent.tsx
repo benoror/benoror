@@ -1,6 +1,6 @@
 import CompactCard from '@/components/CompactCard';
 import Markdown from 'react-markdown';
-import type { ICoverLetterDocument } from '@workspace/data/types/resume';
+import type { ICoverLetterDocument } from '@workspace/data/resume/schema';
 
 export default function CoverLetterPageContent({
   coverLetter,

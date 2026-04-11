@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SubSkillContent from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubskillContent/SubSkillContent';
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@workspace/ui/components/dialog';
 import { Tooltip, TooltipTrigger, TooltipContent } from '@workspace/ui/components/tooltip';
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 import SkillBadge from '@/components/SkillBadge';
 import { ExternalLink } from 'lucide-react';
 

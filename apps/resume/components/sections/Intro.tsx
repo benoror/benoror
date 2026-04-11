@@ -1,4 +1,4 @@
-import type { IResumeAbout } from '@workspace/data/types/resume';
+import type { IResumeAbout } from '@workspace/data/resume/schema';
 import { shortURL } from '@workspace/utils/url';
 import { MapPin } from 'lucide-react';
 

@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react';
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 import PrintSubSkill from '@/components/sections/Skills/Skill/SubSkills/PrintSubSkill/PrintSubSkill';
 import SubSkill from '@/components/sections/Skills/Skill/SubSkills/SubSkill/SubSkill';
 import CompactCard from '@/components/CompactCard';

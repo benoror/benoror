@@ -1,7 +1,7 @@
 'use client'
 
 import AnimatedProgress from '@/components/AnimatedProgress';
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 import { scrollToSkill } from '@/lib/scrollToSkill';
 
 export default function CoreSkill({ skill }: { skill: ISkill}) {

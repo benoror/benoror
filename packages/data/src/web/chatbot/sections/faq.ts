@@ -1,5 +1,5 @@
-import type { ChatbotSection } from "../types.js"
-import { FAQ_MARKDOWN } from "./editorial-content.js"
+import type { ChatbotSection } from "../schema.js";
+import { FAQ_MARKDOWN } from "./editorial-content.js";
 
 export async function buildFaqSection(): Promise<ChatbotSection> {
   return {
@@ -12,5 +12,5 @@ export async function buildFaqSection(): Promise<ChatbotSection> {
     data: {
       markdown: FAQ_MARKDOWN,
     },
-  }
+  };
 }

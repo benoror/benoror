@@ -1,4 +1,4 @@
-import { LINKS, PERSONAL } from "@workspace/data/personal"
+import { LINKS, PERSONAL } from "@workspace/data/shared/profile"
 
 function buildLlmsTxt(): string {
   return [

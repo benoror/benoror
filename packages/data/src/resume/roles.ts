@@ -1,4 +1,4 @@
-import { IRole } from '../types/resume.js';
+import { IRole } from './schema.js';
 
 export const APPTEGY: IRole[] = [
   {

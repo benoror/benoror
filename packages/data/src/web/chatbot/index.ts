@@ -1,4 +1,4 @@
-export { buildStaticChatbotKnowledgeBase } from "./chatbot/build-static-kb.js"
+export { buildStaticChatbotKnowledgeBase } from "./build-static-kb.js";
 export type {
   ChatbotSection,
   ChatbotSectionData,
@@ -9,4 +9,4 @@ export type {
   PortfolioSectionData,
   ResumeSectionData,
   StaticChatbotKnowledgeBase,
-} from "./chatbot/types.js"
+} from "./schema.js";

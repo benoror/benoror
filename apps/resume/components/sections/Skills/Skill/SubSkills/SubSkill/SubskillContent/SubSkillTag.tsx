@@ -1,5 +1,5 @@
 import { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from '@workspace/ui/components/tooltip';
-import { ISkill } from '@workspace/data/types/resume';
+import { ISkill } from '@workspace/data/resume/schema';
 import SkillBadge from '@/components/SkillBadge';
 import { ExternalLink } from 'lucide-react';
 

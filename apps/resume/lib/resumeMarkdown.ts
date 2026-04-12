@@ -1,5 +1,5 @@
 import { LINKS } from '@workspace/data/shared/profile';
-import type { IAchievement, IResumeDocument, IRole, ISkill } from '@workspace/data/resume/schema';
+import type { IAchievement, IResumeDocument, IResumeVariantSections, IRole, ISkill } from '@workspace/data/resume/schema';
 import { shortURL } from '@workspace/utils/url';
 import { sinceToString } from '@workspace/utils/date';
 
@@ -64,7 +64,11 @@ function pushShortRole(lines: string[], role: IRole, publicResumeUrl: string): v
   lines.push(`- **${roleName}**: ${withAbsoluteSkillLinks(role.description, publicResumeUrl)}`);
 }
 
-export function buildResumeMarkdown(document: IResumeDocument, resumeUrl: string): string {
+export function buildResumeMarkdown(
+  document: IResumeDocument,
+  resumeUrl: string,
+  sections?: IResumeVariantSections,
+): string {
   const publicResumeUrl = resumeUrl.replace(/\/$/, '');
   const lines: string[] = [];
   const sortedSkills = [...document.skills].sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
@@ -85,13 +89,16 @@ export function buildResumeMarkdown(document: IResumeDocument, resumeUrl: string
   lines.push('## About');
   lines.push(withAbsoluteSkillLinks(document.about.about_me, publicResumeUrl));
   lines.push('');
-  lines.push('## Core Skills');
-  for (const skill of sortedSkills) {
-    const years = sinceToString(skill.since);
-    const yearsText = years ? ` (${years})` : '';
-    lines.push(`- ${skill.name}: ${skill.level ?? 0}/100${yearsText}`);
+  if (sections?.coreSkills !== false) {
+    lines.push('## Core Skills');
+    for (const skill of sortedSkills) {
+      const years = sinceToString(skill.since);
+      const yearsText = years ? ` (${years})` : '';
+      lines.push(`- ${skill.name}: ${skill.level ?? 0}/100${yearsText}`);
+    }
+    lines.push('');
   }
-  lines.push('');
+
   lines.push('## Experience');
   lines.push('');
 

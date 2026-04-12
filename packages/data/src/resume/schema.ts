@@ -89,6 +89,10 @@ export interface IResumeVariantMetadata {
   description?: string;
 }
 
+export interface IResumeVariantSections {
+  coreSkills?: boolean;
+}
+
 export interface IResumeDocumentOverride {
   about?: Partial<IResumeAbout>;
   companies?: ICompany[];
@@ -101,6 +105,7 @@ export interface IResumeVariantDefinition {
   slug: string;
   label?: string;
   metadata?: IResumeVariantMetadata;
+  sections?: IResumeVariantSections;
   resume?: IResumeDocumentOverride;
   coverLetter?: ICoverLetterDocument;
 }

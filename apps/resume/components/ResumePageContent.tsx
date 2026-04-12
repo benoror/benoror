@@ -7,21 +7,23 @@ import Intro from '@/components/sections/Intro';
 import Skills from '@/components/sections/Skills/Skills';
 import Languages from '@/components/sections/Languages/Languages';
 import { GitHubIcon } from '@/components/icons/GitHubIcon';
-import type { IResumeDocument } from '@workspace/data/resume/schema';
+import type { IResumeDocument, IResumeVariantSections } from '@workspace/data/resume/schema';
 
 export default function ResumePageContent({
   document,
   resumeUrl,
+  sections,
 }: {
   document: IResumeDocument;
   resumeUrl: string;
+  sections?: IResumeVariantSections;
 }) {
   return (
     <main className="container mx-auto flex flex-col items-center gap-8 print:gap-8 px-6 py-16 print:py-2 md:p-8 max-w-5xl text-sm">
       <Intro about={document.about} resumeUrl={resumeUrl} />
       <Contact about={document.about} />
       <About about={document.about} />
-      <CoreSkills skills={document.skills} />
+      {sections?.coreSkills !== false ? <CoreSkills skills={document.skills} /> : null}
       <Experience companies={document.companies} />
       <Skills skills={document.skills} />
       <Education education={document.education} />

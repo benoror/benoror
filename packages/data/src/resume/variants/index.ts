@@ -7,6 +7,7 @@ import type {
 } from '../schema.js';
 import { fleetioLeverageVariant } from './fleetio-leverage.js';
 import { recruitedgeGlobalVariant } from './recruitedge-global.js';
+import { mergeVariantCompanies } from './utils.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
   fleetioLeverageVariant,
@@ -52,10 +53,16 @@ export function mergeResumeDocument(base: IResumeDocument, override?: IResumeDoc
     return base;
   }
 
-  return mergeObjects(
+  const mergedDocument = mergeObjects(
     base as unknown as Record<string, unknown>,
     override as unknown as Record<string, unknown>
   ) as unknown as IResumeDocument;
+
+  if (override.companies) {
+    mergedDocument.companies = mergeVariantCompanies(base.companies, override.companies);
+  }
+
+  return mergedDocument;
 }
 
 export function getResumeVariant(slug: string): IResumeVariantDefinition | undefined {

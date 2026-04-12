@@ -68,6 +68,24 @@ export const fleetioLeverageVariant: IResumeVariantDefinition = {
         ],
       },
       {
+        ...brokerlit,
+        description: 'Real estate SaaS spanning MLS, CMS, and CRM workflows. Useful evidence of fast-moving, full-stack product work with direct ownership over internal and external tools.',
+        roles: [
+          {
+            ...brokerlitFounderRole,
+            description: 'Technical co-founder role focused on shipping product quickly across backend, frontend, and infrastructure while working closely with actual user workflows.',
+            achievements: [
+              {
+                description: 'Built the platform hands-on in [Ruby on Rails](#ruby-on-rails), [TypeScript](#typescript), [React.js](#react), and [Next.js](#next.js).',
+              },
+              {
+                description: 'Owned infrastructure and developer workflow decisions using [Fly.io](#devops-other) and [Vercel](#next.js), keeping the product simple to ship and iterate.',
+              },
+            ],
+          },
+        ],
+      },
+      {
         ...baseql,
         description: 'Founder-led SaaS product turning cloud data sources into a GraphQL access layer; highly relevant to context layers, structured access to data, and enabling users with better interfaces over distributed systems.',
         roles: [
@@ -83,24 +101,6 @@ export const fleetioLeverageVariant: IResumeVariantDefinition = {
               },
               {
                 description: 'Took the company from side project to successful acquisition, demonstrating ownership, speed, and practical product sense.',
-              },
-            ],
-          },
-        ],
-      },
-      {
-        ...brokerlit,
-        description: 'Real estate SaaS spanning MLS, CMS, and CRM workflows. Useful evidence of fast-moving, full-stack product work with direct ownership over internal and external tools.',
-        roles: [
-          {
-            ...brokerlitFounderRole,
-            description: 'Technical co-founder role focused on shipping product quickly across backend, frontend, and infrastructure while working closely with actual user workflows.',
-            achievements: [
-              {
-                description: 'Built the platform hands-on in [Ruby on Rails](#ruby-on-rails), [TypeScript](#typescript), [React.js](#react), and [Next.js](#next.js).',
-              },
-              {
-                description: 'Owned infrastructure and developer workflow decisions using [Fly.io](#devops-other) and [Vercel](#next.js), keeping the product simple to ship and iterate.',
               },
             ],
           },

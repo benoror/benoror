@@ -30,3 +30,45 @@ export function getBaseVariantRole(company: ICompany, index: number): IRole {
 
   return role;
 }
+
+function getRoleKey(role: IRole): string {
+  return [role.title, role.project ?? '', role.startDate ?? '', role.endDate ?? ''].join('::');
+}
+
+export function mergeVariantRoles(baseRoles: IRole[], overrideRoles?: IRole[]): IRole[] {
+  if (!overrideRoles) {
+    return baseRoles;
+  }
+
+  const overrideKeys = new Set(overrideRoles.map(getRoleKey));
+  const remainingBaseRoles = baseRoles.filter((role) => !overrideKeys.has(getRoleKey(role)));
+
+  return [...overrideRoles, ...remainingBaseRoles];
+}
+
+export function mergeVariantCompanies(baseCompanies: ICompany[], overrideCompanies?: ICompany[]): ICompany[] {
+  if (!overrideCompanies) {
+    return baseCompanies;
+  }
+
+  const baseCompaniesByName = new Map(baseCompanies.map((company) => [company.name, company]));
+  const overrideNames = new Set(overrideCompanies.map((company) => company.name));
+
+  const mergedOverrideCompanies = overrideCompanies.map((company) => {
+    const baseCompany = baseCompaniesByName.get(company.name);
+
+    if (!baseCompany) {
+      return company;
+    }
+
+    return {
+      ...baseCompany,
+      ...company,
+      roles: mergeVariantRoles(baseCompany.roles, company.roles),
+    };
+  });
+
+  const remainingBaseCompanies = baseCompanies.filter((company) => !overrideNames.has(company.name));
+
+  return [...mergedOverrideCompanies, ...remainingBaseCompanies];
+}

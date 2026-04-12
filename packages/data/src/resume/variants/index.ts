@@ -5,9 +5,11 @@ import type {
   IResumeDocumentOverride,
   IResumeVariantDefinition,
 } from '../schema.js';
+import { fleetioLeverageVariant } from './fleetio-leverage.js';
 import { recruitedgeGlobalVariant } from './recruitedge-global.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
+  fleetioLeverageVariant,
   recruitedgeGlobalVariant,
 ];
 

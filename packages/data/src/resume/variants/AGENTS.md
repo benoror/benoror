@@ -48,6 +48,8 @@ Before creating or updating a variant, read:
 - Preserve factual integrity even when reordering or simplifying.
 - Favor measurable impact, scope, leadership context, product/business outcomes, and technical depth where supported by source material.
 - If introducing a keyword like `generalist`, `AI-first`, or `operator`, weave it in lightly and only when it fits the supplied prompt context.
+- Keep explicit employer/company naming out of resume-facing copy by default.
+- Company-specific language should usually live in the cover letter, not the resume, unless the user explicitly asks otherwise.
 
 ## Cover Letter Guidance
 

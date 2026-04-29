@@ -44,7 +44,7 @@ export default function Experience({ companies }: { companies: ICompany[] }) {
             key={companyIndex}
             className={[
               companyIndex !== 0 ? "pt-3" : "",
-              company.name === "Brokerlit" ? "print:break-before-page" : "",
+              company.name === "HealthTree" ? "print:break-before-page" : "",
             ].filter(Boolean).join(" ")}
           >
             <div className="flex flex-row justify-between items-center gap-2 mb-1.5">

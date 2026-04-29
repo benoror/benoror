@@ -6,16 +6,16 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2026',
     endDate: 'Present',
-    description: 'Technical lead for the PAM platform team at a B2B iGaming technology company, driving platform reliability, compliance, and product delivery with a hands-on approach.',
+    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—shipping admin-facing analytics, a greenfield admin API, and operator workflows while raising engineering quality.',
     achievements: [
       {
-        description: 'Hands-on full-stack development of platform features in [Python](#backend-other), [React](#react), and [AWS serverless](#serverless-aws): [Lambda](#serverless-aws), [DynamoDB](#serverless-aws), [Amplify](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), and [OpenSearch](#backend-other).'
+        description: 'Architected and built hands-on on the greenfield PAM admin backend (`admin_panel_v2`): [FastAPI](#backend-other)/[Python](#backend-other) with domain bounded contexts, typed [Pydantic](#backend-other) contracts, and route→service→repository layering—routing OLTP to [DynamoDB](#serverless-aws), lake-backed analytics to [Athena](#backend-other), and search-heavy lists to [OpenSearch](#backend-other); paired with [React](#react) admin UI on [AWS](#aws) serverless ([Lambda](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), [Amplify](#serverless-aws)).'
       }, {
-        description: 'Improved engineering quality and delivery speed by pushing architecture/design reviews, RFD/PRD planning, [Code reviews](#technical-leadership), [Unit Testing](#ruby-on-rails), [CI/CD](#devops-other), and trunk-based development practices.'
+        description: 'Delivered vertical slices for the admin backoffice MVP: paginated users list with cross-store enrichment; sportsbook and casino analytics (summary, KPIs, filtering, pagination) over the data lake—plus RFC/RFD-aligned technical docs and automated tests alongside production code.'
       }, {
-        description: 'Partnered closely with product and engineering leadership to scope and sequence roadmap initiatives, balancing business impact, technical constraints, and execution risk.'
+        description: 'Improved engineering quality and delivery speed through architecture & design reviews, RFD/PRD planning, [Code reviews](#technical-leadership), [Unit Testing](#ruby-on-rails), [CI/CD](#devops-other), and trunk-based development—while partnering with product and engineering leadership to scope and sequence roadmap work.'
       }, {
-        description: 'Supported secure and compliant platform evolution across AML/KYC, data privacy, fraud/geolocation controls, and operational resilience (monitoring, incident response, and root-cause analysis).'
+        description: 'Supported secure, compliant operations: AML/KYC and data privacy, fraud/geolocation controls, withdrawal-review and manual-action tooling for operators, and operational resilience (monitoring, incident response, and root-cause analysis).'
       }, {
         description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent documentation/rules, and repeatable engineering automation patterns.'
       }, {

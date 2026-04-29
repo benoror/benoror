@@ -1,8 +1,10 @@
 import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const APP_ROOT = process.cwd();
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
+const APP_ROOT = path.resolve(SCRIPT_DIR, "..");
 const configPath = path.join(APP_ROOT, "vaults.config.json");
 const destinationRoot = path.join(APP_ROOT, "content");
 

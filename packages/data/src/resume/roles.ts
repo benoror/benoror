@@ -6,18 +6,16 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2026',
     endDate: 'Present',
-    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—architecting a greenfield admin backend, shipping operator-facing analytics on the data lake, and raising engineering quality across a distributed team.',
+    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—shipping operator-facing admin tooling and analytics across legacy and greenfield platforms while raising engineering quality across a distributed team.',
     achievements: [
       {
-        description: 'Authored the RFD ("Holistic Dashboards") and tech spec for, and architected & hands-on built, the greenfield PAM admin backend (`admin_panel_v2`): [FastAPI](#backend-other)/[Python](#backend-other) with [domain-driven](#technical-leadership) bounded contexts, typed [Pydantic](#backend-other) contracts, route→controller→service→repository layering, and shared primitives for pagination, filtering, sorting, currency translation, and error handling.'
+        description: 'Architecting and hands-on building both the existing (legacy) and a new greenfield PAM admin backend in [FastAPI](#backend-other)/[Python](#backend-other) with DDD (Domain-driven design) bounded contexts—delivering the admin backoffice MVP (users, sportsbook & casino analytics) on [AWS](#aws) serverless ([Lambda](#serverless-aws), [DynamoDB](#serverless-aws), [Athena](#backend-other), [OpenSearch](#backend-other), [Cognito](#serverless-aws), [Amplify](#serverless-aws), [EventBridge](#aws)) paired with a [React](#react) admin UI.'
       }, {
-        description: 'Designed a tri-modal data strategy at the repository boundary—OLTP via [DynamoDB](#serverless-aws), lake-backed OLAP analytics via [Athena](#backend-other), and search-heavy lists via [OpenSearch](#backend-other)—deployed on [AWS](#aws) serverless ([Lambda](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), [Amplify](#serverless-aws)) and paired with a [React](#react) admin UI.'
+        description: 'Improved engineering quality and delivery speed by pushing architecture/design reviews, RFD/PRD planning, [code reviews](#technical-leadership), [unit testing](#ruby-on-rails), [CI/CD](#devops-other), and trunk-based development practices.'
       }, {
-        description: 'Delivered the admin backoffice MVP end-to-end: paginated users list (OpenSearch search + parallel Athena enrichment), sportsbook and casino analytics (summary, KPIs, providers, games) with `FilterSet`-based filtering, sorting, and tenant-aware currency translation—replacing legacy Tableau views with in-product, operator-facing dashboards.'
+        description: 'Partnered closely with product and engineering leadership to scope and sequence roadmap initiatives, balancing business impact, technical constraints, and execution risk.'
       }, {
-        description: 'Raised engineering quality and delivery speed via RFD/PRD/RFC planning, architecture & design reviews, [code reviews](#technical-leadership), [unit testing](#ruby-on-rails), [CI/CD](#devops-other), feature-flagged rollouts, and trunk-based development—partnering with product and engineering leadership to scope and sequence roadmap work.'
-      }, {
-        description: 'Supported secure, compliant operations on the road to GLI certification: AML/KYC and data privacy, fraud and geolocation controls, withdrawal-review and manual-action tooling for operators, and operational resilience (monitoring, incident response, and root-cause analysis).'
+        description: 'Supported secure, compliant operations on the road to GLI certification: AML/KYC and data privacy, fraud and geolocation controls, withdrawal-review and manual-action tooling for operators, and operational resilience.'
       }, {
         description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent rules and documentation, and repeatable engineering automation patterns.'
       }, {

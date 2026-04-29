@@ -6,18 +6,20 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2026',
     endDate: 'Present',
-    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—shipping admin-facing analytics, a greenfield admin API, and operator workflows while raising engineering quality.',
+    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—architecting a greenfield admin backend, shipping operator-facing analytics on the data lake, and raising engineering quality across a distributed team.',
     achievements: [
       {
-        description: 'Architected and built hands-on on the greenfield PAM admin backend (`admin_panel_v2`): [FastAPI](#backend-other)/[Python](#backend-other) with domain bounded contexts, typed [Pydantic](#backend-other) contracts, and route→service→repository layering—routing OLTP to [DynamoDB](#serverless-aws), lake-backed analytics to [Athena](#backend-other), and search-heavy lists to [OpenSearch](#backend-other); paired with [React](#react) admin UI on [AWS](#aws) serverless ([Lambda](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), [Amplify](#serverless-aws)).'
+        description: 'Authored the RFD ("Holistic Dashboards") and tech spec for, and architected & hands-on built, the greenfield PAM admin backend (`admin_panel_v2`): [FastAPI](#backend-other)/[Python](#backend-other) with [domain-driven](#technical-leadership) bounded contexts, typed [Pydantic](#backend-other) contracts, route→controller→service→repository layering, and shared primitives for pagination, filtering, sorting, currency translation, and error handling.'
       }, {
-        description: 'Delivered vertical slices for the admin backoffice MVP: paginated users list with cross-store enrichment; sportsbook and casino analytics (summary, KPIs, filtering, pagination) over the data lake—plus RFC/RFD-aligned technical docs and automated tests alongside production code.'
+        description: 'Designed a tri-modal data strategy at the repository boundary—OLTP via [DynamoDB](#serverless-aws), lake-backed OLAP analytics via [Athena](#backend-other), and search-heavy lists via [OpenSearch](#backend-other)—deployed on [AWS](#aws) serverless ([Lambda](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws), [Amplify](#serverless-aws)) and paired with a [React](#react) admin UI.'
       }, {
-        description: 'Improved engineering quality and delivery speed through architecture & design reviews, RFD/PRD planning, [Code reviews](#technical-leadership), [Unit Testing](#ruby-on-rails), [CI/CD](#devops-other), and trunk-based development—while partnering with product and engineering leadership to scope and sequence roadmap work.'
+        description: 'Delivered the admin backoffice MVP end-to-end: paginated users list (OpenSearch search + parallel Athena enrichment), sportsbook and casino analytics (summary, KPIs, providers, games) with `FilterSet`-based filtering, sorting, and tenant-aware currency translation—replacing legacy Tableau views with in-product, operator-facing dashboards.'
       }, {
-        description: 'Supported secure, compliant operations: AML/KYC and data privacy, fraud/geolocation controls, withdrawal-review and manual-action tooling for operators, and operational resilience (monitoring, incident response, and root-cause analysis).'
+        description: 'Raised engineering quality and delivery speed via RFD/PRD/RFC planning, architecture & design reviews, [code reviews](#technical-leadership), [unit testing](#ruby-on-rails), [CI/CD](#devops-other), feature-flagged rollouts, and trunk-based development—partnering with product and engineering leadership to scope and sequence roadmap work.'
       }, {
-        description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent documentation/rules, and repeatable engineering automation patterns.'
+        description: 'Supported secure, compliant operations on the road to GLI certification: AML/KYC and data privacy, fraud and geolocation controls, withdrawal-review and manual-action tooling for operators, and operational resilience (monitoring, incident response, and root-cause analysis).'
+      }, {
+        description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent rules and documentation, and repeatable engineering automation patterns.'
       }, {
         description: 'Helped build and organize the Monterrey engineering team through international hiring, technical interviewing, coaching, and performance management.'
       },
@@ -25,10 +27,12 @@ export const TRIVELTA: IRole[] = [
     skills: [
       { name: 'Technical Leadership', slug: 'technical-leadership' },
       { name: 'Architecture', slug: 'technical-leadership' },
+      { name: 'Domain-Driven Design', slug: 'technical-leadership' },
       { name: 'Delivery management', slug: 'technical-leadership' },
       { name: 'Hiring manager', slug: 'recruitment' },
       { name: 'People management', slug: 'management' },
       { name: 'Python', slug: 'backend-other' },
+      { name: 'FastAPI', slug: 'backend-other' },
       { name: 'AWS Serverless', slug: 'serverless-aws' },
       { name: 'AI enablement', slug: 'ai' },
     ]

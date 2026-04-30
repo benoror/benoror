@@ -4,7 +4,7 @@ import FeedExcerptClient, { type FeedExcerptItem } from "./feed-excerpt-client"
 export default async function FeedExcerpt() {
   const feed = await getAggregatedFeed()
   const sourceById = new Map(feed.sources.map((source) => [source.id, source]))
-  const items: FeedExcerptItem[] = feed.items.slice(0, 5).map((item) => {
+  const items: FeedExcerptItem[] = feed.items.slice(0, 8).map((item) => {
     const source = sourceById.get(item.sourceId)
 
     return {

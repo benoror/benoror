@@ -5,10 +5,10 @@ import { APPTEGY, BASEQL, BROKERLIT, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OP
 
 const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,
-  header: 'Hands-on Engineering Leader · Full Stack Developer · Product Builder',
+  header: 'Hands-on Engineering Leader · Software Developer · Product Builder',
   location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to code, architecture, product, UI/UX design and delivery across backend, frontend, infrastructure and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
+  about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to systems design, architecture, code, product, UI/UX design and delivery across backend, infrastructure, frontend, and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
 };
 
 const COMPANIES = [

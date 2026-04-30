@@ -1,6 +1,6 @@
-export const GENERAL_SUMMARY_MARKDOWN = `# Ben Orozco: Full-Stack Leader, Product Builder, AI Innovator
+export const GENERAL_SUMMARY_MARKDOWN = `# Ben Orozco: Hands-on Engineering Leader, Software Architect, Product Builder, AI Innovator
 
-Ben Orozco is an accomplished full-stack developer, hands-on engineering leader, and visionary product builder. With a career spanning key roles including VP of Engineering and CTO, he is known for his ability to build and scale software products and high-performance engineering teams across diverse markets like the U.S. and Latin America.
+Ben Orozco is a hands-on engineering leader, software architect, and visionary product builder. With a career spanning key roles including VP of Engineering and CTO, he is known for his ability to build and scale software products and high-performance engineering teams across diverse markets like the U.S. and Latin America.
 
 He is passionate about leveraging cutting-edge technology, particularly Artificial Intelligence, to solve complex real-world problems and enhance development workflows. Ben is an active contributor to the open-source community, a prolific maker of innovative projects, and a keen observer of the intersections between technology, science, economics, and history, which he explores on his personal blog, "Pursuit of Polymathy."
 
@@ -15,7 +15,7 @@ Ben is a hands-on engineering leader and technical generalist with a trajectory 
 
 ## What are Ben's strongest technical areas?
 
-His strongest technical areas span backend systems, full-stack web product development, developer tooling, cloud infrastructure, and AI-assisted engineering. He is especially experienced with Ruby on Rails, React/Next.js, Node.js, APIs, system design, DevOps, and practical AI tooling for engineering teams and product workflows.
+His strongest technical areas span systems design, backend platforms, distributed architectures, developer tooling, cloud infrastructure, full-stack web product delivery, and AI-assisted engineering. He is especially experienced with Ruby on Rails, Python, FastAPI, React/Next.js, Node.js, APIs, DevOps, and practical AI tooling for engineering teams and product workflows.
 
 ## What kind of work does Ben enjoy most?
 

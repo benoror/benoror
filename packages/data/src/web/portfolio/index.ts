@@ -19,6 +19,24 @@ export type PortfolioItem = {
 
 export const projectsItems: PortfolioItem[] = [
   {
+    id: "gbadev",
+    title: "GBA Dev Museum",
+    section: "projects",
+    category: "Gaming",
+    role: "👷‍♂️ Maker",
+    circa: "2001 - 2026",
+    url: "https://benoror.github.io/gbadev",
+    images: ["/images/portfolio/gbadev-museum.png"],
+    icon: "/images/portfolio/icons/GBA Dev.png",
+    description:
+      "Homebrew Game Boy Advance games I built as a teenager (2001–2003), AI-vibecoded back to life ~25 years later — preserved, recompiled with a modern open-source toolchain, rebuilt around fixed-point physics & a host-side test harness, and wrapped in a versioned interactive cartridge-rack museum.",
+    techStack: ["C", "ASM", "GCC", "WASM", "mGBA", "GitHub Pages"],
+    links: {
+      github: "https://github.com/benoror/gbadev",
+      other: "https://pdroms.de/files/nintendo-gameboyadvance-gba/arkanoid-v2-8-beta",
+    },
+  },
+  {
     id: "obsidianos-work",
     title: "ObsidianOS: Work",
     section: "projects",
@@ -136,20 +154,6 @@ export const projectsItems: PortfolioItem[] = [
     description:
       "Electronic claim management solution for health networks and insurance companies",
     techStack: ["Elixir/Phoenix", "Ember.js", "AWS", "PostgreSQL"],
-  },
-  {
-    id: "gbadev",
-    title: "GBA Dev",
-    section: "projects",
-    category: "Gaming",
-    role: "👷‍♂️ Maker",
-    circa: "2001",
-    images: ["/images/portfolio/%40rkanoid.gif"],
-    icon: "/images/portfolio/icons/GBA Dev.png",
-    url: "https://github.com/benoror/gbadev",
-    description:
-      "Homebrew Game Boy Advance Game Development",
-    techStack: ["C/GCC", "ASM"],
   },
   {
     id: "taxi-driver",

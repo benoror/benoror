@@ -6,11 +6,13 @@ import type {
   IResumeVariantDefinition,
 } from '../schema.js';
 import { fleetioLeverageVariant } from './fleetio-leverage.js';
+import { nextpatientStaffVariant } from './nextpatient-staff.js';
 import { recruitedgeGlobalVariant } from './recruitedge-global.js';
 import { mergeVariantCompanies } from './utils.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
   fleetioLeverageVariant,
+  nextpatientStaffVariant,
   recruitedgeGlobalVariant,
 ];
 

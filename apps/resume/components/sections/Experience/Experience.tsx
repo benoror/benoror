@@ -22,7 +22,13 @@ function createInitialOpenStates(companies: ICompany[]): Record<string, boolean>
   return initialState
 }
 
-export default function Experience({ companies }: { companies: ICompany[] }) {
+export default function Experience({
+  companies,
+  printPageBreaks = true,
+}: {
+  companies: ICompany[];
+  printPageBreaks?: boolean;
+}) {
   const [openStates, setOpenStates] = useState<Record<string, boolean>>(() => createInitialOpenStates(companies))
 
   useEffect(() => {
@@ -44,7 +50,7 @@ export default function Experience({ companies }: { companies: ICompany[] }) {
             key={companyIndex}
             className={[
               companyIndex !== 0 ? "pt-3" : "",
-              company.name === "HealthTree" ? "print:break-before-page" : "",
+              printPageBreaks && company.name === "HealthTree" ? "print:break-before-page" : "",
             ].filter(Boolean).join(" ")}
           >
             <div className="flex flex-row justify-between items-center gap-2 mb-1.5">

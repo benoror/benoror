@@ -91,6 +91,7 @@ export interface IResumeVariantMetadata {
 
 export interface IResumeVariantSections {
   coreSkills?: boolean;
+  printPageBreaks?: boolean;
 }
 
 export interface IResumeDocumentOverride {

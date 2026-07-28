@@ -23,6 +23,9 @@ export const nextpatientStaffVariant: IResumeVariantDefinition = {
     title: 'Ben Orozco - Staff Software Engineer',
     description: 'Tailored resume and cover letter for a staff-level, hands-on full-stack product role in healthcare software.',
   },
+  sections: {
+    printPageBreaks: false,
+  },
   resume: {
     about: {
       header: 'Staff Software Engineer · Full-Stack Product Builder · Python / JavaScript / PostgreSQL',

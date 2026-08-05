@@ -24,6 +24,7 @@ export const fleetioEmGrowthVariant: IResumeVariantDefinition = {
   },
   sections: {
     coreSkills: false,
+    printPageBreaks: false,
   },
   resume: {
     about: {

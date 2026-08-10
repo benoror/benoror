@@ -17,7 +17,9 @@ async function exists(filePath) {
   }
 }
 
-async function listMarkdownFiles(sourcePath) {
+const ALWAYS_SKIP_DIRS = new Set(["node_modules", ".git", ".obsidian", ".trash"]);
+
+async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}) {
   const stats = await fs.stat(sourcePath);
 
   if (stats.isFile()) {
@@ -27,13 +29,16 @@ async function listMarkdownFiles(sourcePath) {
   const entries = await fs.readdir(sourcePath, { withFileTypes: true });
   const files = await Promise.all(
     entries.map(async (entry) => {
-      if (entry.name.startsWith(".") || entry.name === "node_modules") {
+      if (
+        ALWAYS_SKIP_DIRS.has(entry.name) ||
+        (!includeHidden && entry.name.startsWith("."))
+      ) {
         return [];
       }
 
       const absolute = path.join(sourcePath, entry.name);
       if (entry.isDirectory()) {
-        return listMarkdownFiles(absolute);
+        return listMarkdownFiles(absolute, { includeHidden });
       }
 
       if (!entry.name.endsWith(".md") && !entry.name.endsWith(".mdx")) {
@@ -129,14 +134,18 @@ function expandHome(filePath) {
   return filePath;
 }
 
-async function copyMarkdownFiles(vaultName, sourceRoot) {
-  const files = await listMarkdownFiles(sourceRoot);
+async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
+  const { requirePublish = true, includeHidden = false } = options;
+  const files = await listMarkdownFiles(sourceRoot, { includeHidden });
 
   await Promise.all(
     files.map(async (filePath) => {
       const fileContents = await fs.readFile(filePath, "utf-8");
       const parsed = extractFrontmatter(fileContents);
-      if (!parsed || !hasBooleanFrontmatter(parsed.content, "publish")) {
+      if (
+        requirePublish &&
+        (!parsed || !hasBooleanFrontmatter(parsed.content, "publish"))
+      ) {
         return;
       }
 
@@ -185,7 +194,10 @@ async function main() {
     const vaultDestination = path.join(destinationRoot, source.name);
     // Keep destination mirrored with current vault state by removing stale synced files first.
     await fs.rm(vaultDestination, { recursive: true, force: true });
-    await copyMarkdownFiles(source.name, sourceRoot);
+    await copyMarkdownFiles(source.name, sourceRoot, {
+      requirePublish: source.requirePublish !== false,
+      includeHidden: source.includeHidden === true,
+    });
   }
 
   console.log("Vault sync completed.");

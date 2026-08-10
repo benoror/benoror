@@ -8,14 +8,16 @@ Markdown content is built from the `content` folder.
 
 1. Copy config:
    - `cp apps/notes/vaults.config.example.json apps/notes/vaults.config.json`
-2. Set absolute vault paths in `sources` (`name` + `path` per vault).
+2. Set vault paths in `sources` (`name` + `path` per vault; `~` is supported).
 3. Sync markdown:
    - `pnpm --filter notes sync:vaults`
 
 Sync behavior:
 
 - Recursively traverses each configured vault.
-- Syncs only notes with `publish: true` frontmatter.
+- By default, syncs only notes with `publish: true` frontmatter.
+- Set `requirePublish: false` on a source to sync every markdown file in that folder.
+- Set `includeHidden: true` on a source to also traverse dot-directories (still skips `.git`, `.obsidian`, `.trash`, `node_modules`).
 - If no `date` is present, it auto-populates `date` using this priority: `date` (existing) -> `created` (frontmatter) -> source file `ctime`.
 - If no `created` is present, it auto-populates `created` from source file `ctime` to preserve original file metadata in synced output.
 - If `hidden: true` is present, the note is still generated and accessible by direct URL, but excluded from Quartz Explorer/index-based discovery.

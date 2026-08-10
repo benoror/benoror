@@ -1,12 +1,19 @@
 {
   "sources": [
     {
-      "name": "personal",
-      "path": "/absolute/path/to/Obsidian/PersonalVault"
+      "name": "Wiki",
+      "path": "~/vaults/personal/Wiki",
+      "requirePublish": false
     },
     {
-      "name": "work",
-      "path": "/absolute/path/to/Obsidian/WorkVault"
+      "name": "Agents",
+      "path": "~/dotfiles/stow/agents",
+      "requirePublish": false,
+      "includeHidden": true
+    },
+    {
+      "name": "Work/Agentic Workflows",
+      "path": "~/vaults/trivelta/Agentic Workflows"
     }
   ]
 }

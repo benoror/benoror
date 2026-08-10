@@ -67,6 +67,23 @@ function hasBooleanFrontmatter(frontmatter, field) {
   return pattern.test(frontmatter);
 }
 
+function setBooleanFrontmatter(rawContents, field, value) {
+  const fieldLine = `${field}: ${value}`;
+  const parsed = extractFrontmatter(rawContents);
+
+  if (!parsed) {
+    return `---\n${fieldLine}\n---\n${rawContents}`;
+  }
+
+  const fieldPattern = new RegExp(`^${field}:.*$`, "m");
+  const normalizedFrontmatter = parsed.content.replace(/\s*$/, "");
+  const updatedFrontmatter = fieldPattern.test(normalizedFrontmatter)
+    ? normalizedFrontmatter.replace(fieldPattern, fieldLine)
+    : `${normalizedFrontmatter}\n${fieldLine}`;
+
+  return rawContents.replace(parsed.fullBlock, `---\n${updatedFrontmatter}\n---\n`);
+}
+
 function hasDateFrontmatter(frontmatter) {
   return /^date:\s*["']?[^"'\n]+["']?\s*$/m.test(frontmatter);
 }
@@ -135,7 +152,11 @@ function expandHome(filePath) {
 }
 
 async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
-  const { requirePublish = true, includeHidden = false } = options;
+  const {
+    requirePublish = true,
+    includeInRss = true,
+    includeHidden = false,
+  } = options;
   const files = await listMarkdownFiles(sourceRoot, { includeHidden });
 
   await Promise.all(
@@ -150,7 +171,10 @@ async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
       }
 
       const fileStats = await fs.stat(filePath);
-      const syncedContents = ensureTemporalFrontmatter(fileContents, fileStats);
+      const contentsWithDates = ensureTemporalFrontmatter(fileContents, fileStats);
+      const syncedContents = includeInRss
+        ? contentsWithDates
+        : setBooleanFrontmatter(contentsWithDates, "includeInRss", false);
       const relativeToRoot = path.relative(sourceRoot, filePath);
       const destination = path.join(destinationRoot, vaultName, relativeToRoot);
 
@@ -163,7 +187,7 @@ async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
 
 async function main() {
   if (!(await exists(configPath))) {
-    console.error("Missing vaults.config.json. Copy vaults.config.example.json and update your paths.");
+    console.error("Missing vaults.config.json.");
     process.exit(1);
   }
 
@@ -196,6 +220,7 @@ async function main() {
     await fs.rm(vaultDestination, { recursive: true, force: true });
     await copyMarkdownFiles(source.name, sourceRoot, {
       requirePublish: source.requirePublish !== false,
+      includeInRss: source.includeInRss !== false,
       includeHidden: source.includeHidden === true,
     });
   }

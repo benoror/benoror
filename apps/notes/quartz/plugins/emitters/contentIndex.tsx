@@ -19,6 +19,7 @@ export type ContentDetails = {
   richContent?: string
   date?: Date
   rssDate?: Date
+  includeInRss?: boolean
   description?: string
 }
 
@@ -64,6 +65,7 @@ function generateRSSFeed(cfg: GlobalConfiguration, idx: ContentIndexMap, limit?:
   </item>`
 
   const items = Array.from(idx)
+    .filter(([_, content]) => content.includeInRss !== false)
     .sort(([_, f1], [__, f2]) => {
       if (f1.rssDate && f2.rssDate) {
         return f2.rssDate.getTime() - f1.rssDate.getTime()
@@ -107,6 +109,9 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
         // FrontMatter transformer, so RSS chronology does not change when
         // an existing note is edited.
         const rssDate = file.data.dates?.created ?? date
+        const includeInRss =
+          file.data.frontmatter?.includeInRss !== false &&
+          file.data.frontmatter?.includeInRss !== "false"
         const isHidden =
           file.data.frontmatter?.hidden === true || file.data.frontmatter?.hidden === "true"
         if (isHidden) {
@@ -125,6 +130,7 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
               : undefined,
             date: date,
             rssDate,
+            includeInRss,
             description: file.data.description ?? "",
           })
         }
@@ -157,6 +163,7 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
           delete content.description
           delete content.date
           delete content.rssDate
+          delete content.includeInRss
           return [slug, content]
         }),
       )

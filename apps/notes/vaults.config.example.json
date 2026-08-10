@@ -8,7 +8,7 @@
     {
       "name": "Agents",
       "path": "~/dotfiles/stow/agents",
-      "requirePublish": false,
+      "requirePublish": true,
       "includeHidden": true
     },
     {

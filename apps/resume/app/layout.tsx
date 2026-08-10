@@ -45,6 +45,9 @@ export const metadata: Metadata = {
     title: `${ABOUT.name} - Resume`,
     description: `Resume of ${ABOUT.name}`,
   },
+  other: {
+    "darkreader-lock": "darkreader-lock",
+  },
 };
 
 export default function RootLayout({

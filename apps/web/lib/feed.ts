@@ -131,12 +131,11 @@ const uniqueUrls = (values: Array<string | null | undefined>): string[] => {
   return result
 }
 
+// Only explicit share links (e.g. Bluesky embeds/facets) count as merge
+// signals. Harvesting URLs from arbitrary item bodies would collapse posts
+// that merely cite another item (e.g. a blog post linking to a note).
 const collectReferencedLinks = (item: AggregatedFeedItem): string[] =>
-  uniqueUrls([
-    ...(item.referencedLinks ?? []),
-    ...extractUrlsFromText(item.body),
-    ...extractUrlsFromText(item.summary),
-  ])
+  uniqueUrls(item.referencedLinks ?? [])
 
 const pickPreferredBySourcePriority = (a: AggregatedFeedItem, b: AggregatedFeedItem): AggregatedFeedItem => {
   const aPriority = getSourcePriority(a.sourceUrl)

@@ -8,6 +8,7 @@ sources:
 domains: [agentic]
 date: "2026-07-17T06:23:04.285Z"
 created: "2026-07-17T06:23:04.285Z"
+includeInRss: false
 ---
 
 # Introducing the Model Context Protocol

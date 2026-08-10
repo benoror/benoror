@@ -8,6 +8,7 @@ sources:
 domains: [agentic, startup]
 date: "2026-07-17T06:22:36.658Z"
 created: "2026-07-17T06:22:36.658Z"
+includeInRss: false
 ---
 
 # A sane but extremely bull case on OpenClaw (Clawdbot)

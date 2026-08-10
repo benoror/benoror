@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:04.962Z"
 created: "2026-07-17T06:23:04.962Z"
+includeInRss: false
 ---
 
 # Cursor agent best practices

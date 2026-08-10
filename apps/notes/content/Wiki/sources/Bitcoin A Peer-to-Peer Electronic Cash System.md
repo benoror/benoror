@@ -8,6 +8,7 @@ sources:
 domains: [crypto, reading]
 date: "2026-07-17T06:22:54.997Z"
 created: "2026-07-17T06:22:54.997Z"
+includeInRss: false
 ---
 
 # Bitcoin A Peer-to-Peer Electronic Cash System

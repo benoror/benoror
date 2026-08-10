@@ -5,6 +5,7 @@ sources: ["[[Salary Negotiation Make More Money Be More Valued]]"]
 domains: [career]
 date: "2026-07-17T06:23:13.558Z"
 created: "2026-07-17T06:23:13.558Z"
+includeInRss: false
 ---
 
 # Salary Negotiation Make More Money Be More Valued

@@ -8,6 +8,7 @@ sources:
 domains: [system, coding]
 date: "2026-07-17T06:23:09.903Z"
 created: "2026-07-17T06:23:09.903Z"
+includeInRss: false
 ---
 
 # The Omarchy Manual

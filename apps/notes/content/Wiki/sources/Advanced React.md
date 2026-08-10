@@ -8,6 +8,7 @@ sources:
 domains: [coding, skills]
 date: "2026-07-17T06:22:41.574Z"
 created: "2026-07-17T06:22:41.574Z"
+includeInRss: false
 ---
 
 # Advanced React

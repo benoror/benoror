@@ -5,6 +5,7 @@ sources: ["[[Night Shift Agentic Workflow]]"]
 domains: [agentic, coding]
 date: "2026-07-17T06:22:49.512Z"
 created: "2026-07-17T06:22:49.512Z"
+includeInRss: false
 ---
 
 # Night Shift Agentic Workflow

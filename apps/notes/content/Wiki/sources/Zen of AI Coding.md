@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:32.846Z"
 created: "2026-07-17T06:23:32.846Z"
+includeInRss: false
 ---
 
 # Zen of AI Coding

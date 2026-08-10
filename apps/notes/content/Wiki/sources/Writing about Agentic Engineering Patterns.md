@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:31.355Z"
 created: "2026-07-17T06:23:31.355Z"
+includeInRss: false
 ---
 
 # Writing about Agentic Engineering Patterns

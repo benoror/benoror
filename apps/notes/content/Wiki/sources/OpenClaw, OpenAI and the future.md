@@ -5,6 +5,7 @@ sources: ["[[OpenClaw, OpenAI and the future]]"]
 domains: [agentic, open-source]
 date: "2026-07-17T06:23:02.584Z"
 created: "2026-07-17T06:23:02.584Z"
+includeInRss: false
 ---
 
 # OpenClaw, OpenAI and the future

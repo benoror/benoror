@@ -5,6 +5,7 @@ sources: ["[[Shipping at Inference-Speed]]"]
 domains: [agentic, coding]
 date: "2026-07-17T06:23:16.052Z"
 created: "2026-07-17T06:23:16.052Z"
+includeInRss: false
 ---
 
 # Shipping at Inference-Speed

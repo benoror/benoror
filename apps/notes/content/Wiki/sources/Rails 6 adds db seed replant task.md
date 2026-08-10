@@ -5,6 +5,7 @@ sources: ["[[Rails 6 adds db seed replant task]]"]
 domains: [coding]
 date: "2026-07-17T06:23:08.182Z"
 created: "2026-07-17T06:23:08.182Z"
+includeInRss: false
 ---
 
 # Rails 6 adds db:seed:replant task

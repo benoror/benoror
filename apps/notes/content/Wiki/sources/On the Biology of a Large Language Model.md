@@ -5,6 +5,7 @@ sources: ["[[On the Biology of a Large Language Model]]"]
 domains: [agentic, reading]
 date: "2026-07-17T06:22:55.289Z"
 created: "2026-07-17T06:22:55.289Z"
+includeInRss: false
 ---
 
 # On the Biology of a Large Language Model

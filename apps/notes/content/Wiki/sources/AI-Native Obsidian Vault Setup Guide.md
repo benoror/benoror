@@ -8,6 +8,7 @@ sources:
 domains: [agentic, system]
 date: "2026-07-17T06:22:40.514Z"
 created: "2026-07-17T06:22:40.514Z"
+includeInRss: false
 ---
 
 # AI-Native Obsidian Vault Setup Guide

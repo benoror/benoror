@@ -8,6 +8,7 @@ sources:
 domains: [system]
 date: "2026-07-17T06:22:53.529Z"
 created: "2026-07-17T06:22:53.529Z"
+includeInRss: false
 ---
 
 # How I use Obsidian — Steph Ango

@@ -8,6 +8,7 @@ sources:
 domains: [agentic, skills]
 date: "2026-07-17T06:23:23.309Z"
 created: "2026-07-17T06:23:23.309Z"
+includeInRss: false
 ---
 
 # This is a sample AGENTS.md file from my classes

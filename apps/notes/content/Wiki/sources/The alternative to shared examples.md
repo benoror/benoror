@@ -8,6 +8,7 @@ sources:
 domains: [coding]
 date: "2026-07-17T06:23:12.905Z"
 created: "2026-07-17T06:23:12.905Z"
+includeInRss: false
 ---
 
 # The alternative to shared examples

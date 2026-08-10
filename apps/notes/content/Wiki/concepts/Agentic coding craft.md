@@ -15,6 +15,7 @@ sources:
   - "[[AI-Augmented Software Development Manifesto]]"
 date: "2026-07-17T06:24:14.541Z"
 created: "2026-07-17T06:24:14.541Z"
+includeInRss: false
 ---
 
 # Agentic coding craft

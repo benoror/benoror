@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:22:43.021Z"
 created: "2026-07-17T06:22:43.021Z"
+includeInRss: false
 ---
 
 # Async Ruby is the Future of AI Apps (And It's Already Here)

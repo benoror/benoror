@@ -5,6 +5,7 @@ sources: ["[[Professional screen recorder for macOS]]"]
 domains: [system]
 date: "2026-07-17T06:23:04.788Z"
 created: "2026-07-17T06:23:04.788Z"
+includeInRss: false
 ---
 
 # Screen Studio — professional screen recorder for macOS

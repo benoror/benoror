@@ -8,6 +8,7 @@ sources:
 domains: [career]
 date: "2026-07-17T06:23:07.439Z"
 created: "2026-07-17T06:23:07.439Z"
+includeInRss: false
 ---
 
 # Managing remote teams a crash course

@@ -8,6 +8,7 @@ sources:
 domains: [agentic, skills]
 date: "2026-07-17T06:22:35.073Z"
 created: "2026-07-17T06:22:35.073Z"
+includeInRss: false
 ---
 
 # A Field Guide to Fable: Finding Your Unknowns

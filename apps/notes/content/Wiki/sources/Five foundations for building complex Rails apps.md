@@ -8,6 +8,7 @@ sources:
 domains: [coding]
 date: "2026-07-17T06:23:05.840Z"
 created: "2026-07-17T06:23:05.840Z"
+includeInRss: false
 ---
 
 # Five foundations for building complex Rails apps

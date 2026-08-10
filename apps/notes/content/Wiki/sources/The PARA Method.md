@@ -8,6 +8,7 @@ sources:
 domains: [system, reading]
 date: "2026-07-17T06:23:11.322Z"
 created: "2026-07-17T06:23:11.322Z"
+includeInRss: false
 ---
 
 # The PARA Method

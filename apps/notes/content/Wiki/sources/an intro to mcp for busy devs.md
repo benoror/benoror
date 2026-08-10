@@ -8,6 +8,7 @@ sources:
 domains: [agentic]
 date: "2026-07-17T06:23:35.024Z"
 created: "2026-07-17T06:23:35.024Z"
+includeInRss: false
 ---
 
 # an intro to mcp for busy devs

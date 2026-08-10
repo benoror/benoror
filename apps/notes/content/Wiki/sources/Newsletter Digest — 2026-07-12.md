@@ -8,6 +8,7 @@ sources:
 domains: [reading, news-scan]
 date: "2026-07-17T06:23:11.943Z"
 created: "2026-07-17T06:23:11.943Z"
+includeInRss: false
 ---
 
 # Newsletter Digest — 2026-07-12

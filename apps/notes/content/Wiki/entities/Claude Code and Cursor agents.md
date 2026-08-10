@@ -11,6 +11,7 @@ sources:
   - "[[Claude Code Skills for Solopreneurs]]"
 date: "2026-07-17T06:24:34.663Z"
 created: "2026-07-17T06:24:34.663Z"
+includeInRss: false
 ---
 
 # Claude Code and Cursor agents

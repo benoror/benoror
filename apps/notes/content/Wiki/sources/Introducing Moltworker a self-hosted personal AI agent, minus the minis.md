@@ -8,6 +8,7 @@ sources:
 domains: [agentic, open-source]
 date: "2026-07-17T06:23:03.178Z"
 created: "2026-07-17T06:23:03.178Z"
+includeInRss: false
 ---
 
 # Introducing Moltworker: a self-hosted personal AI agent, minus the minis

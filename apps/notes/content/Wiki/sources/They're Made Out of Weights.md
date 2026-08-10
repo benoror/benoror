@@ -8,6 +8,7 @@ sources:
 domains: [agentic, reading]
 date: "2026-07-17T06:23:21.383Z"
 created: "2026-07-17T06:23:21.383Z"
+includeInRss: false
 ---
 
 # They're Made Out of Weights

@@ -8,6 +8,7 @@ sources:
 domains: [reading]
 date: "2026-07-17T06:23:22.009Z"
 created: "2026-07-17T06:23:22.009Z"
+includeInRss: false
 ---
 
 # They're Made out of Meat | East of the Web

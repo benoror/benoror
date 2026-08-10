@@ -10,6 +10,7 @@ sources:
   - "[[Why we sunsetted mcpt]]"
 date: "2026-07-17T06:24:09.525Z"
 created: "2026-07-17T06:24:09.525Z"
+includeInRss: false
 ---
 
 # Model Context Protocol

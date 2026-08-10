@@ -10,6 +10,7 @@ sources:
   - "[[juggernaut on X CTO shared this with me on day 1something everyone should read if they are in an early-stage startup at least once httpst.co4M7PR3P46O]]"
 date: "2026-07-17T06:24:25.758Z"
 created: "2026-07-17T06:24:25.758Z"
+includeInRss: false
 ---
 
 # Career side doors and negotiation

@@ -8,6 +8,7 @@ sources:
 domains: [agentic, system]
 date: "2026-07-17T06:23:00.380Z"
 created: "2026-07-17T06:23:00.380Z"
+includeInRss: false
 ---
 
 # Building Your AI-Powered Second Brain Claude Code and Obsidian

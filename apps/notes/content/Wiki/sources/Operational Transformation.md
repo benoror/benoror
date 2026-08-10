@@ -5,6 +5,7 @@ sources: ["[[Operational Transformation]]"]
 domains: [coding]
 date: "2026-07-17T06:23:03.911Z"
 created: "2026-07-17T06:23:03.911Z"
+includeInRss: false
 ---
 
 # Operational Transformation

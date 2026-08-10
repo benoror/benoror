@@ -8,6 +8,7 @@ sources:
 domains: [startup, coding]
 date: "2026-07-17T06:23:14.402Z"
 created: "2026-07-17T06:23:14.402Z"
+includeInRss: false
 ---
 
 # The boring technology behind a one-person Internet company

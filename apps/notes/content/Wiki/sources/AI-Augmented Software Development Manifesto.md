@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:22:39.051Z"
 created: "2026-07-17T06:22:39.051Z"
+includeInRss: false
 ---
 
 # AI-Augmented Software Development Manifesto

@@ -16,6 +16,7 @@ sources:
   - "[[Promoting AI agents]]"
 date: "2026-07-17T06:24:18.965Z"
 created: "2026-07-17T06:24:18.965Z"
+includeInRss: false
 ---
 
 # Personal AI agents

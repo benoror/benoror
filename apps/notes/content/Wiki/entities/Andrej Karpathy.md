@@ -8,6 +8,7 @@ sources:
   - "[[They're Made Out of Weights]]"
 date: "2026-07-17T06:24:30.662Z"
 created: "2026-07-17T06:24:30.662Z"
+includeInRss: false
 ---
 
 # Andrej Karpathy

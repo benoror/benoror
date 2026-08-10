@@ -8,6 +8,7 @@ sources:
 domains: [agentic, startup]
 date: "2026-07-17T06:23:03.704Z"
 created: "2026-07-17T06:23:03.704Z"
+includeInRss: false
 ---
 
 # Claude Code Skills for Solopreneurs

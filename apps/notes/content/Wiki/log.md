@@ -5,6 +5,7 @@ tags:
   - log
 date: "2026-07-17T06:14:05.051Z"
 created: "2026-07-17T06:14:05.051Z"
+includeInRss: false
 ---
 
 # Wiki Log

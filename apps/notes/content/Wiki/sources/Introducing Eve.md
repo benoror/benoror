@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:00.315Z"
 created: "2026-07-17T06:23:00.315Z"
+includeInRss: false
 ---
 
 # Introducing Eve

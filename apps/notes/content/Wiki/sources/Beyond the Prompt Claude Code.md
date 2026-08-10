@@ -8,6 +8,7 @@ sources:
 domains: [agentic, skills]
 date: "2026-07-17T06:22:44.207Z"
 created: "2026-07-17T06:22:44.207Z"
+includeInRss: false
 ---
 
 # Beyond the Prompt: Claude Code

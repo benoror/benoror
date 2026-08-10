@@ -11,6 +11,7 @@ sources:
   - "[[Beyond the Prompt Claude Code]]"
 date: "2026-07-17T06:24:05.136Z"
 created: "2026-07-17T06:24:05.136Z"
+includeInRss: false
 ---
 
 # AGENTS.md vs skills

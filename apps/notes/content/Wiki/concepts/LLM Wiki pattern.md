@@ -9,6 +9,7 @@ sources:
   - "[[AI-Native Obsidian Vault Setup Guide]]"
 date: "2026-07-17T06:24:02.102Z"
 created: "2026-07-17T06:24:02.102Z"
+includeInRss: false
 ---
 
 # LLM Wiki pattern

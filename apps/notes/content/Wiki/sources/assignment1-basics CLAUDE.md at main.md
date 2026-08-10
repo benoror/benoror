@@ -8,6 +8,7 @@ sources:
 domains: [agentic, skills]
 date: "2026-07-17T06:23:36.502Z"
 created: "2026-07-17T06:23:36.502Z"
+includeInRss: false
 ---
 
 # assignment1-basics/CLAUDE.md at main

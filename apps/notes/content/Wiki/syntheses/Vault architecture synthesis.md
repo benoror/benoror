@@ -10,6 +10,7 @@ sources:
   - "[[How I use Obsidian — Steph Ango]]"
 date: "2026-07-17T06:24:38.388Z"
 created: "2026-07-17T06:24:38.388Z"
+includeInRss: false
 ---
 
 # Vault architecture synthesis

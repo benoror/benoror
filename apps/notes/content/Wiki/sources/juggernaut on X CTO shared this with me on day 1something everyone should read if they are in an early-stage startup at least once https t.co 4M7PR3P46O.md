@@ -8,6 +8,7 @@ sources:
 domains: [startup, career]
 date: "2026-07-17T06:23:39.720Z"
 created: "2026-07-17T06:23:39.720Z"
+includeInRss: false
 ---
 
 # juggernaut on X: early-stage startup advice (image)

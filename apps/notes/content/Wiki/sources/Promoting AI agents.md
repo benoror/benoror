@@ -5,6 +5,7 @@ sources: ["[[Promoting AI agents]]"]
 domains: [agentic]
 date: "2026-07-17T06:23:07.062Z"
 created: "2026-07-17T06:23:07.062Z"
+includeInRss: false
 ---
 
 # Promoting AI agents

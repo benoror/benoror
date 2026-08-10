@@ -5,6 +5,7 @@ sources: ["[[Rails Dockerfile Best Practices Part 1 Image Slimming]]"]
 domains: [coding]
 date: "2026-07-17T06:23:10.620Z"
 created: "2026-07-17T06:23:10.620Z"
+includeInRss: false
 ---
 
 # Rails Dockerfile Best Practices Part 1: Image Slimming

@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:07.132Z"
 created: "2026-07-17T06:23:07.132Z"
+includeInRss: false
 ---
 
 # Fragments January 8

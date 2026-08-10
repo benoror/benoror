@@ -5,6 +5,7 @@ sources: ["[[a meta-harness for building and running AI agents]]"]
 domains: [agentic]
 date: "2026-07-17T06:22:53.192Z"
 created: "2026-07-17T06:22:53.192Z"
+includeInRss: false
 ---
 
 # Omnigent — meta-harness for AI agents

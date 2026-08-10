@@ -8,6 +8,7 @@ sources:
 domains: [agentic]
 date: "2026-07-17T06:23:08.760Z"
 created: "2026-07-17T06:23:08.760Z"
+includeInRss: false
 ---
 
 # Moltbook is the most interesting place on the internet right now

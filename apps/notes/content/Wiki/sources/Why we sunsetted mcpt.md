@@ -8,6 +8,7 @@ sources:
 domains: [agentic]
 date: "2026-07-17T06:23:29.755Z"
 created: "2026-07-17T06:23:29.755Z"
+includeInRss: false
 ---
 
 # Why we sunsetted mcpt

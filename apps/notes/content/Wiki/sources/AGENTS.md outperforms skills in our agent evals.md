@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:22:38.011Z"
 created: "2026-07-17T06:22:38.011Z"
+includeInRss: false
 ---
 
 # AGENTS.md outperforms skills in our agent evals

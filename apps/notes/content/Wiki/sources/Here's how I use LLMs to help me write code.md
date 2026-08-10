@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:22:49.324Z"
 created: "2026-07-17T06:22:49.324Z"
+includeInRss: false
 ---
 
 # Here's how I use LLMs to help me write code

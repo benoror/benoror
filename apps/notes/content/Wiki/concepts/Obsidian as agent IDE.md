@@ -12,6 +12,7 @@ sources:
   - "[[Karpathy LLM Wiki]]"
 date: "2026-07-17T06:24:22.666Z"
 created: "2026-07-17T06:24:22.666Z"
+includeInRss: false
 ---
 
 # Obsidian as agent IDE

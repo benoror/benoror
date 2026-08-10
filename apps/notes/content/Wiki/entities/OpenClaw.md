@@ -12,6 +12,7 @@ sources:
   - "[[Moltbook is the most interesting place on the internet right now]]"
 date: "2026-07-17T06:24:28.103Z"
 created: "2026-07-17T06:24:28.103Z"
+includeInRss: false
 ---
 
 # OpenClaw

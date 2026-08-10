@@ -8,6 +8,7 @@ sources:
 domains: [agentic, skills]
 date: "2026-07-17T06:22:47.480Z"
 created: "2026-07-17T06:22:47.480Z"
+includeInRss: false
 ---
 
 # Getting started with loops

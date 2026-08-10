@@ -8,6 +8,7 @@ sources:
 domains: [agentic]
 date: "2026-07-17T06:23:17.542Z"
 created: "2026-07-17T06:23:17.542Z"
+includeInRss: false
 ---
 
 # The next chapter EpicAI.pro

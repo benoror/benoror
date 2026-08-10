@@ -8,6 +8,7 @@ sources:
 domains: [agentic, coding]
 date: "2026-07-17T06:23:09.809Z"
 created: "2026-07-17T06:23:09.809Z"
+includeInRss: false
 ---
 
 # My AGENTS.md file for building plans you actually read

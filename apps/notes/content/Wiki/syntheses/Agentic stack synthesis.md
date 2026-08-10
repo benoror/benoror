@@ -10,6 +10,7 @@ sources:
   - "[[AGENTS.md vs skills]]"
 date: "2026-07-17T06:24:38.562Z"
 created: "2026-07-17T06:24:38.562Z"
+includeInRss: false
 ---
 
 # Agentic stack synthesis

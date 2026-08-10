@@ -5,6 +5,7 @@ sources: ["[[Open in Safari [Shortcuts]]]"]
 domains: [system]
 date: "2026-07-17T06:22:56.197Z"
 created: "2026-07-17T06:22:56.197Z"
+includeInRss: false
 ---
 
 # Open in Safari [Shortcuts]

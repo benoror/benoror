@@ -8,6 +8,7 @@ sources:
 domains: [coding]
 date: "2026-07-17T06:22:56.439Z"
 created: "2026-07-17T06:22:56.439Z"
+includeInRss: false
 ---
 
 # How to implement Stripe without going mad

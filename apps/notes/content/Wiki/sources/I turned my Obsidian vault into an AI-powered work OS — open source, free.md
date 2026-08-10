@@ -8,6 +8,7 @@ sources:
 domains: [agentic, startup]
 date: "2026-07-17T06:22:58.690Z"
 created: "2026-07-17T06:22:58.690Z"
+includeInRss: false
 ---
 
 # I turned my Obsidian vault into an AI-powered work OS — open source, free

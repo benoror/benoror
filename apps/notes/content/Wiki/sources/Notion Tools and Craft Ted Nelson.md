@@ -5,6 +5,7 @@ sources: ["[[Notion Tools and Craft Ted Nelson]]"]
 domains: [system, reading]
 date: "2026-07-17T06:22:50.807Z"
 created: "2026-07-17T06:22:50.807Z"
+includeInRss: false
 ---
 
 # Notion Tools and Craft Ted Nelson

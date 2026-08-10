@@ -38,7 +38,7 @@ export default function Navbar() {
       }`}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className={`hidden md:inline-flex text-xl font-bold tracking-tighter hover:no-underline items-center gap-2 ${classes.text}`}>
+        <Link href={LINKS.website.url} className={`hidden md:inline-flex text-xl font-bold tracking-tighter hover:no-underline items-center gap-2 ${classes.text}`}>
           Ben Orozco
         </Link>
 
@@ -55,7 +55,7 @@ export default function Navbar() {
             {isMenuOpen && (
               <div className={`fixed inset-0 top-16 z-40 p-4 ${classes.menuOverlay}`}>
                 <nav className="flex flex-col space-y-6 text-lg">
-                  <Link href="/" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.website.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Home
                   </Link>
                   <Link href={LINKS.portfolio.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
@@ -83,7 +83,7 @@ export default function Navbar() {
         ) : (
           <div className="flex items-center space-x-8">
             <nav className="flex space-x-8 text-sm font-medium">
-              <Link href="/" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.website.url} className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Home
               </Link>
               <Link href={LINKS.portfolio.url} className={`${styles.navLink} ${classes.text} hover:no-underline`}>

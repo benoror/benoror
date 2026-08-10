@@ -58,7 +58,7 @@ export default function Navbar() {
                   <Link href="/" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Home
                   </Link>
-                  <Link href="/portfolio" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.portfolio.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Portfolio
                   </Link>
                   <Link href={LINKS.resume.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
@@ -70,7 +70,7 @@ export default function Navbar() {
                   <Link href={LINKS.blog.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
-                  <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                  <Link href={LINKS.feed_page.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Feed
                   </Link>
                   <div className="pt-4">
@@ -86,7 +86,7 @@ export default function Navbar() {
               <Link href="/" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Home
               </Link>
-              <Link href="/portfolio" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.portfolio.url} className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Portfolio
               </Link>
               <Link href={LINKS.resume.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
@@ -98,7 +98,7 @@ export default function Navbar() {
               <Link href={LINKS.notes.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Notes
               </Link>
-              <Link href="/feed" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+              <Link href={LINKS.feed_page.url} className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Feed
               </Link>
             </nav>

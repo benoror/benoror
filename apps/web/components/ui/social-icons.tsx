@@ -166,8 +166,8 @@ export function SocialIcons({
       <IconLink
         Icon={Rss}
         link={LINKS.feed_page.url}
-        text={shortURL(LINKS.feed.url)}
-        legend={LINKS.feed.legend}
+        text={shortURL(LINKS.feed_page.url)}
+        legend={LINKS.feed_page.legend}
         className={iconClassName}
         tooltipClassName={tooltipClassName}
       />

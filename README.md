@@ -14,7 +14,8 @@ I am a Computer Science Engineer specialized in Full Stack development, passiona
 - 📑 Resume: [resume.benoror.com](https://resume.benoror.com/) [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/960px-PDF_file_icon.svg.png" height="14">](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [Ben Orozco - Resume.pdf](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [<img src="https://www.markdownguide.org/assets/images/markdown-mark-white.svg" height="10">](https://resume.benoror.com/resume.md) [resume.md](https://resume.benoror.com/resume.md)
 - 📝 Notes: [notes.benoror.com](http://notes.benoror.com/)
 - 💭 Blog: [blog.benoror.com](https://blog.benoror.com/)
-- 🧵 Feed: [feed.benoror.com](https://feed.benoror.com) [<img src="https://rss.com/blog/wp-content/uploads/2023/12/1024px-Feed-icon.svg_.png" height="14">](https://www.benoror.com/feed.rss) [feed.rss](https://www.benoror.com/feed.rss)
+- 🧵 Feed: [feed.benoror.com](https://feed.benoror.com) [<img src="https://rss.com/blog/wp-content/uploads/2023/12/1024px-Feed-icon.svg_.png" height="14">](https://feed.benoror.com/feed.rss) [feed.rss](https://feed.benoror.com/feed.rss)
+- 🧰 Dotfiles: [dotfiles.benoror.com](https://dotfiles.benoror.com)
 
 ![Github Stats](https://github-stats-extended.vercel.app/api?username=benoror&count_private=true&hide=contribs&show_icons=true&theme=nord&show=prs_merged_percentage,issues_authored,issues_commented)
 
@@ -25,6 +26,7 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 ### Open Source
 
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&card_width=384&description_lines_count=2&repo=obsidianos_work&show=prs_reviewed,issues_commented)](https://github.com/benoror/obsidianos_work)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=dotfiles&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://dotfiles.benoror.com)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=better-npm-run&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://github.com/benoror/better-npm-run)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=gpg.nvim&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://github.com/benoror/gpg.nvim)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=Sundly&repo=sundly&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://github.com/Sundly/sundly)
@@ -65,7 +67,7 @@ I use it as a playground to experiment with [Web & AI technologies](#tech-stack)
   - [Cursor](https://www.cursor.com/)
   - [v0](https://v0.dev/)
   - [Neovim](https://neovim.io/) / [LazyVim](https://www.lazyvim.org/)
-  - [benoror/dotfiles](https://github.com/benoror/dotfiles)
+  - [dotfiles.benoror.com](https://dotfiles.benoror.com) / [benoror/dotfiles](https://github.com/benoror/dotfiles)
 
 ## Others
 

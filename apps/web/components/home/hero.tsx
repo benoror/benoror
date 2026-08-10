@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
-import { HOME } from "@workspace/data/shared/profile"
+import { HOME, LINKS } from "@workspace/data/shared/profile"
 import { SocialIcons } from "../ui/social-icons"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { useAppTheme } from "@/hooks/use-app-theme"
@@ -164,7 +164,7 @@ export default function Hero() {
               Learn More
             </a>
             <Link
-              href="/portfolio"
+              href={LINKS.portfolio.url}
               className={`${ctaBaseClass} ${classes.secondaryButton}`}
             >
               View Portfolio

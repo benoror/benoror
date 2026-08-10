@@ -61,7 +61,7 @@ export const projectsItems: PortfolioItem[] = [
     category: "Open Source",
     role: "👷‍♂️ Maker",
     circa: "2009 - 2026",
-    url: "https://github.com/benoror/dotfiles",
+    url: "https://dotfiles.benoror.com",
     images: ["/images/portfolio/dotfiles.jpg"],
     icon: "/images/portfolio/icons/dotfiles.png",
     description:

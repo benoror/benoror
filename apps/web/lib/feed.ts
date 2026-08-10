@@ -22,6 +22,8 @@ export type AggregatedFeedItem = {
   body?: string
   bodyFormat?: "html" | "markdown" | "code" | "text"
   codeLanguage?: string
+  /** Canonical URLs this item points at (e.g. Bluesky link embeds to a blog post). */
+  referencedLinks?: string[]
   alsoSharedTo?: Array<{
     sourceId: string
     sourceName: string
@@ -78,6 +80,64 @@ const getSourcePriority = (sourceUrl: string): number => {
 
 const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase()
 
+const normalizeUrlForMatch = (value: string): string | null => {
+  const trimmed = value.trim().replace(/[),.;!?]+$/g, "").replace(/\u2026$/, "").replace(/\.{2,}$/, "")
+  if (!trimmed) return null
+
+  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
+  try {
+    const url = new URL(withProtocol)
+    if (!/^https?:$/i.test(url.protocol)) return null
+    if (!url.hostname.includes(".")) return null
+    url.hash = ""
+    url.search = ""
+    url.username = ""
+    url.password = ""
+    url.hostname = url.hostname.toLowerCase().replace(/^www\./, "")
+    const pathname = url.pathname.replace(/\/+$/, "") || ""
+    return `${url.protocol}//${url.hostname}${pathname}`
+  } catch {
+    return null
+  }
+}
+
+const urlsLooselyMatch = (left: string, right: string): boolean => {
+  const a = normalizeUrlForMatch(left)
+  const b = normalizeUrlForMatch(right)
+  if (!a || !b) return false
+  if (a === b) return true
+  // Bluesky (and similar clients) often truncate display URLs with "...".
+  return a.startsWith(b) || b.startsWith(a)
+}
+
+const extractUrlsFromText = (value: string | undefined): string[] => {
+  if (!value) return []
+  const matches = value.match(/https?:\/\/[^\s<>"')]+/gi) ?? []
+  const bareHosts = value.match(/(?:^|\s)((?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?)/gi) ?? []
+  return [...matches, ...bareHosts.map((part) => part.trim())]
+    .map((candidate) => normalizeUrlForMatch(candidate))
+    .filter((url): url is string => Boolean(url))
+}
+
+const uniqueUrls = (values: Array<string | null | undefined>): string[] => {
+  const seen = new Set<string>()
+  const result: string[] = []
+  for (const value of values) {
+    const normalized = value ? normalizeUrlForMatch(value) : null
+    if (!normalized || seen.has(normalized)) continue
+    seen.add(normalized)
+    result.push(normalized)
+  }
+  return result
+}
+
+const collectReferencedLinks = (item: AggregatedFeedItem): string[] =>
+  uniqueUrls([
+    ...(item.referencedLinks ?? []),
+    ...extractUrlsFromText(item.body),
+    ...extractUrlsFromText(item.summary),
+  ])
+
 const pickPreferredBySourcePriority = (a: AggregatedFeedItem, b: AggregatedFeedItem): AggregatedFeedItem => {
   const aPriority = getSourcePriority(a.sourceUrl)
   const bPriority = getSourcePriority(b.sourceUrl)
@@ -91,6 +151,83 @@ const sortBySourcePriority = (items: AggregatedFeedItem[]): AggregatedFeedItem[]
     if (aPriority !== bPriority) return aPriority - bPriority
     return 0
   })
+}
+
+const mergeDuplicateFeedItems = (items: AggregatedFeedItem[]): AggregatedFeedItem[] => {
+  const parent = new Map<string, string>()
+  const find = (id: string): string => {
+    const current = parent.get(id) ?? id
+    if (current === id) return id
+    const root = find(current)
+    parent.set(id, root)
+    return root
+  }
+  const union = (leftId: string, rightId: string) => {
+    const leftRoot = find(leftId)
+    const rightRoot = find(rightId)
+    if (leftRoot !== rightRoot) parent.set(leftRoot, rightRoot)
+  }
+
+  for (const item of items) {
+    parent.set(item.id, item.id)
+  }
+
+  const byTitle = new Map<string, string[]>()
+  for (const item of items) {
+    const key = normalizeDedupTitle(item.title)
+    const existing = byTitle.get(key) ?? []
+    byTitle.set(key, [...existing, item.id])
+  }
+  for (const ids of byTitle.values()) {
+    const first = ids[0]
+    if (!first) continue
+    for (const id of ids.slice(1)) union(first, id)
+  }
+
+  for (const item of items) {
+    const refs = collectReferencedLinks(item)
+    if (refs.length === 0) continue
+    for (const other of items) {
+      if (other.id === item.id) continue
+      if (refs.some((ref) => urlsLooselyMatch(ref, other.link))) {
+        union(item.id, other.id)
+      }
+    }
+  }
+
+  const groups = new Map<string, AggregatedFeedItem[]>()
+  for (const item of items) {
+    const root = find(item.id)
+    const existing = groups.get(root) ?? []
+    groups.set(root, [...existing, item])
+  }
+
+  return [...groups.values()]
+    .map((group): AggregatedFeedItem | null => {
+      const first = group[0]
+      if (!first) return null
+      if (group.length === 1) {
+        const { referencedLinks: _referencedLinks, ...rest } = first
+        return rest
+      }
+
+      const sorted = sortBySourcePriority(group)
+      const preferred = sorted.reduce((best, current) => pickPreferredBySourcePriority(best, current))
+      const alternates = sorted
+        .filter((item) => item.id !== preferred.id)
+        .map((item) => ({
+          sourceId: item.sourceId,
+          sourceName: item.sourceName,
+          link: item.link,
+        }))
+
+      const { referencedLinks: _referencedLinks, ...rest } = preferred
+      return {
+        ...rest,
+        alsoSharedTo: alternates.length > 0 ? alternates : undefined,
+      }
+    })
+    .filter((item): item is AggregatedFeedItem => item !== null)
 }
 
 const parseDate = (value: string | undefined): Date | null => {
@@ -399,7 +536,23 @@ const fetchBlueskyItems = async (
           uri?: string
           indexedAt?: string
           author?: { handle?: string; displayName?: string }
-          record?: { text?: string; createdAt?: string; $type?: string; reply?: unknown }
+          embed?: {
+            $type?: string
+            external?: { uri?: string; title?: string; description?: string }
+          }
+          record?: {
+            text?: string
+            createdAt?: string
+            $type?: string
+            reply?: unknown
+            embed?: {
+              $type?: string
+              external?: { uri?: string; title?: string; description?: string }
+            }
+            facets?: Array<{
+              features?: Array<{ $type?: string; uri?: string }>
+            }>
+          }
           reply?: unknown
         }
       }>
@@ -425,6 +578,18 @@ const fetchBlueskyItems = async (
       const text = toBlueskyText(post.record?.text)
       const title = text.split("\n").find((line) => line.trim().length > 0)?.slice(0, 120) || "Bluesky post"
       const sourceName = source.name
+      const facetUris =
+        post.record?.facets?.flatMap((facet) =>
+          (facet.features ?? [])
+            .map((feature) => feature.uri)
+            .filter((uri): uri is string => typeof uri === "string"),
+        ) ?? []
+      const referencedLinks = uniqueUrls([
+        post.record?.embed?.external?.uri,
+        post.embed?.external?.uri,
+        ...facetUris,
+        ...extractUrlsFromText(text),
+      ])
 
       items.push({
         id: `${source.id}::${post.uri ?? link}`,
@@ -437,6 +602,7 @@ const fetchBlueskyItems = async (
         sourceId: source.id,
         sourceName,
         sourceUrl: source.site_url,
+        ...(referencedLinks.length > 0 ? { referencedLinks } : {}),
       })
     }
 
@@ -658,36 +824,7 @@ const getSourceItems = async (
 export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
-  const groupedByTitle = new Map<string, AggregatedFeedItem[]>()
-  for (const item of sourceResults.flatMap((result) => result.items)) {
-    const key = normalizeDedupTitle(item.title)
-    const existingGroup = groupedByTitle.get(key) ?? []
-    groupedByTitle.set(key, [...existingGroup, item])
-  }
-
-  const dedupedItems = [...groupedByTitle.values()]
-    .map((group): AggregatedFeedItem | null => {
-      const first = group[0]
-      if (!first) return null
-      if (group.length === 1) return first
-    const sorted = sortBySourcePriority(group)
-    const preferred = sorted.reduce((best, current) => pickPreferredBySourcePriority(best, current))
-    const alternates = sorted
-      .filter((item) => item.id !== preferred.id)
-      .map((item) => ({
-        sourceId: item.sourceId,
-        sourceName: item.sourceName,
-        link: item.link,
-      }))
-
-    return {
-      ...preferred,
-      alsoSharedTo: alternates.length > 0 ? alternates : undefined,
-    }
-    })
-    .filter((item): item is AggregatedFeedItem => item !== null)
-
-  const items = dedupedItems
+  const items = mergeDuplicateFeedItems(sourceResults.flatMap((result) => result.items))
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)
 

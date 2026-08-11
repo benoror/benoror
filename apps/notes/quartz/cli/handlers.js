@@ -477,7 +477,7 @@ export async function handleBuild(argv) {
       "package.json",
     ])
     chokidar
-      .watch(paths, { ignoreInitial: true })
+      .watch(paths, { ignoreInitial: true, followSymlinks: false })
       .on("add", () => build(clientRefresh))
       .on("change", () => build(clientRefresh))
       .on("unlink", () => build(clientRefresh))

@@ -15,6 +15,7 @@ Markdown content is built from the `content` folder.
 Sync behavior:
 
 - Recursively traverses each configured vault.
+- Ignores symlinked files/directories and skips symlinked source roots.
 - Syncs only notes with `publish: true` frontmatter.
 - If no `date` is present, it auto-populates `date` using this priority: `date` (existing) -> `created` (frontmatter) -> source file `ctime`.
 - If no `created` is present, it auto-populates `created` from source file `ctime` to preserve original file metadata in synced output.

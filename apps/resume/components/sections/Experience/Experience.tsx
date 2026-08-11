@@ -24,7 +24,7 @@ function createInitialOpenStates(companies: ICompany[]): Record<string, boolean>
 
 export default function Experience({
   companies,
-  printPageBreaks = true,
+  printPageBreaks = false,
 }: {
   companies: ICompany[];
   printPageBreaks?: boolean;

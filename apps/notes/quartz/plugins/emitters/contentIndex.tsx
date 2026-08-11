@@ -18,6 +18,8 @@ export type ContentDetails = {
   content: string
   richContent?: string
   date?: Date
+  rssDate?: Date
+  includeInRss?: boolean
   description?: string
 }
 
@@ -59,16 +61,17 @@ function generateRSSFeed(cfg: GlobalConfiguration, idx: ContentIndexMap, limit?:
     <link>https://${joinSegments(base, encodeURI(slug))}</link>
     <guid>https://${joinSegments(base, encodeURI(slug))}</guid>
     <description><![CDATA[ ${content.richContent ?? content.description} ]]></description>
-    <pubDate>${content.date?.toUTCString()}</pubDate>
+    <pubDate>${content.rssDate?.toUTCString()}</pubDate>
   </item>`
 
   const items = Array.from(idx)
+    .filter(([_, content]) => content.includeInRss !== false)
     .sort(([_, f1], [__, f2]) => {
-      if (f1.date && f2.date) {
-        return f2.date.getTime() - f1.date.getTime()
-      } else if (f1.date && !f2.date) {
+      if (f1.rssDate && f2.rssDate) {
+        return f2.rssDate.getTime() - f1.rssDate.getTime()
+      } else if (f1.rssDate && !f2.rssDate) {
         return -1
-      } else if (!f1.date && f2.date) {
+      } else if (!f1.rssDate && f2.rssDate) {
         return 1
       }
 
@@ -102,6 +105,13 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
       for (const [tree, file] of content) {
         const slug = file.data.slug!
         const date = getDate(ctx.cfg.configuration, file.data) ?? new Date()
+        // Frontmatter `date` is normalized to `dates.created` by the
+        // FrontMatter transformer, so RSS chronology does not change when
+        // an existing note is edited.
+        const rssDate = file.data.dates?.created ?? date
+        const includeInRss =
+          file.data.frontmatter?.includeInRss !== false &&
+          file.data.frontmatter?.includeInRss !== "false"
         const isHidden =
           file.data.frontmatter?.hidden === true || file.data.frontmatter?.hidden === "true"
         if (isHidden) {
@@ -119,6 +129,8 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
               ? escapeHTML(toHtml(tree as Root, { allowDangerousHtml: true }))
               : undefined,
             date: date,
+            rssDate,
+            includeInRss,
             description: file.data.description ?? "",
           })
         }
@@ -150,6 +162,8 @@ export const ContentIndex: QuartzEmitterPlugin<Partial<Options>> = (opts) => {
           // for the RSS feed
           delete content.description
           delete content.date
+          delete content.rssDate
+          delete content.includeInRss
           return [slug, content]
         }),
       )

@@ -17,7 +17,9 @@ async function exists(filePath) {
   }
 }
 
-async function listMarkdownFiles(sourcePath) {
+const ALWAYS_SKIP_DIRS = new Set(["node_modules", ".git", ".obsidian", ".trash"]);
+
+async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}) {
   const stats = await fs.stat(sourcePath);
 
   if (stats.isFile()) {
@@ -27,7 +29,10 @@ async function listMarkdownFiles(sourcePath) {
   const entries = await fs.readdir(sourcePath, { withFileTypes: true });
   const files = await Promise.all(
     entries.map(async (entry) => {
-      if (entry.name.startsWith(".") || entry.name === "node_modules") {
+      if (
+        ALWAYS_SKIP_DIRS.has(entry.name) ||
+        (!includeHidden && entry.name.startsWith("."))
+      ) {
         return [];
       }
 
@@ -37,7 +42,7 @@ async function listMarkdownFiles(sourcePath) {
 
       const absolute = path.join(sourcePath, entry.name);
       if (entry.isDirectory()) {
-        return listMarkdownFiles(absolute);
+        return listMarkdownFiles(absolute, { includeHidden });
       }
 
       if (!entry.name.endsWith(".md") && !entry.name.endsWith(".mdx")) {
@@ -64,6 +69,23 @@ function extractFrontmatter(rawContents) {
 function hasBooleanFrontmatter(frontmatter, field) {
   const pattern = new RegExp(`^${field}:\\s*(?:true|"true"|'true')\\s*$`, "m");
   return pattern.test(frontmatter);
+}
+
+function setBooleanFrontmatter(rawContents, field, value) {
+  const fieldLine = `${field}: ${value}`;
+  const parsed = extractFrontmatter(rawContents);
+
+  if (!parsed) {
+    return `---\n${fieldLine}\n---\n${rawContents}`;
+  }
+
+  const fieldPattern = new RegExp(`^${field}:.*$`, "m");
+  const normalizedFrontmatter = parsed.content.replace(/\s*$/, "");
+  const updatedFrontmatter = fieldPattern.test(normalizedFrontmatter)
+    ? normalizedFrontmatter.replace(fieldPattern, fieldLine)
+    : `${normalizedFrontmatter}\n${fieldLine}`;
+
+  return rawContents.replace(parsed.fullBlock, `---\n${updatedFrontmatter}\n---\n`);
 }
 
 function hasDateFrontmatter(frontmatter) {
@@ -133,19 +155,30 @@ function expandHome(filePath) {
   return filePath;
 }
 
-async function copyMarkdownFiles(vaultName, sourceRoot) {
-  const files = await listMarkdownFiles(sourceRoot);
+async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
+  const {
+    requirePublish = true,
+    includeInRss = true,
+    includeHidden = false,
+  } = options;
+  const files = await listMarkdownFiles(sourceRoot, { includeHidden });
 
   await Promise.all(
     files.map(async (filePath) => {
       const fileContents = await fs.readFile(filePath, "utf-8");
       const parsed = extractFrontmatter(fileContents);
-      if (!parsed || !hasBooleanFrontmatter(parsed.content, "publish")) {
+      if (
+        requirePublish &&
+        (!parsed || !hasBooleanFrontmatter(parsed.content, "publish"))
+      ) {
         return;
       }
 
       const fileStats = await fs.stat(filePath);
-      const syncedContents = ensureTemporalFrontmatter(fileContents, fileStats);
+      const contentsWithDates = ensureTemporalFrontmatter(fileContents, fileStats);
+      const syncedContents = includeInRss
+        ? contentsWithDates
+        : setBooleanFrontmatter(contentsWithDates, "includeInRss", false);
       const relativeToRoot = path.relative(sourceRoot, filePath);
       const destination = path.join(destinationRoot, vaultName, relativeToRoot);
 
@@ -158,7 +191,7 @@ async function copyMarkdownFiles(vaultName, sourceRoot) {
 
 async function main() {
   if (!(await exists(configPath))) {
-    console.error("Missing vaults.config.json. Copy vaults.config.example.json and update your paths.");
+    console.error("Missing vaults.config.json.");
     process.exit(1);
   }
 
@@ -197,7 +230,11 @@ async function main() {
     const vaultDestination = path.join(destinationRoot, source.name);
     // Keep destination mirrored with current vault state by removing stale synced files first.
     await fs.rm(vaultDestination, { recursive: true, force: true });
-    await copyMarkdownFiles(source.name, sourceRoot);
+    await copyMarkdownFiles(source.name, sourceRoot, {
+      requirePublish: source.requirePublish !== false,
+      includeInRss: source.includeInRss !== false,
+      includeHidden: source.includeHidden === true,
+    });
   }
 
   console.log("Vault sync completed.");

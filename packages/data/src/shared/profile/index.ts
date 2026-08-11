@@ -18,9 +18,17 @@ export const LINKS = {
     url: isProductionDeployment ? "https://www.benoror.com" : "http://localhost:3000",
     legend: "Website",
   },
+  portfolio: {
+    url: isProductionDeployment ? "https://portfolio.benoror.com" : "http://localhost:3000/portfolio",
+    legend: "Portfolio",
+  },
   resume: {
     url: isProductionDeployment ? "https://resume.benoror.com" : "http://localhost:3001",
     legend: "Resume",
+  },
+  cv: {
+    url: isProductionDeployment ? "https://cv.benoror.com" : "http://localhost:3001",
+    legend: "CV",
   },
   resume_pdf: {
     url: isProductionDeployment
@@ -44,12 +52,16 @@ export const LINKS = {
     url: "https://benoror.bearblog.dev",
   },
   feed: {
-    url: isProductionDeployment ? "https://www.benoror.com/feed.rss" : "http://localhost:3000/feed.rss",
+    url: isProductionDeployment ? "https://feed.benoror.com/feed.rss" : "http://localhost:3000/feed.rss",
     legend: "RSS Feed",
   },
   feed_page: {
-    url: isProductionDeployment ? "https://www.benoror.com/feed" : "http://localhost:3000/feed",
+    url: isProductionDeployment ? "https://feed.benoror.com" : "http://localhost:3000/feed",
     legend: "Activity Feed",
+  },
+  dotfiles: {
+    url: "https://dotfiles.benoror.com",
+    legend: "Dotfiles",
   },
   github: {
     url: "https://github.com/benoror",

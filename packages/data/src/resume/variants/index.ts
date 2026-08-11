@@ -5,12 +5,14 @@ import type {
   IResumeDocumentOverride,
   IResumeVariantDefinition,
 } from '../schema.js';
+import { fleetioEmGrowthVariant } from './fleetio-em-growth.js';
 import { fleetioLeverageVariant } from './fleetio-leverage.js';
 import { nextpatientStaffVariant } from './nextpatient-staff.js';
 import { recruitedgeGlobalVariant } from './recruitedge-global.js';
 import { mergeVariantCompanies } from './utils.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
+  fleetioEmGrowthVariant,
   fleetioLeverageVariant,
   nextpatientStaffVariant,
   recruitedgeGlobalVariant,

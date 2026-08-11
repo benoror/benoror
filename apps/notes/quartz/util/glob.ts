@@ -17,6 +17,9 @@ export async function glob(
       ignore: ignorePatterns,
       gitignore: true,
       followSymbolicLinks: false,
+      // Include content under dot-directories (e.g. Agents/.agents/**).
+      // Still respect ignorePatterns / gitignore for .obsidian, .git, etc.
+      dot: true,
     })
   ).map(toPosixPath)
   return fps as FilePath[]

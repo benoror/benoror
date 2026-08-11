@@ -43,6 +43,10 @@ export const metadata: Metadata = {
     title: "Ben Orozco | Full-stack Developer",
     description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
   },
+  other: {
+    // Dark Reader's injected backgrounds hide the outrun canvas, which sits at -z-10.
+    "darkreader-lock": "darkreader-lock",
+  },
 }
 
 export default function RootLayout({

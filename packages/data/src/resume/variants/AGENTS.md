@@ -32,6 +32,7 @@ Before creating or updating a variant, read:
   - selected `skills`
   - `coverLetter`
 - Keep the overall identity consistent with the base resume.
+- Leave print page-breaks off by default (`sections.printPageBreaks` omitted or `false`). Only set `printPageBreaks: true` when a variant explicitly needs a print layout break.
 
 ## Tone
 

@@ -24,7 +24,7 @@ export default function ResumePageContent({
       <Contact about={document.about} />
       <About about={document.about} />
       {sections?.coreSkills !== false ? <CoreSkills skills={document.skills} /> : null}
-      <Experience companies={document.companies} printPageBreaks={sections?.printPageBreaks !== false} />
+      <Experience companies={document.companies} printPageBreaks={sections?.printPageBreaks === true} />
       <Skills skills={document.skills} />
       <Education education={document.education} />
       <Languages languages={document.languages} />

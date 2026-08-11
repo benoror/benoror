@@ -55,6 +55,23 @@ export const projectsItems: PortfolioItem[] = [
     icon: "/images/portfolio/icons/ObsidianOS-icon.png",
   },
   {
+    id: "dotfiles",
+    title: "dotfiles",
+    section: "projects",
+    category: "Open Source",
+    role: "👷‍♂️ Maker",
+    circa: "2009 - 2026",
+    url: "https://dotfiles.benoror.com",
+    images: ["/images/portfolio/dotfiles.jpg"],
+    icon: "/images/portfolio/icons/dotfiles.png",
+    description:
+      "Personal configs managed with GNU Stow — shell, Neovim, Ghostty, Cursor, and a shared agents hub for Claude/Codex/OpenCode. macOS + NixOS, since 2009.",
+    techStack: ["Shell", "GNU Stow", "Neovim", "NixOS", "Makefile", "macOS"],
+    links: {
+      github: "https://github.com/benoror/dotfiles",
+    },
+  },
+  {
     id: "gpg-nvim",
     title: "gpg.nvim",
     section: "projects",

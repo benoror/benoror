@@ -2,19 +2,15 @@
 
 import * as React from "react"
 import { ThemeProvider as NextThemesProvider, useTheme } from "next-themes"
-import { getInitialThemePreference, THEME_STORAGE_KEY } from "@/lib/theme-default-policy"
+import { resolveBootstrapTheme } from "@/lib/theme-default-policy"
 import { TooltipProvider } from "@workspace/ui/components/tooltip"
 
 function ThemeBootstrap() {
   const { setTheme } = useTheme()
 
   React.useEffect(() => {
-    if (typeof window === "undefined") return
-
-    const hasSavedTheme = window.localStorage.getItem(THEME_STORAGE_KEY)
-    if (hasSavedTheme) return
-
-    setTheme(getInitialThemePreference())
+    const bootstrapTheme = resolveBootstrapTheme()
+    if (bootstrapTheme) setTheme(bootstrapTheme)
   }, [setTheme])
 
   return null

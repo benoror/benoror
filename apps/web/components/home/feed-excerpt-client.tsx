@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Rss } from "lucide-react"
+import { LINKS } from "@workspace/data/shared/profile"
 import ExternalLink from "@/components/ui/external-link"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "./feed-excerpt.theme"
@@ -73,7 +74,7 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
           )}
 
           <div className="pt-2 text-center">
-            <a href="/feed" className={`text-sm underline underline-offset-4 ${classes.linkHover} ${classes.body}`}>
+            <a href={LINKS.feed_page.url} className={`text-sm underline underline-offset-4 ${classes.linkHover} ${classes.body}`}>
               View All
             </a>
           </div>

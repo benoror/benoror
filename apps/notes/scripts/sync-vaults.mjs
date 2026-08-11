@@ -36,6 +36,10 @@ async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}) {
         return [];
       }
 
+      if (entry.isSymbolicLink()) {
+        return [];
+      }
+
       const absolute = path.join(sourcePath, entry.name);
       if (entry.isDirectory()) {
         return listMarkdownFiles(absolute, { includeHidden });
@@ -211,6 +215,14 @@ async function main() {
     if (!(await exists(sourceRoot))) {
       console.warn(
         `warning: skipping source "${source.name}" because path does not exist: ${sourceRoot}`
+      );
+      continue;
+    }
+
+    const sourceStats = await fs.lstat(sourceRoot);
+    if (sourceStats.isSymbolicLink()) {
+      console.warn(
+        `warning: skipping source "${source.name}" because path is a symlink: ${sourceRoot}`
       );
       continue;
     }

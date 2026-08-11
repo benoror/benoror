@@ -13,6 +13,7 @@ Markdown content is built from the `content` folder.
 Sync behavior:
 
 - Recursively traverses each configured vault.
+- Ignores symlinked files/directories and skips symlinked source roots.
 - By default, syncs only notes with `publish: true` frontmatter.
 - Set `requirePublish: false` on a source to sync every markdown file in that folder.
 - Set `includeInRss: false` on a source to keep its pages on the Notes site while excluding them from RSS.

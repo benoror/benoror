@@ -19,10 +19,29 @@ async function exists(filePath) {
 
 const ALWAYS_SKIP_DIRS = new Set(["node_modules", ".git", ".obsidian", ".trash"]);
 
-async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}) {
-  const stats = await fs.stat(sourcePath);
+function createSyncStats() {
+  return {
+    sourcesProcessed: 0,
+    sourcesSkippedMissing: 0,
+    sourcesSkippedSymlink: 0,
+    markdownCandidates: 0,
+    copiedFiles: 0,
+    publishFilteredFiles: 0,
+    symlinkPathsSkipped: 0,
+  };
+}
 
-  if (stats.isFile()) {
+async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}, syncStats) {
+  const sourceStats = await fs.lstat(sourcePath);
+
+  if (sourceStats.isSymbolicLink()) {
+    if (syncStats) {
+      syncStats.symlinkPathsSkipped += 1;
+    }
+    return [];
+  }
+
+  if (sourceStats.isFile()) {
     return [sourcePath];
   }
 
@@ -36,13 +55,17 @@ async function listMarkdownFiles(sourcePath, { includeHidden = false } = {}) {
         return [];
       }
 
-      if (entry.isSymbolicLink()) {
+      const absolute = path.join(sourcePath, entry.name);
+      const absoluteStats = await fs.lstat(absolute);
+      if (absoluteStats.isSymbolicLink()) {
+        if (syncStats) {
+          syncStats.symlinkPathsSkipped += 1;
+        }
         return [];
       }
 
-      const absolute = path.join(sourcePath, entry.name);
-      if (entry.isDirectory()) {
-        return listMarkdownFiles(absolute, { includeHidden });
+      if (absoluteStats.isDirectory()) {
+        return listMarkdownFiles(absolute, { includeHidden }, syncStats);
       }
 
       if (!entry.name.endsWith(".md") && !entry.name.endsWith(".mdx")) {
@@ -160,21 +183,35 @@ async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
     requirePublish = true,
     includeInRss = true,
     includeHidden = false,
+    syncStats,
   } = options;
-  const files = await listMarkdownFiles(sourceRoot, { includeHidden });
+  const files = await listMarkdownFiles(sourceRoot, { includeHidden }, syncStats);
+  if (syncStats) {
+    syncStats.markdownCandidates += files.length;
+  }
 
   await Promise.all(
     files.map(async (filePath) => {
+      const fileStats = await fs.lstat(filePath);
+      if (fileStats.isSymbolicLink()) {
+        if (syncStats) {
+          syncStats.symlinkPathsSkipped += 1;
+        }
+        return;
+      }
+
       const fileContents = await fs.readFile(filePath, "utf-8");
       const parsed = extractFrontmatter(fileContents);
       if (
         requirePublish &&
         (!parsed || !hasBooleanFrontmatter(parsed.content, "publish"))
       ) {
+        if (syncStats) {
+          syncStats.publishFilteredFiles += 1;
+        }
         return;
       }
 
-      const fileStats = await fs.stat(filePath);
       const contentsWithDates = ensureTemporalFrontmatter(fileContents, fileStats);
       const syncedContents = includeInRss
         ? contentsWithDates
@@ -184,6 +221,9 @@ async function copyMarkdownFiles(vaultName, sourceRoot, options = {}) {
 
       await fs.mkdir(path.dirname(destination), { recursive: true });
       await fs.writeFile(destination, syncedContents, "utf-8");
+      if (syncStats) {
+        syncStats.copiedFiles += 1;
+      }
       console.log(`copied ${vaultName}/${relativeToRoot}`);
     })
   );
@@ -204,6 +244,7 @@ async function main() {
   }
 
   await fs.mkdir(destinationRoot, { recursive: true });
+  const syncStats = createSyncStats();
 
   for (const source of config.sources) {
     if (!source.name || !source.path) {
@@ -213,6 +254,7 @@ async function main() {
 
     const sourceRoot = path.resolve(expandHome(source.path));
     if (!(await exists(sourceRoot))) {
+      syncStats.sourcesSkippedMissing += 1;
       console.warn(
         `warning: skipping source "${source.name}" because path does not exist: ${sourceRoot}`
       );
@@ -221,12 +263,15 @@ async function main() {
 
     const sourceStats = await fs.lstat(sourceRoot);
     if (sourceStats.isSymbolicLink()) {
+      syncStats.sourcesSkippedSymlink += 1;
+      syncStats.symlinkPathsSkipped += 1;
       console.warn(
         `warning: skipping source "${source.name}" because path is a symlink: ${sourceRoot}`
       );
       continue;
     }
 
+    syncStats.sourcesProcessed += 1;
     const vaultDestination = path.join(destinationRoot, source.name);
     // Keep destination mirrored with current vault state by removing stale synced files first.
     await fs.rm(vaultDestination, { recursive: true, force: true });
@@ -234,9 +279,15 @@ async function main() {
       requirePublish: source.requirePublish !== false,
       includeInRss: source.includeInRss !== false,
       includeHidden: source.includeHidden === true,
+      syncStats,
     });
   }
 
+  console.log(
+    `Sync summary: processed ${syncStats.sourcesProcessed} source(s), discovered ${syncStats.markdownCandidates} markdown candidate(s), copied ${syncStats.copiedFiles} file(s), ` +
+      `publish-filtered ${syncStats.publishFilteredFiles}, symlink-skipped ${syncStats.symlinkPathsSkipped}, ` +
+      `missing-source-skipped ${syncStats.sourcesSkippedMissing}, symlink-source-skipped ${syncStats.sourcesSkippedSymlink}.`
+  );
   console.log("Vault sync completed.");
 }
 

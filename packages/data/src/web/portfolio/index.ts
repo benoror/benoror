@@ -19,6 +19,27 @@ export type PortfolioItem = {
 
 export const projectsItems: PortfolioItem[] = [
   {
+    id: "inbundly",
+    title: "Inbundly",
+    section: "projects",
+    category: "Open Source",
+    role: "👷‍♂️ Maker",
+    circa: "2026",
+    url: "https://inbundly.com",
+    images: [
+      "/images/portfolio/inbundly-light.png",
+      "/images/portfolio/inbundly-dark.png",
+    ],
+    icon: "/images/portfolio/icons/inbundly.png",
+    description:
+      "Google Inbox-style bundles for Gmail — a Manifest V3 browser extension (Chrome + Firefox) that groups email by label into tidy, collapsible bundles, with custom bundles, priority rules, and label colors. A maintained, rebranded fork of teresa-ou/inboxy, shipped to the Chrome Web Store.",
+    techStack: ["JavaScript", "Manifest V3", "Webpack", "Jest", "Chrome", "Firefox"],
+    links: {
+      github: "https://github.com/benoror/inbundly",
+      other: "https://chromewebstore.google.com/detail/pbfjicjmcpogjlbpljebhhgkgfhbdcga",
+    },
+  },
+  {
     id: "gbadev",
     title: "GBA Dev Museum",
     section: "projects",

@@ -9,6 +9,7 @@ import { fleetioEmGrowthVariant } from './fleetio-em-growth.js';
 import { fleetioLeverageVariant } from './fleetio-leverage.js';
 import { nextpatientStaffVariant } from './nextpatient-staff.js';
 import { recruitedgeGlobalVariant } from './recruitedge-global.js';
+import { saleshoodTechLeadVariant } from './saleshood-tech-lead.js';
 import { mergeVariantCompanies } from './utils.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
@@ -16,6 +17,7 @@ export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
   fleetioLeverageVariant,
   nextpatientStaffVariant,
   recruitedgeGlobalVariant,
+  saleshoodTechLeadVariant,
 ];
 
 export const RESUME_VARIANTS: Record<string, IResumeVariantDefinition> = Object.fromEntries(

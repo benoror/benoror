@@ -331,6 +331,32 @@ export const talksItems: PortfolioItem[] = [
     techStack: ["Cryptocurrency", "Blockchain", "Digital Assets"],
   },
   {
+    id: "alerts-scaling",
+    title: "Scaling Critical Alerts: From 30min to 30sec",
+    section: "talks",
+    category: "Talk",
+    role: "🎙️ Expositor",
+    circa: "2020",
+    url: "https://docs.google.com/presentation/d/1NoKRGYIL5W_yuAcLBjnwaE9pY3SSEKCAftRqam0puPM/edit?usp=sharing",
+    description:
+      "Re-architecting Apptegy's multi-channel school alerting engine for COVID-era crisis response and 12x+ growth — extracting a Rails Outpost relay (Citadel pattern) with Sidekiq priority queues, provider adapters (Twilio, Sendgrid, push, social), translation/TTS pipelines, and async analytics webhooks. Cut critical SMS delivery from 30+ minutes to ~30 seconds (~60x throughput).",
+    images: [
+      "/images/portfolio/alerts-scaling-1.png",
+      "/images/portfolio/alerts-scaling-2.png",
+      "/images/portfolio/alerts-scaling-3.png",
+    ],
+    icon: "/images/portfolio/icons/alerts-scaling.png",
+    techStack: [
+      "Ruby on Rails",
+      "Sidekiq",
+      "Redis",
+      "PostgreSQL",
+      "Twilio",
+      "Sendgrid",
+      "Kubernetes",
+    ],
+  },
+  {
     id: "fiets",
     title: "FIETS Expo",
     section: "talks",

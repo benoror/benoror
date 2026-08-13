@@ -9,7 +9,7 @@
 
 ## About me
 
-I am a Computer Science Engineer specialized in Full Stack development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
+I am a Computer Science Engineer specialized in AI Engineering & Full Stack Software Development, passionate on building software products, leading development teams and leveraging technology to tackle big real-world problems.
 
 - 📑 Resume: [resume.benoror.com](https://resume.benoror.com/) [<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/960px-PDF_file_icon.svg.png" height="14">](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [Ben Orozco - Resume.pdf](https://resume.benoror.com/Ben%20Orozco%20-%20Resume.pdf) [<img src="https://www.markdownguide.org/assets/images/markdown-mark-white.svg" height="10">](https://resume.benoror.com/resume.md) [resume.md](https://resume.benoror.com/resume.md)
 - 📝 Notes: [notes.benoror.com](http://notes.benoror.com/)

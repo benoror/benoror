@@ -41,8 +41,8 @@ export const APPTEGY: IRole[] = [
   {
     title: 'VP of Engineering',
     location: 'Monterrey, MX 🇲🇽',
-    startDate: 'Apr 2021 ',
-    endDate: 'Present',
+    startDate: 'Apr 2021',
+    endDate: 'Nov 2025',
     description: 'Shipped & scaled a suite of industry-leading products with quality and cadence in a high-growth Series-B EdTech startup.',
     achievements: [
       {

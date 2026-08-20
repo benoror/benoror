@@ -5,6 +5,7 @@ import type {
   IResumeDocumentOverride,
   IResumeVariantDefinition,
 } from '../schema.js';
+import { apptegyPlatformVariant } from './apptegy-platform.js';
 import { fleetioEmGrowthVariant } from './fleetio-em-growth.js';
 import { fleetioLeverageVariant } from './fleetio-leverage.js';
 import { nextpatientStaffVariant } from './nextpatient-staff.js';
@@ -14,6 +15,7 @@ import { saleshoodTechLeadVariant } from './saleshood-tech-lead.js';
 import { mergeVariantCompanies } from './utils.js';
 
 export const RESUME_VARIANT_LIST: IResumeVariantDefinition[] = [
+  apptegyPlatformVariant,
   fleetioEmGrowthVariant,
   fleetioLeverageVariant,
   nextpatientStaffVariant,

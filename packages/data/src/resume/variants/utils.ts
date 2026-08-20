@@ -1,5 +1,5 @@
 import { BASE_RESUME_DOCUMENT } from '../index.js';
-import type { ICompany, IRole, ISkill } from '../schema.js';
+import type { IAchievement, ICompany, IRole, ISkill } from '../schema.js';
 
 export function getBaseVariantCompany(name: string): ICompany {
   const company = BASE_RESUME_DOCUMENT.companies.find((entry) => entry.name === name);
@@ -71,4 +71,16 @@ export function mergeVariantCompanies(baseCompanies: ICompany[], overrideCompani
   const remainingBaseCompanies = baseCompanies.filter((company) => !overrideNames.has(company.name));
 
   return [...mergedOverrideCompanies, ...remainingBaseCompanies];
+}
+
+/** Achievements marked `hidden` stay in source for variants/agents but are omitted from public surfaces. */
+export function visibleAchievements(achievements: IAchievement[] = []): IAchievement[] {
+  return achievements
+    .filter((achievement) => !achievement.hidden)
+    .map((achievement) => ({
+      ...achievement,
+      subAchievements: achievement.subAchievements
+        ? visibleAchievements(achievement.subAchievements)
+        : undefined,
+    }));
 }

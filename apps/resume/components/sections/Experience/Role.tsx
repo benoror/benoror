@@ -40,6 +40,8 @@ const ShortRole = ({ role }: { role: IRole }) => (
 )
 
 export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }: { roleKey: string, role: IRole, short: boolean, isOpen: boolean, toggleCollapsible: (key: string) => void }) {
+  const achievements = role.achievements.filter((achievement) => !achievement.hidden)
+
   if(!!short) {
     return <ShortRole role={role} />
   }
@@ -60,10 +62,10 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
         <div className="group">
           <CollapsibleTrigger
             onClick={() => toggleCollapsible(roleKey)}
-            className={`w-full text-left flex items-center gap-2 focus:outline-none ${role.achievements.length > 0 ? "cursor-pointer" : ""}`}
+            className={`w-full text-left flex items-center gap-2 focus:outline-none ${achievements.length > 0 ? "cursor-pointer" : ""}`}
           >
             <p className="mt-1 text-sm group-hover:text-primary transition-colors">
-              {role.achievements.length > 0 && (
+              {achievements.length > 0 && (
                 <span className="inline mr-1">
                   {isOpen ? (
                     <ChevronUp className="inline h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
@@ -79,7 +81,7 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
 
         <CollapsibleContent className="mt-2 ml-4">
           <ul className="space-y-1 list-disc pl-2 text-sm">
-            {role.achievements.map((achievement, pointIndex) => (
+            {achievements.map((achievement, pointIndex) => (
               <Achievement key={pointIndex} achievement={achievement} />
             ))}
           </ul>

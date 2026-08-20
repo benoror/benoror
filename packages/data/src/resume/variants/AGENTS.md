@@ -32,6 +32,7 @@ Before creating or updating a variant, read:
   - selected `skills`
   - `coverLetter`
 - Keep the overall identity consistent with the base resume.
+- Achievements may set `hidden: true` on the base resume to keep sensitive or early-stage work in source for variants/agents without showing on the default public resume. Variants that want those items must copy them explicitly without `hidden`.
 - Leave print page-breaks off by default (`sections.printPageBreaks` omitted or `false`). Only set `printPageBreaks: true` when a variant explicitly needs a print layout break.
 
 ## Tone

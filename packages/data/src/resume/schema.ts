@@ -25,6 +25,8 @@ export interface IRole {
 
 export interface IAchievement {
   description: string;
+  /** Present in source for variants/agents, but omitted from the default public resume surfaces. */
+  hidden?: boolean;
   subAchievements?: IAchievement[];
 }
 

@@ -19,6 +19,12 @@ export const TRIVELTA: IRole[] = [
       }, {
         description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent rules and documentation, and repeatable engineering automation patterns.'
       }, {
+        hidden: true,
+        description: 'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound tool surface over PAM analytics so authorized admins can analyze operator data through standard AI clients without privilege gain beyond existing RBAC, product gates, and audit posture.'
+      }, {
+        hidden: true,
+        description: 'Leading early design for a PAM sub-product: AI-augmented operator support ticketing tailored for iGaming (casino, sportsbook, prediction markets) — aiming to replace Zendesk-class workflows at higher volume, with agents, harnesses, evals, post-training/fine-tuning, RAGs, and knowledge bases grounded in the PAM MCP surface.'
+      }, {
         description: 'Helped build and organize the Monterrey engineering team through international hiring, technical interviewing, coaching, and performance management.'
       },
     ],

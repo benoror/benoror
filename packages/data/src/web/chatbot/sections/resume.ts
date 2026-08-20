@@ -17,6 +17,10 @@ function flattenAchievementDescriptions(
   depth = 0,
 ): string[] {
   return achievements.flatMap((achievement) => {
+    if (achievement.hidden) {
+      return [];
+    }
+
     const prefix = depth === 0 ? "" : "  ";
     const nested = flattenAchievementDescriptions(
       achievement.subAchievements ?? [],

@@ -8,6 +8,10 @@ function withAbsoluteSkillLinks(markdown: string, publicResumeUrl: string): stri
 }
 
 function pushAchievement(lines: string[], achievement: IAchievement, publicResumeUrl: string, depth = 0): void {
+  if (achievement.hidden) {
+    return;
+  }
+
   const indent = '  '.repeat(depth);
   lines.push(`${indent}- ${withAbsoluteSkillLinks(achievement.description, publicResumeUrl)}`);
 

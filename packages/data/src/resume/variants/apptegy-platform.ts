@@ -35,12 +35,12 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
       {
         ...trivelta,
         description:
-          'B2B platform company. Current seat is ~80% hands-on: platform architecture and code, agentic engineering / AI feature work, identity-adjacent Cognito surfaces, and raising delivery quality for a distributed team.',
+          'B2B platform company ([PAM](https://trivelta.com/pam)). Current seat is ~80% hands-on: platform architecture, MCP/AI connector work, AI-augmented support-product design, Cognito identity surfaces, and raising delivery quality for a distributed team.',
         roles: [
           {
             ...triveltaLeadRole,
             description:
-              'Technical lead for the PAM platform team — ~80% hands-on across architecture, critical-path code, AI/agentic workflows, and operator-facing admin tooling on legacy and greenfield platforms.',
+              'Technical lead for the PAM platform team — ~80% hands-on across architecture, critical-path code, MCP/agentic AI product work, and operator-facing admin tooling on legacy and greenfield platforms.',
             achievements: [
               {
                 description:
@@ -48,7 +48,15 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
               },
               {
                 description:
-                  'Driving big leaps in agentic engineering and AI features: practical [AI tool](#ai-tools) workflows, agent rules/docs, repeatable automation patterns, and shipping AI-assisted product capabilities while staying in the critical path.',
+                  'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound analytics tool surface so authorized admins can use standard AI clients without privilege gain beyond existing Cognito auth, RBAC, product gates, and audit posture.',
+              },
+              {
+                description:
+                  'Leading early design for a PAM sub-product: AI-augmented operator support ticketing for iGaming (casino, sportsbook, prediction markets) — Zendesk-class workflows at higher volume, with agents, harnesses, evals, post-training/fine-tuning, RAGs, and knowledge bases grounded in the PAM MCP surface.',
+              },
+              {
+                description:
+                  'Driving agentic engineering and AI features hands-on (~80% in the codebase): [AI tool](#ai-tools) workflows, agent rules/docs, repeatable automation patterns, and shipping AI-assisted product capabilities on the critical path.',
               },
               {
                 description:
@@ -264,12 +272,12 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
     paragraphs: [
       'I am writing to put myself forward for the Senior Full Stack Platform Engineer role — and, more broadly, to reconnect. I spent nearly six years at Apptegy, first as a hands-on platform lead and later as VP of Engineering. I know the products, the multi-tenant district reality, and what it takes to ship shared foundations that other teams can trust. With some distance, I am clearer that I do my best work close to the code — and I would like to come back in a hands-on seat, whether that is platform engineering, AI engineering, or the overlap between the two.',
       'The Platform Engineer description maps directly to work I have already owned here. As Lead Software Engineer I built the AuthN/Z identity provider on OAuth2 and OpenID Connect for SSO and user management across the product suite, shipped Thrillshare platform APIs in Ruby on Rails for Vue.js and mobile clients, and led shared services for alerting, forms, ETL, translation, LMS, and real-time messaging. That was platform engineering in practice: secure sign-in and session boundaries, reusable services, AWS/Kubernetes operations, and patterns other engineers could build on.',
-      'Since leaving I have stayed deeply hands-on — roughly 80% of my time in architecture and code. At Trivelta I lead a platform team day to day while driving big leaps in agentic engineering and AI features: tool workflows, agent rules, automation patterns, and shipping AI-assisted product work on the critical path. That builds on what I started as VP at Apptegy, when I led org-wide AI enablement that improved productivity by 10% and cut code review time by 60%. I care about AI that raises the floor for engineers and products — with security, quality, and judgment — not hype.',
+      'Since leaving I have stayed deeply hands-on — roughly 80% of my time in architecture and code. At Trivelta I lead the PAM platform team while building a read-only MCP connector so admins can analyze operator data through standard AI clients without bypassing existing auth, RBAC, or audit controls — and I am early-designing an AI-augmented support ticketing sub-product for iGaming operators (agents, harnesses, evals, RAGs, knowledge bases) on top of that surface. That builds on what I started as VP at Apptegy, when I led org-wide AI enablement that improved productivity by 10% and cut code review time by 60%. I care about AI that raises the floor for engineers and products — with security, quality, and judgment — not hype.',
       'If the Platform Engineer role is the right door, I am ready. If AI engineering or another hands-on seat is a better fit given my history and where Apptegy is investing now, I would welcome that conversation too. Either way, I would be glad to talk about how I can help again.',
     ],
     closing: 'Best regards,',
     signature: 'Ben Orozco',
     summary:
-      'Returning-alumni cover letter for Apptegy: Platform Engineer as the concrete door, plus hands-on (~80%) agentic AI engineering depth and openness to AI Engineering or the best return path.',
+      'Returning-alumni cover letter for Apptegy: Platform Engineer as the concrete door, plus hands-on MCP/agentic AI work at Trivelta (PAM connector + AI support ticketing) and openness to AI Engineering or the best return path.',
   },
 };

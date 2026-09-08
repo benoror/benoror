@@ -1,11 +1,27 @@
 import Parser from "rss-parser"
 import { FEED_SOURCES, LINKS } from "@workspace/data/shared/profile"
+import {
+  type BlueskyAuthorFeedEntry,
+  type BlueskyAuthorRef,
+  type BlueskyThreadNode,
+  collectSelfAuthoredReplyShareLinksFromThread,
+  indexSelfAuthoredReplyShareLinksFromAuthorFeed,
+  isBlueskyReplyPost,
+  mergeDuplicateFeedItems,
+  referencedLinksForBlueskyRoot,
+  toBlueskyText,
+  uniqueUrls,
+} from "@/lib/feed/consolidate"
 
 const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000
 const MAX_ITEMS = 200
 const GIST_API_BASE_URL = "https://api.github.com/gists"
 const BLUESKY_API_BASE_URL = "https://public.api.bsky.app"
+const BLUESKY_THREAD_LOOKBACK_MS = 90 * 24 * 60 * 60 * 1000
+const BLUESKY_MAX_THREAD_FETCHES = 16
+const BLUESKY_THREAD_DEPTH = 6
+const BLUESKY_THREAD_CONCURRENCY = 4
 
 const parser = new Parser()
 const LINK_PRIORITY_LIST = Object.values(LINKS).map((entry) => entry.url)
@@ -62,171 +78,6 @@ const isNotesRootLinkForSource = (itemLink: string, sourceSiteUrl: string): bool
     const normalizedSource = normalizeUrl(sourceSiteUrl).toLowerCase()
     return normalizedItem === normalizedSource
   }
-}
-
-const getSourcePriority = (sourceUrl: string): number => {
-  const normalizedSourceUrl = normalizeUrl(sourceUrl)
-  const index = LINK_PRIORITY_LIST.findIndex((url) => {
-    const normalizedPriorityUrl = normalizeUrl(url)
-    return (
-      normalizedSourceUrl === normalizedPriorityUrl ||
-      normalizedSourceUrl.startsWith(`${normalizedPriorityUrl}/`) ||
-      normalizedPriorityUrl.startsWith(`${normalizedSourceUrl}/`)
-    )
-  })
-
-  return index >= 0 ? index : Number.MAX_SAFE_INTEGER
-}
-
-const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase()
-
-const normalizeUrlForMatch = (value: string): string | null => {
-  const trimmed = value.trim().replace(/[),.;!?]+$/g, "").replace(/\u2026$/, "").replace(/\.{2,}$/, "")
-  if (!trimmed) return null
-
-  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
-  try {
-    const url = new URL(withProtocol)
-    if (!/^https?:$/i.test(url.protocol)) return null
-    if (!url.hostname.includes(".")) return null
-    url.hash = ""
-    url.search = ""
-    url.username = ""
-    url.password = ""
-    url.hostname = url.hostname.toLowerCase().replace(/^www\./, "")
-    const pathname = url.pathname.replace(/\/+$/, "") || ""
-    return `${url.protocol}//${url.hostname}${pathname}`
-  } catch {
-    return null
-  }
-}
-
-const urlsLooselyMatch = (left: string, right: string): boolean => {
-  const a = normalizeUrlForMatch(left)
-  const b = normalizeUrlForMatch(right)
-  if (!a || !b) return false
-  if (a === b) return true
-  // Bluesky (and similar clients) often truncate display URLs with "...".
-  return a.startsWith(b) || b.startsWith(a)
-}
-
-const extractUrlsFromText = (value: string | undefined): string[] => {
-  if (!value) return []
-  const matches = value.match(/https?:\/\/[^\s<>"')]+/gi) ?? []
-  const bareHosts = value.match(/(?:^|\s)((?:[a-z0-9-]+\.)+[a-z]{2,}(?:\/[^\s]*)?)/gi) ?? []
-  return [...matches, ...bareHosts.map((part) => part.trim())]
-    .map((candidate) => normalizeUrlForMatch(candidate))
-    .filter((url): url is string => Boolean(url))
-}
-
-const uniqueUrls = (values: Array<string | null | undefined>): string[] => {
-  const seen = new Set<string>()
-  const result: string[] = []
-  for (const value of values) {
-    const normalized = value ? normalizeUrlForMatch(value) : null
-    if (!normalized || seen.has(normalized)) continue
-    seen.add(normalized)
-    result.push(normalized)
-  }
-  return result
-}
-
-// Only explicit share links (e.g. Bluesky embeds/facets) count as merge
-// signals. Harvesting URLs from arbitrary item bodies would collapse posts
-// that merely cite another item (e.g. a blog post linking to a note).
-const collectReferencedLinks = (item: AggregatedFeedItem): string[] =>
-  uniqueUrls(item.referencedLinks ?? [])
-
-const pickPreferredBySourcePriority = (a: AggregatedFeedItem, b: AggregatedFeedItem): AggregatedFeedItem => {
-  const aPriority = getSourcePriority(a.sourceUrl)
-  const bPriority = getSourcePriority(b.sourceUrl)
-  return aPriority <= bPriority ? a : b
-}
-
-const sortBySourcePriority = (items: AggregatedFeedItem[]): AggregatedFeedItem[] => {
-  return [...items].sort((a, b) => {
-    const aPriority = getSourcePriority(a.sourceUrl)
-    const bPriority = getSourcePriority(b.sourceUrl)
-    if (aPriority !== bPriority) return aPriority - bPriority
-    return 0
-  })
-}
-
-const mergeDuplicateFeedItems = (items: AggregatedFeedItem[]): AggregatedFeedItem[] => {
-  const parent = new Map<string, string>()
-  const find = (id: string): string => {
-    const current = parent.get(id) ?? id
-    if (current === id) return id
-    const root = find(current)
-    parent.set(id, root)
-    return root
-  }
-  const union = (leftId: string, rightId: string) => {
-    const leftRoot = find(leftId)
-    const rightRoot = find(rightId)
-    if (leftRoot !== rightRoot) parent.set(leftRoot, rightRoot)
-  }
-
-  for (const item of items) {
-    parent.set(item.id, item.id)
-  }
-
-  const byTitle = new Map<string, string[]>()
-  for (const item of items) {
-    const key = normalizeDedupTitle(item.title)
-    const existing = byTitle.get(key) ?? []
-    byTitle.set(key, [...existing, item.id])
-  }
-  for (const ids of byTitle.values()) {
-    const first = ids[0]
-    if (!first) continue
-    for (const id of ids.slice(1)) union(first, id)
-  }
-
-  for (const item of items) {
-    const refs = collectReferencedLinks(item)
-    if (refs.length === 0) continue
-    for (const other of items) {
-      if (other.id === item.id) continue
-      if (refs.some((ref) => urlsLooselyMatch(ref, other.link))) {
-        union(item.id, other.id)
-      }
-    }
-  }
-
-  const groups = new Map<string, AggregatedFeedItem[]>()
-  for (const item of items) {
-    const root = find(item.id)
-    const existing = groups.get(root) ?? []
-    groups.set(root, [...existing, item])
-  }
-
-  return [...groups.values()]
-    .map((group): AggregatedFeedItem | null => {
-      const first = group[0]
-      if (!first) return null
-      if (group.length === 1) {
-        const { referencedLinks: _referencedLinks, ...rest } = first
-        return rest
-      }
-
-      const sorted = sortBySourcePriority(group)
-      const preferred = sorted.reduce((best, current) => pickPreferredBySourcePriority(best, current))
-      const alternates = sorted
-        .filter((item) => item.id !== preferred.id)
-        .map((item) => ({
-          sourceId: item.sourceId,
-          sourceName: item.sourceName,
-          link: item.link,
-        }))
-
-      const { referencedLinks: _referencedLinks, ...rest } = preferred
-      return {
-        ...rest,
-        alsoSharedTo: alternates.length > 0 ? alternates : undefined,
-      }
-    })
-    .filter((item): item is AggregatedFeedItem => item !== null)
 }
 
 const parseDate = (value: string | undefined): Date | null => {
@@ -498,7 +349,77 @@ const buildBlueskyPostLink = (authorHandle: string, postUri: string | undefined)
   return `https://bsky.app/profile/${authorHandle}/post/${rkey}`
 }
 
-const toBlueskyText = (value: unknown): string => (typeof value === "string" ? value.trim() : "")
+const mapPool = async <T, R>(items: T[], concurrency: number, mapper: (item: T) => Promise<R>): Promise<R[]> => {
+  if (items.length === 0) return []
+  const results = new Array<R>(items.length)
+  let next = 0
+  const workerCount = Math.min(concurrency, items.length)
+  await Promise.all(
+    Array.from({ length: workerCount }, async () => {
+      while (next < items.length) {
+        const index = next
+        next += 1
+        const item = items[index]
+        if (item === undefined) continue
+        results[index] = await mapper(item)
+      }
+    }),
+  )
+  return results
+}
+
+const fetchSelfAuthoredThreadShareLinks = async (
+  uri: string,
+  actor: BlueskyAuthorRef,
+): Promise<string[]> => {
+  try {
+    const response = await fetch(
+      `${BLUESKY_API_BASE_URL}/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(uri)}&depth=${BLUESKY_THREAD_DEPTH}&parentHeight=0`,
+      {
+        headers: {
+          "User-Agent": RSS_USER_AGENT,
+        },
+        signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+        next: { revalidate: 1800 },
+      },
+    )
+    if (!response.ok) return []
+    const payload = (await response.json()) as { thread?: BlueskyThreadNode }
+    return collectSelfAuthoredReplyShareLinksFromThread(payload.thread, actor)
+  } catch {
+    return []
+  }
+}
+
+const enrichThreadShareLinksFromRecentRoots = async (
+  feed: BlueskyAuthorFeedEntry[],
+  threadShareLinksByRoot: Map<string, string[]>,
+  actor: BlueskyAuthorRef,
+): Promise<void> => {
+  const now = Date.now()
+  const recentRoots = feed
+    .filter((entry) => !entry.reason && !isBlueskyReplyPost(entry))
+    .map((entry) => entry.post)
+    .filter((post): post is NonNullable<typeof post> => Boolean(post?.uri))
+    .filter((post) => (post.replyCount ?? 0) > 0)
+    .filter((post) => !threadShareLinksByRoot.has(post.uri ?? ""))
+    .filter((post) => {
+      const published = parseDate(post.record?.createdAt ?? post.indexedAt)
+      return published !== null && now - published.getTime() <= BLUESKY_THREAD_LOOKBACK_MS
+    })
+    .slice(0, BLUESKY_MAX_THREAD_FETCHES)
+
+  const extras = await mapPool(recentRoots, BLUESKY_THREAD_CONCURRENCY, async (post) => {
+    const uri = post.uri
+    if (!uri) return { uri: "", links: [] as string[] }
+    return { uri, links: await fetchSelfAuthoredThreadShareLinks(uri, actor) }
+  })
+
+  for (const { uri, links } of extras) {
+    if (!uri || links.length === 0) continue
+    threadShareLinksByRoot.set(uri, uniqueUrls([...(threadShareLinksByRoot.get(uri) ?? []), ...links]))
+  }
+}
 
 const fetchBlueskyItems = async (
   source: (typeof FEED_SOURCES)[number],
@@ -527,43 +448,27 @@ const fetchBlueskyItems = async (
       }
     }
 
-    const payload = (await response.json()) as {
-      feed?: Array<{
-        reason?: unknown
-        reply?: unknown
-        post?: {
-          uri?: string
-          indexedAt?: string
-          author?: { handle?: string; displayName?: string }
-          embed?: {
-            $type?: string
-            external?: { uri?: string; title?: string; description?: string }
-          }
-          record?: {
-            text?: string
-            createdAt?: string
-            $type?: string
-            reply?: unknown
-            embed?: {
-              $type?: string
-              external?: { uri?: string; title?: string; description?: string }
-            }
-            facets?: Array<{
-              features?: Array<{ $type?: string; uri?: string }>
-            }>
-          }
-          reply?: unknown
-        }
-      }>
+    const payload = (await response.json()) as { feed?: BlueskyAuthorFeedEntry[] }
+    const feed = payload.feed ?? []
+    const actorRef = {
+      handle: actor,
+      did: feed.find((entry) => entry.post?.author?.did)?.post?.author?.did,
     }
+    // Fold explicit share links from self-authored replies already present in
+    // getAuthorFeed. Recent roots that still have replies we did not see there
+    // get a bounded getPostThread walk (depth 6, max 16, concurrency 4).
+    const threadShareLinksByRoot = indexSelfAuthoredReplyShareLinksFromAuthorFeed(feed, actorRef)
+    await enrichThreadShareLinksFromRecentRoots(feed, threadShareLinksByRoot, actorRef)
 
     const items: AggregatedFeedItem[] = []
-    for (const entry of payload.feed ?? []) {
+    for (const entry of feed) {
       // Reposts include "reason" metadata; skip them.
       if (entry.reason) continue
 
-      // Keep only top-level posts (exclude all reply shapes).
-      if (entry.reply || entry.post?.reply || entry.post?.record?.reply) continue
+      // Keep only top-level posts (exclude all reply shapes as their own rows).
+      // Self-authored reply embeds/facets are folded into the root via
+      // threadShareLinksByRoot so a "Read more" permalink can merge with the blog item.
+      if (isBlueskyReplyPost(entry)) continue
 
       const post = entry.post
       const authorHandle = post?.author?.handle
@@ -576,19 +481,10 @@ const fetchBlueskyItems = async (
 
       const text = toBlueskyText(post.record?.text)
       const title = text.split("\n").find((line) => line.trim().length > 0)?.slice(0, 120) || "Bluesky post"
-      const sourceName = source.name
-      const facetUris =
-        post.record?.facets?.flatMap((facet) =>
-          (facet.features ?? [])
-            .map((feature) => feature.uri)
-            .filter((uri): uri is string => typeof uri === "string"),
-        ) ?? []
-      const referencedLinks = uniqueUrls([
-        post.record?.embed?.external?.uri,
-        post.embed?.external?.uri,
-        ...facetUris,
-        ...extractUrlsFromText(text),
-      ])
+      const referencedLinks = referencedLinksForBlueskyRoot(
+        post,
+        post.uri ? threadShareLinksByRoot.get(post.uri) ?? [] : [],
+      )
 
       items.push({
         id: `${source.id}::${post.uri ?? link}`,
@@ -599,7 +495,7 @@ const fetchBlueskyItems = async (
         bodyFormat: "text",
         publishedAt,
         sourceId: source.id,
-        sourceName,
+        sourceName: source.name,
         sourceUrl: source.site_url,
         ...(referencedLinks.length > 0 ? { referencedLinks } : {}),
       })
@@ -823,7 +719,7 @@ const getSourceItems = async (
 export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
-  const items = mergeDuplicateFeedItems(sourceResults.flatMap((result) => result.items))
+  const items = mergeDuplicateFeedItems(sourceResults.flatMap((result) => result.items), LINK_PRIORITY_LIST)
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)
 

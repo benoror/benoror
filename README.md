@@ -26,6 +26,7 @@ Full list: 💼 [portfolio.benoror.com](https://portfolio.benoror.com)
 ### Open Source
 
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&card_width=384&description_lines_count=2&repo=obsidianos_work&show=prs_reviewed,issues_commented)](https://github.com/benoror/obsidianos_work)
+[![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&card_width=384&description_lines_count=2&repo=inbundly&show=prs_reviewed,issues_commented)](https://github.com/benoror/inbundly)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=dotfiles&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://dotfiles.benoror.com)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=better-npm-run&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://github.com/benoror/better-npm-run)
 [![Readme Card](https://github-stats-extended.vercel.app/api/pin/?username=benoror&repo=gpg.nvim&card_width=384&description_lines_count=2&show=prs_reviewed,issues_commented)](https://github.com/benoror/gpg.nvim)

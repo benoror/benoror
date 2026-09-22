@@ -8,7 +8,8 @@ const healthTree = getBaseVariantCompany('HealthTree');
 const brokerlit = getBaseVariantCompany('Brokerlit');
 const baseql = getBaseVariantCompany('BaseQL');
 
-const triveltaLeadRole = getBaseVariantRole(trivelta, 0);
+const triveltaManagerRole = getBaseVariantRole(trivelta, 0);
+const triveltaLeadRole = getBaseVariantRole(trivelta, 1);
 const apptegyVpRole = getBaseVariantRole(apptegy, 0);
 const apptegyLeadRole = getBaseVariantRole(apptegy, 1);
 const ecaresoftIntlCtoRole = getBaseVariantRole(ecaresoft, 0);
@@ -36,8 +37,11 @@ export const saleshoodTechLeadVariant: IResumeVariantDefinition = {
       {
         ...trivelta,
         description:
-          'B2B iGaming technology provider. Current hands-on tech lead role: architecture, delivery, mentoring, and day-to-day coding across legacy and greenfield platforms — including search-backed analytics on OpenSearch.',
+          'B2B iGaming technology provider. Promoted to lead three Backoffice teams while remaining a fractional PAM Tech Lead and developer on high-leverage platform and AI initiatives.',
         roles: [
+          {
+            ...triveltaManagerRole,
+          },
           {
             ...triveltaLeadRole,
             description:

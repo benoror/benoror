@@ -2,10 +2,42 @@ import { IRole } from './schema.js';
 
 export const TRIVELTA: IRole[] = [
   {
+    title: 'Engineering Manager, Backoffice',
+    location: 'Monterrey, MX 🇲🇽',
+    startDate: 'Sep 2026',
+    endDate: 'Present',
+    description: 'Promoted to lead Trivelta\'s three Backoffice engineering teams—PAM (player account management), TCM (Trivelta Client Management), and Data Engineering—while remaining a fractional PAM tech lead and developer for high-leverage platform initiatives.',
+    achievements: [
+      {
+        description: 'Leading a 10-person Backoffice engineering group across three teams, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers through the team structure.'
+      }, {
+        description: 'Owning cross-team direction, prioritization, delivery, and technical alignment across PAM, TCM, and Data Engineering.'
+      }, {
+        description: 'Remaining hands-on as fractional PAM Tech Lead and developer on high-level initiatives including [ClickHouse](#backend-other), a secure MCP connector, and migration to [Amazon EKS](#kubernetes).'
+      }, {
+        hidden: true,
+        description: 'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound tool surface over PAM analytics so authorized admins can analyze operator data through standard AI clients without privilege gain beyond existing RBAC, product gates, and audit posture.'
+      }, {
+        description: 'Incubating a greenfield, AI-enabled customer-support product tailored to the workflows and scale of iGaming operators.'
+      },
+    ],
+    skills: [
+      { name: 'Engineering Management', slug: 'management' },
+      { name: 'Technical Leadership', slug: 'technical-leadership' },
+      { name: 'People Management', slug: 'management' },
+      { name: 'Delivery Management', slug: 'technical-leadership' },
+      { name: 'Architecture', slug: 'technical-leadership' },
+      { name: 'ClickHouse', slug: 'backend-other' },
+      { name: 'MCP', slug: 'multi-agent-orchestration' },
+      { name: 'Amazon EKS', slug: 'kubernetes' },
+      { name: 'AI Product Development', slug: 'ai-product-features' },
+    ]
+  },
+  {
     title: 'Lead Software Engineer (Platform Team Lead)',
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2026',
-    endDate: 'Present',
+    endDate: 'Aug 2026',
     description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—shipping operator-facing admin tooling and analytics across legacy and greenfield platforms while raising engineering quality across a distributed team.',
     achievements: [
       {
@@ -18,12 +50,6 @@ export const TRIVELTA: IRole[] = [
         description: 'Partnered closely with product and engineering leadership to scope and sequence roadmap initiatives, balancing business impact, technical constraints, and execution risk.'
       }, {
         description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent rules and documentation, and repeatable engineering automation patterns.'
-      }, {
-        hidden: true,
-        description: 'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound tool surface over PAM analytics so authorized admins can analyze operator data through standard AI clients without privilege gain beyond existing RBAC, product gates, and audit posture.'
-      }, {
-        hidden: true,
-        description: 'Leading early design for a PAM sub-product: AI-augmented operator support ticketing tailored for iGaming (casino, sportsbook, prediction markets) — aiming to replace Zendesk-class workflows at higher volume, with agents, harnesses, evals, post-training/fine-tuning, RAGs, and knowledge bases grounded in the PAM MCP surface.'
       }, {
         description: 'Helped build and organize the Monterrey engineering team through international hiring, technical interviewing, coaching, and performance management.'
       },

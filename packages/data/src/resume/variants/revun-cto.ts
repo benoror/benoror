@@ -10,7 +10,8 @@ const baseql = getBaseVariantCompany('BaseQL');
 
 const apptegyVpRole = getBaseVariantRole(apptegy, 0);
 const apptegyLeadRole = getBaseVariantRole(apptegy, 1);
-const triveltaLeadRole = getBaseVariantRole(trivelta, 0);
+const triveltaManagerRole = getBaseVariantRole(trivelta, 0);
+const triveltaLeadRole = getBaseVariantRole(trivelta, 1);
 const brokerlitFounderRole = getBaseVariantRole(brokerlit, 0);
 const ecaresoftIntlCtoRole = getBaseVariantRole(ecaresoft, 0);
 const ecaresoftNimboCtoRole = getBaseVariantRole(ecaresoft, 1);
@@ -111,8 +112,11 @@ export const revunCtoVariant: IResumeVariantDefinition = {
       {
         ...trivelta,
         description:
-          'B2B platform company. Current hands-on technical lead role proving I still evaluate systems, write critical path code, and raise engineering quality while managing a distributed team.',
+          'B2B platform company. Promoted to lead three Backoffice teams while retaining fractional technical ownership of high-leverage platform, data, infrastructure, and AI work.',
         roles: [
+          {
+            ...triveltaManagerRole,
+          },
           {
             ...triveltaLeadRole,
             description:

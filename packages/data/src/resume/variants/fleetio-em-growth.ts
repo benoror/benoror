@@ -6,7 +6,8 @@ const apptegy = getBaseVariantCompany('Apptegy');
 const healthTree = getBaseVariantCompany('HealthTree');
 const ecaresoft = getBaseVariantCompany('Ecaresoft');
 const baseql = getBaseVariantCompany('BaseQL');
-const triveltaLeadRole = getBaseVariantRole(trivelta, 0);
+const triveltaManagerRole = getBaseVariantRole(trivelta, 0);
+const triveltaLeadRole = getBaseVariantRole(trivelta, 1);
 const apptegyVpRole = getBaseVariantRole(apptegy, 0);
 const apptegyLeadRole = getBaseVariantRole(apptegy, 1);
 const healthTreeCtoRole = getBaseVariantRole(healthTree, 0);
@@ -90,8 +91,11 @@ export const fleetioEmGrowthVariant: IResumeVariantDefinition = {
       {
         ...trivelta,
         description:
-          'B2B technology provider. Current hands-on technical lead role with people management, analytics delivery, and feature-flagged product work—useful signal that I still operate close to code, data, and team health.',
+          'B2B technology provider. Promoted to lead three Backoffice teams while retaining fractional technical ownership of platform, data, infrastructure, and AI work.',
         roles: [
+          {
+            ...triveltaManagerRole,
+          },
           {
             ...triveltaLeadRole,
             description:

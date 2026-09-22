@@ -7,7 +7,8 @@ const brokerlit = getBaseVariantCompany('Brokerlit');
 const baseql = getBaseVariantCompany('BaseQL');
 const healthTree = getBaseVariantCompany('HealthTree');
 const ecaresoft = getBaseVariantCompany('Ecaresoft');
-const triveltaLeadRole = getBaseVariantRole(trivelta, 0);
+const triveltaManagerRole = getBaseVariantRole(trivelta, 0);
+const triveltaLeadRole = getBaseVariantRole(trivelta, 1);
 const apptegyVpRole = getBaseVariantRole(apptegy, 0);
 const apptegyLeadRole = getBaseVariantRole(apptegy, 1);
 const brokerlitFounderRole = getBaseVariantRole(brokerlit, 0);
@@ -31,8 +32,11 @@ export const nextpatientStaffVariant: IResumeVariantDefinition = {
     companies: [
       {
         ...trivelta,
-        description: 'B2B iGaming technology provider. Current hands-on role building operator-facing product across a legacy platform and a greenfield replacement — closest evidence of day-to-day Python, React and product ownership.',
+        description: 'B2B iGaming technology provider. Promoted to lead three Backoffice teams while retaining fractional hands-on ownership of PAM platform, data, infrastructure, and AI initiatives.',
         roles: [
+          {
+            ...triveltaManagerRole,
+          },
           {
             ...triveltaLeadRole,
             description: 'Hands-on technical lead for the player account management platform, building operator-facing admin tooling and analytics across a legacy system and its greenfield replacement.',

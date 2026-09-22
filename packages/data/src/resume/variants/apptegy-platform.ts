@@ -20,48 +20,48 @@ const baseqlFounderRole = getBaseVariantRole(baseql, 0);
 
 export const apptegyPlatformVariant: IResumeVariantDefinition = {
   slug: 'apptegy-platform',
-  label: 'Platform / AI Engineer · Apptegy (return)',
+  label: 'Senior / Staff Platform and AI Engineer · Apptegy',
   metadata: {
-    title: 'Ben Orozco - Senior Full Stack Platform / AI Engineer',
+    title: 'Ben Orozco - Senior / Staff Platform and AI Engineer',
     description:
       'Tailored resume and cover letter for returning to Apptegy — platform auth/identity foundations, current Backoffice engineering leadership, and hands-on agentic AI engineering depth.',
   },
   resume: {
     about: {
-      header: 'Hands-on Platform & AI Engineer · Auth / Shared Systems · Agentic Engineering',
+      header: 'Senior / Staff Platform and AI Engineer · Identity · Shared Systems · Agentic Engineering',
       about_me:
-        'Hands-on engineering leader and former Apptegy platform lead / VP of Engineering, now managing three Backoffice teams while remaining a fractional tech lead and developer on high-leverage platform and AI initiatives. Deep experience building shared foundations multi-product teams depend on — authentication, identity, SSO, access control, and reusable platform services — plus recent work in MCP, agentic engineering, and AI-assisted products. Strongest on [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#databases), APIs, and production reliability, with enough frontend range for full-stack platform surfaces (including Vue.js). Looking to contribute again where platform and AI engineering multiply the product ecosystem.',
+        'Senior platform and AI engineer with unusually broad leadership experience, including nearly six years at Apptegy as a platform lead and VP of Engineering. Built authentication, identity, SSO, access controls, APIs, and shared services used across a multi-product SaaS platform. Now lead three Backoffice teams while retaining fractional responsibility for architecture and high-leverage work in MCP, data infrastructure, Kubernetes, and AI-assisted products. Bring staff-level technical judgment plus experience hiring, coaching, managing performance, setting standards, and aligning work across teams. Seeking a hands-on role where platform engineering and AI improve the leverage of the wider product organization.',
     },
     companies: [
       {
         ...trivelta,
         description:
-          'B2B iGaming technology company. Promoted to lead three Backoffice engineering teams while retaining fractional technical ownership of PAM platform, data, MCP, infrastructure, and AI-product initiatives.',
+          'B2B iGaming technology company. Lead three Backoffice teams while retaining fractional technical ownership of PAM platform, data, infrastructure, MCP, and AI-product initiatives.',
         roles: [
           {
             ...triveltaManagerRole,
             description:
-              'Engineering Manager for PAM, TCM, and Data Engineering, leading 10 engineers while remaining a fractional PAM Tech Lead and developer on the portfolio\'s highest-leverage platform and AI work.',
+              'Lead PAM, TCM, and Data Engineering while remaining a fractional PAM Tech Lead and developer for selected platform and AI initiatives.',
             achievements: [
               {
                 description:
-                  'Leading a 10-person Backoffice group across three teams, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers through the team structure.',
+                  'Lead a 10-person Backoffice group, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers managed through the team leads.',
               },
               {
                 description:
-                  'Owning cross-team direction, prioritization, delivery, and technical alignment across PAM, TCM (Trivelta Client Management), and Data Engineering.',
+                  'Own cross-team priorities, roadmap execution, delivery, and technical alignment across PAM, TCM (Trivelta Client Management), and Data Engineering.',
               },
               {
                 description:
-                  'Remaining hands-on on high-level PAM initiatives: [ClickHouse](#backend-other) data infrastructure, migration to [Amazon EKS](#kubernetes), and a secure, read-only MCP connector.',
+                  'Remain hands-on with PAM data infrastructure in [ClickHouse](#backend-other), migration to [Amazon EKS](#kubernetes), and a secure, read-only MCP connector.',
               },
               {
                 description:
-                  'Designing and building the PAM MCP connector as a curated, permission-bound analytics tool surface so authorized admins can use standard AI clients without bypassing Cognito auth, RBAC, product gates, or audit controls.',
+                  'Design and build the PAM MCP connector as a curated analytics surface that preserves Cognito authentication, RBAC, product gates, data boundaries, and audit controls.',
               },
               {
                 description:
-                  'Incubating a greenfield, AI-enabled support product for iGaming operators, grounded in the PAM MCP surface and designed around agents, harnesses, evals, RAG, knowledge bases, and future model adaptation.',
+                  'Shape a greenfield AI-enabled support product for iGaming operators, exploring agents, harnesses, evals, RAG, knowledge bases, and model adaptation on top of the PAM MCP surface; development has not yet started.',
               },
             ],
           },
@@ -72,7 +72,7 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
             achievements: [
               {
                 description:
-                  'Architecting and building the admin backend in [FastAPI](#backend-other)/[Python](#backend-other) with DDD bounded contexts, deployed on [AWS](#aws) serverless ([Lambda](#serverless-aws), [DynamoDB](#serverless-aws), [Cognito](#serverless-aws), [EventBridge](#aws)) with a [React](#react) admin UI.',
+                  'Architected and built PAM admin capabilities in [Python](#backend-other)/[FastAPI](#backend-other), using typed contracts and domain boundaries across legacy and greenfield systems on AWS.',
               },
               {
                 description:
@@ -80,11 +80,11 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
               },
               {
                 description:
-                  'Keeping production healthy on the legacy path while migrating behind feature flags — progressive delivery and rollback-minded sequencing rather than big-bang cuts.',
+                  'Kept the legacy platform stable while moving capabilities behind feature flags, enabling progressive delivery and practical rollback paths.',
               },
               {
                 description:
-                  'Established design reviews, RFD/PRD planning, [code reviews](#technical-leadership), testing, [CI/CD](#devops-other), and trunk-based development across the team.',
+                  'Established design reviews, RFD/PRD planning, code review, testing, CI/CD, and trunk-based development across the team.',
               },
               {
                 description:
@@ -97,32 +97,32 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
       {
         ...apptegy,
         description:
-          'EdTech SaaS serving 6,000+ school districts and 10MM+ users. Closest evidence for return: built AuthN/Z and shared platform services hands-on, led org-wide AI enablement, and stayed close to architecture, security boundaries, and delivery systems through scale.',
+          'EdTech SaaS serving 6,000+ school districts and more than 10 million users. Built core identity and shared platform services, then led engineering through organizational and architectural scale.',
         roles: [
           {
             ...apptegyLeadRole,
             description:
-              'Hands-on lead for platform and infrastructure during rapid growth from ~500 to 2,000+ school districts: identity, shared services, Thrillshare APIs, and reliability patterns other product teams built on.',
+              'Led platform and infrastructure work as Apptegy grew from roughly 500 to more than 2,000 school districts, combining hands-on development, architecture, delivery, and engineer development.',
             achievements: [
               {
                 description:
-                  'Built an AuthN/Z identity provider on [OAuth2](#apis) and [OpenID Connect](#apis) for SSO and user management across existing and newer products — designed for continuous inflow of thousands of new users and clear session/identity boundaries in a multi-tenant district context.',
+                  'Built an AuthN/Z identity provider using [OAuth2](#apis) and [OpenID Connect](#apis), enabling SSO, user management, and clear identity boundaries across a multi-tenant product suite.',
               },
               {
                 description:
-                  'Hands-on development of Thrillshare platform and APIs in [Ruby on Rails](#ruby-on-rails)/[PostgreSQL](#databases), supporting Vue.js and mobile clients, with [Sidekiq](#ruby-on-rails) processing hundreds of thousands of background jobs a day.',
+                  'Built Thrillshare platform services and APIs in [Ruby on Rails](#ruby-on-rails) and [PostgreSQL](#databases) for Vue.js and mobile clients, with [Sidekiq](#ruby-on-rails) processing hundreds of thousands of jobs per day.',
               },
               {
                 description:
-                  'Designed and shipped shared outpost services other teams relied on: multi-channel alerting (SMS/voice/TTS/push/email) that scaled from tens to thousands of notifications per minute; plus forms/surveys, ETL, translation, LMS, and real-time messaging.',
+                  'Designed shared services other product teams depended on, including alerting that scaled from tens to thousands of notifications per minute, forms and surveys, ETL, translation, learning, and real-time messaging.',
               },
               {
                 description:
-                  'Owned reliability and release practices across [AWS](#aws), [Kubernetes](#kubernetes), and [CI/CD](#devops-other) — Capistrano and EKS deployments, observability-minded operations, and safer rollouts under load.',
+                  'Owned CI/CD and production releases across [AWS](#aws) and [Kubernetes](#kubernetes), improving deployment consistency and operational reliability.',
               },
               {
                 description:
-                  'Raised the bar across engineering through architecture and design reviews, peer review, unit testing, mentoring, interviewing, and onboarding while staying in the codebase.',
+                  'Raised technical standards through architecture and design reviews, code review, testing, mentoring, interviewing, and onboarding.',
               },
             ],
           },
@@ -130,23 +130,27 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
             ...apptegyVpRole,
             endDate: 'Nov 2025',
             description:
-              'VP of Engineering through Series-B scale-up toward Series-C complexity: org health, delivery systems, architecture quality, and org-wide AI enablement — useful judgment for platform and AI engineering seats, not a bid to return only as an executive.',
+              'Led engineering through high-growth scale, using deep platform context to guide organization design, talent development, delivery systems, architecture strategy, and AI adoption.',
             achievements: [
               {
                 description:
-                  'Led practical AI enablement across engineering ([Cursor](#ai-tools), [Claude](#ai-tools), [CodeRabbit](#ai-tools), [Gemini](#ai-tools)), improving productivity by 10% and cutting code review time by 60% — early groundwork for how the org adopts AI seriously.',
+                  'Helped hire, organize, and lead 140+ engineers across the U.S. and Mexico, developing managers and engineers through coaching, feedback, performance management, and clear accountability.',
               },
               {
                 description:
-                  'Helped hire, form, and lead a remote engineering organization of 140+ engineers across the U.S. and Mexico, building a high-performance yet thoughtful culture through coaching, performance systems, and continuous improvement.',
+                  'Restructured teams and introduced planning and delivery systems as the company matured toward Series C and more than $100M ARR.',
               },
               {
                 description:
-                  'Drove architecture simplification and cost reduction across a gRPC microservices landscape and in-house frameworks, pushing clearer DDD boundaries and more maintainable shared patterns.',
+                  'Drove cost reduction and simplification across a gRPC microservices architecture and internal frameworks by clarifying domain boundaries and reducing unnecessary complexity.',
               },
               {
                 description:
-                  'Partnered with product and company leadership on roadmap sequencing, org design, and execution risk for platform-impacting work that crossed team boundaries.',
+                  'Led practical AI enablement across engineering, increasing productivity by 10% and reducing code-review time by 60% while establishing guidance for quality and responsible adoption.',
+              },
+              {
+                description:
+                  'Partnered with Product and executive leadership on priorities, organizational design, delivery risk, and architecture decisions that crossed team boundaries.',
               },
             ],
           },
@@ -248,38 +252,38 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
         ...getBaseVariantSkill('backend'),
         order: 1,
         description:
-          'Platform backend depth: [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#databases), AuthN/Z ([OAuth2](#apis)/[OIDC](#apis)), SSO, session and access boundaries, reusable APIs/services, and high-volume [Sidekiq](#ruby-on-rails) workloads.',
+          'Platform backend depth across [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#databases), OAuth2/OIDC, SSO, identity and access boundaries, reusable services, and high-volume background workloads.',
       },
       {
         ...getBaseVariantSkill('ai'),
         order: 2,
         level: 90,
         description:
-          'Hands-on agentic engineering and AI product work: [AI tools](#ai-tools), multi-agent [workflows](#ai-workflows), team enablement, and shipping AI-assisted features with quality and security discipline — not demos for demos\' sake.',
+          'Agentic engineering and AI product development with MCP, RAG, agents, harnesses, evals, knowledge bases, and engineering-team enablement. Emphasis on authorization, data boundaries, verification, reliability, and human oversight.',
       },
       {
         ...getBaseVariantSkill('leadership'),
         order: 3,
         description:
-          'Hands-on technical leadership for shared systems: architecture ownership, design/code reviews, mentoring, cross-team platform decisions, and raising standards without losing proximity to the code.',
+          'Technical and organizational influence through architecture and design reviews, roadmap decisions, engineering standards, hiring, mentoring, coaching, performance management, and cross-team alignment.',
       },
       {
         ...getBaseVariantSkill('frontend'),
         order: 4,
         description:
-          'Full-stack range for platform surfaces: Vue.js clients alongside [React](#react)/[TypeScript](#typescript) — enough to ship and review sign-in and shared UI flows with judgment.',
+          'Full-stack range across Vue.js, [React](#react), and [TypeScript](#typescript) for sign-in flows, admin tools, and shared product surfaces.',
       },
       {
         ...getBaseVariantSkill('devops'),
         order: 5,
         description:
-          'Operational mindset for platform work: [AWS](#aws), [Kubernetes](#kubernetes), CI/CD, observability, progressive delivery, and incident-aware rollout planning.',
+          'Production operations across [AWS](#aws), [Kubernetes](#kubernetes), CI/CD, observability, progressive delivery, rollback planning, and distributed systems.',
       },
       {
         ...getBaseVariantSkill('product'),
         order: 6,
         description:
-          'Translating cross-cutting platform and AI product needs into scoped plans — identity, entitlements, shared services, and AI features — in partnership with product and application teams.',
+          'Translate cross-cutting platform and AI needs into scoped plans with Product and application teams, balancing user value, security, technical constraints, and delivery risk.',
       },
     ],
   },
@@ -290,14 +294,14 @@ export const apptegyPlatformVariant: IResumeVariantDefinition = {
     recipient: 'Apptegy hiring team',
     greeting: 'Dear Apptegy team,',
     paragraphs: [
-      'I am writing to put myself forward for the Senior Full Stack Platform Engineer role — and, more broadly, to reconnect. I spent nearly six years at Apptegy, first as a hands-on platform lead and later as VP of Engineering. I know the products, the multi-tenant district reality, and what it takes to ship shared foundations that other teams can trust. With some distance, I am clearer that my best work combines technical leadership with real proximity to architecture and code — whether in platform engineering, AI engineering, or the overlap between the two.',
-      'The Platform Engineer description maps directly to work I have already owned here. As Lead Software Engineer I built the AuthN/Z identity provider on OAuth2 and OpenID Connect for SSO and user management across the product suite, shipped Thrillshare platform APIs in Ruby on Rails for Vue.js and mobile clients, and led shared services for alerting, forms, ETL, translation, LMS, and real-time messaging. That was platform engineering in practice: secure sign-in and session boundaries, reusable services, AWS/Kubernetes operations, and patterns other engineers could build on.',
-      'At Trivelta I was recently promoted to lead all three Backoffice engineering teams — PAM, TCM, and Data Engineering — with a 10-person group. I still serve as a fractional PAM Tech Lead and developer on the highest-leverage work: ClickHouse, an EKS migration, and a secure read-only MCP connector that lets admins analyze operator data through standard AI clients without bypassing auth, RBAC, or audit controls. I am also incubating a greenfield AI-enabled support product for iGaming operators on top of that surface. This builds on the org-wide AI enablement I led at Apptegy, which improved productivity by 10% and cut code review time by 60%.',
-      'If the Platform Engineer role is the right door, I am ready. If AI engineering or another hands-on seat is a better fit given my history and where Apptegy is investing now, I would welcome that conversation too. Either way, I would be glad to talk about how I can help again.',
+      'I am interested in returning to Apptegy as a hands-on platform or AI engineer. During nearly six years there, I moved from platform lead to VP of Engineering because I could combine technical depth with the ability to develop engineers, teams, and systems. That leadership experience now makes me more effective in a senior or staff-level engineering role: I can own difficult platform work, raise standards around it, and help other teams succeed.',
+      'The Platform Engineer role matches work I know well. I built Apptegy\'s OAuth2/OIDC identity provider for SSO and user management across products, developed Rails APIs for Vue.js and mobile clients, and led shared services for alerts, forms, ETL, translation, learning, and real-time messaging. The work required secure identity boundaries, reliable operations on AWS and Kubernetes, and interfaces that product teams could adopt without rebuilding the same foundations.',
+      'My current work continues that path. At Trivelta, I lead PAM, TCM, and Data Engineering while remaining a fractional PAM Tech Lead and developer for ClickHouse, an EKS migration, and a permission-bound MCP analytics surface. I am also shaping an AI-enabled support product whose architecture is still exploratory, with attention to agents, evals, RAG, access controls, and human oversight. The role combines direct technical contribution with the hiring, coaching, performance management, roadmap judgment, and cross-team influence I developed at Apptegy.',
+      'I would welcome a conversation about the Platform Engineer opening or another hands-on platform or AI role where this combination would be useful.',
     ],
     closing: 'Best regards,',
     signature: 'Ben Orozco',
     summary:
-      'Returning-alumni cover letter for Apptegy: Platform Engineer as the concrete door, current leadership of three Backoffice teams, fractional hands-on ownership of MCP/data/infrastructure work, and openness to AI Engineering or the best return path.',
+      'Returning-alumni cover letter positioning platform and AI engineering as the primary path, with prior Apptegy leadership presented as a multiplier for hands-on impact.',
   },
 };

@@ -6,19 +6,19 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Sep 2026',
     endDate: 'Present',
-    description: 'Promoted to lead Trivelta\'s three Backoffice engineering teams—PAM (player account management), TCM (Trivelta Client Management), and Data Engineering—while remaining a fractional PAM tech lead and developer for high-leverage platform initiatives.',
+    description: 'Promoted to lead three Backoffice engineering teams: PAM (player account management), TCM (Trivelta Client Management), and Data Engineering. Retain fractional responsibility as PAM Tech Lead and developer for selected platform initiatives.',
     achievements: [
       {
-        description: 'Leading a 10-person Backoffice engineering group across three teams, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers through the team structure.'
+        description: 'Lead a 10-person Backoffice engineering group, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers managed through the team leads.'
       }, {
-        description: 'Owning cross-team direction, prioritization, delivery, and technical alignment across PAM, TCM, and Data Engineering.'
+        description: 'Own cross-team priorities, roadmap execution, delivery, and technical alignment across PAM, TCM, and Data Engineering.'
       }, {
-        description: 'Remaining hands-on as fractional PAM Tech Lead and developer on high-level initiatives including [ClickHouse](#backend-other), a secure MCP connector, and migration to [Amazon EKS](#kubernetes).'
+        description: 'Remain hands-on as fractional PAM Tech Lead and developer for high-leverage work involving [ClickHouse](#backend-other), a secure MCP connector, and migration to [Amazon EKS](#kubernetes).'
       }, {
         hidden: true,
         description: 'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound tool surface over PAM analytics so authorized admins can analyze operator data through standard AI clients without privilege gain beyond existing RBAC, product gates, and audit posture.'
       }, {
-        description: 'Incubating a greenfield, AI-enabled customer-support product tailored to the workflows and scale of iGaming operators.'
+        description: 'Shape the product and technical direction for a greenfield, AI-enabled support product tailored to iGaming operators; development has not yet started.'
       },
     ],
     skills: [
@@ -38,20 +38,20 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2026',
     endDate: 'Aug 2026',
-    description: 'Technical lead for the PAM (player account management) platform team at a B2B iGaming technology company—shipping operator-facing admin tooling and analytics across legacy and greenfield platforms while raising engineering quality across a distributed team.',
+    description: 'Led the PAM platform team across legacy and greenfield systems, combining hands-on development, architecture, delivery, and engineer development.',
     achievements: [
       {
-        description: 'Architecting and hands-on building both the existing and new greenfield PAM admin backend in [FastAPI](#backend-other)/[Python](#backend-other) with DDD ([Domain-driven design](#technical-leadership)) bounded contexts and typed [Pydantic](#backend-other) contracts, deployed on [AWS](#aws) serverless ([Lambda](#serverless-aws), [DynamoDB](#serverless-aws), [Athena](#backend-other), [OpenSearch](#backend-other), [Cognito](#serverless-aws), [Amplify](#serverless-aws), [EventBridge](#aws)) and paired with a [React](#react) admin UI.'
+        description: 'Architected and built PAM admin capabilities in [Python](#backend-other)/[FastAPI](#backend-other), using typed contracts and domain boundaries across legacy and greenfield systems on AWS.'
       }, {
-        description: 'Delivered the admin backoffice across vertical slices: reporting with parallel cross-store analytics enrichment and tenant-aware currency translation, replacing legacy Tableau views with in-product, operator-facing dashboards on the data lake.'
+        description: 'Delivered operator-facing reporting with cross-store analytics enrichment and tenant-aware currency translation, replacing legacy Tableau views with in-product dashboards.'
       }, {
-        description: 'Improved engineering quality and delivery speed by pushing architecture/design reviews, RFD/PRD planning, [code reviews](#technical-leadership), [unit testing](#ruby-on-rails), [CI/CD](#devops-other), feature-flagged rollouts, and trunk-based development practices.'
+        description: 'Raised engineering quality through architecture and design reviews, RFD/PRD planning, code review, testing, CI/CD, feature-flagged releases, and trunk-based development.'
       }, {
-        description: 'Partnered closely with product and engineering leadership to scope and sequence roadmap initiatives, balancing business impact, technical constraints, and execution risk.'
+        description: 'Partnered with Product and Engineering leadership to scope and sequence roadmap initiatives against business value, technical constraints, and delivery risk.'
       }, {
-        description: 'Led AI enablement across the team by standardizing practical workflows for [AI tools](#ai-tools), agent rules and documentation, and repeatable engineering automation patterns.'
+        description: 'Established practical AI-assisted engineering workflows, including tool guidance, agent rules, documentation, and repeatable automation.'
       }, {
-        description: 'Helped build and organize the Monterrey engineering team through international hiring, technical interviewing, coaching, and performance management.'
+        description: 'Helped build the Monterrey engineering team through international hiring, technical interviews, coaching, and performance management.'
       },
     ],
     skills: [
@@ -75,18 +75,18 @@ export const APPTEGY: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Apr 2021',
     endDate: 'Nov 2025',
-    description: 'Shipped & scaled a suite of industry-leading products with quality and cadence in a high-growth Series-B EdTech startup.',
+    description: 'Led engineering through high-growth scale, combining organization design, talent development, delivery systems, technical strategy, and cross-functional execution.',
     achievements: [
       {
-        description: 'Help hiring, forming & leading a team of 140+ Engineers on both sides of the border by building a high-performance yet thoughtful engineering culture. Enabler for growth & learning, facilitating continuous improvement and seek of excellence.'
+        description: 'Helped hire, organize, and lead 140+ engineers across the U.S. and Mexico, developing managers and engineers through coaching, feedback, performance management, and clear accountability.'
       }, {
-        description: 'Participated in organizational restructuring when transitioning to a mature scale-up company towards Series-C 100MM+ ARR, focusing on strategy, planning, and execution of established processes, implementing org restructuring, planning frameworks, and delivery systems for sustained high-growth.'
+        description: 'Restructured teams and introduced planning and delivery systems as the company matured toward Series C and more than $100M ARR.'
       }, {
-        description: 'Lead AI enablement projects across the Engineering organization, advocating adoption & best practices for tools such as [Cursor](#ai-tools), [Claude](#ai-tools), [CodeRabbit](#ai-tools), [Gemini](#ai-tools), etc. which lead to a 10% increase in productivity and 60% reduction in code review time.',
+        description: 'Led organization-wide AI enablement with practical guidance for [Cursor](#ai-tools), [Claude](#ai-tools), [CodeRabbit](#ai-tools), and [Gemini](#ai-tools), increasing productivity by 10% and reducing code-review time by 60%.'
       }, {
-        description: 'Led architecting & shipping of multiple high-impact services & products with consistent cadence & quality, ensuring uptime and scalability for millions of end-users.'
+        description: 'Partnered with Product and executive leadership on priorities, organizational design, delivery risk, and architecture decisions for products serving millions of users.'
       }, {
-        description: 'Advocated a significant cost-reduction, simplification & refactoring of gRPC-based microservices architecture & in-house frameworks following Domain-Driven Design (DDD) principles.'
+        description: 'Drove cost reduction and simplification across a gRPC microservices architecture and internal frameworks by clarifying domain boundaries and reducing unnecessary complexity.'
       },
     ],
     skills: [
@@ -102,30 +102,26 @@ export const APPTEGY: IRole[] = [
     title: 'Lead Software Engineer',
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Mar 2020',
-    endDate: 'Abr 2021',
-    description: 'As part of the nascent engineering organization, I helped planting the seeds & building the foundations, architected, hands-on coded, delivered, refactored & scaled during an early stage of the company and through the scale from ~500 to 2,000+ school districts. Lead the platform & infrastructure teams working on new and existing products, building internal & user-facing components on top of a service oriented architecture during rapid scale-up.',
+    endDate: 'Apr 2021',
+    description: 'Led platform and infrastructure work as Apptegy grew from roughly 500 to more than 2,000 school districts, combining architecture, hands-on development, delivery, and team leadership.',
     achievements: [
       {
-        description: 'Hands-on development of Thrillshare platform and APIs mainly in [Ruby on Rails](#ruby-on-rails), supporting Vue.js & Mobile (iOS & Android) clients.'
+        description: 'Built Thrillshare platform services and APIs in [Ruby on Rails](#ruby-on-rails) for Vue.js, iOS, and Android clients, with [Sidekiq](#ruby-on-rails) handling high-volume background work.'
       }, {
-        description: 'Advocate best design, architecture, coding practices, peer reviewing & unit testing across the Engineering organization'
+        description: 'Established architecture, code-review, and testing practices that raised engineering quality across teams.'
       }, {
-        description: 'Developed greenfield Ruby on Rails outpost services following SOA (service-oriented architecture):',
+        description: 'Designed and shipped shared platform services:',
         subAchievements: [{
-          description: 'Auth: With a constant inflow of 1,000\'s of new users, implemented an AuthN/Z identity provider based on [OAuth2](#apis) & [OpenID Connect](#apis) standards to support SSO (Single Sign-on) and User Management across existing and newer Apptegy\'s products',
+          description: 'Built an AuthN/Z identity provider using [OAuth2](#apis) and [OpenID Connect](#apis), enabling SSO and user management across Apptegy products as thousands of new users entered the platform.'
         }, {
-          description: 'Alerts: Due to a spike in usage of our alerting services, from 10\'s to 1,000\'s of notifications per minute, we required to scale it up by implementing a Multi-channel (SMS/Voice/TTS/Push), multi-provider (Twilio, Sendgrid, Facebook, Twitter) & multi-language relay service for school district notifications'
+          description: 'Scaled school-district alerts from tens to thousands of notifications per minute through a multi-channel, multi-provider, multilingual relay service.'
         }, {
-          description: 'Among other projects I lead: Forms & surveys builder, ETL pipeline revamp, Translation service, Emails newsletters & marketing campaigns, Learning-management-system & Real-time horizontally-scalable Chat messaging system'
+          description: 'Led shared services for forms and surveys, ETL, translation, email campaigns, learning management, and horizontally scalable real-time messaging.'
         }]
       }, {
-        description: 'Supporting Micro-services built with [Ruby](#ruby-on-rails), [Roda](#ruby-on-rails) micro-framework & [Sidekiq](#ruby-on-rails): Analytics, Data Management, Translations, Learning Management System.'
+        description: 'Owned CI/CD and production releases across [AWS](#aws) and [Kubernetes](#kubernetes), improving deployment consistency and operational reliability.'
       }, {
-        description: 'DevOps, CI/CD and release managment deploying in [AWS](#aws): [EC2](#aws), [ELB](#aws), [EKS](#aws), [RDS](#aws), [S3](#aws) clusters using [Capistrano](#devops-other) & [Kubernetes](#kubernetes)'
-      }, {
-        description: 'Scrum master working with Product team following Agile methodologies.'
-      }, {
-        description: 'Interview backend & full-stack candidates while onboarding new hires.'
+        description: 'Partnered with Product to sequence delivery, interviewed backend and full-stack candidates, and onboarded new engineers.'
       }],
       skills: [
         { name: 'Technical Leadership', slug: 'technical-leadership' },
@@ -141,11 +137,11 @@ export const APPTEGY: IRole[] = [
 export const BROKERLIT: IRole[] = [
   {
     title: 'Technical Co-Founder',
-    description: 'Developed real estate SaaS platform with the help of a freelance contractor.',
+    description: 'Built and operated a real estate SaaS platform with a lean team.',
     achievements: [{
-      description: 'Hands-on development of the platform in [Ruby on Rails](#ruby-on-rails) & [Typescript](#typescript)/[React.js](#react)/[Next.js](#next.js)'
+      description: 'Built the platform in [Ruby on Rails](#ruby-on-rails), [TypeScript](#typescript), [React](#react), and [Next.js](#next.js).'
     }, {
-      description: 'DevOps infrastructure based on [Fly.io](#devops-other) k8s service & [Vercel](#next.js) serverless hosting'
+      description: 'Operated lean production infrastructure on [Fly.io](#devops-other) and [Vercel](#next.js).'
     }],
     skills: []
   }
@@ -154,11 +150,11 @@ export const BROKERLIT: IRole[] = [
 export const BASEQL: IRole[] = [
   {
     title: 'Founder',
-    description: 'Built as a side-project during COVID and exited through a successful acquisition.',
+    description: 'Built, operated, and sold a bootstrapped GraphQL SaaS product.',
     achievements: [{
-      description: 'Hands-on full-stack Javascript development with [Node.js](#javascript), [React.js](#react)/[Next.js](#next.js) & [Tailwind CSS](#react).'
+      description: 'Built the product across [Node.js](#javascript), [React](#react), [Next.js](#next.js), and Tailwind CSS.'
     }, {
-      description: 'DevOps infrastructure based on [AWS EBS](#aws) & [MongoDB](#databases)'
+      description: 'Owned production infrastructure and data operations on AWS and [MongoDB](#databases) through acquisition in 2024.'
     }],
     skills: []
   }
@@ -167,21 +163,21 @@ export const BASEQL: IRole[] = [
 export const HEALTHTREE: IRole[] = [
   {
     title: 'CTO',
-    description: 'Developed web & mobile platforms for cancer patients to find their best treatment options.',
+    description: 'Led technology and product delivery for web and mobile platforms helping cancer patients identify treatment options.',
     achievements: [{
-      description: 'Put together development team and processes for backend APIs in [Ruby on Rails](#ruby-on-rails), frontend clients in [React.js](#react) & data pipelines by hands-on programming, code reviewing & testing.'
+      description: 'Built the engineering team and delivery practices while contributing directly to [Ruby on Rails](#ruby-on-rails) APIs, [React](#react) clients, data pipelines, code review, and testing.'
     }, {
-      description: 'Automated products lifecycle via DevOps & Continuous Integration/Delivery pipelines.'
+      description: 'Automated build, test, and deployment workflows through CI/CD.'
     }, {
-      description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#devops-other) [Sentry](#devops-other) [Intercom](#product)'
+      description: 'Introduced [Metabase](#devops-other), [Sentry](#devops-other), and [Intercom](#product) to make product usage, incidents, and customer feedback visible.'
     }, {
-      description: 'Created a product development pipeline from scratch to priotitize and measure performance using Agile [Kanban](#product) methodology in [Trello](#product)'
+      description: 'Established a Kanban product-development process to prioritize work and track delivery.'
     }, {
-      description: 'Decreased bugs and improved overall quality via technical leadership & mentoring to achieve continuous improvement as a team'
+      description: 'Improved engineering quality through technical leadership, mentoring, code review, and testing.'
     }, {
-      description: 'Defined a Technology Strategy and Software Architecture aligned with product vision'
+      description: 'Defined technology strategy and software architecture aligned with the product vision.'
     }, {
-      description: 'Recruited and retained top talent in a competitive U.S. market'
+      description: 'Recruited and retained engineers in a competitive U.S. market.'
     }],
     skills: [
       // { name: 'Ownership' },
@@ -196,24 +192,24 @@ export const ECARESOFT: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Jan 2018',
     endDate: 'Jan 2019',
-    description: 'Lead technology strategy, software development and operations to get to new SaaS markets in Argentina and Middle-East. Merged all product teams under a single organization culture. Worked closely with Product, Sales & Support organizations.',
+    description: 'Led technology strategy, engineering, and operations during expansion into Argentina and the Middle East. Unified product teams and partnered with Product, Sales, and Support.',
     achievements: [{
-      description: 'Technology strategy and software architecture',
+      description: 'Defined technology strategy and software architecture for international expansion.',
       subAchievements: [{
-        description: 'Succesfully launched internationalization for new markets via APIs, Microservices and serverless Lambda functions using.'
+        description: 'Launched internationalization for new markets through APIs, microservices, and serverless functions.'
       }, {
-        description: 'Achieved high availability and resilience cloud architecture by relying on DevOps, elastic infrastructure, containerization, automated testing and CI/CD pipelines for continuous quality and delivery with.'
+        description: 'Improved availability and resilience through elastic infrastructure, containers, automated testing, and CI/CD.'
       }]
     }, {
-      description: 'Product development and operations',
+      description: 'Improved product development and engineering operations.',
       subAchievements: [{
-        description: 'Improved roadmap priorization and improved performance measurement of dev teams by adopting [SCRUM](#technical-leadership) & [Kanban](#product) Agile software development methodologies'
+        description: 'Improved roadmap prioritization and delivery visibility through Scrum and [Kanban](#product).'
       }, {
-        description: 'Increased customer feedback awareness and success metrics by creating support & analytics infrastructure in: [Metabase](#devops-other) [Sentry](#devops-other) [Intercom](#product)'
+        description: 'Introduced [Metabase](#devops-other), [Sentry](#devops-other), and [Intercom](#product) to connect usage, incidents, and customer feedback to product decisions.'
       }, {
-        description: 'Achieved continuous improvement via OKRs, Performance Reviews and One-on-ones'
+        description: 'Established OKRs, performance reviews, and one-on-ones to improve accountability and engineer development.'
       }, {
-        description: 'Recruited and succesfully retained top talent that added value to the company'
+        description: 'Recruited and retained engineers during international growth.'
       }]
     }],
     skills: [
@@ -228,24 +224,24 @@ export const ECARESOFT: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Feb 2016',
     endDate: 'Jan 2019',
-    description: 'Scaled EHR practice management app from MVP to product/market fit, thousands of MAUs and increasing ARR by providing the best user experience for LatAm physicians market.',
+    description: 'Scaled an EHR and practice-management product from MVP to product-market fit, thousands of monthly active users, and growing ARR in the Latin American physician market.',
     achievements: [{
-      description: 'Established development processes for coding, reviewing & testing [Ruby on Rails](#ruby-on-rails) backend APIs and [Ember.js](#frontend-other) frontend clients'
+      description: 'Established development, code-review, and testing practices for [Ruby on Rails](#ruby-on-rails) APIs and [Ember.js](#frontend-other) clients.'
     }, {
-      description: 'Defined Software Architecture and launched fault-tolerant APIs and microservices in [Ruby](#ruby-on-rails), [Java](#backend-other), [PostgreSQL](#databases), [Redis](#databases) and [Sidekiq](#ruby-on-rails) for background processing',
+      description: 'Defined the architecture and launched fault-tolerant APIs and services using [Ruby](#ruby-on-rails), [PostgreSQL](#databases), [Redis](#databases), and [Sidekiq](#ruby-on-rails).',
       subAchievements: [{
-        description: 'Drugs interactions service based on Wolters Kluwer\'s Medi-Span®'
+        description: 'Built a drug-interaction service using Wolters Kluwer Medi-Span data.'
       }, {
-        description: 'Machine Learning prediction & classification service based on [Python](#backend-other) & [Tensorflow](#ai-product-features)'
+        description: 'Built a prediction and classification service using [Python](#backend-other) and TensorFlow.'
       }, {
-        description: 'Full-text search service based on [Apache Solr](#backend-other)'
+        description: 'Built full-text search using [Apache Solr](#backend-other).'
       }]
     }, {
-      description: 'Implemented DevOps and continuous integration/delivery to production'
+      description: 'Implemented production infrastructure and CI/CD.'
     }, {
-      description: 'Reached balance between quality & speed by improving recruiting, management & coaching of development team'
+      description: 'Balanced quality and delivery speed through recruiting, coaching, and engineering management.'
     }, {
-      description: 'Achieved Lean product development by relying on [Kanban](#product) methodology'
+      description: 'Introduced [Kanban](#product) to improve product flow and prioritization.'
     }],
     skills: [
       // { name: 'Ownership' },
@@ -259,13 +255,13 @@ export const ECARESOFT: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Oct 2017',
     endDate: 'Jul 2018',
-    description: 'Bootstraped a claims management system for the insurance industry in LatAm by working on technical development and defining a Domain-driven microservices architecture',
+    description: 'Bootstrapped a claims-management product for the Latin American insurance market and defined its domain-driven service architecture.',
     achievements: [{
-      description: 'Full-stack development using [Elixir](#backend-other)/[Phoenix](#backend-other) for Backend and [Ember.js](#frontend-other) for Frontend',
+      description: 'Built the product with [Elixir/Phoenix](#backend-other) and [Ember.js](#frontend-other).'
     }, {
-      description: '[Domain-driven Design](#technical-leadership) architecture using Bounded Contexts',
+      description: 'Established bounded contexts using [Domain-Driven Design](#technical-leadership).'
     }, {
-      description: 'DevOps infrastructure using [Docker](#docker) containers on [AWS](#aws): [Elastic Beanstalk](#aws)',
+      description: 'Deployed containerized workloads on [AWS Elastic Beanstalk](#aws).'
     }],
     skills: [
       // { name: 'Ownership' },
@@ -280,7 +276,7 @@ export const PANAX: IRole[] = [
     location: '',
     startDate: '2014',
     endDate: '2016',
-    description: 'Launched an MVP of No-Code tool for internal business applications by defining a Client-server architecture using: [Node.js](#javascript) / [Express](#javascript) [SQL Server](#databases) [Angular.js](#frontend-other)',
+    description: 'Launched an MVP for a no-code internal-applications platform using [Node.js](#javascript), Express, [SQL Server](#databases), and [AngularJS](#frontend-other).',
     achievements: [],
     skills: []
   }
@@ -292,7 +288,7 @@ export const OPERIT: IRole[] = [
     location: '',
     startDate: '2014',
     endDate: '2014',
-    description: 'Define and execute ETL, Analytics and Business Intelligence processes and maintenance of existing software',
+    description: 'Designed ETL, analytics, and business-intelligence workflows and maintained existing software.',
     achievements: [],
     skills: []
   }
@@ -304,7 +300,7 @@ export const SAP: IRole[] = [
     location: '',
     startDate: '2013',
     endDate: '2014',
-    description: 'Test-driven development for Supportability & SaaS enterprise product lines using [JavaScript](#javascript) and [Jasmine](#javascript)',
+    description: 'Practiced test-driven development for enterprise SaaS product lines using [JavaScript](#javascript) and Jasmine.',
     achievements: [],
     skills: []
   }
@@ -316,7 +312,7 @@ export const COTIZAHOY: IRole[] = [
     location: '',
     startDate: '2010',
     endDate: '2013',
-    description: 'Launched SaaS/Marketplace developed in [Ruby on Rails](#ruby-on-rails) [PostgreSQL](#databases) [Heroku](#devops-other)',
+    description: 'Launched a B2B SaaS marketplace built with [Ruby on Rails](#ruby-on-rails), [PostgreSQL](#databases), and Heroku.',
     achievements: [],
     skills: []
   }
@@ -328,7 +324,7 @@ export const NICMX: IRole[] = [
     location: '',
     startDate: '2008',
     endDate: '2009',
-    description: 'Developed internal and customer apps in PHP Java and PL/SQL',
+    description: 'Developed internal and customer applications using PHP, Java, and PL/SQL.',
     achievements: [],
     skills: []
   }

@@ -5,10 +5,10 @@ import { APPTEGY, BASEQL, BROKERLIT, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OP
 
 const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,
-  header: 'Hands-on Engineering Leader · Software Developer · Product Builder',
+  header: 'Hands-on Engineering Executive · VP Engineering / CTO · Product and Platform Builder',
   location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `Hands-on VP Eng/CTO with strong software engineering roots and technical generalist mindset with a trajectory across U.S. & LatAm. Product-minded builder with startup DNA, shipping and scaling products and teams from 0 to 1 and 1 to 100, staying close to systems design, architecture, code, product, UI/UX design and delivery across backend, infrastructure, frontend, and AI. Experienced hiring manager and technical leader with high energy, ownership thriving in ambiguity, execution speed and strategic leadership enabling engineering orgs with practical AI tooling across agentic workflows.` // Looking for the next big challenge at the intersection of enterprise software & AI.
+  about_me: `Hands-on VP of Engineering and CTO with 15+ years building SaaS products and engineering organizations across the U.S. and Latin America. Led distributed organizations of 140+ engineers through hiring, manager development, performance management, organizational design, roadmap execution, and architectural change. Retain deep technical range across backend systems, cloud infrastructure, frontend delivery, product development, and AI. Currently lead three Backoffice teams while remaining directly involved in architecture and selected platform initiatives. Best suited to roles that require executive judgment, strong engineering management, and enough technical depth to challenge decisions and contribute when needed.`
 };
 
 const COMPANIES = [
@@ -16,7 +16,7 @@ const COMPANIES = [
     name: 'Trivelta',
     url: 'https://trivelta.com/',
     location: 'Boston, MA 🇺🇸',
-    startDate: '2026',
+    startDate: 'Jan 2026',
     endDate: 'Present',
     description: 'B2B iGaming technology provider.',
     roles: TRIVELTA
@@ -26,9 +26,9 @@ const COMPANIES = [
     url: 'https://www.apptegy.com',
     location: 'Little Rock, AR 🇺🇸',
     remote: true,
-    startDate: '2020',
+    startDate: 'Mar 2020',
     endDate: 'Nov 2025',
-    description: 'Industry-leading EdTech SaaS company with 6,000+ school districts in the US & Canada and 10MM+ of active users.',
+    description: 'EdTech SaaS platform serving 6,000+ school districts and more than 10 million active users across the U.S. and Canada.',
     roles: APPTEGY,
   },
   {
@@ -37,7 +37,7 @@ const COMPANIES = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: '2023',
     endDate: 'Present',
-    description: 'Real Estate SaaS providing an MLS, CMS & CRM platform for brokers to manage their properties and inbound leads generation.',
+    description: 'Real estate SaaS combining MLS, CMS, and CRM workflows for property management and inbound lead generation.',
     roles: BROKERLIT,
   },
   {
@@ -46,7 +46,7 @@ const COMPANIES = [
     location: 'Miami, FL 🇺🇸',
     startDate: '2020',
     endDate: '2024',
-    description: `GraphQL access point for your Cloud data (Airtable & Google Sheets). 🎯 **Acquired in 2024**`,
+    description: `GraphQL access layer for cloud data in Airtable and Google Sheets. **Acquired in 2024.**`,
     roles: BASEQL,
   },
   {
@@ -55,7 +55,7 @@ const COMPANIES = [
     location: 'Salt Lake City, UT 🇺🇸',
     startDate: 'Jan 2019',
     endDate: 'Mar 2020',
-    description: 'Healthcare platform for cancer patients, their families and caregivers, with the mission of accelerating the finding of a cure',
+    description: 'Healthcare platform helping cancer patients, families, and caregivers identify treatment options and accelerate research.',
     roles: HEALTHTREE,
   },
   {
@@ -64,7 +64,7 @@ const COMPANIES = [
     location: 'Austin, TX 🇺🇸',
     startDate: '2016',
     endDate: '2019',
-    description: 'EHR & HIS systems for hospitals and clinics in Latin America and Middle East.',
+    description: 'EHR and hospital information systems for healthcare providers in Latin America and the Middle East.',
     roles: ECARESOFT,
   },
   {
@@ -125,39 +125,39 @@ const SKILLS: ISkill[] = [{
   order: 1,
   since: 2016,
   level: 100,
-  description: 'Hands-on technical leader and generalist: building teams, shipping products, and scaling delivery. Comfortable wearing multiple hats — from strategy & hiring to architecture & building',
+  description: 'Executive and technical leadership across organization design, team formation, talent development, strategy, architecture, and delivery.',
   subSkills: [{
     name: 'Technical Leadership',
     slug: 'technical-leadership',
-    description: 'Leading engineering teams end-to-end: technical direction, execution scope, sequencing, delivery quality, and mentoring.',
+    description: 'Technical direction from architecture and design review through sequencing, delivery quality, and engineer development.',
     subSkills: [
-      { name: 'Project scope & sequencing' },
+      { name: 'Project scope and sequencing' },
       { name: 'Delivery management' },
-      { name: 'Ownership & Accountability' },
-      { name: 'System Design Architecture' },
+      { name: 'Ownership and accountability' },
+      { name: 'System design and architecture' },
       { name: 'Code reviews' },
-      { name: 'Mentoring & Coaching' },
-      { name: 'Agile Methodologies' },
-      { name: 'Roadmaps Planning' },
+      { name: 'Mentoring and coaching' },
+      { name: 'Agile methodologies' },
+      { name: 'Roadmap planning' },
     ],
   }, {
     name: 'Strategic Planning',
     slug: 'strategic-planning',
     description: 'Pragmatic planning across product and engineering: tooling strategy, architecture choices, and execution plans tied to business outcomes.',
     subSkills: [
-      { name: 'Tooling & AI enablement' },
-      { name: 'Vendor & cost management' },
-      { name: 'Buy vs Build decisions' },
-      { name: 'Team composition & org design' },
-      { name: 'Architecture & design reviews' },
+      { name: 'Tooling and AI enablement' },
+      { name: 'Vendor and cost management' },
+      { name: 'Build-versus-buy decisions' },
+      { name: 'Team composition and organization design' },
+      { name: 'Architecture and design reviews' },
       { name: 'RFC/RFD technical documentation' },
-      { name: 'Product + Engineering leadership alignment' },
+      { name: 'Product and Engineering alignment' },
       { name: 'Resource allocation' },
     ],
   }, {
     name: 'People Management',
     slug: 'management',
-    description: 'VP-level people-first team & manager development: coaching, performance, feedback, and building healthy high-output teams.',
+    description: 'Manager and engineer development through coaching, feedback, performance management, and clear accountability.',
     subSkills: [
       { name: 'Mentorship' },
       { name: 'Coaching' },
@@ -168,7 +168,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'Recruitment',
     slug: 'recruitment',
-    description: 'Hiring manager experience: building interview loops, running technical screens, and coaching interviewers/candidates.',
+    description: 'Built hiring processes, interview loops, and technical assessments while coaching interviewers and onboarding new hires.',
     subSkills: [
       { name: 'Talent sourcing' },
       { name: 'Hiring manager' },
@@ -184,22 +184,22 @@ const SKILLS: ISkill[] = [{
   order: 3,
   since: 2010,
   level: 100,
-  description: 'Backend development is my primary area of expertise, and I have created multiple applications, APIs, and integrations.',
+  description: 'Primary technical depth in backend systems, APIs, integrations, data access, background processing, and production performance.',
   subSkills: [{
     name: 'Ruby on Rails',
     slug: 'ruby-on-rails',
-    description: 'I have worked with Ruby on Rails since 2013, building and maintaining numerous applications. Including those with large databases where efficient SQL queries are crucial. My experience includes implementing APIs, admin panels, integrating APIs, and optimising high-traffic applications.',
+    description: 'Ruby on Rails experience since 2013 across APIs, admin platforms, integrations, high-traffic applications, and database-intensive systems.',
     subSkills: [
       { name: 'Rails 7' },
-      { name: 'Sidekiq', description: "I have implemented Sidekiq clusters handling hundreds of thousands of jobs a day." },
+      { name: 'Sidekiq', description: 'Built Sidekiq workloads processing hundreds of thousands of jobs per day.' },
       { name: 'TDD' },
-      { name: 'RSpec', description: "I write well-structured, easy-to-read and performant tests using contexts and abstractions." },
+      { name: 'RSpec', description: 'Structured, maintainable test suites using clear contexts and reusable abstractions.' },
       { name: 'Capybara' },
     ],
   }, {
     name: 'Developing APIs',
     slug: 'apis',
-    description: "Since 2015, I have been developing APIs. I've built multiple applications using Ruby on Rails as well as other frameworks.",
+    description: 'API design and delivery since 2015 across Rails and other backend frameworks.',
     subSkills: [
       { name: 'REST API' },
       { name: 'GraphQL' },
@@ -217,7 +217,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'Databases',
     slug: 'databases',
-    description: 'I have worked with many different kinds of databases. Most Ruby on Rails performance issues stem from inefficient database queries. I have extensive experience in identifying and optimizing these issues.',
+    description: 'Relational and NoSQL data modeling, query analysis, and performance optimization for production systems.',
     subSkills: [
       { name: 'PostgreSQL' },
       { name: 'MySQL' },
@@ -227,7 +227,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'API integrations',
     slug: 'integrations',
-    description: 'I developed multiple APIs that were consumed by frontend, mobile apps and other services.',
+    description: 'Internal and external integrations serving web, mobile, and service-to-service clients.',
     subSkills: [
       { name: 'REST' },
       { name: 'GraphQL' },
@@ -235,7 +235,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'Other',
     slug: 'backend-other',
-    description: 'I like experimenting with different technologies and frameworks to find the best tool for the job.',
+    description: 'Additional backend languages and infrastructure selected according to product and operational constraints.',
     subSkills: [
       { name: 'Node.js' },
       { name: 'Python' },
@@ -243,7 +243,7 @@ const SKILLS: ISkill[] = [{
       { name: 'Rust' },
       { name: 'Elixir' },
       { name: 'Shell' },
-      { name: 'Search engines - ElasticSearch, Solr'},
+      { name: 'Search engines: Elasticsearch, Solr'},
       { name: 'Git'},
     ],
   }],
@@ -253,11 +253,11 @@ const SKILLS: ISkill[] = [{
   order: 4,
   since: 2018,
   level: 90,
-  description: 'I have been working with React since 2018. Created multiple applications and websites.',
+  description: 'Full-stack product delivery across modern web applications, admin tools, and server-rendered interfaces.',
   subSkills: [{
     name: 'React',
     slug: 'react',
-    description: 'I have been working with React since 2018. I have created several applications using React. SPA applications with SSR.',
+    description: 'React experience since 2018 across single-page applications, server rendering, testing, and design systems.',
     subSkills: [
       { name: 'React Testing Library' },
       { name: 'Playwright' },
@@ -267,15 +267,15 @@ const SKILLS: ISkill[] = [{
       { name: 'React Query' },
     ],
   }, {
-    name: 'Typescript',
+    name: 'TypeScript',
     slug: 'typescript',
-    description: 'I created a complex frontend application using Typescript and Next.js. I use Typescript in all my javascript projects.',
+    description: 'Type-safe frontend and full-stack application development with TypeScript.',
     subSkills: [
     ],
   }, {
-    name: 'Javascript',
+    name: 'JavaScript',
     slug: 'javascript',
-    description: 'Javascript was always a part of my work. From simple jQuery scripts, through ES6, to using it with Typescript in Next.js applications and Express.js APIs.',
+    description: 'JavaScript experience from browser applications through Node.js services and modern TypeScript stacks.',
     subSkills: [
       { name: 'Node.js' },
       { name: 'Jest' },
@@ -283,7 +283,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'Next.js',
     slug: 'next.js',
-    description: 'I created a complex frontend application using Next.js and Typescript. Next.js is my go to framework for frontend applications.',
+    description: 'Next.js applications using TypeScript, server rendering, authentication, and Vercel delivery.',
     subSkills: [
       { name: 'NextAuth' },
       { name: 'Vercel', url: 'https://vercel.com' },
@@ -293,7 +293,7 @@ const SKILLS: ISkill[] = [{
     slug: 'frontend-other',
     description: '',
     subSkills: [
-      { name: 'Hotwire & Stimulus'},
+      { name: 'Hotwire and Stimulus'},
       { name: 'React Native' },
       { name: 'TailwindCSS' },
     ],
@@ -308,25 +308,24 @@ const SKILLS: ISkill[] = [{
   subSkills: [{
     name: 'AWS',
     slug: 'aws',
-    description: "I've hosted websites and Kuberentes clusters using AWS",
+    description: 'Production systems on AWS across compute, storage, databases, serverless workloads, and Kubernetes.',
     subSkills: [
       { name: 'EKS' },
       { name: 'S3' },
       { name: 'EC2' },
       { name: 'RDS' },
       { name: 'Lambda' },
-      { name: 'Cloudflare' },
     ],
   }, {
     name: 'Docker',
     slug: 'docker',
-    description: "I use Docker on a daily basis in development and production environments.",
+    description: 'Containerized development and production workloads.',
     subSkills: [
     ],
   }, {
     name: 'Kubernetes',
     slug: 'kubernetes',
-    description: 'I have set up and maintained multiple Kubernetes clusters from scratch utilizing GitOps principles.',
+    description: 'Built and operated Kubernetes environments using GitOps practices.',
     subSkills: [
       { name: 'GitOPS - ArgoCD' },
       { name: 'Kustomize' },
@@ -335,7 +334,7 @@ const SKILLS: ISkill[] = [{
   }, {
     name: 'Other',
     slug: 'devops-other',
-    description: 'I have managed infrastructure and deployment pipelines since early in my career.',
+    description: 'Infrastructure, deployment pipelines, observability, and production operations.',
     subSkills: [
       { name: 'Greenfield infrastructure setup' },
       { name: 'Terraform' },
@@ -343,6 +342,7 @@ const SKILLS: ISkill[] = [{
       { name: 'CDN' },
       { name: 'Observability' },
       { name: 'Distributed systems' },
+      { name: 'Cloudflare' },
       { name: 'Fly.io', url: 'https://fly.io' },
     ],
   }],
@@ -367,7 +367,7 @@ const SKILLS: ISkill[] = [{
   order: 6,
   since: 2023,
   level: 75,
-  description: 'Hands-on with AI-assisted engineering and AI product delivery: agent workflows, team adoption, and production-oriented experimentation.',
+  description: 'AI-assisted engineering, team enablement, and AI product development grounded in evaluation, security, reliability, and production constraints.',
   subSkills: [{
     name: 'AI tools',
     slug: 'ai-tools',
@@ -406,7 +406,7 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'Chatbots' },
       { name: 'RAGs (Pinecone, pgvector)' },
-      { name: 'Context tuning & prompt refinement' },
+      { name: 'Context tuning and prompt refinement' },
       { name: 'Security and privacy guardrails' },
     ],
   }],

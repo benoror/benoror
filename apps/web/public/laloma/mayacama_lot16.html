@@ -152,11 +152,50 @@ footer{margin-top:48px; padding-top:16px; border-top:1px solid var(--rule); colo
 .presets button:hover, .seg button:hover{color:var(--blue)}
 .vcanvas{position:relative; height:clamp(360px, 58vw, 640px); border:1px solid var(--rule); border-radius:var(--r); overflow:hidden; background:#dde6ee; touch-action:none}
 .vcanvas canvas{display:block; width:100%; height:100%}
-.vlegend{position:absolute; left:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:4px 10px; max-width:70%; background:rgba(255,255,255,.88); color:#2B2824; font-size:.75rem; padding:6px 8px; border-radius:5px}
+.vlegend{position:absolute; left:10px; bottom:10px; display:flex; flex-wrap:wrap; gap:4px 10px; max-width:calc(100% - 200px); background:rgba(255,255,255,.88); color:#2B2824; font-size:.75rem; padding:6px 8px; border-radius:5px}
 .vlegend .vleg-note{flex-basis:100%; font-weight:400; color:#5a554d}
 .vlegend i{display:inline-block; width:10px; height:10px; margin-right:4px; border:1px solid #6b645a; vertical-align:-1px}
-.vsun{position:absolute; right:10px; top:10px; background:rgba(255,255,255,.88); color:#2B2824; font-family:var(--f-mono); font-size:.75rem; padding:4px 8px; border-radius:5px}
+.vsun{position:absolute; right:10px; top:52px; background:rgba(255,255,255,.88); color:#2B2824; font-family:var(--f-mono); font-size:.75rem; padding:4px 8px; border-radius:5px}
 .vmsg{position:absolute; inset:0; display:grid; place-items:center; color:#2B2824; background:#dde6ee; padding:20px; text-align:center}
+.vcanvas:focus{outline:none}
+.vcanvas:focus-visible{outline:2px solid var(--blue); outline-offset:-2px}
+.vctl{position:absolute; z-index:2}
+.vbtn{width:34px; height:34px; display:grid; place-items:center; padding:0; border:1px solid rgba(43,40,36,.2); border-radius:6px; background:rgba(255,255,255,.92); color:#2B2824; cursor:pointer; touch-action:manipulation; -webkit-tap-highlight-color:transparent}
+.vbtn:hover{background:#fff; color:var(--blue)}
+.vbtn:active{background:#e8eef5}
+.vbtn:focus-visible{outline:2px solid var(--blue); outline-offset:1px}
+.vbtn svg{width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round}
+.vtools{top:10px; right:10px; display:flex; gap:6px}
+.vpad{right:10px; bottom:10px; display:grid; grid-template-columns:repeat(4, 34px); grid-auto-rows:34px; gap:4px; padding:5px; border-radius:9px; background:rgba(255,255,255,.55)}
+.vpad .z{margin-left:6px}
+.vcompass{position:absolute; z-index:2; top:8px; left:8px; width:60px; height:60px; padding:0; border:0; background:none; cursor:pointer; border-radius:50%}
+.vcompass:focus-visible{outline:2px solid var(--blue)}
+.vcompass svg{width:100%; height:100%; display:block; overflow:visible}
+.vcompass .ring{fill:rgba(255,255,255,.92); stroke:rgba(43,40,36,.25); stroke-width:1}
+.vcompass .tick{stroke:#6b645a; stroke-width:1.4}
+.vcompass .nn{fill:#C0392B}
+.vcompass .ss{fill:#9a9389}
+.vcompass .hub{fill:#fff; stroke:#6b645a; stroke-width:.8}
+.vcompass .lbl{font:700 8.5px Arial, sans-serif; fill:#C0392B; text-anchor:middle; dominant-baseline:middle}
+.vcompass:hover .ring{stroke:var(--blue)}
+.vhelp{position:absolute; z-index:3; left:50%; top:50%; transform:translate(-50%, -50%); width:min(460px, calc(100% - 24px)); max-height:calc(100% - 24px); overflow:auto; background:rgba(255,255,255,.97); color:#2B2824; font-size:.82rem; line-height:1.45; padding:12px 16px; border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.vhelp[hidden]{display:none}
+.vhelp ul{margin:6px 0 10px; padding-left:18px}
+.vhelp li{margin:3px 0}
+.vhelp-close{font:inherit; cursor:pointer; border:1px solid var(--rule); background:#fff; border-radius:5px; padding:4px 12px}
+.viewer.is-full{position:fixed; inset:0; z-index:2000; margin:0; padding:8px; display:flex; flex-direction:column; gap:6px; background:var(--sheet, #fff); overflow:auto}
+.viewer.is-full .vcanvas{flex:1 1 auto; height:auto; min-height:260px}
+.viewer.is-full > .note{display:none}
+html.l16-full, html.l16-full body{overflow:hidden}
+@media (max-width:640px){
+  .vbtn{width:30px; height:30px}
+  .vbtn svg{width:16px; height:16px}
+  .vpad{grid-template-columns:repeat(4, 30px); grid-auto-rows:30px; gap:3px; padding:4px; right:6px; bottom:6px}
+  .vtools{top:6px; right:6px}
+  .vsun{top:44px; font-size:.68rem}
+  .vcompass{width:48px; height:48px; top:6px; left:6px}
+  .vlegend{max-width:calc(100% - 172px); font-size:.68rem}
+}
 /* prompt pack */
 .prompt{background:var(--sheet); border:1px solid var(--rule); border-radius:var(--r); padding:14px 16px; display:grid; gap:8px; min-width:0}
 .prompt header{display:flex; justify-content:space-between; gap:10px; align-items:baseline; flex-wrap:wrap}
@@ -6122,7 +6161,7 @@ html:not(.paged) .pager{display:none}
       <span class="presets" role="group" aria-label="Vistas"><button type="button" data-vpreset="norte">Esquina N</button><button type="button" data-vpreset="calleSE">Calle SE</button><button type="button" data-vpreset="jardin">Jardín (desde SW)</button><button type="button" data-vpreset="aerea">Aérea</button><button type="button" data-vpreset="cerca">Aérea cercana</button><button type="button" data-vpreset="planta">Planta</button></span>
     </div>
     <div class="vcanvas" id="v-canvas"><div class="vsun" id="v-sun" aria-live="polite"></div><div class="vlegend" id="v-legend" hidden></div><div class="vmsg" id="v-msg" hidden></div></div>
-    <p class="note"><b>Muros</b> muestra muros, puertas, ventanas, escaleras y muebles, con losas y techos transparentes. Elige un nivel en «Nivel» para ver solo hasta ese piso, o un cuarto en «Ver desde» para verlo a la altura de los ojos (1.6 m), mirando hacia el norte. Los muros, puertas y ventanas son supuestos: el anteproyecto aún no los define. En <b>Maqueta</b> y <b>Usos</b>, el nivel elegido se corta a 1.2 m. Las vistas fijas sirven para tomar capturas para Gemini (L-11). La hora es local (UTC−6).</p>
+    <p class="note"><b>Muros</b> muestra muros, puertas, ventanas, escaleras y muebles, con losas y techos transparentes. Elige un nivel en «Nivel» para ver solo hasta ese piso, o un cuarto en «Ver desde» para verlo a la altura de los ojos (1.6 m), mirando hacia el norte. Los muros, puertas y ventanas son supuestos: el anteproyecto aún no los define. En <b>Maqueta</b> y <b>Usos</b>, el nivel elegido se corta a 1.2 m. Los botones del modelo sirven para moverse, girar, inclinar y acercar; la brújula marca el norte y el botón de las esquinas abre la pantalla completa. Con el modelo seleccionado también funcionan las flechas del teclado (el botón «?» explica todo). Las vistas fijas sirven para tomar capturas para Gemini (L-11). La hora es local (UTC−6).</p>
   </div>
 </section>
 
@@ -6913,9 +6952,12 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
     cerca: [[-6, 17, 24], [11, 1, 7]],
     planta: [[12.5, 62, 6.95], [12.5, 0, 6.75]],
   };
+  var fp = false, lastPreset = 'norte';
   function setFov(f, minD) { camera.fov = f; camera.updateProjectionMatrix(); controls.minDistance = minD; }
+  function orbitMode() { fp = false; controls.enableZoom = true; controls.maxDistance = 140; }
   function preset(k) {
-    var p = PRESETS[k]; setFov(35, 4); if (selR) selR.value = '';
+    var p = PRESETS[k]; if (!p) return;
+    lastPreset = k; orbitMode(); setFov(35, 4); if (selR) selR.value = '';
     camera.position.set(p[0][0], p[0][1], p[0][2]); controls.target.set(p[1][0], p[1][1], p[1][2]); controls.update(); kick();
   }
   function setMode(m) {
@@ -6923,7 +6965,8 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
     document.querySelectorAll('[data-vmode]').forEach(function (o) { o.setAttribute('aria-pressed', o.getAttribute('data-vmode') === m ? 'true' : 'false'); });
     build(selC.value); kick();
   }
-  // camera inside a room: eye height 1.6 m, from the S corner looking to the N corner (toward the skyline)
+  // camera inside a room: eye height 1.6 m, from the S corner looking to the N corner (toward the skyline).
+  // The orbit target sits 0.1 m in front of the eye, so dragging looks around instead of circling.
   function enterRoom(v) {
     if (!v || !curC) return;
     var p = v.split('|'), L = null;
@@ -6934,11 +6977,153 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
     selL.value = L.id; applyLevel();
     if (selR) selR.value = v;
     var x = r[0], y = r[1], w = r[2], h = r[3], m = Math.min(0.35, w / 4, h / 4);
-    setFov(68, 0.1);
+    fp = true; setFov(68, 0.02); controls.maxDistance = 0.3; controls.enableZoom = false;
     camera.position.set(x + w - m, L.ffl + 1.6, y + m);
-    controls.target.set(x + m, L.ffl + 1.2, y + h - m);
+    var dir = new THREE.Vector3(x + m - (x + w - m), -0.25, y + h - m - (y + m)).normalize();
+    controls.target.copy(camera.position).addScaledVector(dir, 0.1);
     controls.update(); kick();
   }
+
+  // ---------- on-screen controls: compass, navigation pad, fullscreen, help, keyboard
+  var viewerEl = (wrap.closest && wrap.closest('.viewer')) || wrap.parentNode;
+  var NORTH = new THREE.Vector3(-0.7429684642109612, 0, 0.66932642349455);
+  var YAX = new THREE.Vector3(0, 1, 0);
+  var ICON = {
+    full: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+    exit: '<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>',
+    help: '<circle cx="12" cy="12" r="9"/><path d="M9.6 9.4a2.5 2.5 0 1 1 3.4 2.4c-.7.3-1 .8-1 1.5v.4"/><path d="M12 17.3v.1"/>',
+    up: '<path d="M12 19V5M6 11l6-6 6 6"/>', down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+    left: '<path d="M19 12H5M11 6l-6 6 6 6"/>', right: '<path d="M5 12h14M13 6l6 6-6 6"/>',
+    rotl: '<path d="M5 13a7 7 0 1 0 2-5.3"/><path d="M4 4v4.5h4.5"/>', rotr: '<path d="M19 13a7 7 0 1 1-2-5.3"/><path d="M20 4v4.5h-4.5"/>',
+    home: '<path d="M4 11.5 12 4l8 7.5"/><path d="M6.5 10v10h11V10"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>', minus: '<path d="M5 12h14"/>',
+    tup: '<path d="M6 12l6-6 6 6M6 18l6-6 6 6"/>', tdown: '<path d="M6 6l6 6 6-6M6 12l6 6 6-6"/>',
+  };
+  function svg(k) { return '<svg viewBox="0 0 24 24" aria-hidden="true">' + ICON[k] + '</svg>'; }
+  function mk(tag, cls, html, attrs) { var e = document.createElement(tag); if (cls) e.className = cls; if (html) e.innerHTML = html; for (var a in (attrs || {})) e.setAttribute(a, attrs[a]); return e; }
+  function btn(icon, label, fn, cls) {
+    var b = mk('button', 'vbtn' + (cls ? ' ' + cls : ''), svg(icon), { type: 'button', title: label, 'aria-label': label });
+    var t0 = null, t1 = null;
+    function stop() { clearTimeout(t0); clearInterval(t1); t0 = t1 = null; }
+    b.addEventListener('pointerdown', function (e) { if (e.button !== 0) return; e.preventDefault(); fn(); stop(); t0 = setTimeout(function () { t1 = setInterval(fn, 80); }, 380); });
+    ['pointerup', 'pointerleave', 'pointercancel', 'blur'].forEach(function (ev) { b.addEventListener(ev, stop); });
+    b.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); fn(); } });
+    return b;
+  }
+  function groundAxes() {
+    var r = new THREE.Vector3(1, 0, 0).applyQuaternion(camera.quaternion); r.y = 0;
+    if (r.lengthSq() < 1e-8) r.set(1, 0, 0);
+    r.normalize();
+    return { r: r, f: new THREE.Vector3(r.z, 0, -r.x) };
+  }
+  function move(fwd, side) {
+    var ax = groundAxes(), dist = camera.position.distanceTo(controls.target);
+    var step = fp ? 0.35 : Math.max(0.4, dist * 0.06);
+    var d = ax.f.multiplyScalar(fwd * step).add(ax.r.multiplyScalar(side * step));
+    camera.position.add(d); controls.target.add(d); controls.update(); kick();
+  }
+  function turn(dir) { // dir +1 = left, -1 = right
+    var a = dir * 10 * Math.PI / 180;
+    if (fp) { var v = controls.target.clone().sub(camera.position).applyAxisAngle(YAX, a); controls.target.copy(camera.position).add(v); }
+    else { var w = camera.position.clone().sub(controls.target).applyAxisAngle(YAX, -a); camera.position.copy(controls.target).add(w); }
+    controls.update(); kick();
+  }
+  function tilt(dir) { // dir +1 = look more from above (orbit) / look up (inside a room)
+    if (fp) {
+      var v = controls.target.clone().sub(camera.position), sp = new THREE.Spherical().setFromVector3(v);
+      sp.phi = Math.min(Math.PI * 0.85, Math.max(Math.PI * 0.15, sp.phi - dir * 0.12));
+      controls.target.copy(camera.position).add(new THREE.Vector3().setFromSpherical(sp));
+    } else {
+      var off = camera.position.clone().sub(controls.target), s2 = new THREE.Spherical().setFromVector3(off);
+      s2.phi = Math.min(controls.maxPolarAngle, Math.max(0.03, s2.phi - dir * 0.12));
+      camera.position.copy(controls.target).add(off.setFromSpherical(s2));
+    }
+    controls.update(); kick();
+  }
+  function zoom(dir) { // dir +1 = closer
+    if (fp) { camera.fov = Math.min(95, Math.max(30, camera.fov - dir * 6)); camera.updateProjectionMatrix(); kick(); return; }
+    var off = camera.position.clone().sub(controls.target), d = off.length() * (dir > 0 ? 0.85 : 1 / 0.85);
+    off.setLength(Math.min(controls.maxDistance, Math.max(controls.minDistance, d)));
+    camera.position.copy(controls.target).add(off); controls.update(); kick();
+  }
+  function faceNorth() {
+    if (fp) { controls.target.copy(camera.position).addScaledVector(NORTH, 0.1); controls.target.y -= 0.02; }
+    else {
+      var off = camera.position.clone().sub(controls.target), len = off.length(), hz = Math.sqrt(off.x * off.x + off.z * off.z);
+      camera.position.set(controls.target.x - NORTH.x * hz, controls.target.y + off.y, controls.target.z - NORTH.z * hz);
+      if (Math.abs(camera.position.distanceTo(controls.target) - len) > 1e-3) camera.position.sub(controls.target).setLength(len).add(controls.target);
+    }
+    controls.update(); kick();
+  }
+  function home() { preset(lastPreset || 'norte'); }
+  // compass rose
+  var compass = mk('button', 'vcompass', '<svg viewBox="-30 -30 60 60" aria-hidden="true"><circle r="27" class="ring"/><g class="rose">'
+    + '<path class="tick" d="M0-27v5M27 0h-5M0 27v-5M-27 0h5"/><path class="nn" d="M0-17 5 0H-5Z"/><path class="ss" d="M0 17 5 0H-5Z"/><circle r="2.2" class="hub"/>'
+    + '<text y="-19.5" class="lbl">N</text></g></svg>', { type: 'button', title: 'Brújula · clic para mirar al norte', 'aria-label': 'Mirar al norte' });
+  compass.addEventListener('click', faceNorth);
+  var rose = compass.querySelector('.rose');
+  function updateCompass() {
+    var ax = groundAxes(), a = NORTH.dot(ax.f), b = NORTH.dot(ax.r);
+    rose.setAttribute('transform', 'rotate(' + (Math.atan2(b, a) * 180 / Math.PI).toFixed(1) + ')');
+  }
+  // tools: help + fullscreen
+  var tools = mk('div', 'vctl vtools');
+  var helpBtn = btn('help', 'Ayuda: cómo moverse', function () { help.hidden = !help.hidden; });
+  var fullBtn = btn('full', 'Pantalla completa', function () { setFull(!viewerEl.classList.contains('is-full')); });
+  tools.appendChild(helpBtn); tools.appendChild(fullBtn);
+  // navigation pad
+  var pad = mk('div', 'vctl vpad', '', { role: 'group', 'aria-label': 'Navegación' });
+  [['rotl', 'Girar a la izquierda (←)', function () { turn(1); }], ['up', 'Avanzar (↑)', function () { move(1, 0); }], ['rotr', 'Girar a la derecha (→)', function () { turn(-1); }], ['plus', 'Acercar (+)', function () { zoom(1); }, 'z'],
+   ['left', 'Moverse a la izquierda (A)', function () { move(0, -1); }], ['home', 'Vista inicial (H)', home], ['right', 'Moverse a la derecha (D)', function () { move(0, 1); }], ['minus', 'Alejar (−)', function () { zoom(-1); }, 'z'],
+   ['tup', 'Ver más desde arriba (W)', function () { tilt(1); }], ['down', 'Retroceder (↓)', function () { move(-1, 0); }], ['tdown', 'Ver más de lado (S)', function () { tilt(-1); }]]
+    .forEach(function (d) { pad.appendChild(btn(d[0], d[1], d[2], d[3])); });
+  var help = mk('div', 'vhelp', '<b>Cómo moverse</b><ul>'
+    + '<li><b>Ratón:</b> arrastra para girar. Clic derecho y arrastra para mover. La rueda acerca y aleja.</li>'
+    + '<li><b>Pantalla táctil:</b> un dedo gira. Dos dedos mueven, acercan y alejan.</li>'
+    + '<li><b>Botones:</b> flechas para avanzar y moverse de lado, giros, inclinación, + y −, y la casa para volver a la vista inicial. La brújula marca el norte: haz clic en ella para mirar al norte.</li>'
+    + '<li><b>Teclado</b> (haz clic en el modelo primero): ↑ ↓ avanzar y retroceder, ← → girar, A D de lado, W S inclinar, + − acercar, N norte, H inicio, F pantalla completa.</li>'
+    + '<li><b>Dentro de un cuarto</b> («Ver desde»): arrastra para mirar alrededor. La rueda y ↑ ↓ caminan. + y − cambian el ángulo de la lente.</li></ul>'
+    + '<button type="button" class="vhelp-close">Cerrar</button>');
+  help.hidden = true;
+  help.querySelector('.vhelp-close').addEventListener('click', function () { help.hidden = true; wrap.focus(); });
+  [compass, tools, pad, help].forEach(function (e) { wrap.appendChild(e); });
+  // fullscreen: real fullscreen when the browser allows it, otherwise the viewer fills the window
+  function setFull(on) {
+    viewerEl.classList.toggle('is-full', on); document.documentElement.classList.toggle('l16-full', on);
+    fullBtn.innerHTML = svg(on ? 'exit' : 'full');
+    fullBtn.title = on ? 'Salir de pantalla completa (Esc)' : 'Pantalla completa (F)'; fullBtn.setAttribute('aria-label', fullBtn.title);
+    var fsEl = document.fullscreenElement || document.webkitFullscreenElement;
+    try {
+      if (on && !fsEl) { var rq = viewerEl.requestFullscreen || viewerEl.webkitRequestFullscreen; if (rq) { var pr = rq.call(viewerEl); if (pr && pr.catch) pr.catch(function () {}); } }
+      if (!on && fsEl) { var ex = document.exitFullscreen || document.webkitExitFullscreen; if (ex) { var p2 = ex.call(document); if (p2 && p2.catch) p2.catch(function () {}); } }
+    } catch (e) { /* the frame may not allow fullscreen: the CSS fallback still fills the window */ }
+    setTimeout(resize, 60); setTimeout(resize, 300);
+  }
+  ['fullscreenchange', 'webkitfullscreenchange'].forEach(function (ev) {
+    document.addEventListener(ev, function () { if (!(document.fullscreenElement || document.webkitFullscreenElement) && viewerEl.classList.contains('is-full')) setFull(false); });
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && viewerEl.classList.contains('is-full') && !(document.fullscreenElement || document.webkitFullscreenElement)) setFull(false); });
+  // keyboard (only while the model has the focus, so the page still scrolls)
+  wrap.setAttribute('tabindex', '0');
+  wrap.setAttribute('aria-label', 'Modelo 3D. Usa las flechas para moverte; ? muestra la ayuda.');
+  renderer.domElement.addEventListener('pointerdown', function () { if (document.activeElement !== wrap) wrap.focus({ preventScroll: true }); });
+  wrap.addEventListener('keydown', function (e) {
+    if (e.target !== wrap || e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key, done = true;
+    if (k === 'ArrowUp') move(1, 0); else if (k === 'ArrowDown') move(-1, 0);
+    else if (k === 'ArrowLeft') { if (e.shiftKey) move(0, -1); else turn(1); }
+    else if (k === 'ArrowRight') { if (e.shiftKey) move(0, 1); else turn(-1); }
+    else if (k === 'a' || k === 'A') move(0, -1); else if (k === 'd' || k === 'D') move(0, 1);
+    else if (k === 'w' || k === 'W') tilt(1); else if (k === 's' || k === 'S') tilt(-1);
+    else if (k === '+' || k === '=') zoom(1); else if (k === '-' || k === '_') zoom(-1);
+    else if (k === 'n' || k === 'N') faceNorth(); else if (k === 'h' || k === 'H' || k === 'Home') home();
+    else if (k === 'f' || k === 'F') setFull(!viewerEl.classList.contains('is-full'));
+    else if (k === '?') help.hidden = !help.hidden;
+    else done = false;
+    if (done) e.preventDefault();
+  });
+  // inside a room the wheel walks
+  renderer.domElement.addEventListener('wheel', function (e) { if (!fp) return; e.preventDefault(); move(e.deltaY < 0 ? 1 : -1, 0); }, { passive: false });
 
   selC.addEventListener('change', function () { build(selC.value); kick(); });
   selL.addEventListener('change', function () { applyLevel(); kick(); });
@@ -6953,6 +7138,7 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
   var dirty = 30, visible = true;
   function kick() { dirty = Math.max(dirty, 30); }
   controls.addEventListener('change', kick);
+  function draw() { renderer.render(scene, camera); updateCompass(); }
   function resize() {
     var w = wrap.clientWidth, h = wrap.clientHeight; if (!w || !h) return;
     renderer.setSize(w, h, false); camera.aspect = w / h; camera.updateProjectionMatrix(); kick();
@@ -6963,7 +7149,7 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
     requestAnimationFrame(loop);
     if (!visible) return;
     if (controls.update()) dirty = Math.max(dirty, 2);
-    if (dirty > 0) { renderer.render(scene, camera); dirty--; }
+    if (dirty > 0) { draw(); dirty--; }
   }
   var initMode = document.querySelector('[data-vmode][aria-pressed="true"]');
   mode = initMode ? initMode.getAttribute('data-vmode') : 'maqueta';
@@ -6972,12 +7158,13 @@ Light: soft morning sun from the east, clear sky. Style and materials from the o
   updateSun();
   resize();
   if (wrap.clientWidth) { renderer.setSize(wrap.clientWidth, wrap.clientHeight, false); camera.aspect = wrap.clientWidth / wrap.clientHeight; camera.updateProjectionMatrix(); }
-  renderer.render(scene, camera);
+  draw();
   loop();
   window.__l16viewer = { preset: preset, build: build, setMode: setMode, enterRoom: enterRoom, applyLevel: applyLevel, ready: true,
-    render: function () { controls.update(); renderer.render(scene, camera); },
-    cam: function (p, t, fov) { setFov(fov || 35, 0.1); camera.position.set(p[0], p[1], p[2]); controls.target.set(t[0], t[1], t[2]); controls.update(); },
-    state: function () { return { mode: mode, level: selL.value, cam: camera.position.toArray().map(function (v) { return +v.toFixed(2); }), groups: levelGroups.map(function (g) { return g.userData.id + (g.visible ? '+' : '-'); }) }; } };
+    move: move, turn: turn, tilt: tilt, zoom: zoom, faceNorth: faceNorth, home: home, setFull: setFull,
+    render: function () { controls.update(); draw(); },
+    cam: function (p, t, fov) { orbitMode(); setFov(fov || 35, 0.1); camera.position.set(p[0], p[1], p[2]); controls.target.set(t[0], t[1], t[2]); controls.update(); },
+    state: function () { return { mode: mode, level: selL.value, fp: fp, cam: camera.position.toArray().map(function (v) { return +v.toFixed(2); }), compass: rose.getAttribute('transform'), groups: levelGroups.map(function (g) { return g.userData.id + (g.visible ? '+' : '-'); }) }; } };
 })();
 
 </script>

@@ -39,6 +39,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible{outline:2px solid v
 .prose{max-width:70ch; display:grid; gap:.7rem; color:var(--ink2)}
 .note{color:var(--ink2); font-size:.93rem; max-width:80ch}
 
+/* links to the project files (full version only) */
+a.gd{white-space:nowrap}
+a.gd::before{content:""; display:inline-block; width:1.05em; height:.94em; margin-right:.3em; vertical-align:-.12em; background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 87.3 78'%3E%3Cpath d='m6.6 66.85 3.85 6.65c.8 1.4 1.95 2.5 3.3 3.3l13.75-23.8h-27.5c0 1.55.4 3.1 1.2 4.5z' fill='%230066da'/%3E%3Cpath d='m43.65 25-13.75-23.8c-1.35.8-2.5 1.9-3.3 3.3l-25.4 44a9.06 9.06 0 0 0 -1.2 4.5h27.5z' fill='%2300ac47'/%3E%3Cpath d='m73.55 76.8c1.35-.8 2.5-1.9 3.3-3.3l1.6-2.75 7.65-13.25c.8-1.4 1.2-2.95 1.2-4.5h-27.502l5.852 11.5z' fill='%23ea4335'/%3E%3Cpath d='m43.65 25 13.75-23.8c-1.35-.8-2.9-1.2-4.5-1.2h-18.5c-1.6 0-3.15.45-4.5 1.2z' fill='%2300832d'/%3E%3Cpath d='m59.8 53h-32.3l-13.75 23.8c1.35.8 2.9 1.2 4.5 1.2h50.8c1.6 0 3.15-.45 4.5-1.2z' fill='%232684fc'/%3E%3Cpath d='m73.4 26.5-12.7-22c-.8-1.4-1.95-2.5-3.3-3.3l-13.75 23.8 16.15 28h27.45c0-1.55-.4-3.1-1.2-4.5z' fill='%23ffba00'/%3E%3C/svg%3E") no-repeat center/contain}
+a.xref::after{content:" ↗"; font-size:.85em}
+.gd-row{display:flex; flex-wrap:wrap; align-items:center; gap:6px 8px; margin-top:.9rem; font-size:.82rem}
+.gd-row .k{font-family:var(--f-mono); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3); margin-right:2px}
+.gd-row a{text-decoration:none; color:var(--ink2); border:1px solid var(--rule); border-radius:999px; padding:3px 10px 3px 8px; background:var(--sheet); white-space:normal}
+.gd-row a:hover{color:var(--blue); border-color:var(--blue)}
+.gal-dlg .gal-bar a.gd{font-size:.82rem; text-decoration:none; border:1px solid var(--rule); border-radius:999px; padding:4px 10px 4px 8px; flex:none}
+.attach a.gd, .prose a.gd, footer a.gd{white-space:normal}
+
 /* title block */
 .top{display:grid; grid-template-columns:minmax(0,1fr) auto; gap:24px; align-items:end; padding-block:40px 28px; border-bottom:2px solid var(--ink)}
 .top h1{font-size:clamp(2.4rem, 1.6rem + 3.6vw, 4.2rem); font-weight:800; letter-spacing:-0.02em; margin:.4rem 0 .6rem}
@@ -58,7 +69,7 @@ nav.toc .sub{display:inline-flex; gap:8px; color:var(--ink3)}
 section.sheet{padding-block:44px 8px; display:grid; gap:20px}
 .sheet-head{display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 16px; align-items:baseline}
 .sheet-no{font-family:var(--f-mono); font-size:.8rem; color:var(--blue); border:1.5px solid var(--blue); padding:2px 7px; border-radius:3px; letter-spacing:.06em}
-.sheet-head .prose{grid-column:1/-1}
+.sheet-head .prose, .sheet-head .gd-row{grid-column:1/-1}
 
 .plate{background:var(--plate); border:1px solid var(--rule); border-radius:var(--r); padding:8px; overflow-x:auto}
 .plate svg{display:block; width:100%; height:auto; min-width:640px}
@@ -315,6 +326,7 @@ html:not(.paged) .pager{display:none}
     <div class="eyebrow">Anteproyecto · San Luis Potosí</div>
     <h1>Casa patio con mirador</h1>
     <p class="lead">Tres formas de acomodar la casa en el lote, comparadas con la propuesta previa, y una opción recomendada que junta lo mejor de cada una con su revisión. Todas usan hasta 3 niveles sobre el suelo, 1 m de restricción a las calles y barda al SW, con la vista al norte.</p>
+    
   </div>
   <div class="cartouche" aria-label="Datos de la lámina">
     <div>Proyecto</div><div>Casa habitación</div>
@@ -6229,6 +6241,7 @@ html:not(.paged) .pager{display:none}
   function show(i) {
     cur = (i + items.length) % items.length; var b = items[cur];
     img.src = b.getAttribute('data-full'); img.alt = b.getAttribute('data-title');
+    var o = dlg.querySelector('.gal-orig'), d = b.getAttribute('data-drive'); if (o) { o.hidden = !d; if (d) o.href = d; }
     tt.innerHTML = ''; var h = document.createElement('b'); h.textContent = b.getAttribute('data-title'); tt.appendChild(h);
     var c = document.createElement('span'); c.textContent = [b.getAttribute('data-cap'), b.getAttribute('data-src')].filter(Boolean).join(' · '); tt.appendChild(c);
   }
@@ -6371,7 +6384,7 @@ Place: the ENTRANCE HALL just inside the front door on the north-east street: an
 
 <nav class="pager" aria-label="Lámina anterior y siguiente"><a id="pg-prev" class="prev" href="#terreno" hidden><small>← Anterior</small><span></span></a><a id="pg-next" class="next" href="#programa"><small>Siguiente →</small><span></span></a></nav>
 
-<footer>Planos esquemáticos a partir del DWG del lote, el reglamento del condominio (Anexo D), el documento de programa y las propuestas Propuesta previa. No sustituyen un proyecto ejecutivo. Faltan levantamiento topográfico con niveles de calle y estudio de mecánica de suelos.</footer>
+<footer>Planos esquemáticos a partir del DWG del lote, el reglamento del condominio (Anexo D), el documento de programa y las propuestas previas. No sustituyen un proyecto ejecutivo. Faltan levantamiento topográfico con niveles de calle y estudio de mecánica de suelos.</footer>
 </main>
 </div>
 

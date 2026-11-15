@@ -2,13 +2,14 @@
 
 import { motion } from "framer-motion"
 import {
-  PromptInput,
-  PromptInputSubmit,
-  PromptInputTextarea,
-  type PromptInputMessage,
-} from "@/components/ai-elements/prompt-input"
+  InputGroup,
+  InputGroupButton,
+  InputGroupTextarea,
+} from "@workspace/ui/components/input-group"
+import { CornerDownLeftIcon, SquareIcon } from "lucide-react"
 import { BlinkingCursor } from "@/components/chatbot/blinking-cursor"
 import type { getClasses } from "@/components/chatbot/chatbot-ui.theme"
+import { usePromptCarousel } from "@/components/chatbot/use-prompt-carousel"
 
 type ChatbotClasses = ReturnType<typeof getClasses>
 
@@ -16,8 +17,9 @@ type ThemedPromptInputProps = {
   classes: ChatbotClasses
   hasMessages: boolean
   showCarousel: boolean
+  isPromptCarouselEnabled: boolean
   isPromptActive: boolean
-  typedPrompt: string
+  prompts: string[]
   input: string
   isLoading: boolean
   textareaRef: React.RefObject<HTMLTextAreaElement | null>
@@ -32,8 +34,9 @@ export function ThemedPromptInput({
   classes,
   hasMessages,
   showCarousel,
+  isPromptCarouselEnabled,
   isPromptActive,
-  typedPrompt,
+  prompts,
   input,
   isLoading,
   textareaRef,
@@ -43,6 +46,8 @@ export function ThemedPromptInput({
   onInputFocus,
   onInputBlur,
 }: ThemedPromptInputProps) {
+  const { typedPrompt } = usePromptCarousel(prompts, isPromptCarouselEnabled)
+
   return (
     <motion.div
       className={`${
@@ -54,50 +59,78 @@ export function ThemedPromptInput({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.2 }}
     >
-      <PromptInput
+      <form
         className="[&_[data-slot=input-group]]:!bg-transparent [&_[data-slot=input-group]]:dark:!bg-transparent [&_[data-slot=input-group]]:!shadow-none [&_[data-slot=input-group]]:border-transparent [&_[data-slot=input-group]]:backdrop-blur-none [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:border-transparent [&_[data-slot=input-group]]:has-[[data-slot=input-group-control]:focus-visible]:ring-0 [&_[data-slot=input-group-control]]:!bg-transparent [&_[data-slot=input-group-control]]:dark:!bg-transparent [&_[data-slot=input-group-control]]:!font-mono [&_[data-slot=input-group-control]]:focus-visible:border-transparent [&_[data-slot=input-group-control]]:focus-visible:ring-0 [&_[data-slot=input-group-control]]:focus:outline-none [&_[data-slot=button]]:!font-mono [&_textarea]:!bg-transparent [&_textarea]:dark:!bg-transparent [&_textarea]:!font-mono [&_button]:!font-mono"
         onClick={onPromptInteract}
-        onSubmit={async (message: PromptInputMessage, event) => {
+        onSubmit={async (event) => {
           event.preventDefault()
-          await onSubmitText(message.text)
+          await onSubmitText(input)
         }}
       >
-        <div className="relative flex-1">
-          <div
-            className={`pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 font-mono text-sm ${classes.promptGlyph}`}
-          >
-            ❯
-          </div>
-          {showCarousel && (
+        <InputGroup className="overflow-hidden">
+          <div className="relative flex-1">
             <div
-              className={`pointer-events-none absolute inset-y-0 left-10 z-10 flex items-center font-mono text-sm transition-opacity duration-200 ${isPromptActive ? "opacity-20" : "opacity-100"} ${classes.placeholderText}`}
+              className={`pointer-events-none absolute left-4 top-1/2 z-10 -translate-y-1/2 font-mono text-sm ${classes.promptGlyph}`}
             >
-              <span className="mr-1">Try:</span>
-              <span className="mr-1">"</span>
-              <em>{typedPrompt}</em>
-              <span>"</span>
-              {!isPromptActive && (
-                <BlinkingCursor className={`ml-1 ${classes.placeholderCaret}`} />
-              )}
+              ❯
             </div>
-          )}
-          <PromptInputTextarea
-            className={hasMessages ? classes.textarea : classes.initialTextarea}
-            onChange={(event) => onInputChange(event.currentTarget.value)}
-            onFocus={onInputFocus}
-            onBlur={onInputBlur}
-            placeholder=""
-            ref={textareaRef}
-            value={input}
-          />
-        </div>
-        <PromptInputSubmit
-          className={hasMessages ? classes.submit : classes.initialSubmit}
-          disabled={!input.trim()}
-          onStop={() => {}}
-          status={isLoading ? "streaming" : "ready"}
-        />
-      </PromptInput>
+            {showCarousel && (
+              <div
+                className={`pointer-events-none absolute inset-y-0 left-10 z-10 flex items-center font-mono text-sm transition-opacity duration-200 ${isPromptActive ? "opacity-20" : "opacity-100"} ${classes.placeholderText}`}
+              >
+                <span className="mr-1">Try:</span>
+                <span className="mr-1">"</span>
+                <em>{typedPrompt}</em>
+                <span>"</span>
+                {!isPromptActive && (
+                  <BlinkingCursor className={`ml-1 ${classes.placeholderCaret}`} />
+                )}
+              </div>
+            )}
+            <InputGroupTextarea
+              className={`field-sizing-content max-h-48 min-h-16 ${
+                hasMessages ? classes.textarea : classes.initialTextarea
+              }`}
+              name="message"
+              onBlur={onInputBlur}
+              onChange={(event) => onInputChange(event.currentTarget.value)}
+              onFocus={onInputFocus}
+              onKeyDown={(event) => {
+                if (
+                  event.key !== "Enter" ||
+                  event.shiftKey ||
+                  event.nativeEvent.isComposing ||
+                  event.keyCode === 229
+                ) {
+                  return
+                }
+
+                event.preventDefault()
+                if (input.trim() && !isLoading) {
+                  event.currentTarget.form?.requestSubmit()
+                }
+              }}
+              placeholder=""
+              ref={textareaRef}
+              value={input}
+            />
+          </div>
+          <InputGroupButton
+            aria-label={isLoading ? "Stop" : "Submit"}
+            className={hasMessages ? classes.submit : classes.initialSubmit}
+            disabled={!input.trim()}
+            size="icon-sm"
+            type={isLoading ? "button" : "submit"}
+            variant="default"
+          >
+            {isLoading ? (
+              <SquareIcon className="size-4" />
+            ) : (
+              <CornerDownLeftIcon className="size-4" />
+            )}
+          </InputGroupButton>
+        </InputGroup>
+      </form>
     </motion.div>
   )
 }

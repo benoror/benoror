@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"
 import { useTheme } from "next-themes"
-import * as THREE from "three"
 
 const HORIZON = 0.6
 
@@ -286,44 +285,49 @@ export default function OutrunHeroBackground() {
 
   // ── Layer 2: Three.js GPU grid ─────────────────────────────────────
   useEffect(() => {
-    if (!threeRef.current) return
-
     const container = threeRef.current
-    const scene = new THREE.Scene()
+    if (!container) return
 
-    // Camera tuned so the grid horizon sits at ~60 % from top
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    )
-    camera.position.set(0, 2.5, 5)
-    camera.rotation.x = 0.15
+    let cancelled = false
+    let dispose: (() => void) | undefined
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor(0x000000, 0)
-    container.appendChild(renderer.domElement)
+    void import("three").then((THREE) => {
+      if (cancelled) return
 
-    const cellSize = 2
-    const gridSize = 1000
-    const gridDivisions = gridSize / cellSize
+      const scene = new THREE.Scene()
 
-    const gridMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        camZ: { value: camera.position.z },
-      },
-      vertexShader: `
+      // Camera tuned so the grid horizon sits at ~60 % from top
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      )
+      camera.position.set(0, 2.5, 5)
+      camera.rotation.x = 0.15
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      renderer.setClearColor(0x000000, 0)
+      container.appendChild(renderer.domElement)
+
+      const cellSize = 2
+      const gridSize = 1000
+
+      const gridMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0 },
+          camZ: { value: camera.position.z },
+        },
+        vertexShader: `
         varying vec3 vWorldPos;
         void main() {
           vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
-      fragmentShader: `
+        fragmentShader: `
         uniform float time;
         uniform float camZ;
         varying vec3 vWorldPos;
@@ -344,65 +348,71 @@ export default function OutrunHeroBackground() {
           gl_FragColor = vec4(color * pulse * glow, horizonFade * xFade);
         }
       `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      })
+
+      // Build grid line segments
+      const gridGeometry = new THREE.BufferGeometry()
+      const verts: number[] = []
+
+      for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
+        verts.push(-gridSize / 2, 0, i, gridSize / 2, 0, i)
+      }
+      for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
+        verts.push(i, 0, -gridSize / 2, i, 0, gridSize / 2)
+      }
+
+      gridGeometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(verts, 3),
+      )
+      const grid = new THREE.LineSegments(gridGeometry, gridMaterial)
+      scene.add(grid)
+
+      let time = 0
+      let rafId: number
+
+      const animate = () => {
+        rafId = requestAnimationFrame(animate)
+        time += 0.01
+        if (gridMaterial.uniforms.time) {
+          gridMaterial.uniforms.time.value = time
+        }
+
+        grid.position.z += 0.08
+        if (grid.position.z > cellSize) {
+          grid.position.z = 0
+        }
+
+        renderer.render(scene, camera)
+      }
+
+      const handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight
+        camera.updateProjectionMatrix()
+        renderer.setSize(window.innerWidth, window.innerHeight)
+      }
+
+      window.addEventListener("resize", handleResize)
+      animate()
+
+      dispose = () => {
+        window.removeEventListener("resize", handleResize)
+        cancelAnimationFrame(rafId)
+        if (container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement)
+        }
+        gridGeometry.dispose()
+        gridMaterial.dispose()
+        renderer.dispose()
+      }
     })
 
-    // Build grid line segments
-    const gridGeometry = new THREE.BufferGeometry()
-    const verts: number[] = []
-
-    for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
-      verts.push(-gridSize / 2, 0, i, gridSize / 2, 0, i)
-    }
-    for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
-      verts.push(i, 0, -gridSize / 2, i, 0, gridSize / 2)
-    }
-
-    gridGeometry.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(verts, 3),
-    )
-    const grid = new THREE.LineSegments(gridGeometry, gridMaterial)
-    scene.add(grid)
-
-    let time = 0
-    let rafId: number
-
-    const animate = () => {
-      rafId = requestAnimationFrame(animate)
-      time += 0.01
-      if (gridMaterial.uniforms.time) {
-        gridMaterial.uniforms.time.value = time
-      }
-
-      grid.position.z += 0.08
-      if (grid.position.z > cellSize) {
-        grid.position.z = 0
-      }
-
-      renderer.render(scene, camera)
-    }
-
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
-    }
-
-    window.addEventListener("resize", handleResize)
-    animate()
-
     return () => {
-      window.removeEventListener("resize", handleResize)
-      cancelAnimationFrame(rafId)
-      if (container?.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
-      }
-      gridGeometry.dispose()
-      gridMaterial.dispose()
-      renderer.dispose()
+      cancelled = true
+      dispose?.()
     }
   }, [])
 

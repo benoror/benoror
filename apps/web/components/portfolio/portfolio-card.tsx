@@ -12,9 +12,10 @@ import { getClasses } from "./portfolio-card.theme"
 
 interface PortfolioCardProps {
   item: PortfolioItem
+  prioritizeImage?: boolean
 }
 
-export default function PortfolioCard({ item }: PortfolioCardProps) {
+export default function PortfolioCard({ item, prioritizeImage = false }: PortfolioCardProps) {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const [isHovered, setIsHovered] = useState(false)
@@ -39,7 +40,13 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
       <div className="relative h-48 overflow-hidden">
         <motion.div animate={{ scale: isHovered ? 1.05 : 1 }} transition={{ duration: 0.3 }} className="h-full w-full">
           {useSlider ? (
-            <ImageSlider images={item.images} alt={item.title} autoplayInterval={3000} className="h-full" />
+            <ImageSlider
+              images={item.images}
+              alt={item.title}
+              autoplayInterval={3000}
+              className="h-full"
+              prioritizeFirstImage={prioritizeImage}
+            />
           ) : (
             <Image
               src={item.images[0] || "/placeholder.svg"}

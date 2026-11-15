@@ -54,21 +54,37 @@ export default function OutrunHeroBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    let animationFrameId: number
+    let animationFrameId = 0
     let time = 0
+    let lastFrameTime = 0
+    const isMobile = window.matchMedia("(max-width: 768px)").matches
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const mobileFrameInterval = 1000 / 30
 
     const resize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
 
-    window.addEventListener("resize", resize)
-    resize()
-
     const isDark = theme === "outrun" || resolvedTheme === "dark"
 
-    const draw = () => {
-      time += 0.01
+    const draw = (frameTime = 0) => {
+      if (
+        !prefersReducedMotion &&
+        isMobile &&
+        lastFrameTime > 0 &&
+        frameTime - lastFrameTime < mobileFrameInterval
+      ) {
+        animationFrameId = requestAnimationFrame(draw)
+        return
+      }
+
+      const frameScale =
+        isMobile && lastFrameTime > 0 && frameTime > 0
+          ? Math.min((frameTime - lastFrameTime) / (1000 / 60), 4)
+          : 1
+      if (frameTime > 0) lastFrameTime = frameTime
+      time += 0.01 * frameScale
       const w = canvas.width
       const h = canvas.height
       const horizonY = h * HORIZON
@@ -272,13 +288,22 @@ export default function OutrunHeroBackground() {
       //   ctx.fill()
       // }
 
-      animationFrameId = requestAnimationFrame(draw)
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(draw)
+      }
     }
 
+    const handleResize = () => {
+      resize()
+      if (prefersReducedMotion) draw()
+    }
+
+    window.addEventListener("resize", handleResize)
+    resize()
     draw()
 
     return () => {
-      window.removeEventListener("resize", resize)
+      window.removeEventListener("resize", handleResize)
       cancelAnimationFrame(animationFrameId)
     }
   }, [theme, resolvedTheme])
@@ -288,10 +313,24 @@ export default function OutrunHeroBackground() {
     const container = threeRef.current
     if (!container) return
 
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) {
+      container.replaceChildren()
+      return
+    }
+
+    const isMobile = window.matchMedia("(max-width: 768px)").matches
+    const mobileFrameInterval = 1000 / 30
     let cancelled = false
     let dispose: (() => void) | undefined
+    let idleCallbackId: number | null = null
+    let fallbackTimeoutId: number | null = null
 
-    void import("three").then((THREE) => {
+    const initializeWebGL = async () => {
+      idleCallbackId = null
+      fallbackTimeoutId = null
+
+      const THREE = await import("three")
       if (cancelled) return
 
       const scene = new THREE.Scene()
@@ -308,7 +347,7 @@ export default function OutrunHeroBackground() {
 
       const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
       renderer.setSize(window.innerWidth, window.innerHeight)
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+      renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2))
       renderer.setClearColor(0x000000, 0)
       container.appendChild(renderer.domElement)
 
@@ -373,15 +412,29 @@ export default function OutrunHeroBackground() {
 
       let time = 0
       let rafId: number
+      let lastFrameTime = 0
 
-      const animate = () => {
+      const animate = (frameTime = 0) => {
         rafId = requestAnimationFrame(animate)
-        time += 0.01
+        if (
+          isMobile &&
+          lastFrameTime > 0 &&
+          frameTime - lastFrameTime < mobileFrameInterval
+        ) {
+          return
+        }
+
+        const frameScale =
+          isMobile && lastFrameTime > 0 && frameTime > 0
+            ? Math.min((frameTime - lastFrameTime) / (1000 / 60), 4)
+            : 1
+        if (frameTime > 0) lastFrameTime = frameTime
+        time += 0.01 * frameScale
         if (gridMaterial.uniforms.time) {
           gridMaterial.uniforms.time.value = time
         }
 
-        grid.position.z += 0.08
+        grid.position.z += 0.08 * frameScale
         if (grid.position.z > cellSize) {
           grid.position.z = 0
         }
@@ -408,10 +461,35 @@ export default function OutrunHeroBackground() {
         gridMaterial.dispose()
         renderer.dispose()
       }
-    })
+    }
+
+    const scheduleInitialization = () => {
+      if (cancelled) return
+
+      if ("requestIdleCallback" in window) {
+        idleCallbackId = window.requestIdleCallback(initializeWebGL, {
+          timeout: 2000,
+        })
+      } else {
+        fallbackTimeoutId = globalThis.setTimeout(initializeWebGL, 250) as unknown as number
+      }
+    }
+
+    if (document.readyState === "complete") {
+      scheduleInitialization()
+    } else {
+      window.addEventListener("load", scheduleInitialization, { once: true })
+    }
 
     return () => {
       cancelled = true
+      window.removeEventListener("load", scheduleInitialization)
+      if (idleCallbackId !== null) {
+        window.cancelIdleCallback(idleCallbackId)
+      }
+      if (fallbackTimeoutId !== null) {
+        window.clearTimeout(fallbackTimeoutId)
+      }
       dispose?.()
     }
   }, [])

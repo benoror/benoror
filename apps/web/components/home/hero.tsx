@@ -9,6 +9,7 @@ import { HOME, LINKS } from "@workspace/data/shared/profile"
 import { SocialIcons } from "../ui/social-icons"
 import OutrunGrid from "@/components/outrun-hero-background"
 import { useAppTheme } from "@/hooks/use-app-theme"
+import { useHasInteracted } from "@/hooks/use-has-interacted"
 import Link from "next/link"
 import { getClasses } from "./hero.theme"
 
@@ -17,18 +18,20 @@ import styles from './home.module.css'
 const MotionImage = motion.create(Image)
 
 function shuffleImages(images: string[]) {
-  const shuffled = [...images]
+  const [firstImage, ...remainingImages] = images
+  const shuffled = [...remainingImages]
   for (let i = shuffled.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1))
     const current = shuffled[i]!
     shuffled[i] = shuffled[j]!
     shuffled[j] = current
   }
-  return shuffled
+  return firstImage ? [firstImage, ...shuffled] : shuffled
 }
 
 export default function Hero() {
   const { themeKind } = useAppTheme()
+  const hasInteracted = useHasInteracted()
   const classes = getClasses(themeKind)
   const [activeImageIndex, setActiveImageIndex] = useState(0)
   const baseImages = useMemo(
@@ -53,12 +56,14 @@ export default function Hero() {
   }, [baseImages])
 
   useEffect(() => {
+    if (!hasInteracted || images.length < 2) return
+
     const interval = setInterval(() => {
       setActiveImageIndex((prev) => (prev + 1) % images.length)
     }, 1500)
 
     return () => clearInterval(interval)
-  }, [images.length])
+  }, [hasInteracted, images.length])
 
   return (
     <section id="top" className={`min-h-screen flex flex-col justify-center items-center relative overflow-hidden ${classes.section}`}>
@@ -92,17 +97,19 @@ export default function Hero() {
             className="flex justify-center mt-6 mb-4"
           >
             <div className={styles.profileImage}>
-              <Image
-                src={images[(activeImageIndex + 1) % images.length] || "/placeholder.svg"}
-                alt=""
-                aria-hidden="true"
-                className="invisible"
-                decoding="async"
-                fetchPriority="low"
-                fill
-                quality={90}
-                sizes="280px"
-              />
+              {hasInteracted ? (
+                <Image
+                  src={images[(activeImageIndex + 1) % images.length] || "/placeholder.svg"}
+                  alt=""
+                  aria-hidden="true"
+                  className="invisible"
+                  decoding="async"
+                  fetchPriority="low"
+                  fill
+                  quality={90}
+                  sizes="280px"
+                />
+              ) : null}
               <AnimatePresence mode="sync" initial={false}>
                 <MotionImage
                   key={images[activeImageIndex]}

@@ -15,6 +15,8 @@ interface ImageSliderProps {
 export default function ImageSlider({ images, alt, autoplayInterval = 1000, className = "" }: ImageSliderProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [autoplay, setAutoplay] = useState(true)
+  const [isNearViewport, setIsNearViewport] = useState(true)
+  const containerRef = useRef<HTMLDivElement>(null)
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Create a placeholder image URL with dimensions
@@ -45,7 +47,7 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
 
   // Handle autoplay
   useEffect(() => {
-    if (autoplay && imageList.length > 1) {
+    if (autoplay && isNearViewport && imageList.length > 1) {
       autoplayTimeoutRef.current = setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
       }, autoplayInterval)
@@ -56,10 +58,23 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
         clearTimeout(autoplayTimeoutRef.current)
       }
     }
-  }, [currentIndex, autoplay, imageList.length, autoplayInterval])
+  }, [currentIndex, autoplay, autoplayInterval, imageList.length, isNearViewport])
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || typeof IntersectionObserver === "undefined") return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearViewport(Boolean(entry?.isIntersecting)),
+      { rootMargin: "200px" },
+    )
+    observer.observe(container)
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div ref={containerRef} className={`relative overflow-hidden ${className}`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -73,6 +88,7 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
             src={imageList[currentIndex] || "/placeholder.svg"}
             alt={`${alt} - image ${currentIndex + 1} of ${imageList.length}`}
             fill
+            sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, calc(100vw - 6rem)"
             className="object-cover"
           />
         </motion.div>

@@ -41,12 +41,24 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
           {useSlider ? (
             <ImageSlider images={item.images} alt={item.title} autoplayInterval={3000} className="h-full" />
           ) : (
-            <Image src={item.images[0] || "/placeholder.svg"} alt={item.title} fill className="object-fill justify-start" />
+            <Image
+              src={item.images[0] || "/placeholder.svg"}
+              alt={item.title}
+              fill
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, calc(100vw - 6rem)"
+              className="object-fill justify-start"
+            />
           )}
         </motion.div>
 
         <div className={`absolute h-16 w-16 top-4 left-4 rounded-full border-2 ring-2 flex items-center justify-center ${classes.iconWrap}`}>
-          <Image src={item.icon || "/placeholder.svg"} alt={item.title} fill className="rounded-full p-2" />
+          <Image
+            src={item.icon || "/placeholder.svg"}
+            alt={item.title}
+            fill
+            sizes="64px"
+            className="rounded-full p-2"
+          />
         </div>
 
         <div className={`absolute inset-0 ${classes.imageOverlay}`} />

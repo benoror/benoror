@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useMemo } from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import Image from "next/image"
 import { HOME, LINKS } from "@workspace/data/shared/profile"
 import { SocialIcons } from "../ui/social-icons"
 import OutrunGrid from "@/components/outrun-hero-background"
@@ -12,6 +13,8 @@ import Link from "next/link"
 import { getClasses } from "./hero.theme"
 
 import styles from './home.module.css'
+
+const MotionImage = motion.create(Image)
 
 function shuffleImages(images: string[]) {
   const shuffled = [...images]
@@ -48,28 +51,6 @@ export default function Hero() {
     // Keep first render deterministic for SSR hydration, then randomize on client.
     setImages(shuffleImages(baseImages))
   }, [baseImages])
-
-  useEffect(() => {
-    const preloadLinks: HTMLLinkElement[] = []
-
-    images.forEach((src) => {
-      // Hint the browser to fetch carousel assets as early as possible.
-      const link = document.createElement("link")
-      link.rel = "preload"
-      link.as = "image"
-      link.href = src
-      document.head.appendChild(link)
-      preloadLinks.push(link)
-
-      const img = new Image()
-      img.decoding = "async"
-      img.src = src
-    })
-
-    return () => {
-      preloadLinks.forEach((link) => link.remove())
-    }
-  }, [images])
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -111,14 +92,29 @@ export default function Hero() {
             className="flex justify-center mt-6 mb-4"
           >
             <div className={styles.profileImage}>
+              <Image
+                src={images[(activeImageIndex + 1) % images.length] || "/placeholder.svg"}
+                alt=""
+                aria-hidden="true"
+                className="invisible"
+                decoding="async"
+                fetchPriority="low"
+                fill
+                quality={90}
+                sizes="280px"
+              />
               <AnimatePresence mode="sync" initial={false}>
-                <motion.img
+                <MotionImage
                   key={images[activeImageIndex]}
                   src={images[activeImageIndex] || "/placeholder.svg"}
                   alt={`Ben Orozco profile ${activeImageIndex + 1}`}
                   className={styles.carouselImage}
-                  loading="eager"
                   decoding="async"
+                  fetchPriority={activeImageIndex === 0 ? "high" : undefined}
+                  fill
+                  priority={activeImageIndex === 0}
+                  quality={90}
+                  sizes="280px"
                   initial={{
                     opacity: 0,
                     scale: 1.06,

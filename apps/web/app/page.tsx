@@ -5,6 +5,8 @@ import FeedExcerpt from "@/components/home/feed-excerpt"
 import Footer from "@/components/footer"
 import type { Metadata } from "next"
 
+export const revalidate = 1800
+
 export const metadata: Metadata = {
   alternates: {
     canonical: "/",

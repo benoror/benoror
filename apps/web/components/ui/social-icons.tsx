@@ -1,61 +1,24 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, NotebookPen, Rss, Twitter } from "lucide-react"
+import { Mail, Rss } from "lucide-react"
 import { HOME, LINKS } from "@workspace/data/shared/profile"
 import { shortURL } from "@workspace/utils/url"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@workspace/ui/components/tooltip"
+import { PlatformIcon } from "@/components/ui/platform-icon"
 
 import styles from "../styles.module.css"
 
-function BlueskyIcon({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`inline-block bg-current ${className ?? ""}`}
-      style={{
-        maskImage: "url('/images/icons/bluesky.svg')",
-        maskRepeat: "no-repeat",
-        maskPosition: "center",
-        maskSize: "contain",
-        WebkitMaskImage: "url('/images/icons/bluesky.svg')",
-        WebkitMaskRepeat: "no-repeat",
-        WebkitMaskPosition: "center",
-        WebkitMaskSize: "contain",
-      }}
-    />
-  )
-}
-
-function ObsidianIcon({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={`inline-block bg-current ${className ?? ""}`}
-      style={{
-        maskImage: "url('/images/icons/obsidian.svg')",
-        maskRepeat: "no-repeat",
-        maskPosition: "center",
-        maskSize: "115%",
-        WebkitMaskImage: "url('/images/icons/obsidian.svg')",
-        WebkitMaskRepeat: "no-repeat",
-        WebkitMaskPosition: "center",
-        WebkitMaskSize: "115%",
-      }}
-    />
-  )
-}
-
 function IconLink({
-  Icon,
+  icon,
   link,
   text,
   legend,
   className,
   tooltipClassName,
 }: {
-  Icon: React.ElementType
+  icon: React.ReactNode
   link: string
   text: string
   legend?: string
@@ -73,7 +36,7 @@ function IconLink({
           aria-label={legend ?? text}
           title={text}
         >
-          <Icon className="h-6 w-6 block shrink-0" />
+          {icon}
         </a>
       </TooltipTrigger>
       <TooltipContent side="top" sideOffset={14} className={tooltipClassName}>
@@ -108,7 +71,7 @@ export function SocialIcons({
       className={`flex space-x-6 ${containerClassName}`}
     >
       <IconLink
-        Icon={Github}
+        icon={<PlatformIcon platform="github" className="h-6 w-6" />}
         link={LINKS.github.url}
         text={shortURL(LINKS.github.url)}
         legend={LINKS.github.legend}
@@ -116,7 +79,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={Twitter}
+        icon={<PlatformIcon platform="x" className="h-6 w-6" />}
         link={LINKS.twitter.url}
         text={shortURL(LINKS.twitter.url)}
         legend={LINKS.twitter.legend}
@@ -124,7 +87,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={BlueskyIcon}
+        icon={<PlatformIcon platform="bluesky" className="h-6 w-6" />}
         link={LINKS.bluesky.url}
         text={shortURL(LINKS.bluesky.url)}
         legend={LINKS.bluesky.legend}
@@ -132,7 +95,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={Linkedin}
+        icon={<PlatformIcon platform="linkedin" className="h-6 w-6" />}
         link={LINKS.linkedin.url}
         text={shortURL(LINKS.linkedin.url)}
         legend={LINKS.linkedin.legend}
@@ -140,7 +103,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={Mail}
+        icon={<Mail aria-hidden="true" className="h-6 w-6 block shrink-0" />}
         link={`mailto:${HOME.public_email}`}
         text={shortURL(HOME.public_email)}
         legend="Email"
@@ -148,7 +111,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={ObsidianIcon}
+        icon={<PlatformIcon platform="notes" className="h-6 w-6" />}
         link={LINKS.notes.url}
         text={shortURL(LINKS.notes.url)}
         legend={LINKS.notes.legend}
@@ -156,7 +119,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={NotebookPen}
+        icon={<PlatformIcon platform="bear" className="h-6 w-6" />}
         link={LINKS.blog.url}
         text={shortURL(LINKS.blog.url)}
         legend={LINKS.blog.legend}
@@ -164,7 +127,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        Icon={Rss}
+        icon={<Rss aria-hidden="true" className="h-6 w-6 block shrink-0" />}
         link={LINKS.feed_page.url}
         text={shortURL(LINKS.feed_page.url)}
         legend={LINKS.feed_page.legend}

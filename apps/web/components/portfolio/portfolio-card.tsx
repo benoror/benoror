@@ -12,9 +12,10 @@ import { getClasses } from "./portfolio-card.theme"
 
 interface PortfolioCardProps {
   item: PortfolioItem
+  prioritizeImage?: boolean
 }
 
-export default function PortfolioCard({ item }: PortfolioCardProps) {
+export default function PortfolioCard({ item, prioritizeImage = false }: PortfolioCardProps) {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const [isHovered, setIsHovered] = useState(false)
@@ -39,14 +40,32 @@ export default function PortfolioCard({ item }: PortfolioCardProps) {
       <div className="relative h-48 overflow-hidden">
         <motion.div animate={{ scale: isHovered ? 1.05 : 1 }} transition={{ duration: 0.3 }} className="h-full w-full">
           {useSlider ? (
-            <ImageSlider images={item.images} alt={item.title} autoplayInterval={3000} className="h-full" />
+            <ImageSlider
+              images={item.images}
+              alt={item.title}
+              autoplayInterval={3000}
+              className="h-full"
+              prioritizeFirstImage={prioritizeImage}
+            />
           ) : (
-            <Image src={item.images[0] || "/placeholder.svg"} alt={item.title} fill className="object-fill justify-start" />
+            <Image
+              src={item.images[0] || "/placeholder.svg"}
+              alt={item.title}
+              fill
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, calc(100vw - 6rem)"
+              className="object-fill justify-start"
+            />
           )}
         </motion.div>
 
         <div className={`absolute h-16 w-16 top-4 left-4 rounded-full border-2 ring-2 flex items-center justify-center ${classes.iconWrap}`}>
-          <Image src={item.icon || "/placeholder.svg"} alt={item.title} fill className="rounded-full p-2" />
+          <Image
+            src={item.icon || "/placeholder.svg"}
+            alt={item.title}
+            fill
+            sizes="64px"
+            className="rounded-full p-2"
+          />
         </div>
 
         <div className={`absolute inset-0 ${classes.imageOverlay}`} />

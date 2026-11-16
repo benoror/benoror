@@ -99,7 +99,7 @@ export const projectsItems: PortfolioItem[] = [
     category: "Open Source",
     role: "👷‍♂️ Maker",
     url: "https://github.com/benoror/gpg.nvim",
-    images: ["/images/portfolio/gpg.nvim.gif"],
+    images: ["/images/portfolio/gpg.nvim.mp4"],
     description: "Editing GPG encrypted files symmetrically in NeoVIM",
     techStack: ["Lua", "Neovim", "GPG"],
     links: {
@@ -117,7 +117,7 @@ export const projectsItems: PortfolioItem[] = [
     role: "👷‍♂️ Maker",
     circa: "2025",
     url: "https://benoror.github.io/bloxcraft/",
-    images: ["/images/portfolio/bloxcraft.gif"],
+    images: ["/images/portfolio/bloxcraft.mp4"],
     description:
       "A vibe-coded puzzle game inspired by Bloxorz and based on thomasfriday.com/cuboid.",
     techStack: ["JavaScript", "HTML", "CSS", "Three.js"],

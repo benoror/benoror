@@ -1,13 +1,20 @@
 "use client"
 
 import { useCallback, useMemo, useRef, useState } from "react"
+import dynamic from "next/dynamic"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import { getClasses } from "@/components/chatbot/chatbot-ui.theme"
-import { usePromptCarousel } from "@/components/chatbot/use-prompt-carousel"
 import { useConversationUI } from "@/components/chatbot/use-conversation-ui"
 import { useChatTransport } from "@/components/chatbot/use-chat-transport"
 import { ThemedPromptInput } from "@/components/chatbot/themed-prompt-input"
-import { ThemedConversationPanel } from "@/components/chatbot/themed-conversation-panel"
+
+const loadConversationPanel = () =>
+  import("@/components/chatbot/themed-conversation-panel")
+
+const ThemedConversationPanel = dynamic(
+  () => loadConversationPanel().then((module) => module.ThemedConversationPanel),
+  { ssr: false },
+)
 
 // Placeholder prompts for the carousel
 const examplePrompts = [
@@ -48,8 +55,15 @@ export function ChatbotUI() {
   })
   const isExpanded = uiMode === "expanded"
   const isIdle = uiMode === "idle"
-  const { typedPrompt } = usePromptCarousel(examplePrompts, isIdle)
   const handleMinimize = useCallback(() => setIsConversationOpen(false), [setIsConversationOpen])
+  const handlePromptFocus = useCallback(() => {
+    void loadConversationPanel()
+    handleInputFocus()
+  }, [handleInputFocus])
+  const handlePromptClick = useCallback(() => {
+    void loadConversationPanel()
+    handlePromptInteract()
+  }, [handlePromptInteract])
   const handleSubmitText = useCallback(
     async (text: string) => {
       const trimmed = text.trim()
@@ -68,13 +82,15 @@ export function ChatbotUI() {
   return (
     <div className="pointer-events-none fixed inset-x-0 bottom-4 z-[100] flex justify-center px-4">
       <div ref={rootRef} className="pointer-events-auto w-full max-w-2xl">
-        <ThemedConversationPanel
-          classes={classes}
-          isExpanded={isExpanded}
-          messages={messages}
-          isLoading={isLoading}
-          onMinimize={handleMinimize}
-        />
+        {isExpanded ? (
+          <ThemedConversationPanel
+            classes={classes}
+            isExpanded={isExpanded}
+            messages={messages}
+            isLoading={isLoading}
+            onMinimize={handleMinimize}
+          />
+        ) : null}
 
         <ThemedPromptInput
           classes={classes}
@@ -82,14 +98,15 @@ export function ChatbotUI() {
           input={input}
           isLoading={isLoading}
           isPromptActive={isPromptActive}
+          isPromptCarouselEnabled={isIdle}
           onInputBlur={handleInputBlur}
           onInputChange={setInput}
-          onInputFocus={handleInputFocus}
-          onPromptInteract={handlePromptInteract}
+          onInputFocus={handlePromptFocus}
+          onPromptInteract={handlePromptClick}
           onSubmitText={handleSubmitText}
           textareaRef={textareaRef}
           showCarousel={showCarousel}
-          typedPrompt={typedPrompt}
+          prompts={examplePrompts}
         />
       </div>
     </div>

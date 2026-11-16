@@ -1,4 +1,5 @@
 import Parser from "rss-parser"
+import { unstable_cache } from "next/cache"
 import { FEED_SOURCES, LINKS } from "@workspace/data/shared/profile"
 import {
   type BlueskyAuthorFeedEntry,
@@ -716,7 +717,7 @@ const getSourceItems = async (
   }
 }
 
-export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
+const aggregateFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
   const items = mergeDuplicateFeedItems(sourceResults.flatMap((result) => result.items), LINK_PRIORITY_LIST)
@@ -735,3 +736,9 @@ export const getAggregatedFeed = async (): Promise<AggregatedFeed> => {
 
   return { items, sources, generatedAt: new Date().toISOString() }
 }
+
+export const getAggregatedFeed = unstable_cache(
+  aggregateFeed,
+  ["aggregated-feed-v1"],
+  { revalidate: 1800 },
+)

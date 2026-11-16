@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react"
 import { useTheme } from "next-themes"
-import * as THREE from "three"
 
 const HORIZON = 0.6
 
@@ -55,21 +54,37 @@ export default function OutrunHeroBackground() {
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
-    let animationFrameId: number
+    let animationFrameId = 0
     let time = 0
+    let lastFrameTime = 0
+    const isMobile = window.matchMedia("(max-width: 768px)").matches
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    const mobileFrameInterval = 1000 / 30
 
     const resize = () => {
       canvas.width = window.innerWidth
       canvas.height = window.innerHeight
     }
 
-    window.addEventListener("resize", resize)
-    resize()
-
     const isDark = theme === "outrun" || resolvedTheme === "dark"
 
-    const draw = () => {
-      time += 0.01
+    const draw = (frameTime = 0) => {
+      if (
+        !prefersReducedMotion &&
+        isMobile &&
+        lastFrameTime > 0 &&
+        frameTime - lastFrameTime < mobileFrameInterval
+      ) {
+        animationFrameId = requestAnimationFrame(draw)
+        return
+      }
+
+      const frameScale =
+        isMobile && lastFrameTime > 0 && frameTime > 0
+          ? Math.min((frameTime - lastFrameTime) / (1000 / 60), 4)
+          : 1
+      if (frameTime > 0) lastFrameTime = frameTime
+      time += 0.01 * frameScale
       const w = canvas.width
       const h = canvas.height
       const horizonY = h * HORIZON
@@ -273,57 +288,85 @@ export default function OutrunHeroBackground() {
       //   ctx.fill()
       // }
 
-      animationFrameId = requestAnimationFrame(draw)
+      if (!prefersReducedMotion) {
+        animationFrameId = requestAnimationFrame(draw)
+      }
     }
 
+    const handleResize = () => {
+      resize()
+      if (prefersReducedMotion) draw()
+    }
+
+    window.addEventListener("resize", handleResize)
+    resize()
     draw()
 
     return () => {
-      window.removeEventListener("resize", resize)
+      window.removeEventListener("resize", handleResize)
       cancelAnimationFrame(animationFrameId)
     }
   }, [theme, resolvedTheme])
 
   // ── Layer 2: Three.js GPU grid ─────────────────────────────────────
   useEffect(() => {
-    if (!threeRef.current) return
-
     const container = threeRef.current
-    const scene = new THREE.Scene()
+    if (!container) return
 
-    // Camera tuned so the grid horizon sits at ~60 % from top
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000,
-    )
-    camera.position.set(0, 2.5, 5)
-    camera.rotation.x = 0.15
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (prefersReducedMotion) {
+      container.replaceChildren()
+      return
+    }
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
-    renderer.setSize(window.innerWidth, window.innerHeight)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-    renderer.setClearColor(0x000000, 0)
-    container.appendChild(renderer.domElement)
+    const isMobile = window.matchMedia("(max-width: 768px)").matches
+    const mobileFrameInterval = 1000 / 30
+    let cancelled = false
+    let dispose: (() => void) | undefined
+    let idleCallbackId: number | null = null
+    let fallbackTimeoutId: number | null = null
 
-    const cellSize = 2
-    const gridSize = 1000
-    const gridDivisions = gridSize / cellSize
+    const initializeWebGL = async () => {
+      idleCallbackId = null
+      fallbackTimeoutId = null
 
-    const gridMaterial = new THREE.ShaderMaterial({
-      uniforms: {
-        time: { value: 0 },
-        camZ: { value: camera.position.z },
-      },
-      vertexShader: `
+      const THREE = await import("three")
+      if (cancelled) return
+
+      const scene = new THREE.Scene()
+
+      // Camera tuned so the grid horizon sits at ~60 % from top
+      const camera = new THREE.PerspectiveCamera(
+        75,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000,
+      )
+      camera.position.set(0, 2.5, 5)
+      camera.rotation.x = 0.15
+
+      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true })
+      renderer.setSize(window.innerWidth, window.innerHeight)
+      renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2))
+      renderer.setClearColor(0x000000, 0)
+      container.appendChild(renderer.domElement)
+
+      const cellSize = 2
+      const gridSize = 1000
+
+      const gridMaterial = new THREE.ShaderMaterial({
+        uniforms: {
+          time: { value: 0 },
+          camZ: { value: camera.position.z },
+        },
+        vertexShader: `
         varying vec3 vWorldPos;
         void main() {
           vWorldPos = (modelMatrix * vec4(position, 1.0)).xyz;
           gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
         }
       `,
-      fragmentShader: `
+        fragmentShader: `
         uniform float time;
         uniform float camZ;
         varying vec3 vWorldPos;
@@ -344,65 +387,110 @@ export default function OutrunHeroBackground() {
           gl_FragColor = vec4(color * pulse * glow, horizonFade * xFade);
         }
       `,
-      transparent: true,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    })
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+      })
 
-    // Build grid line segments
-    const gridGeometry = new THREE.BufferGeometry()
-    const verts: number[] = []
+      // Build grid line segments
+      const gridGeometry = new THREE.BufferGeometry()
+      const verts: number[] = []
 
-    for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
-      verts.push(-gridSize / 2, 0, i, gridSize / 2, 0, i)
-    }
-    for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
-      verts.push(i, 0, -gridSize / 2, i, 0, gridSize / 2)
-    }
-
-    gridGeometry.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(verts, 3),
-    )
-    const grid = new THREE.LineSegments(gridGeometry, gridMaterial)
-    scene.add(grid)
-
-    let time = 0
-    let rafId: number
-
-    const animate = () => {
-      rafId = requestAnimationFrame(animate)
-      time += 0.01
-      if (gridMaterial.uniforms.time) {
-        gridMaterial.uniforms.time.value = time
+      for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
+        verts.push(-gridSize / 2, 0, i, gridSize / 2, 0, i)
+      }
+      for (let i = -gridSize / 2; i <= gridSize / 2; i += cellSize) {
+        verts.push(i, 0, -gridSize / 2, i, 0, gridSize / 2)
       }
 
-      grid.position.z += 0.08
-      if (grid.position.z > cellSize) {
-        grid.position.z = 0
+      gridGeometry.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(verts, 3),
+      )
+      const grid = new THREE.LineSegments(gridGeometry, gridMaterial)
+      scene.add(grid)
+
+      let time = 0
+      let rafId: number
+      let lastFrameTime = 0
+
+      const animate = (frameTime = 0) => {
+        rafId = requestAnimationFrame(animate)
+        if (
+          isMobile &&
+          lastFrameTime > 0 &&
+          frameTime - lastFrameTime < mobileFrameInterval
+        ) {
+          return
+        }
+
+        const frameScale =
+          isMobile && lastFrameTime > 0 && frameTime > 0
+            ? Math.min((frameTime - lastFrameTime) / (1000 / 60), 4)
+            : 1
+        if (frameTime > 0) lastFrameTime = frameTime
+        time += 0.01 * frameScale
+        if (gridMaterial.uniforms.time) {
+          gridMaterial.uniforms.time.value = time
+        }
+
+        grid.position.z += 0.08 * frameScale
+        if (grid.position.z > cellSize) {
+          grid.position.z = 0
+        }
+
+        renderer.render(scene, camera)
       }
 
-      renderer.render(scene, camera)
+      const handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight
+        camera.updateProjectionMatrix()
+        renderer.setSize(window.innerWidth, window.innerHeight)
+      }
+
+      window.addEventListener("resize", handleResize)
+      animate()
+
+      dispose = () => {
+        window.removeEventListener("resize", handleResize)
+        cancelAnimationFrame(rafId)
+        if (container.contains(renderer.domElement)) {
+          container.removeChild(renderer.domElement)
+        }
+        gridGeometry.dispose()
+        gridMaterial.dispose()
+        renderer.dispose()
+      }
     }
 
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight
-      camera.updateProjectionMatrix()
-      renderer.setSize(window.innerWidth, window.innerHeight)
+    const scheduleInitialization = () => {
+      if (cancelled) return
+
+      if ("requestIdleCallback" in window) {
+        idleCallbackId = window.requestIdleCallback(initializeWebGL, {
+          timeout: 2000,
+        })
+      } else {
+        fallbackTimeoutId = globalThis.setTimeout(initializeWebGL, 250) as unknown as number
+      }
     }
 
-    window.addEventListener("resize", handleResize)
-    animate()
+    if (document.readyState === "complete") {
+      scheduleInitialization()
+    } else {
+      window.addEventListener("load", scheduleInitialization, { once: true })
+    }
 
     return () => {
-      window.removeEventListener("resize", handleResize)
-      cancelAnimationFrame(rafId)
-      if (container?.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement)
+      cancelled = true
+      window.removeEventListener("load", scheduleInitialization)
+      if (idleCallbackId !== null) {
+        window.cancelIdleCallback(idleCallbackId)
       }
-      gridGeometry.dispose()
-      gridMaterial.dispose()
-      renderer.dispose()
+      if (fallbackTimeoutId !== null) {
+        window.clearTimeout(fallbackTimeoutId)
+      }
+      dispose?.()
     }
   }, [])
 

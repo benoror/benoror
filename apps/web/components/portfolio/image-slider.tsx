@@ -3,18 +3,54 @@
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useHasInteracted } from "@/hooks/use-has-interacted"
+
+const VIDEO_MEDIA: Record<
+  string,
+  {
+    mp4: string
+    webm?: string
+    poster: string
+    width: number
+    height: number
+  }
+> = {
+  "/images/portfolio/bloxcraft.mp4": {
+    mp4: "/images/portfolio/bloxcraft.mp4",
+    poster: "/images/portfolio/bloxcraft-poster.png",
+    width: 640,
+    height: 480,
+  },
+  "/images/portfolio/gpg.nvim.mp4": {
+    mp4: "/images/portfolio/gpg.nvim.mp4",
+    webm: "/images/portfolio/gpg.nvim.webm",
+    poster: "/images/portfolio/gpg.nvim-poster.png",
+    width: 1152,
+    height: 648,
+  },
+}
 
 interface ImageSliderProps {
   images: string[]
   alt: string
   autoplayInterval?: number
   className?: string
+  prioritizeFirstImage?: boolean
 }
 
-export default function ImageSlider({ images, alt, autoplayInterval = 1000, className = "" }: ImageSliderProps) {
+export default function ImageSlider({
+  images,
+  alt,
+  autoplayInterval = 1000,
+  className = "",
+  prioritizeFirstImage = false,
+}: ImageSliderProps) {
+  const hasInteracted = useHasInteracted()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [autoplay, setAutoplay] = useState(true)
+  const [isNearViewport, setIsNearViewport] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const autoplayTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   // Create a placeholder image URL with dimensions
@@ -23,6 +59,8 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
   // Filter out empty image sources and ensure we have at least one valid image
   const validImages = images.filter((img) => img && img.trim() !== "")
   const imageList = validImages.length > 0 ? validImages : [placeholderImage]
+  const currentSource = imageList[currentIndex] || "/placeholder.svg"
+  const videoMedia = VIDEO_MEDIA[currentSource]
 
   // Reset autoplay when manually navigating
   const resetAutoplay = () => {
@@ -45,7 +83,7 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
 
   // Handle autoplay
   useEffect(() => {
-    if (autoplay && imageList.length > 1) {
+    if (autoplay && hasInteracted && isNearViewport && imageList.length > 1) {
       autoplayTimeoutRef.current = setTimeout(() => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
       }, autoplayInterval)
@@ -56,10 +94,36 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
         clearTimeout(autoplayTimeoutRef.current)
       }
     }
-  }, [currentIndex, autoplay, imageList.length, autoplayInterval])
+  }, [currentIndex, autoplay, autoplayInterval, hasInteracted, imageList.length, isNearViewport])
+
+  useEffect(() => {
+    const container = containerRef.current
+    if (!container || typeof IntersectionObserver === "undefined") return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearViewport(Boolean(entry?.isIntersecting)),
+      { rootMargin: "200px" },
+    )
+    observer.observe(container)
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    if (isNearViewport) {
+      void video.play().catch(() => {
+        // Autoplay can still be denied by user-agent policy; the poster remains visible.
+      })
+    } else {
+      video.pause()
+    }
+  }, [isNearViewport, videoMedia])
 
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div ref={containerRef} className={`relative overflow-hidden ${className}`}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
@@ -69,12 +133,34 @@ export default function ImageSlider({ images, alt, autoplayInterval = 1000, clas
           transition={{ duration: 0.1 }}
           className="relative w-full h-full"
         >
-          <Image
-            src={imageList[currentIndex] || "/placeholder.svg"}
-            alt={`${alt} - image ${currentIndex + 1} of ${imageList.length}`}
-            fill
-            className="object-cover"
-          />
+          {videoMedia ? (
+            <video
+              ref={videoRef}
+              aria-label={`${alt} animation`}
+              autoPlay={isNearViewport}
+              className="h-full w-full object-cover"
+              height={videoMedia.height}
+              loop
+              muted
+              playsInline
+              poster={videoMedia.poster}
+              preload={isNearViewport ? "auto" : "metadata"}
+              width={videoMedia.width}
+            >
+              {videoMedia.webm ? <source src={videoMedia.webm} type="video/webm" /> : null}
+              <source src={videoMedia.mp4} type="video/mp4" />
+            </video>
+          ) : (
+            <Image
+              src={currentSource}
+              alt={`${alt} - image ${currentIndex + 1} of ${imageList.length}`}
+              fetchPriority={prioritizeFirstImage && currentIndex === 0 ? "high" : undefined}
+              fill
+              priority={prioritizeFirstImage && currentIndex === 0}
+              sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, calc(100vw - 6rem)"
+              className="object-cover"
+            />
+          )}
         </motion.div>
       </AnimatePresence>
 

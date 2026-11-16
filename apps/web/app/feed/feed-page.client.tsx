@@ -7,9 +7,11 @@ import Footer from "@/components/footer"
 import OutrunGrid from "@/components/outrun-hero-background"
 import ExternalLink from "@/components/ui/external-link"
 import FeedItemBody from "@/components/feed/feed-item-body"
+import { PlatformIcon } from "@/components/ui/platform-icon"
 import { LINKS } from "@workspace/data/shared/profile"
 import { useAppTheme } from "@/hooks/use-app-theme"
 import type { AggregatedFeed, AggregatedFeedItem } from "@/lib/feed"
+import { detectFeedPlatform, getFeedPlatformLabel } from "@/lib/feed/platform"
 import { getClasses } from "./feed-page.theme"
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -28,6 +30,13 @@ function FeedItemCard({
   sourceRssUrl?: string
   classes: ReturnType<typeof getClasses>
 }) {
+  const canonicalPlatform = detectFeedPlatform({
+    sourceId: item.sourceId,
+    sourceName: item.sourceName,
+    url: item.link,
+    sourceUrl,
+  })
+
   return (
     <li className={`${classes.card} p-4`}>
       <div className="flex flex-col gap-2">
@@ -40,13 +49,14 @@ function FeedItemCard({
           {item.title}
         </a>
         <div className={`text-[0.92rem] ${classes.meta} flex flex-wrap items-center gap-2`}>
-            <ExternalLink
-              href={sourceUrl}
-              target="_blank"
-              className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
-            >
-              {item.sourceName}
-            </ExternalLink>
+          <ExternalLink
+            href={sourceUrl}
+            target="_blank"
+            className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
+          >
+            <PlatformIcon platform={canonicalPlatform} className="h-3.5 w-3.5" />
+            {item.sourceName}
+          </ExternalLink>
           {sourceRssUrl ? (
             <a
               href={sourceRssUrl}
@@ -70,22 +80,35 @@ function FeedItemCard({
           className={`text-[1.01rem] ${classes.body}`}
         />
         {item.alsoSharedTo && item.alsoSharedTo.length > 0 ? (
-          <div className={`flex justify-end text-xs ${classes.meta}`}>
-            <span className="mr-1">Also shared to:</span>
-            <span className="flex flex-wrap items-center justify-end gap-1">
-              {item.alsoSharedTo.map((shared, index) => (
-                <span key={`${item.id}-${shared.sourceId}-${index}`}>
+          <div className={`flex items-center justify-end gap-1.5 text-xs ${classes.meta}`}>
+            <span>Also on:</span>
+            <span className="flex flex-wrap items-center justify-end gap-0.5">
+              {item.alsoSharedTo.map((shared, index) => {
+                const platformInput = {
+                  sourceId: shared.sourceId,
+                  sourceName: shared.sourceName,
+                  url: shared.link,
+                }
+                const platform = detectFeedPlatform(platformInput)
+                const platformLabel =
+                  platform === "unknown"
+                    ? shared.sourceName || getFeedPlatformLabel(platformInput)
+                    : getFeedPlatformLabel(platformInput)
+
+                return (
                   <a
+                    key={`${item.id}-${shared.sourceId}-${index}`}
                     href={shared.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`underline underline-offset-4 ${classes.link}`}
+                    aria-label={`View this item on ${platformLabel}`}
+                    title={platformLabel}
+                    className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-current/10 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
                   >
-                    {shared.sourceName}
+                    <PlatformIcon platform={platform} className="h-4 w-4" />
                   </a>
-                  {index < item.alsoSharedTo!.length - 1 ? "," : ""}
-                </span>
-              ))}
+                )
+              })}
             </span>
           </div>
         ) : null}
@@ -119,9 +142,7 @@ function FeedPaginationControls({
       <Link
         href={getPageHref(Math.max(1, pagination.currentPage - 1))}
         aria-disabled={pagination.currentPage <= 1}
-        className={`text-sm underline underline-offset-4 ${
-          pagination.currentPage <= 1 ? "pointer-events-none opacity-50" : classes.link
-        }`}
+        className={`text-sm underline underline-offset-4 ${pagination.currentPage <= 1 ? "pointer-events-none opacity-50" : classes.link}`}
       >
         Previous
       </Link>
@@ -133,9 +154,7 @@ function FeedPaginationControls({
       <Link
         href={getPageHref(Math.min(pagination.totalPages, pagination.currentPage + 1))}
         aria-disabled={pagination.currentPage >= pagination.totalPages}
-        className={`text-sm underline underline-offset-4 ${
-          pagination.currentPage >= pagination.totalPages ? "pointer-events-none opacity-50" : classes.link
-        }`}
+        className={`text-sm underline underline-offset-4 ${pagination.currentPage >= pagination.totalPages ? "pointer-events-none opacity-50" : classes.link}`}
       >
         Next
       </Link>
@@ -143,13 +162,7 @@ function FeedPaginationControls({
   )
 }
 
-export function FeedPageClient({
-  feed,
-  pagination,
-}: {
-  feed: AggregatedFeed
-  pagination: FeedPagination
-}) {
+export function FeedPageClient({ feed, pagination }: { feed: AggregatedFeed; pagination: FeedPagination }) {
   const { themeKind } = useAppTheme()
   const classes = getClasses(themeKind)
   const sourceById = new Map(feed.sources.map((source) => [source.id, source]))
@@ -163,7 +176,11 @@ export function FeedPageClient({
         <div className="container mx-auto px-4 py-12 md:py-24">
           <div className={`${classes.panel} space-y-12`}>
             <div className="space-y-4">
-              <h1 className={`text-4xl md:text-5xl font-bold tracking-tighter ${classes.heading} ${classes.headingAccent}`}>Feed</h1>
+              <h1
+                className={`text-4xl md:text-5xl font-bold tracking-tighter ${classes.heading} ${classes.headingAccent}`}
+              >
+                Feed
+              </h1>
               <p className={`text-xl max-w-3xl ${classes.body}`}>
                 A consolidated stream of my writing and activity, powered by RSS/Atom.
               </p>
@@ -203,9 +220,7 @@ export function FeedPageClient({
               )}
             </div>
 
-            <p className={`text-xs ${classes.meta}`}>
-              Generated at {dateFormatter.format(new Date(feed.generatedAt))}
-            </p>
+            <p className={`text-xs ${classes.meta}`}>Generated at {dateFormatter.format(new Date(feed.generatedAt))}</p>
           </div>
         </div>
       </section>

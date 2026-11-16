@@ -110,3 +110,11 @@ export const PLATFORM_LABELS: Record<FeedPlatform, string> = {
 }
 
 export const getFeedPlatformLabel = (input: FeedPlatformInput): string => PLATFORM_LABELS[detectFeedPlatform(input)]
+
+export const getFeedPlatformDescriptor = (input: FeedPlatformInput): { platform: FeedPlatform; label: string } => {
+  const platform = detectFeedPlatform(input)
+  return {
+    platform,
+    label: platform === "unknown" ? input.sourceName || PLATFORM_LABELS.unknown : PLATFORM_LABELS[platform],
+  }
+}

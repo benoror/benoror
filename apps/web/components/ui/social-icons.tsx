@@ -71,7 +71,7 @@ export function SocialIcons({
       className={`flex space-x-6 ${containerClassName}`}
     >
       <IconLink
-        icon={<PlatformIcon platform="github" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="github" size={24} />}
         link={LINKS.github.url}
         text={shortURL(LINKS.github.url)}
         legend={LINKS.github.legend}
@@ -79,7 +79,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        icon={<PlatformIcon platform="x" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="x" size={24} />}
         link={LINKS.twitter.url}
         text={shortURL(LINKS.twitter.url)}
         legend={LINKS.twitter.legend}
@@ -87,7 +87,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        icon={<PlatformIcon platform="bluesky" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="bluesky" size={24} />}
         link={LINKS.bluesky.url}
         text={shortURL(LINKS.bluesky.url)}
         legend={LINKS.bluesky.legend}
@@ -95,7 +95,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        icon={<PlatformIcon platform="linkedin" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="linkedin" size={24} />}
         link={LINKS.linkedin.url}
         text={shortURL(LINKS.linkedin.url)}
         legend={LINKS.linkedin.legend}
@@ -111,7 +111,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        icon={<PlatformIcon platform="notes" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="notes" size={24} />}
         link={LINKS.notes.url}
         text={shortURL(LINKS.notes.url)}
         legend={LINKS.notes.legend}
@@ -119,7 +119,7 @@ export function SocialIcons({
         tooltipClassName={tooltipClassName}
       />
       <IconLink
-        icon={<PlatformIcon platform="bear" className="h-6 w-6" />}
+        icon={<PlatformIcon platform="bear" size={24} />}
         link={LINKS.blog.url}
         text={shortURL(LINKS.blog.url)}
         legend={LINKS.blog.legend}

@@ -26,14 +26,26 @@ const BLUESKY_THREAD_DEPTH = 6
 const BLUESKY_THREAD_CONCURRENCY = 4
 
 const parser = new Parser()
-const MANUAL_SOCIAL_SOURCE_URLS = new Set([LINKS.twitter.url, LINKS.linkedin.url])
+const EXPLICIT_PRIORITY_SOURCE_URLS = new Set([
+  LINKS.bear_blog.url,
+  LINKS.notes.url,
+  LINKS.twitter.url,
+  LINKS.linkedin.url,
+  LINKS.bluesky.url,
+])
+// Canonical items and "also on" links use the same order: Bear/notes
+// (long-form), X, LinkedIn, every other source, then Bluesky last. Thus
+// Bluesky is only canonical when no twin exists on any other source.
 const LINK_PRIORITY_LIST = [
-  ...Object.values(LINKS)
-    .map((entry) => entry.url)
-    .filter((url) => !MANUAL_SOCIAL_SOURCE_URLS.has(url)),
+  LINKS.bear_blog.url,
+  LINKS.notes.url,
   "https://x.com/benoror",
   LINKS.twitter.url,
   LINKS.linkedin.url,
+  ...Object.values(LINKS)
+    .map((entry) => entry.url)
+    .filter((url) => !EXPLICIT_PRIORITY_SOURCE_URLS.has(url)),
+  LINKS.bluesky.url,
 ]
 // This is a truncated duplicate of the canonical 3mzef2pyrwk2h post.
 const HIDDEN_BLUESKY_POST_LINKS = new Set(["https://bsky.app/profile/benoror.bsky.social/post/3mzeezv4klk2h"])

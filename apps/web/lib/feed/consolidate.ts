@@ -128,11 +128,54 @@ export const uniqueUrls = (values: Array<string | null | undefined>): string[] =
 
 const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase()
 
+const getHostname = (value: string): string | null => {
+  try {
+    return new URL(value).hostname.toLowerCase().replace(/^www\./, "")
+  } catch {
+    return null
+  }
+}
+
 // Only explicit share links (e.g. Bluesky embeds/facets) count as merge
 // signals. Harvesting URLs from arbitrary item bodies would collapse posts
 // that merely cite another item (e.g. a blog post linking to a note).
 const collectMatchLinks = (item: MergeableFeedItem): string[] =>
   uniqueUrls([item.link, ...(item.referencedLinks ?? [])])
+
+const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number => {
+  const normalizedSourceUrl = normalizePriorityUrl(sourceUrl)
+  const index = priorityUrls.findIndex((url) => {
+    const normalizedPriorityUrl = normalizePriorityUrl(url)
+    return (
+      normalizedSourceUrl === normalizedPriorityUrl ||
+      normalizedSourceUrl.startsWith(`${normalizedPriorityUrl}/`) ||
+      normalizedPriorityUrl.startsWith(`${normalizedSourceUrl}/`)
+    )
+  })
+
+  if (index >= 0) return index
+
+  const sourceHostname = getHostname(sourceUrl)
+  const sameHostnameIndex = sourceHostname
+    ? priorityUrls.findIndex((url) => getHostname(url) === sourceHostname)
+    : -1
+  if (sameHostnameIndex >= 0) return sameHostnameIndex
+
+  // An unlisted source belongs to the "everything else" bucket immediately
+  // before Bluesky, which must remain last even as new sources are added.
+  const blueskyIndex = priorityUrls.findIndex((url) => getHostname(url) === "bsky.app")
+  return blueskyIndex >= 0 ? blueskyIndex - 0.5 : Number.MAX_SAFE_INTEGER
+}
+
+const getSharedLinkPriority = <T extends MergeableFeedItem>(
+  candidate: AggregatedFeedAlsoSharedTo,
+  group: T[],
+  priorityUrls: string[],
+): number => {
+  const matchingItem = group.find((item) => item.sourceId === candidate.sourceId)
+  if (matchingItem) return getSourcePriority(matchingItem.sourceUrl, priorityUrls)
+  return getSourcePriority(candidate.link, priorityUrls)
+}
 
 const mergeAlsoSharedTo = <T extends MergeableFeedItem>(
   group: T[],
@@ -152,28 +195,20 @@ const mergeAlsoSharedTo = <T extends MergeableFeedItem>(
   ]
 
   const seen = new Set<string>()
-  return candidates.filter((candidate) => {
-    const normalized = normalizeUrlForMatch(candidate.link)
-    if (!normalized || urlsLooselyMatch(candidate.link, preferred.link) || seen.has(normalized)) {
-      return false
-    }
-    seen.add(normalized)
-    return true
-  })
-}
-
-const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number => {
-  const normalizedSourceUrl = normalizePriorityUrl(sourceUrl)
-  const index = priorityUrls.findIndex((url) => {
-    const normalizedPriorityUrl = normalizePriorityUrl(url)
-    return (
-      normalizedSourceUrl === normalizedPriorityUrl ||
-      normalizedSourceUrl.startsWith(`${normalizedPriorityUrl}/`) ||
-      normalizedPriorityUrl.startsWith(`${normalizedSourceUrl}/`)
+  return candidates
+    .filter((candidate) => {
+      const normalized = normalizeUrlForMatch(candidate.link)
+      if (!normalized || urlsLooselyMatch(candidate.link, preferred.link) || seen.has(normalized)) {
+        return false
+      }
+      seen.add(normalized)
+      return true
+    })
+    .sort(
+      (a, b) =>
+        getSharedLinkPriority(a, group, sourcePriorityUrls) -
+        getSharedLinkPriority(b, group, sourcePriorityUrls),
     )
-  })
-
-  return index >= 0 ? index : Number.MAX_SAFE_INTEGER
 }
 
 const pickPreferredBySourcePriority = <T extends MergeableFeedItem>(a: T, b: T, priorityUrls: string[]): T => {
@@ -253,7 +288,11 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
       if (group.length === 1) {
         const { referencedLinks, ...rest } = first
         void referencedLinks
-        return rest
+        const alternates = mergeAlsoSharedTo(group, first, sourcePriorityUrls)
+        return {
+          ...rest,
+          alsoSharedTo: alternates.length > 0 ? alternates : undefined,
+        }
       }
 
       const sorted = sortBySourcePriority(group, sourcePriorityUrls)

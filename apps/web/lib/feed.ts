@@ -16,7 +16,8 @@ import {
 
 const RSS_USER_AGENT = "benoror-feed-bot/1.0 (+https://www.benoror.com/feed)"
 const FEED_TIMEOUT_MS = 10000
-const MAX_ITEMS = 200
+// Keep the complete curated social history alongside the automatic sources.
+const MAX_ITEMS = 500
 const GIST_API_BASE_URL = "https://api.github.com/gists"
 const BLUESKY_API_BASE_URL = "https://public.api.bsky.app"
 const BLUESKY_THREAD_LOOKBACK_MS = 90 * 24 * 60 * 60 * 1000
@@ -25,7 +26,17 @@ const BLUESKY_THREAD_DEPTH = 6
 const BLUESKY_THREAD_CONCURRENCY = 4
 
 const parser = new Parser()
-const LINK_PRIORITY_LIST = Object.values(LINKS).map((entry) => entry.url)
+const MANUAL_SOCIAL_SOURCE_URLS = new Set([LINKS.twitter.url, LINKS.linkedin.url])
+const LINK_PRIORITY_LIST = [
+  ...Object.values(LINKS)
+    .map((entry) => entry.url)
+    .filter((url) => !MANUAL_SOCIAL_SOURCE_URLS.has(url)),
+  "https://x.com/benoror",
+  LINKS.twitter.url,
+  LINKS.linkedin.url,
+]
+// This is a truncated duplicate of the canonical 3mzef2pyrwk2h post.
+const HIDDEN_BLUESKY_POST_LINKS = new Set(["https://bsky.app/profile/benoror.bsky.social/post/3mzeezv4klk2h"])
 
 export type AggregatedFeedItem = {
   id: string
@@ -65,8 +76,7 @@ export type AggregatedFeed = {
 }
 
 const normalizeUrl = (value: string): string => value.trim().replace(/\/+$/, "")
-const normalizeLocalhostNotesLink = (value: string): string =>
-  value.replace(/^https:\/\/localhost:3002/i, "http://localhost:3002")
+const normalizeLocalhostNotesLink = (value: string): string => value.replace(/^https:\/\/localhost:3002/i, "http://localhost:3002")
 const isNotesRootLinkForSource = (itemLink: string, sourceSiteUrl: string): boolean => {
   try {
     const linkUrl = new URL(itemLink)
@@ -146,7 +156,12 @@ const decodeHtmlEntities = (input: string): string =>
     .replaceAll("&nbsp;", " ")
 
 const stripHtmlTags = (input: string): string =>
-  decodeHtmlEntities(input.replace(/<br\s*\/?>/gi, "\n").replace(/<\/p>/gi, "\n\n").replace(/<[^>]+>/g, ""))
+  decodeHtmlEntities(
+    input
+      .replace(/<br\s*\/?>/gi, "\n")
+      .replace(/<\/p>/gi, "\n\n")
+      .replace(/<[^>]+>/g, ""),
+  )
     .split("\n")
     .map((line) => line.trimEnd())
     .join("\n")
@@ -161,11 +176,13 @@ type GistFile = {
 }
 
 const extractCodeLinesFromHtml = (html: string): string[] => {
-  const lineMatches = Array.from(
-    html.matchAll(/<td[^>]*class="[^"]*blob-code-inner[^"]*"[^>]*>([\s\S]*?)<\/td>/gi),
-  )
+  const lineMatches = Array.from(html.matchAll(/<td[^>]*class="[^"]*blob-code-inner[^"]*"[^>]*>([\s\S]*?)<\/td>/gi))
 
-  return lineMatches.map((match) => stripInlineHtml(match[1] ?? "").replace(/\u00a0/g, " ").trimEnd())
+  return lineMatches.map((match) =>
+    stripInlineHtml(match[1] ?? "")
+      .replace(/\u00a0/g, " ")
+      .trimEnd(),
+  )
 }
 
 const extractGistFilesFromHtml = (html: string): GistFile[] => {
@@ -316,15 +333,44 @@ const normalizeMaybeEmpty = (value: string | undefined): string | undefined => {
   return normalized ? normalized : undefined
 }
 
+const describeSharedSocialLink = (link: string): NonNullable<AggregatedFeedItem["alsoSharedTo"]>[number] => {
+  const hostname = new URL(link).hostname.toLowerCase().replace(/^www\./, "")
+  if (hostname === "x.com" || hostname === "twitter.com") {
+    return { sourceId: "x_posts", sourceName: "X", link }
+  }
+  if (hostname === "linkedin.com") {
+    return { sourceId: "linkedin_posts", sourceName: "LinkedIn", link }
+  }
+  if (hostname === "bsky.app") {
+    return { sourceId: "bluesky_posts", sourceName: "Bluesky", link }
+  }
+  if (hostname === "benoror.bearblog.dev") {
+    return { sourceId: "bear_blog", sourceName: "Blog", link }
+  }
+  if (hostname === "notes.benoror.com") {
+    return { sourceId: "notes", sourceName: "Obsidian Notes", link }
+  }
+  return { sourceId: `external:${hostname}`, sourceName: hostname, link }
+}
+
+const mapManualSocialItems = (source: (typeof FEED_SOURCES)[number]): AggregatedFeedItem[] =>
+  (source.manual_items ?? []).map((post) => ({
+    id: `${source.id}::${post.url}`,
+    title: post.title,
+    link: post.url,
+    publishedAt: `${post.date}T00:00:00.000Z`,
+    sourceId: source.id,
+    sourceName: source.name,
+    sourceUrl: source.site_url,
+    referencedLinks: post.alsoOn,
+    alsoSharedTo: post.alsoOn.map(describeSharedSocialLink),
+  }))
+
 const isStackOverflowCommentItem = (item: Parser.Item): boolean => {
   const title = item.title?.toLowerCase() ?? ""
   const link = item.link?.toLowerCase() ?? ""
 
-  return (
-    title.startsWith("comment by ") ||
-    link.includes("/posts/comments/") ||
-    link.includes("#comment")
-  )
+  return title.startsWith("comment by ") || link.includes("/posts/comments/") || link.includes("#comment")
 }
 
 const getBodyContent = (item: Parser.Item): string => {
@@ -369,10 +415,7 @@ const mapPool = async <T, R>(items: T[], concurrency: number, mapper: (item: T) 
   return results
 }
 
-const fetchSelfAuthoredThreadShareLinks = async (
-  uri: string,
-  actor: BlueskyAuthorRef,
-): Promise<string[]> => {
+const fetchSelfAuthoredThreadShareLinks = async (uri: string, actor: BlueskyAuthorRef): Promise<string[]> => {
   try {
     const response = await fetch(
       `${BLUESKY_API_BASE_URL}/xrpc/app.bsky.feed.getPostThread?uri=${encodeURIComponent(uri)}&depth=${BLUESKY_THREAD_DEPTH}&parentHeight=0`,
@@ -413,7 +456,10 @@ const enrichThreadShareLinksFromRecentRoots = async (
   const extras = await mapPool(recentRoots, BLUESKY_THREAD_CONCURRENCY, async (post) => {
     const uri = post.uri
     if (!uri) return { uri: "", links: [] as string[] }
-    return { uri, links: await fetchSelfAuthoredThreadShareLinks(uri, actor) }
+    return {
+      uri,
+      links: await fetchSelfAuthoredThreadShareLinks(uri, actor),
+    }
   })
 
   for (const { uri, links } of extras) {
@@ -422,25 +468,20 @@ const enrichThreadShareLinksFromRecentRoots = async (
   }
 }
 
-const fetchBlueskyItems = async (
-  source: (typeof FEED_SOURCES)[number],
-): Promise<{ items: AggregatedFeedItem[]; error?: string }> => {
+const fetchBlueskyItems = async (source: (typeof FEED_SOURCES)[number]): Promise<{ items: AggregatedFeedItem[]; error?: string }> => {
   const actor = getBlueskyActorFromProfileUrl(source.site_url)
   if (!actor) {
     return { items: [], error: "Invalid Bluesky profile URL" }
   }
 
   try {
-    const response = await fetch(
-      `${BLUESKY_API_BASE_URL}/xrpc/app.bsky.feed.getAuthorFeed?actor=${encodeURIComponent(actor)}&limit=100`,
-      {
-        headers: {
-          "User-Agent": RSS_USER_AGENT,
-        },
-        signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
-        next: { revalidate: 1800 },
+    const response = await fetch(`${BLUESKY_API_BASE_URL}/xrpc/app.bsky.feed.getAuthorFeed?actor=${encodeURIComponent(actor)}&limit=100`, {
+      headers: {
+        "User-Agent": RSS_USER_AGENT,
       },
-    )
+      signal: AbortSignal.timeout(FEED_TIMEOUT_MS),
+      next: { revalidate: 1800 },
+    })
 
     if (!response.ok) {
       return {
@@ -449,7 +490,9 @@ const fetchBlueskyItems = async (
       }
     }
 
-    const payload = (await response.json()) as { feed?: BlueskyAuthorFeedEntry[] }
+    const payload = (await response.json()) as {
+      feed?: BlueskyAuthorFeedEntry[]
+    }
     const feed = payload.feed ?? []
     const actorRef = {
       handle: actor,
@@ -475,17 +518,19 @@ const fetchBlueskyItems = async (
       const authorHandle = post?.author?.handle
       const link = authorHandle ? buildBlueskyPostLink(authorHandle, post?.uri) : null
       if (!post || !link) continue
+      if (HIDDEN_BLUESKY_POST_LINKS.has(link)) continue
 
       const publishedAtRaw = post.record?.createdAt ?? post.indexedAt
       const publishedAt = parseDate(publishedAtRaw)?.toISOString()
       if (!publishedAt) continue
 
       const text = toBlueskyText(post.record?.text)
-      const title = text.split("\n").find((line) => line.trim().length > 0)?.slice(0, 120) || "Bluesky post"
-      const referencedLinks = referencedLinksForBlueskyRoot(
-        post,
-        post.uri ? threadShareLinksByRoot.get(post.uri) ?? [] : [],
-      )
+      const title =
+        text
+          .split("\n")
+          .find((line) => line.trim().length > 0)
+          ?.slice(0, 120) || "Bluesky post"
+      const referencedLinks = referencedLinksForBlueskyRoot(post, post.uri ? (threadShareLinksByRoot.get(post.uri) ?? []) : [])
 
       items.push({
         id: `${source.id}::${post.uri ?? link}`,
@@ -529,11 +574,8 @@ const inferBodyKind = async (
 
   if (source.id.startsWith("gist_")) {
     const gistFilesFromApi = item.link ? await fetchGistFilesFromApi(item.link) : null
-    const gistFiles = gistFilesFromApi && gistFilesFromApi.length > 0
-      ? gistFilesFromApi
-      : isLikelyHtml(body)
-        ? extractGistFilesFromHtml(body)
-        : []
+    const gistFiles =
+      gistFilesFromApi && gistFilesFromApi.length > 0 ? gistFilesFromApi : isLikelyHtml(body) ? extractGistFilesFromHtml(body) : []
 
     if (gistFiles.length > 0) {
       const markdownFiles = gistFiles.filter((file) => {
@@ -558,10 +600,7 @@ const inferBodyKind = async (
           return Boolean(mapLanguageFromExtension(file.filename) ?? mapGitHubLanguage(file.language))
         }) ?? gistFiles[0]
 
-      const primaryLanguage =
-        mapLanguageFromExtension(primaryFile?.filename) ??
-        mapGitHubLanguage(primaryFile?.language) ??
-        codeLanguage
+      const primaryLanguage = mapLanguageFromExtension(primaryFile?.filename) ?? mapGitHubLanguage(primaryFile?.language) ?? codeLanguage
 
       return {
         body: normalizeMaybeEmpty(primaryFile?.content),
@@ -581,12 +620,8 @@ const inferBodyKind = async (
   }
 
   if (isCodeSource && codeLanguage) {
-    const gistCodeBody =
-      source.id.startsWith("gist_") && isLikelyHtml(body) ? normalizeMaybeEmpty(extractGistCodeFromHtml(body)) : undefined
-    const codeBody =
-      gistCodeBody ??
-      normalizeMaybeEmpty(stripHtmlTags(body)) ??
-      normalizeMaybeEmpty(item.contentSnippet)
+    const gistCodeBody = source.id.startsWith("gist_") && isLikelyHtml(body) ? normalizeMaybeEmpty(extractGistCodeFromHtml(body)) : undefined
+    const codeBody = gistCodeBody ?? normalizeMaybeEmpty(stripHtmlTags(body)) ?? normalizeMaybeEmpty(item.contentSnippet)
     return {
       body: codeBody,
       bodyFormat: "code",
@@ -607,10 +642,7 @@ const inferBodyKind = async (
   }
 }
 
-const normalizeItem = async (
-  item: Parser.Item,
-  source: (typeof FEED_SOURCES)[number],
-): Promise<AggregatedFeedItem | null> => {
+const normalizeItem = async (item: Parser.Item, source: (typeof FEED_SOURCES)[number]): Promise<AggregatedFeedItem | null> => {
   const publishedDate = parseDate(item.isoDate) ?? parseDate(item.pubDate)
   if (!publishedDate || !item.link || !item.title) {
     return null
@@ -643,7 +675,16 @@ const normalizeItem = async (
 
 const getSourceItems = async (
   source: (typeof FEED_SOURCES)[number],
-): Promise<{ items: AggregatedFeedItem[]; error?: string; resolvedSiteUrl?: string; resolvedRssUrl?: string }> => {
+): Promise<{
+  items: AggregatedFeedItem[]
+  error?: string
+  resolvedSiteUrl?: string
+  resolvedRssUrl?: string
+}> => {
+  if (source.manual_items) {
+    return { items: mapManualSocialItems(source) }
+  }
+
   if (source.id === "bluesky_posts") {
     return fetchBlueskyItems(source)
   }
@@ -687,10 +728,7 @@ const getSourceItems = async (
 
     const xml = await response.text()
     const parsed = await parser.parseString(xml)
-    const resolvedSiteUrl =
-      isNotesSource && resolvedRssUrl.startsWith("http://localhost")
-        ? "http://localhost:3002"
-        : source.site_url
+    const resolvedSiteUrl = isNotesSource && resolvedRssUrl.startsWith("http://localhost") ? "http://localhost:3002" : source.site_url
     const normalizedItems = (await Promise.all((parsed.items ?? []).map((item) => normalizeItem(item, source))))
       .filter((item): item is AggregatedFeedItem => item !== null)
       .map((item) => {
@@ -720,7 +758,10 @@ const getSourceItems = async (
 const aggregateFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
-  const items = mergeDuplicateFeedItems(sourceResults.flatMap((result) => result.items), LINK_PRIORITY_LIST)
+  const items = mergeDuplicateFeedItems(
+    sourceResults.flatMap((result) => result.items),
+    LINK_PRIORITY_LIST,
+  )
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)
 
@@ -737,8 +778,4 @@ const aggregateFeed = async (): Promise<AggregatedFeed> => {
   return { items, sources, generatedAt: new Date().toISOString() }
 }
 
-export const getAggregatedFeed = unstable_cache(
-  aggregateFeed,
-  ["aggregated-feed-v1"],
-  { revalidate: 1800 },
-)
+export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v1"], { revalidate: 1800 })

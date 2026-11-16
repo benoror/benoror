@@ -3,7 +3,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc && node dist/shared/profile/social-posts.js"
   },
   "files": [
     "dist"

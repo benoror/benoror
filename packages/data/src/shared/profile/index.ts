@@ -1,5 +1,6 @@
 import { gmailAlias } from '@workspace/utils/email';
 import type { FeedSource, LinkEntry } from './schema.js';
+import { SOCIAL_POSTS } from './social-posts.js';
 
 const isProductionDeployment =
   process.env.NODE_ENV === "production" ||
@@ -141,11 +142,12 @@ export const FEED_SOURCES: FeedSource[] = [
     note: "Filtered to entries authored under the benoror namespace.",
   },
   {
-    id: "x_likes_bookmarks",
-    name: "X / Twitter (manual likes/bookmarks subset)",
+    id: "x_posts",
+    name: "X",
     site_url: "https://x.com/benoror",
+    manual_items: SOCIAL_POSTS.filter((post) => post.platform === "x"),
     status: "manual",
-    note: "X does not provide an official public RSS for likes/bookmarks.",
+    note: "Hand-curated posts; X does not provide an official public RSS for this feed.",
   },
   {
     id: "bluesky_posts",
@@ -156,10 +158,11 @@ export const FEED_SOURCES: FeedSource[] = [
   },
   {
     id: "linkedin_posts",
-    name: "LinkedIn (manual subset)",
+    name: "LinkedIn",
     site_url: LINKS.linkedin.url,
+    manual_items: SOCIAL_POSTS.filter((post) => post.platform === "linkedin"),
     status: "manual",
-    note: "LinkedIn does not provide an official public RSS endpoint for member posts.",
+    note: "Hand-curated posts; LinkedIn does not provide an official public RSS endpoint for member posts.",
   },
   {
     id: "stack_overflow",
@@ -211,4 +214,5 @@ export const INTERESTS = [
   "Technology, Business & Economics",
 ];
 
-export { FeedSource, LinkEntry };
+export { SOCIAL_POSTS, type FeedSource, type LinkEntry };
+export type { SocialPost, SocialPostPlatform } from "./schema.js";

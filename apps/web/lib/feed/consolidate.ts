@@ -72,7 +72,11 @@ export type BlueskyAuthorRef = {
 const normalizePriorityUrl = (value: string): string => value.trim().replace(/\/+$/, "")
 
 export const normalizeUrlForMatch = (value: string): string | null => {
-  const trimmed = value.trim().replace(/[),.;!?]+$/g, "").replace(/\u2026$/, "").replace(/\.{2,}$/, "")
+  const trimmed = value
+    .trim()
+    .replace(/[),.;!?]+$/g, "")
+    .replace(/\u2026$/, "")
+    .replace(/\.{2,}$/, "")
   if (!trimmed) return null
 
   const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`
@@ -86,7 +90,7 @@ export const normalizeUrlForMatch = (value: string): string | null => {
     url.password = ""
     url.hostname = url.hostname.toLowerCase().replace(/^www\./, "")
     const pathname = url.pathname.replace(/\/+$/, "") || ""
-    return `${url.protocol}//${url.hostname}${pathname}`
+    return `https://${url.hostname}${pathname}`
   } catch {
     return null
   }
@@ -127,8 +131,36 @@ const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase(
 // Only explicit share links (e.g. Bluesky embeds/facets) count as merge
 // signals. Harvesting URLs from arbitrary item bodies would collapse posts
 // that merely cite another item (e.g. a blog post linking to a note).
-const collectReferencedLinks = (item: MergeableFeedItem): string[] =>
-  uniqueUrls(item.referencedLinks ?? [])
+const collectMatchLinks = (item: MergeableFeedItem): string[] =>
+  uniqueUrls([item.link, ...(item.referencedLinks ?? [])])
+
+const mergeAlsoSharedTo = <T extends MergeableFeedItem>(
+  group: T[],
+  preferred: T,
+  sourcePriorityUrls: string[],
+): AggregatedFeedAlsoSharedTo[] => {
+  const sorted = sortBySourcePriority(group, sourcePriorityUrls)
+  const candidates: AggregatedFeedAlsoSharedTo[] = [
+    ...sorted
+      .filter((item) => item.id !== preferred.id)
+      .map((item) => ({
+        sourceId: item.sourceId,
+        sourceName: item.sourceName,
+        link: item.link,
+      })),
+    ...sorted.flatMap((item) => item.alsoSharedTo ?? []),
+  ]
+
+  const seen = new Set<string>()
+  return candidates.filter((candidate) => {
+    const normalized = normalizeUrlForMatch(candidate.link)
+    if (!normalized || urlsLooselyMatch(candidate.link, preferred.link) || seen.has(normalized)) {
+      return false
+    }
+    seen.add(normalized)
+    return true
+  })
+}
 
 const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number => {
   const normalizedSourceUrl = normalizePriorityUrl(sourceUrl)
@@ -144,11 +176,7 @@ const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number =>
   return index >= 0 ? index : Number.MAX_SAFE_INTEGER
 }
 
-const pickPreferredBySourcePriority = <T extends MergeableFeedItem>(
-  a: T,
-  b: T,
-  priorityUrls: string[],
-): T => {
+const pickPreferredBySourcePriority = <T extends MergeableFeedItem>(a: T, b: T, priorityUrls: string[]): T => {
   const aPriority = getSourcePriority(a.sourceUrl, priorityUrls)
   const bPriority = getSourcePriority(b.sourceUrl, priorityUrls)
   return aPriority <= bPriority ? a : b
@@ -197,12 +225,15 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
     for (const id of ids.slice(1)) union(first, id)
   }
 
-  for (const item of items) {
-    const refs = collectReferencedLinks(item)
-    if (refs.length === 0) continue
-    for (const other of items) {
-      if (other.id === item.id) continue
-      if (refs.some((ref) => urlsLooselyMatch(ref, other.link))) {
+  for (let index = 0; index < items.length; index += 1) {
+    const item = items[index]
+    if (!item) continue
+    const links = collectMatchLinks(item)
+    for (let otherIndex = index + 1; otherIndex < items.length; otherIndex += 1) {
+      const other = items[otherIndex]
+      if (!other) continue
+      const otherLinks = collectMatchLinks(other)
+      if (links.some((link) => otherLinks.some((otherLink) => urlsLooselyMatch(link, otherLink)))) {
         union(item.id, other.id)
       }
     }
@@ -220,7 +251,8 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
       const first = group[0]
       if (!first) return null
       if (group.length === 1) {
-        const { referencedLinks: _referencedLinks, ...rest } = first
+        const { referencedLinks, ...rest } = first
+        void referencedLinks
         return rest
       }
 
@@ -228,15 +260,10 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
       const preferred = sorted.reduce((best, current) =>
         pickPreferredBySourcePriority(best, current, sourcePriorityUrls),
       )
-      const alternates = sorted
-        .filter((item) => item.id !== preferred.id)
-        .map((item) => ({
-          sourceId: item.sourceId,
-          sourceName: item.sourceName,
-          link: item.link,
-        }))
+      const alternates = mergeAlsoSharedTo(group, preferred, sourcePriorityUrls)
 
-      const { referencedLinks: _referencedLinks, ...rest } = preferred
+      const { referencedLinks, ...rest } = preferred
+      void referencedLinks
       return {
         ...rest,
         alsoSharedTo: alternates.length > 0 ? alternates : undefined,
@@ -256,10 +283,7 @@ const getReplyRootUri = (reply: unknown): string | null => {
 export const isBlueskyReplyPost = (entry: BlueskyAuthorFeedEntry): boolean =>
   Boolean(entry.reply || entry.post?.reply || getReplyRootUri(entry.post?.record?.reply))
 
-export const isSameBlueskyAuthor = (
-  postAuthor: BlueskyAuthor | undefined,
-  actor: BlueskyAuthorRef,
-): boolean => {
+export const isSameBlueskyAuthor = (postAuthor: BlueskyAuthor | undefined, actor: BlueskyAuthorRef): boolean => {
   if (!postAuthor) return false
   if (actor.did && postAuthor.did) {
     return postAuthor.did === actor.did
@@ -272,18 +296,12 @@ export const isSameBlueskyAuthor = (
 
 const collectFacetUris = (post: BlueskyPostView): string[] =>
   post.record?.facets?.flatMap((facet) =>
-    (facet.features ?? [])
-      .map((feature) => feature.uri)
-      .filter((uri): uri is string => typeof uri === "string"),
+    (facet.features ?? []).map((feature) => feature.uri).filter((uri): uri is string => typeof uri === "string"),
   ) ?? []
 
 /** Embeds and link facets only — the explicit share URIs used as merge signals. */
 export const collectBlueskyExplicitShareLinks = (post: BlueskyPostView): string[] =>
-  uniqueUrls([
-    post.record?.embed?.external?.uri,
-    post.embed?.external?.uri,
-    ...collectFacetUris(post),
-  ])
+  uniqueUrls([post.record?.embed?.external?.uri, post.embed?.external?.uri, ...collectFacetUris(post)])
 
 /** Root posts keep their previous harvest: explicit shares plus URLs in the post text. */
 export const collectBlueskyRootReferencedLinks = (post: BlueskyPostView): string[] =>

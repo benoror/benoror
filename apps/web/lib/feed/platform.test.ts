@@ -1,6 +1,11 @@
 import assert from "node:assert/strict"
 import { describe, test } from "node:test"
-import { detectFeedPlatform, getFeedPlatformLabel, type FeedPlatformInput } from "./platform.ts"
+import {
+  detectFeedPlatform,
+  getFeedPlatformDescriptor,
+  getFeedPlatformLabel,
+  type FeedPlatformInput,
+} from "./platform.ts"
 
 describe("detectFeedPlatform", () => {
   const cases: Array<{
@@ -91,5 +96,34 @@ describe("detectFeedPlatform", () => {
       "unknown",
     )
     assert.equal(getFeedPlatformLabel({ url: "https://example.com/post" }), "External link")
+  })
+})
+
+describe("home Recent Activity platform icons", () => {
+  test("builds canonical and also-on icon descriptors from the home item fields", () => {
+    const homeItem = {
+      sourceId: "x_posts",
+      sourceName: "X",
+      sourceUrl: "https://x.com/benoror",
+      link: "https://x.com/benoror/status/1",
+      alsoSharedTo: [
+        {
+          sourceId: "linkedin_posts",
+          sourceName: "LinkedIn",
+          link: "https://www.linkedin.com/posts/benoror_example",
+        },
+        {
+          sourceId: "bluesky_posts",
+          sourceName: "Bluesky",
+          link: "https://bsky.app/profile/benoror.bsky.social/post/1",
+        },
+      ],
+    }
+
+    assert.deepEqual(getFeedPlatformDescriptor(homeItem), { platform: "x", label: "X" })
+    assert.deepEqual(homeItem.alsoSharedTo.map(getFeedPlatformDescriptor), [
+      { platform: "linkedin", label: "LinkedIn" },
+      { platform: "bluesky", label: "Bluesky" },
+    ])
   })
 })

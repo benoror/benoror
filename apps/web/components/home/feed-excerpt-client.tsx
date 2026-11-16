@@ -4,16 +4,24 @@ import { motion } from "framer-motion"
 import { Rss } from "lucide-react"
 import { LINKS } from "@workspace/data/shared/profile"
 import ExternalLink from "@/components/ui/external-link"
+import { PlatformIcon } from "@/components/ui/platform-icon"
 import { useAppTheme } from "@/hooks/use-app-theme"
+import { detectFeedPlatform, getFeedPlatformDescriptor } from "@/lib/feed/platform"
 import { getClasses } from "./feed-excerpt.theme"
 
 export type FeedExcerptItem = {
   id: string
   title: string
   link: string
+  sourceId: string
   sourceName: string
   sourceUrl: string
   sourceRssUrl?: string
+  alsoSharedTo?: Array<{
+    sourceId: string
+    sourceName: string
+    link: string
+  }>
 }
 
 export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] }) {
@@ -38,43 +46,82 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
             <p className={`text-center ${classes.body}`}>No feed items available right now.</p>
           ) : (
             <ul className="space-y-3">
-              {items.map((item) => (
-                <li key={item.id} className={`pt-3 first:pt-0 border-t first:border-t-0 ${classes.separator}`}>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`font-medium underline-offset-4 hover:underline ${classes.body} ${classes.linkHover}`}
-                  >
-                    {item.title}
-                  </a>
-                  <div className={`text-sm mt-1 flex flex-wrap items-center gap-2 ${classes.source}`}>
-                    <ExternalLink
-                      href={item.sourceUrl}
+              {items.map((item) => {
+                const canonicalPlatform = detectFeedPlatform({
+                  sourceId: item.sourceId,
+                  sourceName: item.sourceName,
+                  url: item.link,
+                  sourceUrl: item.sourceUrl,
+                })
+
+                return (
+                  <li key={item.id} className={`pt-3 first:pt-0 border-t first:border-t-0 ${classes.separator}`}>
+                    <a
+                      href={item.link}
                       target="_blank"
-                      className={`transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                      rel="noopener noreferrer"
+                      className={`font-medium underline-offset-4 hover:underline ${classes.body} ${classes.linkHover}`}
                     >
-                      {item.sourceName}
-                    </ExternalLink>
-                    {item.sourceRssUrl ? (
-                      <a
-                        href={item.sourceRssUrl}
+                      {item.title}
+                    </a>
+                    <div className={`text-sm mt-1 flex flex-wrap items-center gap-2 ${classes.source}`}>
+                      <ExternalLink
+                        href={item.sourceUrl}
                         target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label={`Open RSS feed for ${item.sourceName}`}
-                        className={`inline-flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                        className={`transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
                       >
-                        <Rss className="h-4 w-4" />
-                      </a>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
+                        <PlatformIcon platform={canonicalPlatform} size={18} />
+                        {item.sourceName}
+                      </ExternalLink>
+                      {item.sourceRssUrl ? (
+                        <a
+                          href={item.sourceRssUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open RSS feed for ${item.sourceName}`}
+                          className={`inline-flex items-center transition-colors focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                        >
+                          <Rss className="h-4 w-4" />
+                        </a>
+                      ) : null}
+                      {item.alsoSharedTo && item.alsoSharedTo.length > 0 ? (
+                        <span className="ml-auto inline-flex flex-wrap items-center justify-end gap-0.5 text-xs">
+                          <span className="mr-1">Also on:</span>
+                          {item.alsoSharedTo.map((shared, index) => {
+                            const { platform, label } = getFeedPlatformDescriptor({
+                              sourceId: shared.sourceId,
+                              sourceName: shared.sourceName,
+                              url: shared.link,
+                            })
+
+                            return (
+                              <a
+                                key={`${item.id}-${shared.sourceId}-${index}`}
+                                href={shared.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`View this item on ${label}`}
+                                title={label}
+                                className={`inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-current/10 focus-visible:outline-none focus-visible:ring-2 ${classes.linkHover} ${classes.linkFocus}`}
+                              >
+                                <PlatformIcon platform={platform} size={18} />
+                              </a>
+                            )
+                          })}
+                        </span>
+                      ) : null}
+                    </div>
+                  </li>
+                )
+              })}
             </ul>
           )}
 
           <div className="pt-2 text-center">
-            <a href={LINKS.feed_page.url} className={`text-sm underline underline-offset-4 ${classes.linkHover} ${classes.body}`}>
+            <a
+              href={LINKS.feed_page.url}
+              className={`text-sm underline underline-offset-4 ${classes.linkHover} ${classes.body}`}
+            >
               View All
             </a>
           </div>

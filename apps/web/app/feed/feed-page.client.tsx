@@ -54,7 +54,7 @@ function FeedItemCard({
             target="_blank"
             className={`inline-flex items-center gap-1 transition-colors hover:underline underline-offset-4 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
           >
-            <PlatformIcon platform={canonicalPlatform} className="h-3.5 w-3.5" />
+            <PlatformIcon platform={canonicalPlatform} size={18} />
             {item.sourceName}
           </ExternalLink>
           {sourceRssUrl ? (
@@ -105,7 +105,7 @@ function FeedItemCard({
                     title={platformLabel}
                     className={`inline-flex h-7 w-7 items-center justify-center rounded-md transition-colors hover:bg-current/10 focus-visible:outline-none focus-visible:ring-2 ${classes.link} ${classes.linkFocus}`}
                   >
-                    <PlatformIcon platform={platform} className="h-4 w-4" />
+                    <PlatformIcon platform={platform} size={18} />
                   </a>
                 )
               })}

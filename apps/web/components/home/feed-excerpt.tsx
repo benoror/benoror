@@ -11,9 +11,11 @@ export default async function FeedExcerpt() {
       id: item.id,
       title: item.title,
       link: item.link,
+      sourceId: item.sourceId,
       sourceName: item.sourceName,
       sourceUrl: source?.siteUrl ?? item.sourceUrl,
       sourceRssUrl: source?.rssUrl,
+      alsoSharedTo: item.alsoSharedTo,
     }
   })
 

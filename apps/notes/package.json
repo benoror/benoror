@@ -40,7 +40,7 @@
     "mdast-util-to-hast": "^13.2.0",
     "mdast-util-to-string": "^4.0.0",
     "micromorph": "^0.4.5",
-    "minimatch": "^10.0.3",
+    "minimatch": "^11.0.1",
     "pixi.js": "^8.13.1",
     "preact": "^10.27.1",
     "preact-render-to-string": "^6.6.1",

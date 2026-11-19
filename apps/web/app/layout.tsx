@@ -20,8 +20,8 @@ const fontMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(LINKS.website.url),
-  title: "Ben Orozco | Full-stack Developer",
-  description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+  title: "Ben Orozco | Engineering Leader & Builder",
+  description: "Personal website of Ben Orozco - Engineering Leader, VP Engineering & CTO, and Founder",
   alternates: {
     canonical: "/",
     types: {
@@ -34,14 +34,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: LINKS.website.url,
-    title: "Ben Orozco | Full-stack Developer",
-    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+    title: "Ben Orozco | Engineering Leader & Builder",
+    description: "Personal website of Ben Orozco - Engineering Leader, VP Engineering & CTO, and Founder",
     siteName: "Ben Orozco",
   },
   twitter: {
     card: "summary",
-    title: "Ben Orozco | Full-stack Developer",
-    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+    title: "Ben Orozco | Engineering Leader & Builder",
+    description: "Personal website of Ben Orozco - Engineering Leader, VP Engineering & CTO, and Founder",
   },
   other: {
     // Dark Reader's injected backgrounds hide the outrun canvas, which sits at -z-10.

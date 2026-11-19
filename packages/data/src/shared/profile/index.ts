@@ -185,7 +185,7 @@ export const HOME = {
   title: PERSONAL.short_name,
   header: "Technologist, Software Engineer & Entrepreneur",
   public_email: "hello@benoror.com",
-  about_me: "I'm a Computer Science Engineer with a trajectory of building, working and growing Tech Startups, either bootstrapped, solo-maker and high-growth. I'm deeply passionate on making and launching software products, growing & leading engineering teams, and leveraging technology to tackle big real-world problems. I consider myself a technologist & pursuer of becoming a polymath in many areas I find interesting.",
+  about_me: "I've spent 15+ years building software products and the teams behind them, from bootstrapped startups to growth-stage platforms. As VP of Engineering at Apptegy I helped scale a distributed org of 140+ engineers across the US and Mexico through Series C and led the org-wide rollout of AI-assisted engineering. Earlier, I served as CTO at HealthTree and Ecaresoft (Nimbo) and founded BaseQL, a developer tool acquired in 2024. Today I lead engineering teams while staying hands-on with code and architecture around agentic workflows, Ruby on Rails, TypeScript, and Python on AWS and Kubernetes.",
 };
 
 export const SKILLS = [

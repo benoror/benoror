@@ -23,7 +23,7 @@ export default function About() {
           <h2 className={`text-3xl md:text-4xl font-bold tracking-tighter text-center ${classes.heading}`}>About Me</h2>
 
           <div className="space-y-4">
-            <p className={`leading-relaxed text-center text-justify ${classes.body}`}>
+            <p className={`leading-relaxed text-left md:text-justify ${classes.body}`}>
               {HOME.about_me}
             </p>
           </div>

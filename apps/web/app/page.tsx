@@ -13,13 +13,13 @@ export const metadata: Metadata = {
   },
   openGraph: {
     url: "/",
-    title: "Ben Orozco | Full-stack Developer",
-    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+    title: "Ben Orozco | Engineering Leader & Builder",
+    description: "Personal website of Ben Orozco - Engineering Leader, VP Engineering & CTO, and Founder",
   },
   twitter: {
     card: "summary",
-    title: "Ben Orozco | Full-stack Developer",
-    description: "Personal website of Ben Orozco - Full-stack Developer, Leader, and Technologist",
+    title: "Ben Orozco | Engineering Leader & Builder",
+    description: "Personal website of Ben Orozco - Engineering Leader, VP Engineering & CTO, and Founder",
   },
 }
 

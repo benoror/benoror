@@ -6,6 +6,7 @@ import {
   type BlueskyThreadNode,
   type MergeableFeedItem,
   collectSelfAuthoredReplyShareLinksFromThread,
+  dropStandaloneSocialPosts,
   indexSelfAuthoredReplyShareLinksFromAuthorFeed,
   mergeDuplicateFeedItems,
   referencedLinksForBlueskyRoot,
@@ -21,11 +22,49 @@ const INBUNDLY_SITE = "https://inbundly.com"
 const SOURCE_PRIORITY = [
   "https://benoror.bearblog.dev",
   "https://notes.benoror.com",
-  "https://x.com/benoror",
   "https://linkedin.com/in/benoror",
   "https://example.com",
+  "https://x.com/benoror",
   "https://bsky.app/profile/benoror.bsky.social",
 ]
+
+const FEATURED_X_IDS = [
+  "2120604588797788469",
+  "2115572065629507795",
+  "2110091188355367391",
+  "2080180698162344076",
+  "2049686088457892172",
+  "2018812038404083961",
+]
+
+const X_SOURCE = { sourceId: "x_posts", sourceName: "X", sourceUrl: "https://x.com/benoror" }
+const LINKEDIN_SOURCE = { sourceId: "linkedin_posts", sourceName: "LinkedIn", sourceUrl: "https://linkedin.com/in/benoror" }
+const BLUESKY_SOURCE = {
+  sourceId: "bluesky_posts",
+  sourceName: "Bluesky",
+  sourceUrl: "https://bsky.app/profile/benoror.bsky.social",
+}
+
+type CuratedPost = { date: string; platform: string; url: string; title: string; alsoOn: string[]; featured?: boolean }
+const curatedPosts = socialPosts as CuratedPost[]
+
+/** Mirrors how lib/feed.ts maps a curated social post into a feed item. */
+const curatedFeedItem = (post: CuratedPost): MergeableFeedItem => {
+  const source = post.platform === "x" ? X_SOURCE : LINKEDIN_SOURCE
+  return feedItem({
+    id: `${source.sourceId}::${post.url}`,
+    title: post.title,
+    link: post.url,
+    ...source,
+    referencedLinks: post.alsoOn,
+    alsoSharedTo: post.alsoOn.map((link) => ({
+      sourceId: `shared::${new URL(link).hostname}`,
+      sourceName: new URL(link).hostname,
+      link,
+    })),
+    ...(post.featured ? { featured: true } : {}),
+  })
+}
 
 const post = (opts: {
   uri: string
@@ -256,30 +295,26 @@ describe("mergeDuplicateFeedItems", () => {
     assert.ok(merged.some((item) => item.id === "blog::other"))
   })
 
-  test("uses X as canonical for an X + Bluesky cross-post", () => {
+  test("keeps X as the main link of an X + Bluesky pair, which then leaves the feed", () => {
     const x = feedItem({
       id: "x_posts::cross-post",
-      title: "Canonical X title",
+      title: "X title",
       link: "https://x.com/benoror/status/1",
-      sourceId: "x_posts",
-      sourceName: "X",
-      sourceUrl: "https://x.com/benoror",
+      ...X_SOURCE,
       referencedLinks: ["https://bsky.app/profile/benoror.bsky.social/post/1"],
     })
     const bluesky = feedItem({
       id: "bluesky_posts::cross-post",
       title: "Bluesky title",
       link: "https://bsky.app/profile/benoror.bsky.social/post/1",
-      sourceId: "bluesky_posts",
-      sourceName: "Bluesky",
-      sourceUrl: "https://bsky.app/profile/benoror.bsky.social",
+      ...BLUESKY_SOURCE,
     })
 
     const merged = mergeDuplicateFeedItems([bluesky, x], SOURCE_PRIORITY)
     assert.equal(merged.length, 1)
     assert.equal(merged[0]?.link, x.link)
-    assert.equal(merged[0]?.title, x.title)
     assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["Bluesky"])
+    assert.deepEqual(dropStandaloneSocialPosts(merged), [])
   })
 
   test("uses LinkedIn as canonical for a LinkedIn + Bluesky cross-post", () => {
@@ -308,7 +343,7 @@ describe("mergeDuplicateFeedItems", () => {
     assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["Bluesky"])
   })
 
-  test("uses X for an X + LinkedIn + Bluesky cross-post and orders alternates", () => {
+  test("uses LinkedIn over X for an X + LinkedIn + Bluesky twin and orders alternates", () => {
     const linkedinLink = "https://www.linkedin.com/posts/benoror_cross-post-3"
     const blueskyLink = "https://bsky.app/profile/benoror.bsky.social/post/3"
     const x = feedItem({
@@ -343,9 +378,10 @@ describe("mergeDuplicateFeedItems", () => {
 
     const merged = mergeDuplicateFeedItems([bluesky, linkedin, x], SOURCE_PRIORITY)
     assert.equal(merged.length, 1)
-    assert.equal(merged[0]?.link, x.link)
-    assert.equal(merged[0]?.title, x.title)
-    assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["LinkedIn", "Bluesky"])
+    assert.equal(merged[0]?.link, linkedin.link)
+    assert.equal(merged[0]?.title, linkedin.title)
+    assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["X", "Bluesky"])
+    assert.equal(dropStandaloneSocialPosts(merged).length, 1)
   })
 
   test("keeps a blog canonical over X and Bluesky and orders social alternates", () => {
@@ -383,7 +419,7 @@ describe("mergeDuplicateFeedItems", () => {
     assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["X", "Bluesky"])
   })
 
-  test("orders every other source between LinkedIn and Bluesky", () => {
+  test("orders every other source between LinkedIn and the short-form social sources", () => {
     const sharedTitle = "One cross-post"
     const items = [
       feedItem({
@@ -432,21 +468,19 @@ describe("mergeDuplicateFeedItems", () => {
     assert.equal(merged.length, 1)
     assert.equal(merged[0]?.sourceName, "Obsidian Notes")
     assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), [
-      "X",
       "LinkedIn",
       "Other",
+      "X",
       "Bluesky",
     ])
   })
 
   test("orders a singleton item's existing alsoOn links with the same precedence", () => {
-    const x = feedItem({
-      id: "x_posts::singleton",
-      title: "X post with unmatched cross-post links",
-      link: "https://x.com/benoror/status/singleton",
-      sourceId: "x_posts",
-      sourceName: "X",
-      sourceUrl: "https://x.com/benoror",
+    const linkedin = feedItem({
+      id: "linkedin_posts::singleton",
+      title: "LinkedIn post with unmatched cross-post links",
+      link: "https://www.linkedin.com/posts/benoror_singleton",
+      ...LINKEDIN_SOURCE,
       alsoSharedTo: [
         {
           sourceId: "bluesky_posts",
@@ -454,50 +488,31 @@ describe("mergeDuplicateFeedItems", () => {
           link: "https://bsky.app/profile/benoror.bsky.social/post/singleton",
         },
         {
+          sourceId: "x_posts",
+          sourceName: "X",
+          link: "https://x.com/benoror/status/singleton",
+        },
+        {
           sourceId: "other",
           sourceName: "Other",
           link: "https://unlisted.example/singleton",
         },
-        {
-          sourceId: "linkedin_posts",
-          sourceName: "LinkedIn",
-          link: "https://www.linkedin.com/posts/benoror_singleton",
-        },
       ],
     })
 
-    const merged = mergeDuplicateFeedItems([x], SOURCE_PRIORITY)
+    const merged = mergeDuplicateFeedItems([linkedin], SOURCE_PRIORITY)
     assert.equal(merged.length, 1)
-    assert.equal(merged[0]?.link, x.link)
-    assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), [
-      "LinkedIn",
-      "Other",
-      "Bluesky",
-    ])
+    assert.equal(merged[0]?.link, linkedin.link)
+    assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["Other", "X", "Bluesky"])
   })
 
-  test("folds all 10 curated Bluesky/blog/notes cross-posts into their existing entries", () => {
-    const crossPosts = socialPosts.filter((post) =>
+  test("folds all 10 curated Bluesky/blog/notes cross-posts into long-form or featured entries", () => {
+    const crossPosts = curatedPosts.filter((post) =>
       post.alsoOn.some((url) => ["bsky.app", "benoror.bearblog.dev", "notes.benoror.com"].includes(new URL(url).hostname)),
     )
     assert.equal(crossPosts.length, 10)
 
-    const socialItems = crossPosts.map((post) =>
-      feedItem({
-        id: `x_posts::${post.url}`,
-        title: post.title,
-        link: post.url,
-        sourceId: "x_posts",
-        sourceName: "X",
-        sourceUrl: "https://x.com/benoror",
-        referencedLinks: post.alsoOn,
-        alsoSharedTo: post.alsoOn.map((link) => ({
-          sourceId: `shared::${new URL(link).hostname}`,
-          sourceName: new URL(link).hostname,
-          link,
-        })),
-      }),
-    )
+    const socialItems = crossPosts.map(curatedFeedItem)
     const existingItems = crossPosts.flatMap((post, index) =>
       post.alsoOn
         .filter((url) => ["bsky.app", "benoror.bearblog.dev", "notes.benoror.com"].includes(new URL(url).hostname))
@@ -526,53 +541,148 @@ describe("mergeDuplicateFeedItems", () => {
         }),
     )
 
-    const merged = mergeDuplicateFeedItems([...socialItems, ...existingItems], SOURCE_PRIORITY)
+    const merged = dropStandaloneSocialPosts(
+      mergeDuplicateFeedItems([...socialItems, ...existingItems], SOURCE_PRIORITY),
+    )
     assert.equal(merged.length, 10)
-    assert.equal(merged.filter((item) => item.id.startsWith("x_posts::")).length, 6)
     assert.equal(merged.filter((item) => item.sourceId === "bear_blog" || item.sourceId === "notes").length, 4)
+    assert.equal(merged.filter((item) => item.sourceId === "linkedin_posts").length, 5)
+    assert.deepEqual(
+      merged.filter((item) => item.sourceId === "x_posts").map((item) => item.featured),
+      [true],
+    )
     assert.ok(merged.every((item) => item.alsoSharedTo?.some((shared) => shared.sourceId.includes("bluesky"))))
   })
 
-  test("renders an X post with a LinkedIn alsoOn once, with X canonical", () => {
-    const crossPost = socialPosts.find((post) => post.platform === "x" && post.alsoOn.some((url) => url.includes("linkedin.com")))
+  test("renders a LinkedIn + X twin once, with LinkedIn canonical and X under alsoOn", () => {
+    const crossPost = curatedPosts.find(
+      (post) => post.platform === "linkedin" && post.alsoOn.some((url) => new URL(url).hostname === "x.com"),
+    )
     assert.ok(crossPost)
-    const linkedInUrl = crossPost.alsoOn.find((url) => url.includes("linkedin.com"))
-    assert.ok(linkedInUrl)
+    const xUrl = crossPost.alsoOn.find((url) => new URL(url).hostname === "x.com")
+    assert.ok(xUrl)
 
+    const linkedIn = curatedFeedItem(crossPost)
     const x = feedItem({
-      id: `x_posts::${crossPost.url}`,
-      title: crossPost.title,
-      link: crossPost.url,
-      sourceId: "x_posts",
-      sourceName: "X",
-      sourceUrl: "https://x.com/benoror",
-      referencedLinks: crossPost.alsoOn,
-      alsoSharedTo: [
-        {
-          sourceId: "linkedin_posts",
-          sourceName: "LinkedIn",
-          link: linkedInUrl,
-        },
-      ],
-    })
-    const linkedIn = feedItem({
-      id: `linkedin_posts::${linkedInUrl}`,
-      title: `LinkedIn copy of ${crossPost.title}`,
-      link: `${linkedInUrl}/?utm_source=test`,
-      sourceId: "linkedin_posts",
-      sourceName: "LinkedIn",
-      sourceUrl: "https://linkedin.com/in/benoror",
+      id: `x_posts::${xUrl}`,
+      title: `X copy of ${crossPost.title}`,
+      link: `${xUrl}/?s=20`,
+      ...X_SOURCE,
     })
 
-    const merged = mergeDuplicateFeedItems([linkedIn, x], SOURCE_PRIORITY)
+    const merged = dropStandaloneSocialPosts(mergeDuplicateFeedItems([x, linkedIn], SOURCE_PRIORITY))
     assert.equal(merged.length, 1)
-    assert.equal(merged[0]?.sourceId, "x_posts")
-    assert.deepEqual(merged[0]?.alsoSharedTo, [
-      {
-        sourceId: "linkedin_posts",
-        sourceName: "LinkedIn",
-        link: linkedIn.link,
-      },
-    ])
+    assert.equal(merged[0]?.sourceId, "linkedin_posts")
+    assert.equal(merged[0]?.link, crossPost.url)
+    assert.ok(merged[0]?.alsoSharedTo?.some((shared) => shared.link === x.link))
+  })
+
+  test("does not merge two posts that only cite the same third-party or homepage URL", () => {
+    const skillsPack = feedItem({
+      id: "bluesky_posts::skills-pack",
+      title: "Shipped my own skills pack",
+      link: "https://bsky.app/profile/benoror.bsky.social/post/pack",
+      ...BLUESKY_SOURCE,
+      referencedLinks: ["https://skills.sh", "https://skills.sh/p/pack"],
+    })
+    const laterPost = feedItem({
+      id: "bluesky_posts::five-steps",
+      title: "Five steps as agent skills",
+      link: "https://bsky.app/profile/benoror.bsky.social/post/five",
+      ...BLUESKY_SOURCE,
+      referencedLinks: ["https://skills.sh/p/pack"],
+    })
+    const chatbot = feedItem({
+      id: "bluesky_posts::chatbot",
+      title: "I just added a chatbot to benoror.com",
+      link: "https://bsky.app/profile/benoror.bsky.social/post/chatbot",
+      ...BLUESKY_SOURCE,
+      referencedLinks: ["https://benoror.com"],
+    })
+    const portfolioReply = feedItem({
+      id: "bluesky_posts::gba",
+      title: "Resurrecting a GBA project",
+      link: "https://bsky.app/profile/benoror.bsky.social/post/gba",
+      ...BLUESKY_SOURCE,
+      referencedLinks: ["https://www.benoror.com/portfolio"],
+    })
+
+    const merged = mergeDuplicateFeedItems([skillsPack, laterPost, chatbot, portfolioReply], SOURCE_PRIORITY)
+    assert.equal(merged.length, 4)
+  })
+
+  test("a featured X post stays the main item, even next to a LinkedIn twin", () => {
+    const linkedinLink = "https://www.linkedin.com/posts/benoror_featured"
+    const x = feedItem({
+      id: "x_posts::featured",
+      title: "Pinned X post",
+      link: "https://x.com/benoror/status/featured",
+      ...X_SOURCE,
+      referencedLinks: [linkedinLink],
+      featured: true,
+    })
+    const linkedin = feedItem({
+      id: "linkedin_posts::featured",
+      title: "LinkedIn copy",
+      link: linkedinLink,
+      ...LINKEDIN_SOURCE,
+    })
+
+    const merged = dropStandaloneSocialPosts(mergeDuplicateFeedItems([linkedin, x], SOURCE_PRIORITY))
+    assert.equal(merged.length, 1)
+    assert.equal(merged[0]?.link, x.link)
+    assert.equal(merged[0]?.featured, true)
+    assert.deepEqual(merged[0]?.alsoSharedTo?.map((item) => item.sourceName), ["LinkedIn"])
+  })
+})
+
+describe("dropStandaloneSocialPosts", () => {
+  test("keeps long-form and featured items, drops standalone X and Bluesky posts", () => {
+    const items = [
+      { id: "blog", link: "https://benoror.bearblog.dev/post/" },
+      { id: "notes", link: "https://notes.benoror.com/Some-Note" },
+      { id: "linkedin", link: "https://www.linkedin.com/posts/benoror_post" },
+      { id: "gist", link: "https://gist.github.com/benoror/abc" },
+      { id: "x", link: "https://x.com/benoror/status/1" },
+      { id: "twitter", link: "https://twitter.com/benoror/status/2" },
+      { id: "bluesky", link: "https://bsky.app/profile/benoror.bsky.social/post/3" },
+      { id: "featured-x", link: "https://x.com/benoror/status/4", featured: true },
+    ]
+
+    assert.deepEqual(
+      dropStandaloneSocialPosts(items).map((item) => item.id),
+      ["blog", "notes", "linkedin", "gist", "featured-x"],
+    )
+  })
+})
+
+describe("curated social posts", () => {
+  test("features exactly the six pinned X posts", () => {
+    const featured = curatedPosts.filter((post) => post.featured)
+    assert.ok(featured.every((post) => post.platform === "x" && post.featured === true))
+    assert.deepEqual(
+      featured.map((post) => post.url.split("/status/")[1]).sort(),
+      [...FEATURED_X_IDS].sort(),
+    )
+  })
+
+  test("stores X + LinkedIn twins with LinkedIn canonical", () => {
+    const xWithLinkedInTwin = curatedPosts.filter(
+      (post) => post.platform === "x" && post.alsoOn.some((url) => url.includes("linkedin.com")),
+    )
+    assert.deepEqual(xWithLinkedInTwin, [])
+    assert.ok(
+      curatedPosts.some((post) => post.platform === "linkedin" && post.alsoOn.some((url) => url.includes("x.com"))),
+    )
+  })
+
+  test("the rendered curated feed has no standalone X posts besides the featured ones", () => {
+    const merged = dropStandaloneSocialPosts(mergeDuplicateFeedItems(curatedPosts.map(curatedFeedItem), SOURCE_PRIORITY))
+    const linkedInCount = curatedPosts.filter((post) => post.platform === "linkedin").length
+
+    assert.equal(merged.length, linkedInCount + FEATURED_X_IDS.length)
+    const xItems = merged.filter((item) => new URL(item.link).hostname === "x.com")
+    assert.equal(xItems.length, FEATURED_X_IDS.length)
+    assert.ok(xItems.every((item) => item.featured === true))
   })
 })

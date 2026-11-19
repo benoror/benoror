@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Rss } from "lucide-react"
+import { Pin, Rss } from "lucide-react"
 import { LINKS } from "@workspace/data/shared/profile"
 import ExternalLink from "@/components/ui/external-link"
 import { PlatformIcon } from "@/components/ui/platform-icon"
@@ -22,6 +22,7 @@ export type FeedExcerptItem = {
     sourceName: string
     link: string
   }>
+  featured?: boolean
 }
 
 export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] }) {
@@ -83,6 +84,12 @@ export default function FeedExcerptClient({ items }: { items: FeedExcerptItem[] 
                         >
                           <Rss className="h-4 w-4" />
                         </a>
+                      ) : null}
+                      {item.featured ? (
+                        <span className="inline-flex items-center gap-1 text-xs opacity-80" title="Pinned">
+                          <Pin className="h-3 w-3" aria-hidden="true" />
+                          Pinned
+                        </span>
                       ) : null}
                       {item.alsoSharedTo && item.alsoSharedTo.length > 0 ? (
                         <span className="ml-auto inline-flex flex-wrap items-center justify-end gap-0.5 text-xs">

@@ -8,6 +8,7 @@ const SOCIAL_POST_KEYS = [
   "title",
   "alsoOn",
 ] as const;
+const OPTIONAL_SOCIAL_POST_KEYS = ["featured"] as const;
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const PLATFORMS = new Set<SocialPostPlatform>(["x", "linkedin"]);
 
@@ -45,12 +46,15 @@ const validateSocialPost = (value: unknown, index: number): SocialPost => {
   const keys = Object.keys(record);
   const unexpectedKeys = keys.filter(
     (key) =>
-      !SOCIAL_POST_KEYS.includes(key as (typeof SOCIAL_POST_KEYS)[number]),
+      !SOCIAL_POST_KEYS.includes(key as (typeof SOCIAL_POST_KEYS)[number]) &&
+      !OPTIONAL_SOCIAL_POST_KEYS.includes(
+        key as (typeof OPTIONAL_SOCIAL_POST_KEYS)[number],
+      ),
   );
   const missingKeys = SOCIAL_POST_KEYS.filter((key) => !(key in record));
   if (unexpectedKeys.length > 0 || missingKeys.length > 0) {
     throw new TypeError(
-      `${label} must contain exactly ${SOCIAL_POST_KEYS.join(", ")} (missing: ${missingKeys.join(", ") || "none"}; unexpected: ${unexpectedKeys.join(", ") || "none"})`,
+      `${label} must contain exactly ${SOCIAL_POST_KEYS.join(", ")}, plus optional ${OPTIONAL_SOCIAL_POST_KEYS.join(", ")} (missing: ${missingKeys.join(", ") || "none"}; unexpected: ${unexpectedKeys.join(", ") || "none"})`,
     );
   }
 
@@ -78,12 +82,17 @@ const validateSocialPost = (value: unknown, index: number): SocialPost => {
     );
   }
 
+  if ("featured" in record && record.featured !== true) {
+    throw new TypeError(`${label}.featured must be true when present`);
+  }
+
   return {
     date: record.date,
     platform: record.platform as SocialPostPlatform,
     url: record.url,
     title: record.title,
     alsoOn: [...record.alsoOn] as string[],
+    ...(record.featured === true ? { featured: true as const } : {}),
   };
 };
 

@@ -7,6 +7,7 @@ import {
   type BlueskyThreadNode,
   collectSelfAuthoredReplyShareLinksFromThread,
   indexSelfAuthoredReplyShareLinksFromAuthorFeed,
+  dropStandaloneSocialPosts,
   isBlueskyReplyPost,
   mergeDuplicateFeedItems,
   referencedLinksForBlueskyRoot,
@@ -34,17 +35,18 @@ const EXPLICIT_PRIORITY_SOURCE_URLS = new Set([
   LINKS.bluesky.url,
 ])
 // Canonical items and "also on" links use the same order: Bear/notes
-// (long-form), X, LinkedIn, every other source, then Bluesky last. Thus
-// Bluesky is only canonical when no twin exists on any other source.
+// (long-form), LinkedIn, every other source, then X and Bluesky last. X and
+// Bluesky are never canonical except for featured posts; without a long-form
+// twin they are dropped (see dropStandaloneSocialPosts).
 const LINK_PRIORITY_LIST = [
   LINKS.bear_blog.url,
   LINKS.notes.url,
-  "https://x.com/benoror",
-  LINKS.twitter.url,
   LINKS.linkedin.url,
   ...Object.values(LINKS)
     .map((entry) => entry.url)
     .filter((url) => !EXPLICIT_PRIORITY_SOURCE_URLS.has(url)),
+  "https://x.com/benoror",
+  LINKS.twitter.url,
   LINKS.bluesky.url,
 ]
 // This is a truncated duplicate of the canonical 3mzef2pyrwk2h post.
@@ -69,6 +71,8 @@ export type AggregatedFeedItem = {
     sourceName: string
     link: string
   }>
+  /** Pinned social post shown as its own item. */
+  featured?: boolean
 }
 
 export type AggregatedFeedSource = {
@@ -376,6 +380,7 @@ const mapManualSocialItems = (source: (typeof FEED_SOURCES)[number]): Aggregated
     sourceUrl: source.site_url,
     referencedLinks: post.alsoOn,
     alsoSharedTo: post.alsoOn.map(describeSharedSocialLink),
+    ...(post.featured ? { featured: true } : {}),
   }))
 
 const isStackOverflowCommentItem = (item: Parser.Item): boolean => {
@@ -770,9 +775,11 @@ const getSourceItems = async (
 const aggregateFeed = async (): Promise<AggregatedFeed> => {
   const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
 
-  const items = mergeDuplicateFeedItems(
-    sourceResults.flatMap((result) => result.items),
-    LINK_PRIORITY_LIST,
+  const items = dropStandaloneSocialPosts(
+    mergeDuplicateFeedItems(
+      sourceResults.flatMap((result) => result.items),
+      LINK_PRIORITY_LIST,
+    ),
   )
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)

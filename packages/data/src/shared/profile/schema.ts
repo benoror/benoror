@@ -18,6 +18,8 @@ export type SocialPost = {
   url: string;
   title: string;
   alsoOn: string[];
+  /** Pins a social post as its own feed item. Only `true` is allowed. */
+  featured?: true;
 };
 
 export type LinkEntry = {

@@ -13,6 +13,8 @@ export type MergeableFeedItem = {
   sourceUrl: string
   referencedLinks?: string[]
   alsoSharedTo?: AggregatedFeedAlsoSharedTo[]
+  /** A pinned social post that stays a main item and keeps its own link. */
+  featured?: boolean
 }
 
 export type BlueskyExternalEmbed = {
@@ -126,6 +128,15 @@ export const uniqueUrls = (values: Array<string | null | undefined>): string[] =
   return result
 }
 
+// Short-form social networks. Their posts only reach the feed as "also on"
+// links of a long-form twin, unless the post is featured.
+const SHORT_FORM_SOCIAL_HOSTNAMES = new Set(["x.com", "twitter.com", "bsky.app"])
+
+export const isShortFormSocialLink = (value: string): boolean => {
+  const hostname = getHostname(value)
+  return hostname ? SHORT_FORM_SOCIAL_HOSTNAMES.has(hostname) : false
+}
+
 const normalizeDedupTitle = (title: string): string => title.trim().toLowerCase()
 
 const getHostname = (value: string): string | null => {
@@ -141,6 +152,12 @@ const getHostname = (value: string): string | null => {
 // that merely cite another item (e.g. a blog post linking to a note).
 const collectMatchLinks = (item: MergeableFeedItem): string[] =>
   uniqueUrls([item.link, ...(item.referencedLinks ?? [])])
+
+// Two items are twins when one of them points at the other's own link. Two
+// posts that merely cite the same third URL (a product page, the homepage)
+// are separate posts, not copies of each other.
+const pointsAt = (item: MergeableFeedItem, other: MergeableFeedItem): boolean =>
+  collectMatchLinks(item).some((link) => urlsLooselyMatch(link, other.link))
 
 const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number => {
   const normalizedSourceUrl = normalizePriorityUrl(sourceUrl)
@@ -162,9 +179,10 @@ const getSourcePriority = (sourceUrl: string, priorityUrls: string[]): number =>
   if (sameHostnameIndex >= 0) return sameHostnameIndex
 
   // An unlisted source belongs to the "everything else" bucket immediately
-  // before Bluesky, which must remain last even as new sources are added.
-  const blueskyIndex = priorityUrls.findIndex((url) => getHostname(url) === "bsky.app")
-  return blueskyIndex >= 0 ? blueskyIndex - 0.5 : Number.MAX_SAFE_INTEGER
+  // before the short-form social sources (X, Bluesky), which must remain last
+  // even as new sources are added.
+  const firstSocialIndex = priorityUrls.findIndex((url) => isShortFormSocialLink(url))
+  return firstSocialIndex >= 0 ? firstSocialIndex - 0.5 : Number.MAX_SAFE_INTEGER
 }
 
 const getSharedLinkPriority = <T extends MergeableFeedItem>(
@@ -263,12 +281,10 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
   for (let index = 0; index < items.length; index += 1) {
     const item = items[index]
     if (!item) continue
-    const links = collectMatchLinks(item)
     for (let otherIndex = index + 1; otherIndex < items.length; otherIndex += 1) {
       const other = items[otherIndex]
       if (!other) continue
-      const otherLinks = collectMatchLinks(other)
-      if (links.some((link) => otherLinks.some((otherLink) => urlsLooselyMatch(link, otherLink)))) {
+      if (pointsAt(item, other) || pointsAt(other, item)) {
         union(item.id, other.id)
       }
     }
@@ -296,9 +312,9 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
       }
 
       const sorted = sortBySourcePriority(group, sourcePriorityUrls)
-      const preferred = sorted.reduce((best, current) =>
-        pickPreferredBySourcePriority(best, current, sourcePriorityUrls),
-      )
+      const preferred =
+        sorted.find((item) => item.featured) ??
+        sorted.reduce((best, current) => pickPreferredBySourcePriority(best, current, sourcePriorityUrls))
       const alternates = mergeAlsoSharedTo(group, preferred, sourcePriorityUrls)
 
       const { referencedLinks, ...rest } = preferred
@@ -310,6 +326,14 @@ export const mergeDuplicateFeedItems = <T extends MergeableFeedItem>(
     })
     .filter((item): item is Omit<T, "referencedLinks"> => item !== null)
 }
+
+/**
+ * The feed shows long-form work. After merging, an item whose main link is
+ * still a short-form social post (X, Bluesky) had no long-form twin, so it
+ * leaves the feed unless it is featured.
+ */
+export const dropStandaloneSocialPosts = <T extends Pick<MergeableFeedItem, "link" | "featured">>(items: T[]): T[] =>
+  items.filter((item) => item.featured === true || !isShortFormSocialLink(item.link))
 
 export const toBlueskyText = (value: unknown): string => (typeof value === "string" ? value.trim() : "")
 

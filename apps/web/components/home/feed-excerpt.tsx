@@ -16,6 +16,7 @@ export default async function FeedExcerpt() {
       sourceUrl: source?.siteUrl ?? item.sourceUrl,
       sourceRssUrl: source?.rssUrl,
       alsoSharedTo: item.alsoSharedTo,
+      featured: item.featured,
     }
   })
 

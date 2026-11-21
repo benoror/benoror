@@ -5,10 +5,10 @@ import { APPTEGY, BASEQL, BROKERLIT, COTIZAHOY, ECARESOFT, HEALTHTREE, NICMX, OP
 
 const ABOUT: IResumeAbout = {
   name: PERSONAL.short_name,
-  header: 'Hands-on Engineering Executive · VP Engineering / CTO · Product and Platform Builder',
+  header: 'Hands-on Engineering Leader & Builder · VP Engineering & CTO · AI Engineering · 15+ years shipping · Founder',
   location: 'Monterrey, MX 🇲🇽',
   public_email: gmailAlias(PERSONAL.private_email, 'cv'),
-  about_me: `Hands-on VP of Engineering and CTO with 15+ years building SaaS products and engineering organizations across the U.S. and Latin America. Led distributed organizations of 140+ engineers through hiring, manager development, performance management, organizational design, roadmap execution, and architectural change. Retain deep technical range across backend systems, cloud infrastructure, frontend delivery, product development, and AI. Currently lead three Backoffice teams while remaining directly involved in architecture and selected platform initiatives. Best suited to roles that require executive judgment, strong engineering management, and enough technical depth to challenge decisions and contribute when needed.`
+  about_me: `Hands-on Engineering Leader, VP of Engineering, and CTO with 15+ years building software products and engineering teams across the U.S. and Latin America. Helped scale a distributed org of 140+ engineers at Apptegy through Series C and $100M+ ARR, leading org-wide AI enablement alongside hiring, manager coaching, delivery systems, and architecture simplification. Previously CTO at HealthTree and Ecaresoft (Nimbo) and founder of BaseQL (acquired 2024). Currently lead engineering teams while staying hands-on across agentic workflows, Ruby on Rails, TypeScript, Python, and AWS and Kubernetes.`
 };
 
 const COMPANIES = [
@@ -181,7 +181,7 @@ const SKILLS: ISkill[] = [{
 }, {
   name: 'Backend',
   slug: 'backend',
-  order: 3,
+  order: 4,
   since: 2010,
   level: 100,
   description: 'Primary technical depth in backend systems, APIs, integrations, data access, background processing, and production performance.',
@@ -250,7 +250,7 @@ const SKILLS: ISkill[] = [{
 }, {
   name: 'Frontend',
   slug: 'frontend',
-  order: 4,
+  order: 5,
   since: 2018,
   level: 90,
   description: 'Full-stack product delivery across modern web applications, admin tools, and server-rendered interfaces.',
@@ -295,13 +295,12 @@ const SKILLS: ISkill[] = [{
     subSkills: [
       { name: 'Hotwire and Stimulus'},
       { name: 'React Native' },
-      { name: 'TailwindCSS' },
     ],
   }],
 }, {
   name: 'DevOps',
   slug: 'devops',
-  order: 5,
+  order: 6,
   level: 80,
   since: 2019,
   description: 'Building and evolving infrastructure from scratch: CI/CD, cloud environments, reliability, and developer workflows.',
@@ -327,7 +326,7 @@ const SKILLS: ISkill[] = [{
     slug: 'kubernetes',
     description: 'Built and operated Kubernetes environments using GitOps practices.',
     subSkills: [
-      { name: 'GitOPS - ArgoCD' },
+      { name: 'GitOps - ArgoCD' },
       { name: 'Kustomize' },
       { name: 'Helm' },
     ],
@@ -364,9 +363,9 @@ const SKILLS: ISkill[] = [{
 }, {
   name: 'AI',
   slug: 'ai',
-  order: 6,
+  order: 3,
   since: 2023,
-  level: 75,
+  level: 90,
   description: 'AI-assisted engineering, team enablement, and AI product development grounded in evaluation, security, reliability, and production constraints.',
   subSkills: [{
     name: 'AI tools',
@@ -388,7 +387,7 @@ const SKILLS: ISkill[] = [{
       { name: 'MCP / ACP' },
       { name: 'Agent Skills' },
       { name: 'Parallel agents' },
-      { name: 'QMD workflows' },
+      { name: 'Markdown knowledge workflows' },
     ],
   }, {
     name: 'Workflows',

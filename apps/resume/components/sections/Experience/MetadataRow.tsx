@@ -32,7 +32,7 @@ export default function MetadataRow({
         )}
       </div>
       {startDate && endDate && (
-        <div className="flex items-center">
+        <div className="flex items-center whitespace-nowrap text-muted-foreground/70 print:text-neutral-500">
           <Calendar className="h-4 w-4 mr-1" />
           <span>{startDate} - {endDate}</span>
         </div>

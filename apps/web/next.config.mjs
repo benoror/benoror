@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
+  async rewrites() {
+    return [
+      { source: "/poppod", destination: "/pop-podcast" },
+      { source: "/podcast", destination: "/pop-podcast" },
+    ];
+  },
   outputFileTracingIncludes: {
     "/api/chat": ["../../packages/data/src/web/chatbot/**/*"],
   },

@@ -6,10 +6,10 @@ export const TRIVELTA: IRole[] = [
     location: 'Monterrey, MX 🇲🇽',
     startDate: 'Sep 2026',
     endDate: 'Present',
-    description: 'Promoted to lead three Backoffice engineering teams: PAM (player account management), TCM (Trivelta Client Management), and Data Engineering. Retain fractional responsibility as PAM Tech Lead and developer for selected platform initiatives.',
+    description: 'Promoted to lead three engineering teams: PAM (player account management), TCM (Trivelta Client Management), and Data Engineering. Retain fractional responsibility as PAM Tech Lead and developer for selected platform initiatives.',
     achievements: [
       {
-        description: 'Lead a 10-person Backoffice engineering group, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers managed through the team leads.'
+        description: 'Lead a 10-person engineering group, with five direct reports (two Tech Leads and three Engineers) and five additional Engineers managed through the team leads.'
       }, {
         description: 'Own cross-team priorities, roadmap execution, delivery, and technical alignment across PAM, TCM, and Data Engineering.'
       }, {

@@ -48,7 +48,7 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
 
   return (
     <>
-      <div className="flex flex-row justify-between items-center gap-1">
+      <div className="flex flex-row justify-between items-center gap-1 print:break-after-avoid">
         <RoleTitle role={role} />
         <MetadataRow
           remote={role.remote}
@@ -80,7 +80,7 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
         </div>
 
         <CollapsibleContent className="mt-2 ml-4">
-          <ul className="space-y-1 list-disc pl-2 text-sm">
+          <ul className="space-y-1 list-disc pl-2 text-sm print:space-y-0.5">
             {achievements.map((achievement, pointIndex) => (
               <Achievement key={pointIndex} achievement={achievement} />
             ))}
@@ -88,7 +88,7 @@ export default function Role({ roleKey, role, short, isOpen, toggleCollapsible }
         </CollapsibleContent>
       </Collapsible>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 print:break-inside-avoid print:break-before-avoid">
         {(role.skills ?? []).map((skill, skillIndex) => {
           const slug = skill.slug || skill.name.replace(/[\s_]+/g, '-').toLowerCase()
           return (

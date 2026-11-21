@@ -49,11 +49,11 @@ export default function Experience({
           <div
             key={companyIndex}
             className={[
-              companyIndex !== 0 ? "pt-3" : "",
+              companyIndex !== 0 ? "pt-3 print:pt-2" : "",
               printPageBreaks && company.name === "HealthTree" ? "print:break-before-page" : "",
             ].filter(Boolean).join(" ")}
           >
-            <div className="flex flex-row justify-between items-center gap-2 mb-1.5">
+            <div className="flex flex-row justify-between items-center gap-2 mb-1.5 print:mb-1 print:break-after-avoid">
               <h3 className="text-lg font-semibold text-brand-emphasis bg-muted-foreground/10 py-0 px-2 rounded-sm">
                 {company.url ? (
                   <a href={company.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
@@ -72,11 +72,11 @@ export default function Experience({
               />
             </div>
 
-            <p className="text-sm mb-3">
+            <p className="text-sm mb-3 print:mb-2 print:break-after-avoid">
               <MDDescription markdown={company.description} />
             </p>
 
-            <div className="space-y-4 pl-4 border-l-2 border-border">
+            <div className="space-y-4 print:space-y-3 pl-4 border-l-2 border-border">
               {(company.roles ?? []).map((role: IRole, roleIndex: number) => {
                 const key = `${companyIndex}-${roleIndex}`
                 const isOpen = openStates[key]

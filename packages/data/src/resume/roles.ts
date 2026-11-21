@@ -13,12 +13,12 @@ export const TRIVELTA: IRole[] = [
       }, {
         description: 'Own cross-team priorities, roadmap execution, delivery, and technical alignment across PAM, TCM, and Data Engineering.'
       }, {
-        description: 'Remain hands-on as fractional PAM Tech Lead and developer for high-leverage work involving [ClickHouse](#backend-other), a secure MCP connector, and migration to [Amazon EKS](#kubernetes).'
+        description: 'Remain hands-on as fractional PAM Tech Lead and developer for high-leverage work involving [ClickHouse](#backend-other), an RBAC-scoped MCP connector, and migration to [Amazon EKS](#kubernetes).'
       }, {
         hidden: true,
         description: 'Designing and building a read-only MCP connector for [Trivelta PAM](https://trivelta.com/pam): a curated, permission-bound tool surface over PAM analytics so authorized admins can analyze operator data through standard AI clients without privilege gain beyond existing RBAC, product gates, and audit posture.'
       }, {
-        description: 'Shape the product and technical direction for a greenfield, AI-enabled support product tailored to iGaming operators; development has not yet started.'
+        description: 'Shape the product and technical direction for a greenfield, AI-enabled support product tailored to iGaming operators.'
       },
     ],
     skills: [

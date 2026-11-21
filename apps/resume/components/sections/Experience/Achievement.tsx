@@ -5,7 +5,7 @@ export default function Achievement({ achievement }: { achievement: IAchievement
   const subAchievements = (achievement.subAchievements ?? []).filter((entry) => !entry.hidden)
 
   return (
-    <li className="text-md print:text-sm">
+    <li className="text-md print:text-sm print:leading-[1.35] print:break-inside-avoid">
       <MDDescription markdown={achievement.description} />
       {subAchievements.length > 0 && (
         <ul className="pl-8 md:pl-4 list-[circle] list-outside md:list-inside space-x-6">

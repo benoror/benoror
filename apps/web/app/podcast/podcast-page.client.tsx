@@ -232,16 +232,33 @@ export function PodcastPageClient({
                           </div>
                         ) : null}
 
-                        {episode.spotifyEmbedUrl ? (
-                          <iframe
-                            src={episode.spotifyEmbedUrl}
-                            title={`${episode.title} on Spotify`}
-                            width="100%"
-                            height="152"
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                            loading="lazy"
-                            className="rounded-xl border-0"
-                          />
+                        {episode.youtubeEmbedUrl ||
+                        episode.spotifyEmbedUrl ? (
+                          <div className="grid items-start gap-3 md:grid-cols-[minmax(240px,36%)_1fr]">
+                            {episode.youtubeEmbedUrl ? (
+                              <iframe
+                                src={episode.youtubeEmbedUrl}
+                                title={`${episode.title} on YouTube`}
+                                width="100%"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                className="aspect-video w-full rounded-xl border-0"
+                              />
+                            ) : null}
+                            {episode.spotifyEmbedUrl ? (
+                              <iframe
+                                src={episode.spotifyEmbedUrl}
+                                title={`${episode.title} on Spotify`}
+                                width="100%"
+                                height="152"
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy"
+                                className="rounded-xl border-0"
+                              />
+                            ) : null}
+                          </div>
                         ) : null}
                       </article>
                     </li>

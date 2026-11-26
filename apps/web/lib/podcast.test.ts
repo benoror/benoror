@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   cleanPodcastText,
   EPISODE_LINKS,
+  getYouTubeEmbedUrl,
   PODCAST_CANONICAL_URL,
   PODCAST_RSS_URL,
 } from "./podcast.ts";
@@ -33,4 +34,12 @@ test("includes the current episode links", () => {
     "https://open.spotify.com/episode/7AvcXS8fxzQRlrOg4saRIx",
   );
   assert.deepEqual(Object.keys(EPISODE_LINKS).sort(), ["1", "2", "3", "4"]);
+});
+
+test("builds privacy-friendly YouTube embed URLs from episode links", () => {
+  assert.equal(
+    getYouTubeEmbedUrl(EPISODE_LINKS["4"]?.youtube),
+    "https://www.youtube-nocookie.com/embed/fHO1ReeWkG0",
+  );
+  assert.equal(getYouTubeEmbedUrl(), undefined);
 });

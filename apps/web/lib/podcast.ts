@@ -69,6 +69,7 @@ export type PodcastEpisode = {
   image?: string;
   links: EpisodeLinks;
   spotifyEmbedUrl?: string;
+  youtubeEmbedUrl?: string;
 };
 
 export type Podcast = {
@@ -126,6 +127,15 @@ const getSpotifyEmbedUrl = (spotifyUrl?: string) => {
     : undefined;
 };
 
+export const getYouTubeEmbedUrl = (youtubeUrl?: string) => {
+  if (!youtubeUrl) return undefined;
+
+  const videoId = new URL(youtubeUrl).searchParams.get("v");
+  return videoId
+    ? `https://www.youtube-nocookie.com/embed/${videoId}`
+    : undefined;
+};
+
 export async function getPodcast(): Promise<Podcast> {
   const response = await fetch(PODCAST_RSS_URL, {
     headers: {
@@ -161,6 +171,7 @@ export async function getPodcast(): Promise<Podcast> {
         image: item.itunesImage?.$?.href,
         links,
         spotifyEmbedUrl: getSpotifyEmbedUrl(links.spotify),
+        youtubeEmbedUrl: getYouTubeEmbedUrl(links.youtube),
       };
     })
     .filter((episode): episode is PodcastEpisode => episode !== null)

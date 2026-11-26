@@ -2,6 +2,12 @@ import Parser from "rss-parser"
 import { unstable_cache } from "next/cache"
 import { FEED_SOURCES, LINKS } from "@workspace/data/shared/profile"
 import {
+  getPodcast,
+  getPodcastEpisodeUrl,
+  PODCAST_CANONICAL_URL,
+  PODCAST_RSS_URL,
+} from "@/lib/podcast"
+import {
   type BlueskyAuthorFeedEntry,
   type BlueskyAuthorRef,
   type BlueskyThreadNode,
@@ -73,6 +79,7 @@ export type AggregatedFeedItem = {
   }>
   /** Pinned social post shown as its own item. */
   featured?: boolean
+  hasVideo?: boolean
 }
 
 export type AggregatedFeedSource = {
@@ -382,6 +389,45 @@ const mapManualSocialItems = (source: (typeof FEED_SOURCES)[number]): Aggregated
     alsoSharedTo: post.alsoOn.map(describeSharedSocialLink),
     ...(post.featured ? { featured: true } : {}),
   }))
+
+const getPodcastSourceItems = async (): Promise<{
+  items: AggregatedFeedItem[]
+  error?: string
+}> => {
+  try {
+    const podcast = await getPodcast()
+    return {
+      items: podcast.episodes.map((episode) => ({
+        id: `podcast::${episode.id}`,
+        title: episode.title,
+        link: getPodcastEpisodeUrl(episode.slug),
+        publishedAt: episode.publishedAt,
+        sourceId: "podcast",
+        sourceName: "Podcast",
+        sourceUrl: PODCAST_CANONICAL_URL,
+        summary: episode.description,
+        bodyFormat: "text",
+        alsoSharedTo: [
+          ...(episode.links.spotify
+            ? [{ sourceId: "spotify", sourceName: "Spotify", link: episode.links.spotify }]
+            : []),
+          ...(episode.links.apple
+            ? [{ sourceId: "apple_podcasts", sourceName: "Apple Podcasts", link: episode.links.apple }]
+            : []),
+          ...(episode.links.youtube
+            ? [{ sourceId: "youtube", sourceName: "YouTube", link: episode.links.youtube }]
+            : []),
+        ],
+        hasVideo: Boolean(episode.links.youtube),
+      })),
+    }
+  } catch (error) {
+    return {
+      items: [],
+      error: error instanceof Error ? error.message : "Unknown podcast feed error",
+    }
+  }
+}
 
 const isStackOverflowCommentItem = (item: Parser.Item): boolean => {
   const title = item.title?.toLowerCase() ?? ""
@@ -773,14 +819,18 @@ const getSourceItems = async (
 }
 
 const aggregateFeed = async (): Promise<AggregatedFeed> => {
-  const sourceResults = await Promise.all(FEED_SOURCES.map((source) => getSourceItems(source)))
+  const [sourceResults, podcastResult] = await Promise.all([
+    Promise.all(FEED_SOURCES.map((source) => getSourceItems(source))),
+    getPodcastSourceItems(),
+  ])
 
-  const items = dropStandaloneSocialPosts(
+  const existingItems = dropStandaloneSocialPosts(
     mergeDuplicateFeedItems(
       sourceResults.flatMap((result) => result.items),
       LINK_PRIORITY_LIST,
     ),
   )
+  const items = [...existingItems, ...podcastResult.items]
     .sort((a, b) => b.publishedAt.localeCompare(a.publishedAt))
     .slice(0, MAX_ITEMS)
 
@@ -793,8 +843,16 @@ const aggregateFeed = async (): Promise<AggregatedFeed> => {
     note: source.note,
     error: sourceResults[index]?.error,
   }))
+  sources.push({
+    id: "podcast",
+    name: "Podcast",
+    siteUrl: PODCAST_CANONICAL_URL,
+    rssUrl: PODCAST_RSS_URL,
+    status: "active",
+    error: podcastResult.error,
+  })
 
   return { items, sources, generatedAt: new Date().toISOString() }
 }
 
-export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v1"], { revalidate: 1800 })
+export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v4"], { revalidate: 1800 })

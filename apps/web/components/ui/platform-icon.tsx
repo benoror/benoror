@@ -1,4 +1,4 @@
-import { Github, Link as LinkIcon, PawPrint } from "lucide-react"
+import { Github, Link as LinkIcon, PawPrint, Podcast } from "lucide-react"
 import type { FeedPlatform } from "@/lib/feed/platform"
 
 type PlatformIconProps = {
@@ -108,6 +108,29 @@ export function PlatformIcon({ platform, className, size = 16 }: PlatformIconPro
     case "gist":
     case "github":
       return <Github aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
+    case "podcast":
+      return <Podcast aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
+    case "spotify":
+      return (
+        <BrandSvg className={className} size={size}>
+          <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0Zm5.5 17.32a.75.75 0 0 1-1.03.25c-2.83-1.73-6.39-2.12-10.58-1.16a.75.75 0 1 1-.33-1.46c4.59-1.05 8.52-.6 11.7 1.34.35.22.46.68.24 1.03Zm1.48-3.28a.94.94 0 0 1-1.29.31c-3.24-1.99-8.17-2.57-12-1.4a.94.94 0 1 1-.54-1.8c4.37-1.32 9.81-.68 13.52 1.6.44.27.58.85.31 1.29Zm.12-3.42C15.22 8.31 8.82 8.1 5.11 9.23a1.13 1.13 0 0 1-.65-2.16c4.25-1.29 11.33-1.04 15.79 1.61a1.12 1.12 0 1 1-1.15 1.94Z" />
+        </BrandSvg>
+      )
+    case "apple_podcasts":
+      return (
+        <BrandSvg className={className} size={size}>
+          <circle cx="12" cy="10" r="2.15" />
+          <path d="M9.25 14.55c0-1.4 1.23-2.5 2.75-2.5s2.75 1.1 2.75 2.5c0 .94-.22 2.23-.67 4.5-.18.9-1.03 1.57-2.08 1.57s-1.9-.67-2.08-1.57c-.45-2.27-.67-3.56-.67-4.5Z" />
+          <circle cx="12" cy="10" r="5.6" fill="none" stroke="currentColor" strokeWidth="1.7" />
+          <circle cx="12" cy="10" r="8.5" fill="none" stroke="currentColor" strokeWidth="1.7" />
+        </BrandSvg>
+      )
+    case "youtube":
+      return (
+        <BrandSvg className={className} size={size}>
+          <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.55 12 3.55 12 3.55s-7.5 0-9.38.5A3.02 3.02 0 0 0 .5 6.19C0 8.07 0 12 0 12s0 3.93.5 5.81a3.02 3.02 0 0 0 2.12 2.14c1.88.5 9.38.5 9.38.5s7.5 0 9.38-.5a3.02 3.02 0 0 0 2.12-2.14C24 15.93 24 12 24 12s0-3.93-.5-5.81ZM9.55 15.57V8.43L15.82 12l-6.27 3.57Z" />
+        </BrandSvg>
+      )
     default:
       return <LinkIcon aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
   }

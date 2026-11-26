@@ -3,6 +3,10 @@ import { test } from "node:test";
 import {
   cleanPodcastText,
   EPISODE_LINKS,
+  getPodcastEpisodeAnchorId,
+  getPodcastEpisodePath,
+  getPodcastEpisodeSlug,
+  getPodcastEpisodeUrl,
   getYouTubeEmbedUrl,
   PODCAST_CANONICAL_URL,
   PODCAST_RSS_URL,
@@ -18,6 +22,25 @@ test("cleans RSS markup and unsupported dash punctuation", () => {
 test("keeps the canonical page and RSS feed on their intended hosts", () => {
   assert.equal(PODCAST_CANONICAL_URL, "https://benoror.com/podcast");
   assert.equal(PODCAST_RSS_URL, "https://anchor.fm/s/fd81326c/podcast/rss");
+});
+
+test("builds stable episode anchors and readable canonical paths", () => {
+  assert.equal(getPodcastEpisodeAnchorId("4"), "episode-4");
+  const slug = getPodcastEpisodeSlug(
+    "One Map of Reality: What a 109M-Parameter JEPA Says About Scale",
+  );
+  assert.equal(
+    slug,
+    "one-map-of-reality-what-a-109m-parameter-jepa-says-about-scale",
+  );
+  assert.equal(
+    getPodcastEpisodePath(slug),
+    "/podcast/one-map-of-reality-what-a-109m-parameter-jepa-says-about-scale",
+  );
+  assert.equal(
+    getPodcastEpisodeUrl(slug),
+    "https://benoror.com/podcast/one-map-of-reality-what-a-109m-parameter-jepa-says-about-scale",
+  );
 });
 
 test("includes the current episode links", () => {

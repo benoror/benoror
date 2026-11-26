@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Pin, Rss } from "lucide-react"
+import { Pin, Rss, Video } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import OutrunGrid from "@/components/outrun-hero-background"
@@ -70,6 +70,12 @@ function FeedItemCard({
           ) : null}
           <span>·</span>
           <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
+          {item.hasVideo ? (
+            <span className="inline-flex items-center gap-1 text-xs opacity-80">
+              <Video className="h-3.5 w-3.5" aria-hidden="true" />
+              Video
+            </span>
+          ) : null}
           {item.featured ? (
             <span className="inline-flex items-center gap-1 text-xs opacity-80" title="Pinned">
               <Pin className="h-3 w-3" aria-hidden="true" />

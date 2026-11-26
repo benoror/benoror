@@ -1,9 +1,17 @@
 import type { MetadataRoute } from "next"
 import { LINKS } from "@workspace/data/shared/profile"
+import { getPodcast, getPodcastEpisodeUrl } from "@/lib/podcast"
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const websiteUrl = LINKS.website.url.replace(/\/$/, "")
   const now = new Date()
+  const podcast = await getPodcast()
+  const episodeEntries: MetadataRoute.Sitemap = podcast.episodes.map((episode) => ({
+    url: getPodcastEpisodeUrl(episode.slug),
+    lastModified: new Date(episode.publishedAt),
+    changeFrequency: "monthly",
+    priority: 0.8,
+  }))
 
   return [
     {
@@ -48,5 +56,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly",
       priority: 0.6,
     },
+    ...episodeEntries,
   ]
 }

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Pin, Rss } from "lucide-react"
+import { CirclePlay, Pin, Podcast as PodcastIcon, Rss, Video, Youtube } from "lucide-react"
 import Navbar from "@/components/navbar"
 import Footer from "@/components/footer"
 import OutrunGrid from "@/components/outrun-hero-background"
@@ -70,6 +70,12 @@ function FeedItemCard({
           ) : null}
           <span>·</span>
           <time dateTime={item.publishedAt}>{dateFormatter.format(new Date(item.publishedAt))}</time>
+          {item.hasVideo ? (
+            <span className="inline-flex items-center gap-1 text-xs opacity-80">
+              <Video className="h-3.5 w-3.5" aria-hidden="true" />
+              Video
+            </span>
+          ) : null}
           {item.featured ? (
             <span className="inline-flex items-center gap-1 text-xs opacity-80" title="Pinned">
               <Pin className="h-3 w-3" aria-hidden="true" />
@@ -85,6 +91,43 @@ function FeedItemCard({
           continueLinkClassName={`text-sm underline underline-offset-4 ${classes.link}`}
           className={`text-[1.01rem] ${classes.body}`}
         />
+        {item.podcastLinks ? (
+          <div className="flex flex-wrap items-center gap-3 text-sm" aria-label="Listen to this episode">
+            {item.podcastLinks.spotify ? (
+              <a
+                href={item.podcastLinks.spotify}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 underline underline-offset-4 ${classes.link}`}
+              >
+                <CirclePlay className="h-4 w-4" aria-hidden="true" />
+                Spotify
+              </a>
+            ) : null}
+            {item.podcastLinks.apple ? (
+              <a
+                href={item.podcastLinks.apple}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 underline underline-offset-4 ${classes.link}`}
+              >
+                <PodcastIcon className="h-4 w-4" aria-hidden="true" />
+                Apple Podcasts
+              </a>
+            ) : null}
+            {item.podcastLinks.youtube ? (
+              <a
+                href={item.podcastLinks.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-1.5 underline underline-offset-4 ${classes.link}`}
+              >
+                <Youtube className="h-4 w-4" aria-hidden="true" />
+                YouTube
+              </a>
+            ) : null}
+          </div>
+        ) : null}
         {item.alsoSharedTo && item.alsoSharedTo.length > 0 ? (
           <div className={`flex items-center justify-end gap-1.5 text-xs ${classes.meta}`}>
             <span>Also on:</span>

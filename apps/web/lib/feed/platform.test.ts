@@ -68,6 +68,14 @@ describe("detectFeedPlatform", () => {
       input: { url: "https://gist.github.com/benoror/abcdef" },
       expected: "gist",
     },
+    {
+      name: "podcast",
+      input: {
+        sourceId: "podcast",
+        url: "https://benoror.com/podcast#episode-4",
+      },
+      expected: "podcast",
+    },
   ]
 
   for (const testCase of cases) {

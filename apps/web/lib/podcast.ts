@@ -14,7 +14,7 @@ export const PODCAST_PLATFORMS = {
   rss: PODCAST_RSS_URL,
 } as const;
 
-type EpisodeLinks = {
+export type EpisodeLinks = {
   spotify?: string;
   apple?: string;
   youtube?: string;
@@ -77,6 +77,19 @@ export type Podcast = {
   coverImage: string;
   episodes: PodcastEpisode[];
 };
+
+export const getPodcastEpisodeAnchorId = (episodeNumber: string) => {
+  const normalizedEpisodeNumber = episodeNumber
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return `episode-${normalizedEpisodeNumber}`;
+};
+
+export const getPodcastEpisodeUrl = (episodeNumber: string) =>
+  `${PODCAST_CANONICAL_URL}#${getPodcastEpisodeAnchorId(episodeNumber)}`;
 
 const parser = new Parser<Record<string, never>, PodcastFeedItem>({
   customFields: {
@@ -157,7 +170,10 @@ export async function getPodcast(): Promise<Podcast> {
 
       const episodeNumber =
         item.episodeNumber?.trim() || String(feed.items.length - index);
-      const links = EPISODE_LINKS[episodeNumber] ?? {};
+      const links = {
+        spotify: item.link,
+        ...EPISODE_LINKS[episodeNumber],
+      };
 
       return {
         id: item.guid || item.link || `${episodeNumber}-${item.title}`,

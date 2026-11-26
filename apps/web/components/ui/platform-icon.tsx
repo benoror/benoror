@@ -1,4 +1,4 @@
-import { Github, Link as LinkIcon, PawPrint } from "lucide-react"
+import { Github, Link as LinkIcon, PawPrint, Podcast } from "lucide-react"
 import type { FeedPlatform } from "@/lib/feed/platform"
 
 type PlatformIconProps = {
@@ -108,6 +108,8 @@ export function PlatformIcon({ platform, className, size = 16 }: PlatformIconPro
     case "gist":
     case "github":
       return <Github aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
+    case "podcast":
+      return <Podcast aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
     default:
       return <LinkIcon aria-hidden="true" className={className} size={size} style={{ minWidth: size }} />
   }

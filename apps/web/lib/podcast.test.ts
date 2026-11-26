@@ -3,6 +3,8 @@ import { test } from "node:test";
 import {
   cleanPodcastText,
   EPISODE_LINKS,
+  getPodcastEpisodeAnchorId,
+  getPodcastEpisodeUrl,
   getYouTubeEmbedUrl,
   PODCAST_CANONICAL_URL,
   PODCAST_RSS_URL,
@@ -18,6 +20,14 @@ test("cleans RSS markup and unsupported dash punctuation", () => {
 test("keeps the canonical page and RSS feed on their intended hosts", () => {
   assert.equal(PODCAST_CANONICAL_URL, "https://benoror.com/podcast");
   assert.equal(PODCAST_RSS_URL, "https://anchor.fm/s/fd81326c/podcast/rss");
+});
+
+test("builds stable canonical episode anchors", () => {
+  assert.equal(getPodcastEpisodeAnchorId("4"), "episode-4");
+  assert.equal(
+    getPodcastEpisodeUrl("4"),
+    "https://benoror.com/podcast#episode-4",
+  );
 });
 
 test("includes the current episode links", () => {

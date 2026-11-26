@@ -14,7 +14,10 @@ import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import OutrunGrid from "@/components/outrun-hero-background";
 import { useAppTheme } from "@/hooks/use-app-theme";
-import type { Podcast as PodcastData } from "@/lib/podcast";
+import {
+  getPodcastEpisodeAnchorId,
+  type Podcast as PodcastData,
+} from "@/lib/podcast";
 import { getClasses } from "./podcast-page.theme";
 
 type PodcastPlatforms = {
@@ -185,7 +188,8 @@ export function PodcastPageClient({
                   return (
                     <li
                       key={episode.id}
-                      className={`rounded-2xl border p-5 backdrop-blur-md sm:p-7 ${classes.card}`}
+                      id={getPodcastEpisodeAnchorId(episode.episodeNumber)}
+                      className={`scroll-mt-28 rounded-2xl border p-5 backdrop-blur-md sm:p-7 ${classes.card}`}
                     >
                       <article className="space-y-5">
                         <div className="space-y-3">

@@ -9,6 +9,7 @@ export type FeedPlatform =
   | "stackoverflow"
   | "gist"
   | "github"
+  | "podcast"
   | "unknown"
 
 export type FeedPlatformInput = {
@@ -42,6 +43,7 @@ const PLATFORM_ALIASES: Record<string, FeedPlatform> = {
   gists: "gist",
   gist_starred_own: "gist",
   github: "github",
+  podcast: "podcast",
 }
 
 const normalizePlatformHint = (value: string | undefined): FeedPlatform | undefined => {
@@ -78,6 +80,7 @@ const platformFromHostname = (hostname: string | undefined): FeedPlatform | unde
   if (hostname === "stackoverflow.com" || hostname.endsWith(".stackoverflow.com")) return "stackoverflow"
   if (hostname === "gist.github.com") return "gist"
   if (hostname === "github.com" || hostname.endsWith(".github.com")) return "github"
+  if (hostname === "podcasters.spotify.com" || hostname === "anchor.fm") return "podcast"
   return undefined
 }
 
@@ -106,6 +109,7 @@ export const PLATFORM_LABELS: Record<FeedPlatform, string> = {
   stackoverflow: "Stack Overflow",
   gist: "GitHub Gist",
   github: "GitHub",
+  podcast: "Podcast",
   unknown: "External link",
 }
 

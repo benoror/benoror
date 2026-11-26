@@ -1,10 +1,18 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ["@workspace/ui"],
-  async rewrites() {
+  async redirects() {
     return [
-      { source: "/poppod", destination: "/pop-podcast" },
-      { source: "/podcast", destination: "/pop-podcast" },
+      {
+        source: "/pop-podcast",
+        destination: "/podcast",
+        permanent: true,
+      },
+      {
+        source: "/poppod",
+        destination: "/podcast",
+        permanent: true,
+      },
     ];
   },
   outputFileTracingIncludes: {
@@ -22,6 +30,13 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "user-images.githubusercontent.com",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
+        hostname: "d3t3ozftmdmh3i.cloudfront.net",
         port: "",
         pathname: "/**",
         search: "",

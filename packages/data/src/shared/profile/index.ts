@@ -93,7 +93,10 @@ export const LINKS = {
     url: "https://benjiorozco.blogspot.com",
   },
   pop_podcast: {
-    url: "https://benoror.bearblog.dev/pop-podcast",
+    url: isProductionDeployment
+      ? "https://benoror.com/podcast"
+      : "http://localhost:3000/podcast",
+    legend: "Pursuit of Polymathy Podcast",
   },
   product_hunt: {
     url: "https://producthunt.com/@benoror",

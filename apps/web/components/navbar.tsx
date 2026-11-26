@@ -70,6 +70,9 @@ export default function Navbar() {
                   <Link href={LINKS.blog.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Blog
                   </Link>
+                  <Link href={LINKS.pop_podcast.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
+                    Podcast
+                  </Link>
                   <Link href={LINKS.feed_page.url} className={`${styles.navLink} ${classes.text} hover:no-underline`} onClick={() => setIsMenuOpen(false)}>
                     Feed
                   </Link>
@@ -94,6 +97,9 @@ export default function Navbar() {
               </Link>
               <Link href={LINKS.blog.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Blog
+              </Link>
+              <Link href={LINKS.pop_podcast.url} className={`${styles.navLink} ${classes.text} hover:no-underline`}>
+                Podcast
               </Link>
               <Link href={LINKS.notes.url} target="_blank" className={`${styles.navLink} ${classes.text} hover:no-underline`}>
                 Notes

@@ -76,6 +76,21 @@ describe("detectFeedPlatform", () => {
       },
       expected: "podcast",
     },
+    {
+      name: "Spotify episode",
+      input: { url: "https://open.spotify.com/episode/example" },
+      expected: "spotify",
+    },
+    {
+      name: "Apple Podcasts episode",
+      input: { sourceId: "apple_podcasts" },
+      expected: "apple_podcasts",
+    },
+    {
+      name: "YouTube video",
+      input: { url: "https://www.youtube.com/watch?v=example" },
+      expected: "youtube",
+    },
   ]
 
   for (const testCase of cases) {

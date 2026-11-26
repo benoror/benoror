@@ -10,6 +10,9 @@ export type FeedPlatform =
   | "gist"
   | "github"
   | "podcast"
+  | "spotify"
+  | "apple_podcasts"
+  | "youtube"
   | "unknown"
 
 export type FeedPlatformInput = {
@@ -44,6 +47,10 @@ const PLATFORM_ALIASES: Record<string, FeedPlatform> = {
   gist_starred_own: "gist",
   github: "github",
   podcast: "podcast",
+  spotify: "spotify",
+  apple: "apple_podcasts",
+  apple_podcasts: "apple_podcasts",
+  youtube: "youtube",
 }
 
 const normalizePlatformHint = (value: string | undefined): FeedPlatform | undefined => {
@@ -81,6 +88,9 @@ const platformFromHostname = (hostname: string | undefined): FeedPlatform | unde
   if (hostname === "gist.github.com") return "gist"
   if (hostname === "github.com" || hostname.endsWith(".github.com")) return "github"
   if (hostname === "podcasters.spotify.com" || hostname === "anchor.fm") return "podcast"
+  if (hostname === "open.spotify.com") return "spotify"
+  if (hostname === "podcasts.apple.com") return "apple_podcasts"
+  if (hostname === "youtube.com" || hostname.endsWith(".youtube.com") || hostname === "youtu.be") return "youtube"
   return undefined
 }
 
@@ -110,6 +120,9 @@ export const PLATFORM_LABELS: Record<FeedPlatform, string> = {
   gist: "GitHub Gist",
   github: "GitHub",
   podcast: "Podcast",
+  spotify: "Spotify",
+  apple_podcasts: "Apple Podcasts",
+  youtube: "YouTube",
   unknown: "External link",
 }
 

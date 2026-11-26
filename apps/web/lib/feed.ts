@@ -6,7 +6,6 @@ import {
   getPodcastEpisodeUrl,
   PODCAST_CANONICAL_URL,
   PODCAST_RSS_URL,
-  type EpisodeLinks,
 } from "@/lib/podcast"
 import {
   type BlueskyAuthorFeedEntry,
@@ -80,7 +79,6 @@ export type AggregatedFeedItem = {
   }>
   /** Pinned social post shown as its own item. */
   featured?: boolean
-  podcastLinks?: EpisodeLinks
   hasVideo?: boolean
 }
 
@@ -409,7 +407,17 @@ const getPodcastSourceItems = async (): Promise<{
         sourceUrl: PODCAST_CANONICAL_URL,
         summary: episode.description,
         bodyFormat: "text",
-        podcastLinks: episode.links,
+        alsoSharedTo: [
+          ...(episode.links.spotify
+            ? [{ sourceId: "spotify", sourceName: "Spotify", link: episode.links.spotify }]
+            : []),
+          ...(episode.links.apple
+            ? [{ sourceId: "apple_podcasts", sourceName: "Apple Podcasts", link: episode.links.apple }]
+            : []),
+          ...(episode.links.youtube
+            ? [{ sourceId: "youtube", sourceName: "YouTube", link: episode.links.youtube }]
+            : []),
+        ],
         hasVideo: Boolean(episode.links.youtube),
       })),
     }
@@ -847,4 +855,4 @@ const aggregateFeed = async (): Promise<AggregatedFeed> => {
   return { items, sources, generatedAt: new Date().toISOString() }
 }
 
-export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v3"], { revalidate: 1800 })
+export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v4"], { revalidate: 1800 })

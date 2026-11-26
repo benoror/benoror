@@ -1,6 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import {
   CirclePlay,
   Headphones,
@@ -16,6 +19,7 @@ import OutrunGrid from "@/components/outrun-hero-background";
 import { useAppTheme } from "@/hooks/use-app-theme";
 import {
   getPodcastEpisodeAnchorId,
+  getPodcastEpisodePath,
   type Podcast as PodcastData,
 } from "@/lib/podcast";
 import { getClasses } from "./podcast-page.theme";
@@ -32,6 +36,12 @@ type ListenLink = {
   label: string;
   href: string;
   icon: LucideIcon;
+};
+
+type PodcastPagination = {
+  currentPage: number;
+  totalPages: number;
+  totalItems: number;
 };
 
 const dateFormatter = new Intl.DateTimeFormat("en-US", {
@@ -58,13 +68,63 @@ function PlatformLink({
   );
 }
 
+const getPageHref = (page: number) =>
+  page <= 1 ? "/podcast" : `/podcast?page=${page}`;
+
+function PodcastPaginationControls({
+  pagination,
+  classes,
+}: {
+  pagination: PodcastPagination;
+  classes: ReturnType<typeof getClasses>;
+}) {
+  if (pagination.totalPages <= 1) {
+    return null;
+  }
+
+  return (
+    <nav
+      aria-label="Podcast pagination"
+      className="flex flex-wrap items-center justify-between gap-3 pt-2"
+    >
+      <Link
+        href={getPageHref(Math.max(1, pagination.currentPage - 1))}
+        aria-disabled={pagination.currentPage <= 1}
+        className={`text-sm underline underline-offset-4 ${pagination.currentPage <= 1 ? "pointer-events-none opacity-50" : classes.link}`}
+      >
+        Previous
+      </Link>
+
+      <span className={`text-sm ${classes.meta}`}>
+        Page {pagination.currentPage} of {pagination.totalPages} (
+        {pagination.totalItems} episodes)
+      </span>
+
+      <Link
+        href={getPageHref(
+          Math.min(pagination.totalPages, pagination.currentPage + 1),
+        )}
+        aria-disabled={pagination.currentPage >= pagination.totalPages}
+        className={`text-sm underline underline-offset-4 ${pagination.currentPage >= pagination.totalPages ? "pointer-events-none opacity-50" : classes.link}`}
+      >
+        Next
+      </Link>
+    </nav>
+  );
+}
+
 export function PodcastPageClient({
   podcast,
   platforms,
+  pagination,
+  legacyEpisodeLinks,
 }: {
   podcast: PodcastData;
   platforms: PodcastPlatforms;
+  pagination: PodcastPagination;
+  legacyEpisodeLinks: Record<string, string>;
 }) {
+  const router = useRouter();
   const { themeKind } = useAppTheme();
   const classes = getClasses(themeKind);
   const listenLinks: ListenLink[] = [
@@ -74,6 +134,14 @@ export function PodcastPageClient({
     { label: "Pocket Casts", href: platforms.pocketCasts, icon: Headphones },
     { label: "RSS", href: platforms.rss, icon: Rss },
   ];
+
+  useEffect(() => {
+    const anchorId = window.location.hash.slice(1);
+    const episodePath = legacyEpisodeLinks[anchorId];
+    if (episodePath) {
+      router.replace(episodePath);
+    }
+  }, [legacyEpisodeLinks, router]);
 
   return (
     <main className={`min-h-screen flex flex-col ${classes.page}`}>
@@ -217,7 +285,12 @@ export function PodcastPageClient({
                           <h3
                             className={`text-2xl font-semibold leading-tight tracking-tight ${classes.heading}`}
                           >
-                            {episode.title}
+                            <Link
+                              href={getPodcastEpisodePath(episode.slug)}
+                              className="hover:underline"
+                            >
+                              {episode.title}
+                            </Link>
                           </h3>
                           <p className={`leading-relaxed ${classes.body}`}>
                             {episode.description}
@@ -269,6 +342,10 @@ export function PodcastPageClient({
                   );
                 })}
               </ol>
+              <PodcastPaginationControls
+                pagination={pagination}
+                classes={classes}
+              />
             </div>
           </div>
         </div>

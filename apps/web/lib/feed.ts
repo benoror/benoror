@@ -402,7 +402,7 @@ const getPodcastSourceItems = async (): Promise<{
       items: podcast.episodes.map((episode) => ({
         id: `podcast::${episode.id}`,
         title: episode.title,
-        link: getPodcastEpisodeUrl(episode.episodeNumber),
+        link: getPodcastEpisodeUrl(episode.slug),
         publishedAt: episode.publishedAt,
         sourceId: "podcast",
         sourceName: "Podcast",
@@ -847,4 +847,4 @@ const aggregateFeed = async (): Promise<AggregatedFeed> => {
   return { items, sources, generatedAt: new Date().toISOString() }
 }
 
-export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v2"], { revalidate: 1800 })
+export const getAggregatedFeed = unstable_cache(aggregateFeed, ["aggregated-feed-v3"], { revalidate: 1800 })

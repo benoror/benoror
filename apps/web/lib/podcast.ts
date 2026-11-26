@@ -61,6 +61,7 @@ type PodcastFeedItem = {
 
 export type PodcastEpisode = {
   id: string;
+  slug: string;
   episodeNumber: string;
   title: string;
   description: string;
@@ -88,8 +89,22 @@ export const getPodcastEpisodeAnchorId = (episodeNumber: string) => {
   return `episode-${normalizedEpisodeNumber}`;
 };
 
-export const getPodcastEpisodeUrl = (episodeNumber: string) =>
-  `${PODCAST_CANONICAL_URL}#${getPodcastEpisodeAnchorId(episodeNumber)}`;
+export const getPodcastEpisodeSlug = (title: string) => {
+  const slug = title
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+
+  return slug || "episode";
+};
+
+export const getPodcastEpisodePath = (slug: string) => `/podcast/${slug}`;
+
+export const getPodcastEpisodeUrl = (slug: string) =>
+  `${PODCAST_CANONICAL_URL}/${slug}`;
 
 const parser = new Parser<Record<string, never>, PodcastFeedItem>({
   customFields: {
@@ -174,11 +189,13 @@ export async function getPodcast(): Promise<Podcast> {
         spotify: item.link,
         ...EPISODE_LINKS[episodeNumber],
       };
+      const title = cleanPodcastText(item.title);
 
       return {
         id: item.guid || item.link || `${episodeNumber}-${item.title}`,
+        slug: getPodcastEpisodeSlug(title),
         episodeNumber,
-        title: cleanPodcastText(item.title),
+        title,
         description: cleanPodcastText(
           item.contentSnippet || item.content || "",
         ),

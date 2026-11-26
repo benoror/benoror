@@ -5,6 +5,8 @@ import {
   PODCAST_PLATFORMS,
   PODCAST_RSS_URL,
   getPodcast,
+  getPodcastEpisodeAnchorId,
+  getPodcastEpisodePath,
 } from "@/lib/podcast";
 import { PodcastPageClient } from "./podcast-page.client";
 
@@ -50,8 +52,54 @@ export const metadata: Metadata = {
 
 export const revalidate = 21_600;
 
-export default async function PodcastPage() {
-  const podcast = await getPodcast();
+const EPISODES_PER_PAGE = 6;
 
-  return <PodcastPageClient podcast={podcast} platforms={PODCAST_PLATFORMS} />;
+type PodcastPageProps = {
+  searchParams?: Promise<{
+    page?: string;
+  }>;
+};
+
+const toPositiveInt = (value: string | undefined): number | null => {
+  if (!value) return null;
+  const parsed = Number.parseInt(value, 10);
+  if (!Number.isFinite(parsed) || parsed < 1) return null;
+  return parsed;
+};
+
+export default async function PodcastPage({
+  searchParams,
+}: PodcastPageProps) {
+  const podcast = await getPodcast();
+  const resolvedSearchParams = await searchParams;
+  const requestedPage = toPositiveInt(resolvedSearchParams?.page) ?? 1;
+  const totalPages = Math.max(
+    1,
+    Math.ceil(podcast.episodes.length / EPISODES_PER_PAGE),
+  );
+  const currentPage = Math.min(requestedPage, totalPages);
+  const startIndex = (currentPage - 1) * EPISODES_PER_PAGE;
+  const endIndex = startIndex + EPISODES_PER_PAGE;
+  const legacyEpisodeLinks = Object.fromEntries(
+    podcast.episodes.map((episode) => [
+      getPodcastEpisodeAnchorId(episode.episodeNumber),
+      getPodcastEpisodePath(episode.slug),
+    ]),
+  );
+
+  return (
+    <PodcastPageClient
+      podcast={{
+        ...podcast,
+        episodes: podcast.episodes.slice(startIndex, endIndex),
+      }}
+      platforms={PODCAST_PLATFORMS}
+      pagination={{
+        currentPage,
+        totalPages,
+        totalItems: podcast.episodes.length,
+      }}
+      legacyEpisodeLinks={legacyEpisodeLinks}
+    />
+  );
 }

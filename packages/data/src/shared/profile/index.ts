@@ -94,7 +94,7 @@ export const LINKS = {
   },
   pop_podcast: {
     url: isProductionDeployment
-      ? "https://benoror.com/podcast"
+      ? "https://podcast.benoror.com"
       : "http://localhost:3000/podcast",
     legend: "Pursuit of Polymathy Podcast",
   },

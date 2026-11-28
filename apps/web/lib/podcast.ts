@@ -1,7 +1,8 @@
 import Parser from "rss-parser";
 
 export const PODCAST_RSS_URL = "https://anchor.fm/s/fd81326c/podcast/rss";
-export const PODCAST_CANONICAL_URL = "https://benoror.com/podcast";
+export const PODCAST_CANONICAL_URL = "https://podcast.benoror.com";
+export const PODCAST_FALLBACK_URL = "https://www.benoror.com/podcast";
 export const PODCAST_COVER_FALLBACK =
   "https://d3t3ozftmdmh3i.cloudfront.net/staging/podcast_uploaded_nologo/42431027/42431027-1731434150000-3ed7aee10bb11.jpg";
 

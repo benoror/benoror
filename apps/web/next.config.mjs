@@ -5,12 +5,12 @@ const nextConfig = {
     return [
       {
         source: "/pop-podcast",
-        destination: "/podcast",
+        destination: "https://podcast.benoror.com",
         permanent: true,
       },
       {
         source: "/poppod",
-        destination: "/podcast",
+        destination: "https://podcast.benoror.com",
         permanent: true,
       },
     ];

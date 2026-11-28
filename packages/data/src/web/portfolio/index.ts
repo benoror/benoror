@@ -19,6 +19,45 @@ export type PortfolioItem = {
 
 export const projectsItems: PortfolioItem[] = [
   {
+    id: "pursuit-of-polymathy",
+    title: "Pursuit of Polymathy",
+    section: "projects",
+    category: "Podcast",
+    role: "🎙️ Host",
+    circa: "2026",
+    url: "https://podcast.benoror.com",
+    images: ["/images/portfolio/pursuit-of-polymathy.jpg"],
+    icon: "/images/portfolio/pursuit-of-polymathy.jpg",
+    description:
+      "An AI-generated podcast where I explore ideas across software, AI, science, and entrepreneurship. Four episodes are available on Spotify, Apple Podcasts, and YouTube.",
+    techStack: ["AI", "Podcasting", "Spotify", "Apple Podcasts", "YouTube"],
+    links: {
+      video: "https://www.youtube.com/playlist?list=PLI5et9ejV-eQ",
+      other:
+        "https://podcasts.apple.com/us/podcast/pursuit-of-polymathy/id6837809487",
+    },
+  },
+  {
+    id: "wabridge",
+    title: "wabridge",
+    section: "projects",
+    category: "Open Source",
+    role: "👷‍♂️ Maker",
+    circa: "2026",
+    url: "https://github.com/benoror/wabridge",
+    images: ["/images/portfolio/wabridge-logo.svg"],
+    icon: "/images/portfolio/wabridge-logo.svg",
+    description:
+      "An open-source WhatsApp bridge for AI agents that sleep. I built it for my own use and have run it daily for months. A single Go binary keeps a durable append-only local inbox with claim, lease, and done semantics across restarts and machine sleep. Wake pings never carry message content, so data stays local.",
+    techStack: ["Go", "WhatsApp", "JSONL", "Local-first", "Open Source"],
+    links: {
+      github: "https://github.com/benoror/wabridge",
+      other: "https://github.com/benoror/wabridge/releases/tag/v0.0.1-alpha",
+      // TODO: Add the wabridge demo video URL when it is ready.
+      video: undefined,
+    },
+  },
+  {
     id: "inbundly",
     title: "Inbundly",
     section: "projects",

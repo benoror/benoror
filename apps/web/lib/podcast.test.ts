@@ -9,6 +9,7 @@ import {
   getPodcastEpisodeUrl,
   getYouTubeEmbedUrl,
   PODCAST_CANONICAL_URL,
+  PODCAST_FALLBACK_URL,
   PODCAST_RSS_URL,
 } from "./podcast.ts";
 
@@ -20,7 +21,8 @@ test("cleans RSS markup and unsupported dash punctuation", () => {
 });
 
 test("keeps the canonical page and RSS feed on their intended hosts", () => {
-  assert.equal(PODCAST_CANONICAL_URL, "https://benoror.com/podcast");
+  assert.equal(PODCAST_CANONICAL_URL, "https://podcast.benoror.com");
+  assert.equal(PODCAST_FALLBACK_URL, "https://www.benoror.com/podcast");
   assert.equal(PODCAST_RSS_URL, "https://anchor.fm/s/fd81326c/podcast/rss");
 });
 
@@ -39,7 +41,7 @@ test("builds stable episode anchors and readable canonical paths", () => {
   );
   assert.equal(
     getPodcastEpisodeUrl(slug),
-    "https://benoror.com/podcast/one-map-of-reality-what-a-109m-parameter-jepa-says-about-scale",
+    "https://podcast.benoror.com/one-map-of-reality-what-a-109m-parameter-jepa-says-about-scale",
   );
 });
 

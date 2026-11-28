@@ -57,6 +57,15 @@ export default function PortfolioCard({ item, prioritizeImage = false }: Portfol
             />
           )}
         </motion.div>
+        {item.links?.video ? (
+          <a
+            href={item.links.video}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Watch demo video for ${item.title}`}
+            className="absolute inset-0 z-[5]"
+          />
+        ) : null}
 
         <div className={`absolute h-16 w-16 top-4 left-4 rounded-full border-2 ring-2 flex items-center justify-center ${classes.iconWrap}`}>
           <Image

@@ -45,7 +45,10 @@ export const projectsItems: PortfolioItem[] = [
     role: "👷‍♂️ Maker",
     circa: "2026",
     url: "https://github.com/benoror/wabridge",
-    images: ["/images/portfolio/wabridge-logo.svg"],
+    images: [
+      "/images/portfolio/wabridge-demo-poster.png",
+      "/images/portfolio/wabridge-logo.svg",
+    ],
     icon: "/images/portfolio/wabridge-logo.svg",
     description:
       "An open-source WhatsApp bridge for AI agents that sleep. I built it for my own use and have run it daily for months. A single Go binary keeps a durable append-only local inbox with claim, lease, and done semantics across restarts and machine sleep. Wake pings never carry message content, so data stays local.",
@@ -53,8 +56,8 @@ export const projectsItems: PortfolioItem[] = [
     links: {
       github: "https://github.com/benoror/wabridge",
       other: "https://github.com/benoror/wabridge/releases/tag/v0.0.1-alpha",
-      // TODO: Add the wabridge demo video URL when it is ready.
-      video: undefined,
+      video:
+        "https://github.com/benoror/wabridge/raw/main/docs/media/wabridge-v0.0.1-alpha-wake-loop-grok-example-square.mp4",
     },
   },
   {

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 import { LINKS } from "@workspace/data/shared/profile"
-import { getPodcast, getPodcastEpisodeUrl } from "@/lib/podcast"
+import { getPodcast, getPodcastEpisodeUrl, PODCAST_CANONICAL_URL } from "@/lib/podcast"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const websiteUrl = LINKS.website.url.replace(/\/$/, "")
@@ -27,7 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.9,
     },
     {
-      url: "https://benoror.com/podcast",
+      url: PODCAST_CANONICAL_URL,
       lastModified: now,
       changeFrequency: "daily",
       priority: 0.9,
